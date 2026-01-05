@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=HealthBar
+comment0.text=\n\ HealthBar\ renders\ a\ health\ bar\ for\ any\ HasHealth\ unit.\n\ Can\ be\ fixed\ in\ UI\ (followTarget\=false)\ or\ follow\ an\ Actor\ (followTarget\=true).\n
+comment1.params=unit\ follow\ width\ height\ followTarget\ yOffset
+comment1.target=HealthBar(HasHealth,\ greenfoot.Actor,\ int,\ int,\ boolean,\ int)
+comment1.text=\n\ @param\ unit\ \ \ \ \ \ \ \ \ object\ that\ provides\ HP\ via\ HasHealth\n\ @param\ follow\ \ \ \ \ \ \ actor\ to\ follow\ (usually\ same\ as\ unit\ if\ unit\ is\ an\ Actor)\n\ @param\ width\ \ \ \ \ \ \ \ bar\ width\ in\ pixels\n\ @param\ height\ \ \ \ \ \ \ bar\ height\ in\ pixels\n\ @param\ followTarget\ true\ to\ follow\ follow\ actor\ each\ frame\n\ @param\ yOffset\ \ \ \ \ \ y\ offset\ from\ follow\ actor\ (negative\ puts\ bar\ above)\n
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=void\ updateImage()
+numComments=4

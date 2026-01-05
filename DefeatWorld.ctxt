@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=DefeatWorld
+comment0.text=\n\ DefeatWorld\ (Game\ Over\ Screen)\n\ Shows\ game-over\ message\ and\ lets\ the\ player\ restart\ or\ return\ to\ settings/menu.\n
+comment1.params=
+comment1.target=DefeatWorld()
+comment2.params=
+comment2.target=void\ act()
+numComments=3

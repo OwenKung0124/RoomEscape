@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=PauseOverlay
+comment0.text=\n\ PauseOverlay\ displays\ a\ pause\ message\ on\ top\ of\ the\ game.\n\n\ It\ does\ not\ handle\ input.\n\ GameWorld\ handles\ ESC\ /\ Q\ key\ logic\n
+comment1.params=
+comment1.target=PauseOverlay()
+comment2.params=
+comment2.target=void\ redraw()
+comment2.text=\n\ Builds\ the\ pause\ overlay\ image.\n
+numComments=3

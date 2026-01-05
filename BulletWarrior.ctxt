@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=BulletWarrior
+comment0.text=\n\ BulletWarrior\:\n\ -\ Walks\ with\ keyboard\n\ -\ Attacks\ with\ SPACE\n\ -\ Shoots\ a\ Bullet\ on\ the\ hit\ frame\n
+comment1.params=
+comment1.target=BulletWarrior()
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=boolean\ wantsToAttack()
+comment4.params=
+comment4.target=void\ onAttackHit()
+numComments=5

@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=SkeletonEnemy
+comment0.text=\n\ AttackingWonderEnemy\:\n\ -\ wanders\ around\ using\ WanderAround\n\ -\ can\ also\ attack\ with\ attack\ animation\ (handled\ by\ AttackingEnemy)\n\ -\ attacks\ every\ 2\u20135\ seconds\ (random)\ while\ the\ player\ is\ in\ range\n\n\ NOTE\:\n\ -\ Random\ attack\ timing\ (2\u20135s)\ is\ already\ handled\ by\ your\ AttackingEnemy\ class\n\ \ \ using\ attackTimer\ +\ scheduleNextAttack().\n\ -\ This\ class\ only\ provides\:\ wandering\ movement\ +\ attack\ conditions\ +\ hit\ effect.\n
+comment1.params=target
+comment1.target=SkeletonEnemy(Player)
+comment2.params=
+comment2.target=int[]\ computeMove()
+comment2.text=\n\ Computes\ wandering\ movement\ using\ WanderAround.\n
+comment3.params=
+comment3.target=boolean\ wantsToAttack()
+comment3.text=\n\ AI\ rule\:\ only\ attack\ if\ player\ is\ close\ enough.\n\ (Timing\ is\ controlled\ by\ attackTimer\ in\ AttackingEnemy.)\n
+comment4.params=
+comment4.target=boolean\ wantsToAttack_for_testing()
+comment5.params=
+comment5.target=void\ onAttackHit_old()
+comment5.text=\n\ Attack\ effect\ at\ hitFrame\:\n
+comment6.params=
+comment6.target=void\ onAttackHit()
+numComments=7

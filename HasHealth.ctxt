@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=HasHealth
+comment0.text=\n\ HasHealth\ is\ implemented\ by\ any\ actor\ that\ has\ HP.\n\ This\ \ HealthBar\ work\ for\ both\ Player\ and\ Enemy.\n
+comment1.params=
+comment1.target=int\ getHealth()
+comment2.params=
+comment2.target=int\ getMaxHealth()
+numComments=3
