@@ -1,7 +1,8 @@
 import greenfoot.*;
 
 /**
- * A collectible coin that updates RoomData when collected.
+ * A collectible coin
+ * updates RoomData when collected.
  */
 public class Coin extends Actor 
 {
@@ -12,10 +13,10 @@ public class Coin extends Actor
     private static final String COIN_SPRITE = "coin.png";
     /**
      * @param RoomDate rd
-     * @param roomR room row in the world grid
-     * @param roomC room col in the world grid
-     * @param tr tile row inside the room
-     * @param tc tile col inside the room
+     * @param roomR room 
+     * @param roomC room
+     * @param tr tile row
+     * @param tc tile col
      */
     public Coin(RoomData rd,int r, int c, int tr, int tc) 
     {
@@ -37,12 +38,12 @@ public class Coin extends Actor
 
     /**
      * Collect the coin:
-     * - Remove this coin actor
-     * - Update the RoomData
+     * remove the coin
+     * update the RoomData
      */
     private void collect() 
     {
-        //Update RoomData directly so it won't respawn next time
+        //update RoomData directly so it won't respawn next time
         if (roomData != null) 
         {
             if (roomData.tiles[tr][tc] == GameConfig.COIN) 

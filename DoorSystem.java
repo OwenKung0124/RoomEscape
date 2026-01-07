@@ -37,8 +37,7 @@ public class DoorSystem
     {
         doorBlockers.clear();
 
-        // IMPORTANT:
-        // Reset so the next syncDoorBlockers() call rebuilds correctly in the new room.
+        //Reset so the next syncDoorBlockers() call rebuilds correctly in the new room.
         lastUnlocked = true;
     }
 

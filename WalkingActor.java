@@ -1,14 +1,13 @@
 import greenfoot.*;
 
 /**
- * WalkingActor is a shared superclass for Player and Enemy.
- *
- * In this class:
- * - Direction constants (UP/DOWN/LEFT/RIGHT)
- * - Directional frame arrays (up/down/left/right)
- * - Sprite loading and scaling
- * - Animation ticking
- * - Avoid Walking through walls
+ * WalkingActor is a superclass for Player and Enemy.
+ * Hepls player and enemy actor to walk in the gameworld
+ * with correct dirction images
+ * 
+ * When attack, use correct images too.
+ * It also avoid walking through wall.
+
  *
  */
 public abstract class WalkingActor extends SuperSmoothMover 
@@ -25,9 +24,9 @@ public abstract class WalkingActor extends SuperSmoothMover
     protected int spriteH = 55;
 
     //animation timing
-    //bigger = slower animation
+    //bigger, slower animation
     protected int animDelay = 6;
-    protected int animTick = 0;
+    protected int animTimer = 0;
     protected int frameIndex = 0;
 
     //initial facing direction
@@ -163,7 +162,7 @@ public abstract class WalkingActor extends SuperSmoothMover
     protected void resetAnim() 
     {
         frameIndex = 0;
-        animTick = 0;
+        animTimer = 0;
     }
 
     /**
@@ -175,7 +174,6 @@ public abstract class WalkingActor extends SuperSmoothMover
      */
     protected void loadDirectionalFrames(String folder, int frameCount) 
     {
-        //e.g. player/up1.png
         up      = loadFramesRequired(folder + "/up", frameCount);
         down    = loadFramesRequired(folder + "/down", frameCount);
         right   = loadFramesRequired(folder + "/right", frameCount);
@@ -320,15 +318,15 @@ public abstract class WalkingActor extends SuperSmoothMover
      */
     protected void animate(GreenfootImage[] frames) 
     {
-        animTick++;
+        animTimer++;
     
-        if (animTick < animDelay) 
+        if (animTimer < animDelay) 
         {
             setImage(frames[frameIndex]);
             return;
         }
     
-        animTick = 0;
+        animTimer = 0;
         frameIndex++;
         if (frameIndex >= frames.length) frameIndex = 0;
     

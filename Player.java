@@ -1,4 +1,5 @@
 import greenfoot.*;
+import java.util.ArrayList;
 
 /**
  * Warrior
@@ -25,6 +26,10 @@ public abstract class Player extends CombatActor implements HasHealth
     protected int hurtCooldown = 0;
      //how many frames before another damage can count 
     protected int hurtCooldownFrames = GameConfig.DEFAULT_INVINCIBILITY_FRAMES;
+    
+    //keep track of coins collected
+    int coins=0;
+    int score=0;
 
     /**
      * Subclass can override
@@ -140,6 +145,7 @@ public abstract class Player extends CombatActor implements HasHealth
         {
             avoidWallMoving(dx, dy);
             animate(framesFor(dir));
+            collect();  //keep track of collectibles
         }
         else
         {
@@ -226,4 +232,36 @@ public abstract class Player extends CombatActor implements HasHealth
            Greenfoot.setWorld(new DefeatWorld());
         }
     }
+    /*
+     * keep track of collectible itemes
+     */
+    private void collect()
+    {
+        //collect any collectibles
+        if(isTouching(Coin.class))
+        {
+            coins++;
+        }      
+    }
+    public int getCoinCount()
+    {
+        return coins;
+    }
+    public void setCoinCount(int coinCount)
+    {
+        coins=coinCount;
+    }
+    public int getScore()
+    {
+        return score;
+    }
+    public void setScore(int score)
+    {
+        this.score=score;
+    }
+    public void addScore(int score)
+    {
+        this.score+=score;
+    }
+    
 }

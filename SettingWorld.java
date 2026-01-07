@@ -1,12 +1,10 @@
 import greenfoot.*;
 
 /**
- * SetupWorld lets the user pick a warrior using images,
- * then start the game.
+ * SettingWorld lets the user pick a warrior then start the game.
  */
 public class SettingWorld extends World
 {
-    //default selected type
     private int selectedType = GameConfig.WARRIOR_AXE;
 
     //warrior selecttion
@@ -14,19 +12,18 @@ public class SettingWorld extends World
     private WarriorSelectIcon bulletIcon;
     private WarriorSelectIcon swordIcon;
     
-    //start buttons
-    private StartButton newGameBtn;
-    private StartButton resumeBtn;
+    //new game or resume
+    private StartButton newGameBotton;
+    private StartButton resumeBotton;
 
     public SettingWorld()
     {
         super(GameConfig.WORLD_W, GameConfig.WORLD_H, 1);
 
-        //title text
         showText("SETUP", GameConfig.WORLD_W / 2, 80);
         showText("Click a warrior image to select", GameConfig.WORLD_W / 2, 120);
 
-        //show selections
+        //selections
         axeIcon = new WarriorSelectIcon("axe_warrior.png", GameConfig.WARRIOR_AXE);
         bulletIcon = new WarriorSelectIcon("bullet_warrior.png", GameConfig.WARRIOR_BULLET);
         swordIcon = new WarriorSelectIcon("sword_warrior.png", GameConfig.WARRIOR_SWORD);
@@ -36,21 +33,21 @@ public class SettingWorld extends World
         addObject(swordIcon, GameConfig.WORLD_W / 2 + 250, 400);
 
         //new game and resume buttons (images)
-        newGameBtn = new StartButton("start.png", StartButton.MODE_NEW_GAME);
-        resumeBtn  = new StartButton("resume.png", StartButton.MODE_RESUME);
+        newGameBotton = new StartButton("start.png", StartButton.MODE_NEW_GAME);
+        resumeBotton  = new StartButton("resume.png", StartButton.MODE_RESUME);
 
-        addObject(newGameBtn, GameConfig.WORLD_W / 2 - 120, 650);
-        addObject(resumeBtn,  GameConfig.WORLD_W / 2 + 120, 650);
+        addObject(newGameBotton, GameConfig.WORLD_W / 2 - 120, 650);
+        addObject(resumeBotton,  GameConfig.WORLD_W / 2 + 120, 650);
 
-        //Disable resume if no save exists
-        resumeBtn.setEnabled(SaveManager.hasSave());
+        //disable resume if no save exists
+        resumeBotton.setEnabled(SaveManager.hasSave());
 
         //default highlight
         updateHighlights();
     }
 
     /**
-     * Called by WarriorSelectIcon when clicked.
+     * highlight which warrior is selected
      */
     public void chooseWarrior(int type)
     {
@@ -58,7 +55,7 @@ public class SettingWorld extends World
         updateHighlights();
     }
     /**
-     * Starts a brand new game.
+     * starts a brand new game.
      */
     public void startNewGame()
     {
@@ -67,7 +64,7 @@ public class SettingWorld extends World
     }
 
     /**
-     * Resumes a saved game
+     * resume a saved game
      */
     public void resumeGame()
     {
@@ -81,7 +78,7 @@ public class SettingWorld extends World
     }
 
     /**
-     * Updates button visuals so the selected one looks highlighted.
+     * updates button visuals so the selected one looks highlighted.
      */
     private void updateHighlights()
     {

@@ -1,8 +1,6 @@
 /**
- * SaveData stores all information needed to restore a saved game.
+ * SaveData stores information that will be saved.
  *
- * Keep this class simple:
- * - public fields, mainly string and int
  */
 public class SaveData
 {
@@ -12,13 +10,19 @@ public class SaveData
     public int lastRoomR;
     public int lastRoomC;
     
+    //track records
     public int roomsCleared;
-
-    //These are encoded strings so we don't store big arrays here
-    public String visited;
-    public String cleared;
-    
     public int playerHealth;
+    
+    //collectibles
+    public int coins=0;
+    public int score=0;
+
+    //currently handed by GameMap class
+    //public String visited;
+    //public String cleared;
+    
+    
 
     public SaveData()
     {

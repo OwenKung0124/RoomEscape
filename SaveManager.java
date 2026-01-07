@@ -17,6 +17,7 @@ import java.util.Scanner;
  * cleared=1000/0100/0000/0000
  * playerHealt=5
  * roomsCleared=2
+ * coins=10;
  */
 public class SaveManager
 {
@@ -57,7 +58,7 @@ public class SaveManager
      *
      * @param data all info to save
      */
-    public static void save(SaveData data)
+    public static void save(SaveData data, GameMap map)
     {
         if (data == null) return;
     
@@ -69,12 +70,19 @@ public class SaveManager
             out.println("roomC=" + data.roomC);
             out.println("lastRoomR=" + data.lastRoomR);
             out.println("lastRoomC=" + data.lastRoomC);
-    
-            out.println("visited=" + (data.visited == null ? "" : data.visited));
-            out.println("cleared=" + (data.cleared == null ? "" : data.cleared));
             out.println("playerHealth=" + data.playerHealth);
             out.println("roomsCleared=" + data.roomsCleared);
-    
+            out.println("coins=" + data.coins);
+            out.println("score=" + data.score);
+            
+            if(map!=null)
+            {
+                out.println("visited=" + (map == null ? "" : map.exportVisited()));
+                out.println("cleared=" + (map == null ? "" : map.exportCleared()));
+                
+                saveRoomData(map,out);
+            }
+
             out.close();
         }
         catch (IOException e)
@@ -128,21 +136,42 @@ public class SaveManager
                 {
                     data.lastRoomC = parseIntSafe(line.substring("lastRoomC=".length()), data.roomC);
                 }
-                else if (line.startsWith("visited="))
-                {
-                    data.visited = line.substring("visited=".length());
-                }
-                else if (line.startsWith("cleared="))
-                {
-                    data.cleared = line.substring("cleared=".length());
-                }
-                else if (line.startsWith("playerHealth="))
-                {
-                    data.playerHealth=parseIntSafe(line.substring("playerHealth=".length()), 0);
-                }
                 else if (line.startsWith("roomsCleared="))
                 {
                     data.roomsCleared=parseIntSafe(line.substring("roomsCleared=".length()), 0);
+                }
+                else if (line.startsWith("coins="))
+                {
+                    data.coins=parseIntSafe(line.substring("coins=".length()), 0);
+                }
+                else if (line.startsWith("score="))
+                {
+                    data.score=parseIntSafe(line.substring("score=".length()), 0);
+                }
+                else if (line.startsWith("tiles="))
+                {
+                    //tiles=r,c:<encodedTiles>
+                    //tiles import directly inti the RoomData
+                    //only use SaveManager for saving
+                    applyRoomTiles(map, line.substring("tiles=".length()));
+                }
+                else if (line.startsWith("cleared="))
+                {
+                    //data.cleared = line.substring("cleared=".length());
+                    //cleare/visited directly handle import and export in map classs
+                    //not using SaveData to transfer data
+                    map.importCleared(line.substring("cleared=".length()));
+                }
+                else if (line.startsWith("visited="))
+                {
+                    //data.visited = line.substring("visited=".length());
+                    //cleare/visited directly handle import and export in map classs
+                    //not using SaveData to transfer data
+                    map.importVisited(line.substring("visited=".length()));
+                }
+                else if (data!=null&&line.startsWith("playerHealth="))
+                {
+                    data.playerHealth=parseIntSafe(line.substring("playerHealth=".length()), 0);
                 }
             }
         }
@@ -156,106 +185,76 @@ public class SaveManager
             if (sc != null) sc.close();
         }
     
-        //Apply visited/cleared to map
-        if (data.visited != null && data.visited.length() > 0)
-        {
-            applyVisited(map, data.visited);
-        }
-        if (data.cleared != null && data.cleared.length() > 0)
-        {
-            applyCleared(map, data.cleared);
-        }
-    
         return data;
     }
     /**
-     * Encodes visited state into a string like 1101/0111/...
+     * Applies one "tiles=" record onto the map.
+     * roomTiles format: r,c:<encodedTiles>
      */
-    protected static String encodeVisited(GameMap map)
+    private static void applyRoomTiles(GameMap map, String roomTiles)
     {
-        String s = "";
-
-        for (int r = 0; r < map.getRows(); r++)
+        if (map == null) 
         {
-            if (r > 0) s += "/";
-
-            for (int c = 0; c < map.getCols(); c++)
-            {
-                s += (map.wasVisited(r, c) ? "1" : "0");
-            }
+            return; 
+        }
+        if (roomTiles == null)
+        {
+            return;   
         }
 
-        return s;
-    }
-
-    /**
-     * Encodes cleared state into a string like 1000/0100/...
-     */
-    protected static String encodeCleared(GameMap map)
-    {
-        String s = "";
-
-        for (int r = 0; r < map.getRows(); r++)
+        int col = roomTiles.indexOf(':');
+        if (col < 0)
         {
-            if (r > 0) s += "/";
-
-            for (int c = 0; c < map.getCols(); c++)
-            {
-                s += (map.isCleared(r, c) ? "1" : "0");
-            }
+            return;   
         }
 
-        return s;
-    }
+        String roomPart = roomTiles.substring(0, col).trim();
+        String tilesPart = roomTiles.substring(col + 1).trim();
 
-    /**
-     * Applies visited data onto the map.
-     * Calls map.setVisited(r,c) for each '1'.
-     */
-    private static void applyVisited(GameMap map, String data)
-    {
-        String[] rows = data.split("/");
-
-        for (int r = 0; r < rows.length && r < map.getRows(); r++)
+        int comma = roomPart.indexOf(',');
+        if (comma < 0)
         {
-            String row = rows[r];
+            return;   
+        }
 
-            for (int c = 0; c < row.length() && c < map.getCols(); c++)
+        int r = parseIntSafe(roomPart.substring(0, comma), -1);
+        int c = parseIntSafe(roomPart.substring(comma + 1), -1);
+        if (r < 0 || c < 0)
+        {
+            return;   
+        }
+        if (!map.hasRoom(r, c)) 
+        {
+            return;   
+        }
+
+        RoomData rd = map.getRoomData(r, c);
+        if (rd == null)
+        {
+            return;   
+        }
+
+        rd.importTiles(tilesPart);
+    }
+    private static void saveRoomData(GameMap map, PrintWriter out)
+    {
+
+        if (map != null)
+        {
+            for (int r = 0; r < map.getRows(); r++)
             {
-                char ch = row.charAt(c);
-                if (ch == '1')
+                for (int c = 0; c < map.getCols(); c++)
                 {
-                    map.setVisited(r, c);
+                    if (!map.hasRoom(r, c)) continue;
+
+                    RoomData rd = map.getRoomData(r, c);
+                    if (rd == null) continue;
+
+                    out.println("tiles=" + r + "," + c + ":" + rd.exportTiles());
                 }
             }
         }
     }
-
-    /**
-     * Applies cleared data onto the map.
-     * Calls map.markCleared(r,c) for each '1'.
-     */
-    private static void applyCleared(GameMap map, String data)
-    {
-        String[] rows = data.split("/");
-
-        for (int r = 0; r < rows.length && r < map.getRows(); r++)
-        {
-            String row = rows[r];
-
-            for (int c = 0; c < row.length() && c < map.getCols(); c++)
-            {
-                char ch = row.charAt(c);
-                if (ch == '1')
-                {
-                    map.markCleared(r, c);
-                    //cleared implies visited
-                    map.setVisited(r, c);
-                }
-            }
-        }
-    }
-
     /**
      * Parses an integer safely, returning a default value if invalid.
      */

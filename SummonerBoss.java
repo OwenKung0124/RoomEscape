@@ -4,7 +4,7 @@ import greenfoot.*;
  * A stationary boss that periodically performs a "summon" animation.
  *
  * Behaviour:
- *  The boss does not move (computeMove() always returns {0,0}).
+ *  The boss does not move
  *  After a random interval, it starts a summon animation.
  *  When the summon animation finishes, it spawns a small wave of enemies
  *    in the current room using SpawnerSystem.randomFloomSpawnInRoom(RoomData).
@@ -17,20 +17,20 @@ public class SummonerBoss extends Enemy
     //summon timer setting
     private int summonTimer;
     //inimum frames to wait before summoning again
-    private int minInterval = 180; 
+    private int minInterval=180; 
     //maximum frames to wait before summoning again.
-    private int maxInterval = 300; 
+    private int maxInterval=300; 
 
     //animations
     private GreenfootImage[] summonFrames;
-    private int summonAnimDelay = 20;
+    private int summonAnimDelay=20;
 
     //summoning state
-    private boolean summoning = false;
+    private boolean summoning=false;
 
     //How many minions to spawn 
     //after each summon animation finishes
-    private int minionsPerSummon = 1;
+    private int minionsPerSummon=1;
 
     /**
      * Creates a SummonerBoss that targets the given Player (required by Enemy).
@@ -41,23 +41,23 @@ public class SummonerBoss extends Enemy
     {
         super(target);
 
-        spriteW = 160;
-        spriteH = 125;
+        spriteW=160;
+        spriteH=125;
 
         //boos health
-        maxHealth = 100;
-        health = maxHealth;
+        maxHealth=100;
+        health=maxHealth;
 
         //contact damage when touching the player
-        contactDamage = 2;
+        contactDamage=2;
 
         //health bar
-        HP_BAR_W = spriteW-20;
-        HP_BAR_H = 10;
-        HP_BAR_Y_OFFSET = 90;
+        HP_BAR_W=spriteW-20;
+        HP_BAR_H=10;
+        HP_BAR_Y_OFFSET=90;
 
         //loadFramesRequired("pathPrefix", count) loads:
-        summonFrames = loadFramesRequired("enemy/boss/summon/summon", 8);
+        summonFrames=loadFramesRequired("enemy/boss/summon/summon", 8);
 
         //iIdle image: first summon frame.
         setImage(summonFrames[0]);
@@ -67,7 +67,7 @@ public class SummonerBoss extends Enemy
     }
 
     /**
-     * Prevent movement..
+     * movement for boss is always 0, 0
      *
      * @return {0,0} so the boss never moves
      */
@@ -88,7 +88,7 @@ public class SummonerBoss extends Enemy
 
         if (GameWorld.isPaused()) return;
 
-        if (getWorld() == null) return;
+        if (getWorld()==null) return;
 
         //enemy uses hitCooldown 
         //so the player isn't damaged every single frame.
@@ -132,7 +132,7 @@ public class SummonerBoss extends Enemy
      */
     private void scheduleNextSummon()
     {
-        summonTimer = minInterval + Greenfoot.getRandomNumber(maxInterval - minInterval + 1);
+        summonTimer=minInterval + Greenfoot.getRandomNumber(maxInterval - minInterval + 1);
     }
 
     /**
@@ -141,11 +141,11 @@ public class SummonerBoss extends Enemy
      */
     private void startSummon()
     {
-        summoning = true;
+        summoning=true;
 
         //start with the first frame
-        frameIndex = 0;
-        animTick = 0;
+        frameIndex=0;
+        animTimer=0;
 
         setImage(summonFrames[0]);
     }
@@ -160,21 +160,22 @@ public class SummonerBoss extends Enemy
      */
     private void playSummonAnimation()
     {
-        //animTick counts 
-        //how many acts have passed since last frame change.
-        animTick++;
+        //animTimer counts 
+        //how many acts have passed
+        //since last frame change.
+        animTimer++;
 
-        //only change frame when reach the delay threshold.
-        if (animTick < summonAnimDelay) return;
+        //only change frame when reach delay value
+        if (animTimer < summonAnimDelay) return;
 
-        animTick = 0;
+        animTimer=0;
         frameIndex++;
 
         //if reached the end of the animation
         //do the spawn and reset to idle.
         if (frameIndex >= summonFrames.length)
         {
-            summoning = false;
+            summoning=false;
             setImage(summonFrames[0]); // idle
 
             //spawn happens
@@ -186,120 +187,83 @@ public class SummonerBoss extends Enemy
             return;
         }
 
-        //oherwise show the next frame.
+        //show the next frame.
         setImage(summonFrames[frameIndex]);
     }
-
     /**
-     * Spawns minion enemies inside the CURRENT room.
-     *
-     * Uses:
-     * - GameWorld.getCurrentRoomData() to get the RoomData for this room
-     * - SpawnerSystem.randomFloomSpawnInRoom(rd) to find a random FLOOR spawn point
-     *
-     * Minion selection here is randomized
-     */
-    private void spawnMinionsBySpawnner()
-    {
-        GameWorld gw = (GameWorld) getWorld();
-        RoomData rd = gw.getCurrentRoomData();
-
-        for (int i = 0; i < minionsPerSummon; i++)
-        {
-            //use SpawnerSystem's randomFloorSpawninRoom to spawn
-            int[] p = SpawnerSystem.randomFloomSpawnInRoom(rd);
-
-            //randomly choose a minion type.
-            int roll = Greenfoot.getRandomNumber(3);
-            if (roll == 0)
-            {
-                getWorld().addObject(new ChaserEnemy(target), p[0], p[1]);
-            }
-            else if (roll == 1)
-            {
-                getWorld().addObject(new WanderEnemy(target), p[0], p[1]);
-            }
-            else
-            {
-                getWorld().addObject(new SkeletonEnemy(target), p[0], p[1]);
-            }
-        }
-    }
-    /**
-     * Spawns minions near the boss (around its position).
+     * Spawns minions around the boss
      *
      * Strategy:
-     * - Try random points in a square around the boss (radius).
-     * - Reject points that are out of bounds or inside blockers.
-     * - If we fail to find a valid spot after many tries, fall back to
-     *   SpawnerSystem.randomFloomSpawnInRoom(currentRoomData).
+     *  try random points in a square around the boss (radius).
+     *  prevent points that are out of bounds or inside blockers.
+     *  when fail to find a valid spot after many tries
+     *  use SpawnerSystem.randomFloomSpawnInRoom(currentRoomData).
      */
     private void spawnMinions()
     {
-        GameWorld gw = (GameWorld) getWorld();
-        RoomData rd = gw.getCurrentRoomData();
+        GameWorld gw=(GameWorld) getWorld();
+        RoomData rd=gw.getCurrentRoomData();
     
-        int radius = 140; //where to spawn the minions
+        int radius=140; //where to spawn the minions
     
         //how many random tries per minion
-        int triesPerMinion = 30;
+        int triesPerMinion=30;
     
-        for (int i = 0; i < minionsPerSummon; i++)
+        for (int i=0; i < minionsPerSummon; i++)
         {
-            int[] p = findSpawnPointNearBoss(radius, triesPerMinion);
+            int[] point=findSpawnPointNearBoss(radius, triesPerMinion);
     
             //if no good point found near the boss, use room-floor helper
-            if (p == null)
+            if (point==null)
             {
-                p = SpawnerSystem.randomFloomSpawnInRoom(rd);
+                point=SpawnerSystem.randomFloomSpawnInRoom(rd);
             }
     
-            // Spawn a random minion type
-            int roll = Greenfoot.getRandomNumber(3);
-            if (roll == 0)
+            //spawn a random minion type
+            int choice=Greenfoot.getRandomNumber(3);
+            if (choice==0)
             {
-                getWorld().addObject(new ChaserEnemy(target), p[0], p[1]);
+                getWorld().addObject(new ChaserEnemy(player), point[0], point[1]);
             }
-            else if (roll == 1)
+            else if (choice==1)
             {
-                getWorld().addObject(new WanderEnemy(target), p[0], p[1]);
+                getWorld().addObject(new WanderEnemy(player), point[0], point[1]);
             }
             else
             {
-                getWorld().addObject(new SkeletonEnemy(target), p[0], p[1]);
+                getWorld().addObject(new SkeletonEnemy(player), point[0], point[1]);
             }
         }
     }
     
     /**
-     * Attempts to find a valid spawn location near the boss.
+     * find a valid spawn location near the boss.
+     *  inside world bounds
+     *  not at a Blocker
      *
-     * Valid locations:
-     * - inside world bounds
-     * - not inside a Blocker
-     *
-     * @param radius maximum distance (pixels) from the boss center
-     * @param maxTries how many random attempts before giving up
-     * @return {x,y} pixel location, or null if none found
+     * @param radius:   maximum distance from the boss
+     * @param maxTries: how many random tries before giving up
+     * @return:         {x,y} locatiom or null
      */
     private int[] findSpawnPointNearBoss(int radius, int maxTries)
     {
-        World w = getWorld();
-        if (w == null) return null;
+        World w=getWorld();
+        if (w==null) return null;
     
-        for (int t = 0; t < maxTries; t++)
+        for (int t=0; t < maxTries; t++)
         {
-            int x = getX() + Greenfoot.getRandomNumber(radius * 2 + 1) - radius;
-            int y = getY() + Greenfoot.getRandomNumber(radius * 2 + 1) - radius;
+            int x=getX() + Greenfoot.getRandomNumber(radius * 2 + 1) - radius;
+            int y=getY() + Greenfoot.getRandomNumber(radius * 2 + 1) - radius;
     
-            // Keep inside world bounds 
-            //(use a little padding so enemies don't spawn half off-screen)
-            if (x < 20 || y < 20 || x > w.getWidth() - 20 || y > w.getHeight() - 20)
+            //Keep inside world bounds 
+            if (x < 20 || y < 20 || 
+                x > w.getWidth() - 20 || 
+                y > w.getHeight() - 20)
             {
                 continue;
             }
     
-            // skip if location is inside a blocker.
+            //skip if location is at a blocker.
             if (!w.getObjectsAt(x, y, Blocker.class).isEmpty())
             {
                 continue;

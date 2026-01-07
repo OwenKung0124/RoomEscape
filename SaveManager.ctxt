@@ -1,31 +1,24 @@
 #BlueJ class context
 comment0.target=SaveManager
-comment0.text=\n\ SaveManager\ reads/writes\ simple\ save\ data\ to\ a\ text\ file.\n\n\ Saved\ data\ \n\ -\ roomR,\ roomC\n\ -\ visited\ grid\n\ -\ cleared\ grid\n\ -\ lastRoomR,lastRoomC\n\n\ File\ format\ example\:\n\ roomR\=1\n\ roomC\=2\n\ visited\=1101/0111/0101/1111\n\ cleared\=1000/0100/0000/0000\n\ playerHealt\=5\n\ roomsCleared\=2\n
+comment0.text=\n\ SaveManager\ reads/writes\ simple\ save\ data\ to\ a\ text\ file.\n\n\ Saved\ data\ \n\ -\ roomR,\ roomC\n\ -\ visited\ grid\n\ -\ cleared\ grid\n\ -\ lastRoomR,lastRoomC\n\n\ File\ format\ example\:\n\ roomR\=1\n\ roomC\=2\n\ visited\=1101/0111/0101/1111\n\ cleared\=1000/0100/0000/0000\n\ playerHealt\=5\n\ roomsCleared\=2\n\ coins\=10;\n
 comment1.params=
 comment1.target=boolean\ hasSave()
 comment1.text=\n\ @return\ true\ if\ a\ save\ file\ exists\n
 comment2.params=
 comment2.target=void\ deleteSave()
 comment2.text=\n\ Deletes\ the\ save\ file\ (used\ for\ "New\ Game").\n
-comment3.params=data
-comment3.target=void\ save(SaveData)
+comment3.params=data\ map
+comment3.target=void\ save(SaveData,\ GameMap)
 comment3.text=\n\ Saves\ progress\ to\ file\ using\ SaveData.\n\n\ @param\ data\ all\ info\ to\ save\n
 comment4.params=map
 comment4.target=SaveData\ load(GameMap)
 comment4.text=\n\ Loads\ progress\ from\ file\ and\ applies\ visited/cleared\ onto\ the\ map.\n\n\ @param\ map\ map\ to\ apply\ visited/cleared\ into\n\ @return\ SaveData\ if\ loaded,\ or\ null\ if\ missing/invalid\n
-comment5.params=map
-comment5.target=java.lang.String\ encodeVisited(GameMap)
-comment5.text=\n\ Encodes\ visited\ state\ into\ a\ string\ like\ 1101/0111/...\n
-comment6.params=map
-comment6.target=java.lang.String\ encodeCleared(GameMap)
-comment6.text=\n\ Encodes\ cleared\ state\ into\ a\ string\ like\ 1000/0100/...\n
-comment7.params=map\ data
-comment7.target=void\ applyVisited(GameMap,\ java.lang.String)
-comment7.text=\n\ Applies\ visited\ data\ onto\ the\ map.\n\ Calls\ map.setVisited(r,c)\ for\ each\ '1'.\n
-comment8.params=map\ data
-comment8.target=void\ applyCleared(GameMap,\ java.lang.String)
-comment8.text=\n\ Applies\ cleared\ data\ onto\ the\ map.\n\ Calls\ map.markCleared(r,c)\ for\ each\ '1'.\n
-comment9.params=s\ defaultValue
-comment9.target=int\ parseIntSafe(java.lang.String,\ int)
-comment9.text=\n\ Parses\ an\ integer\ safely,\ returning\ a\ default\ value\ if\ invalid.\n
-numComments=10
+comment5.params=map\ roomTiles
+comment5.target=void\ applyRoomTiles(GameMap,\ java.lang.String)
+comment5.text=\n\ Applies\ one\ "tiles\="\ record\ onto\ the\ map.\n\ roomTiles\ format\:\ r,c\:<encodedTiles>\n
+comment6.params=map\ out
+comment6.target=void\ saveRoomData(GameMap,\ java.io.PrintWriter)
+comment7.params=s\ defaultValue
+comment7.target=int\ parseIntSafe(java.lang.String,\ int)
+comment7.text=\n\ Parses\ an\ integer\ safely,\ returning\ a\ default\ value\ if\ invalid.\n
+numComments=8

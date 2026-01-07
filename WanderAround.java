@@ -1,10 +1,10 @@
 import greenfoot.*;
 
 /**
- * WanderAround generates simple random wandering movement:
- * - Pick a random direction (up/down/left/right)
- * - Keep moving that direction for a random time
- * - Then pick again
+ * WanderAround helps wondring actor move in the world
+ *  pick a random direction
+ *  Keep moving in that direction for a random time
+ *  then pick again
 
  */
 public class WanderAround
@@ -18,8 +18,8 @@ public class WanderAround
     private int extraHoldFrames;
 
     /**
-     * @param minHoldFrames  minimum frames to keep a direction
-     * @param extraHoldFrames additional random frames (0..extraHoldFrames-1)
+     * @param minHoldFrames:    minimum frames to keep a direction
+     * @param extraHoldFrames:  additional random frames
      */
     public WanderAround(int minHoldFrames, int extraHoldFrames)
     {
@@ -27,15 +27,19 @@ public class WanderAround
         this.extraHoldFrames = extraHoldFrames;
     }
 
-    /** Default tuning (similar to your WanderEnemy feel). */
+    /**
+     *   By default
+     *   minHoldFramees=30
+     *   extraHoldFrames=60;
+     */
     public WanderAround()
     {
         this(30, 60);
     }
 
     /**
-     * @param speed movement speed
-     * @return int[]{dx, dy} movement for this frame
+     * @param speed:    movement speed
+     * @return:         int[]{dx, dy} 
      */
     public int[] nextMove(int speed)
     {
@@ -54,30 +58,34 @@ public class WanderAround
      */
     private void pickNewDirection() 
     {
-        int pick = Greenfoot.getRandomNumber(6); //0-5
+        int newDir = Greenfoot.getRandomNumber(6); //0-5
 
-        //0..3 = 4 directions, 4..5 = pause
-        if (pick == 0) 
+        //0..3 = 4 directions, 
+        //4..5 = pause
+        if (newDir == 0) 
         { 
-            dirX =  1; dirY =  0; 
+            dirX =  1; 
+            dirY =  0; 
         }
-        else if (pick == 1) 
+        else if (newDir == 1) 
         { 
-            dirX = -1; dirY =  0; 
+            dirX = -1; 
+            dirY =  0; 
         }
-        else if (pick == 2) 
+        else if (newDir == 2) 
         { 
-            dirX =  0; dirY =  1;
+            dirX =  0; 
+            dirY =  1;
         }
-        else if (pick == 3) 
+        else if (newDir == 3) 
         { 
-            dirX =  0; dirY = -1; 
+            dirX =  0; 
+            dirY = -1; 
         }
         else 
         { 
-            dirX = 0; dirY = 0; 
+            dirX = 0; 
+            dirY = 0; 
         }
-
-        //timer = 20 + Greenfoot.getRandomNumber(60); //20-79
     }
 }

@@ -16,7 +16,7 @@ public abstract class Enemy extends CombatActor implements HasHealth
 
     //The player this enemy can interact with 
     //(chase and/or knockback)
-    protected Player target;
+    protected Player player;
 
     //Damage cooldown so enemy doesn't hit every single frame
     protected int hitCooldown = 0;
@@ -44,7 +44,7 @@ public abstract class Enemy extends CombatActor implements HasHealth
 
     public Enemy(Player target) 
     {
-        this.target = target;
+        player = target;
         animDelay=8;
         
         //use default sprite size
@@ -185,7 +185,7 @@ public abstract class Enemy extends CombatActor implements HasHealth
     //Damages/knocks the player on contact
     protected void handlePlayerContact() 
     {
-        if (target == null) 
+        if (player == null) 
         {
             return;
         }
@@ -194,9 +194,9 @@ public abstract class Enemy extends CombatActor implements HasHealth
         {
             hitCooldown = hitCooldownFrames;
             //deal damage to the player (player has its own invincibility too)
-            if (target != null)
+            if (player != null)
             {
-                target.takeDamage(contactDamage);     
+                player.takeDamage(contactDamage);     
             }
         }
     }
@@ -226,6 +226,7 @@ public abstract class Enemy extends CombatActor implements HasHealth
     
         if (health <= 0 && getWorld() != null)
         {
+            player.addScore(maxHealth);
             getWorld().removeObject(this);
         }
     }

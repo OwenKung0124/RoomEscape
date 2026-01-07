@@ -62,8 +62,11 @@ public class GameConfig
     public static final int DOOR_GAP_W = 90;
     public static final int DOOR_GAP_H = 120;
 
-    public static final int ENEMIES_TO_SPAWN = 5;
+    public static final int ENEMIES_TO_SPAWN = 1;
     public static final int WIN_ROOMS = 6;
+    
+    //SummonerBoss
+    public static final int SUMMONER_BOSS_DOOR_CLEARED=8;
     
     //Warrior Selection
     public static final int WARRIOR_AXE=1;
@@ -76,11 +79,10 @@ public class GameConfig
     
     
     //Default max HP for the player.
-    public static final int DEFAULT_MAX_HP = 50;
+    public static final int DEFAULT_MAX_HP = 100;
     public static final int DEFAULT_INVINCIBILITY_FRAMES = 30;
     
-    //SummonerBoss
-    public static final int SUMMONER_BOSS_DOOR_CLEARED=1;
+
     
     //file for reloading data later
     public static final String SAVE_FILE = "save.txt";

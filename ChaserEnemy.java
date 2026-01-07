@@ -25,13 +25,13 @@ public class ChaserEnemy extends Enemy {
      */
     protected int[] computeMove() 
     {
-        if (target == null)
+        if (player==null)
         {
             return new int[]{0, 0};
         }
 
-        int dx = target.getX() - getX();
-        int dy = target.getY() - getY();
+        int dx =player.getX() - getX();
+        int dy =player .getY() - getY();
 
         double dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < 0.0001)

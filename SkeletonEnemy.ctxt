@@ -20,5 +20,5 @@ comment6.text=\n\ Called\ exactly\ once\ on\ hitFrame\ by\ CombatActor.\n\ Shoot
 comment7.params=
 comment7.target=void\ scheduleNextAttack()
 comment8.params=
-comment8.target=void\ faceTarget4Dir()
+comment8.target=void\ faceTargetFourDir()
 numComments=9

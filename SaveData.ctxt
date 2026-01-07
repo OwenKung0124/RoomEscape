@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=SaveData
-comment0.text=\n\ SaveData\ stores\ all\ information\ needed\ to\ restore\ a\ saved\ game.\n\n\ Keep\ this\ class\ simple\:\n\ -\ public\ fields,\ mainly\ string\ and\ int\n
+comment0.text=\n\ SaveData\ stores\ information\ that\ will\ be\ saved.\n\n
 comment1.params=
 comment1.target=SaveData()
 numComments=2

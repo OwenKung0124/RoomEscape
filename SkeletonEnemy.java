@@ -52,7 +52,7 @@ public class SkeletonEnemy extends Enemy
     {
         if (GameWorld.isPaused()) return;
         if (getWorld() == null) return;
-        if (target == null || target.getWorld() == null) return;
+        if (player == null || player.getWorld() == null) return;
 
         //Enemy contact cooldown
         if (hitCooldown > 0) hitCooldown--;
@@ -94,8 +94,8 @@ public class SkeletonEnemy extends Enemy
      */
     private boolean wantsToAttack()
     {
-        int dx = target.getX() - getX();
-        int dy = target.getY() - getY();
+        int dx = player.getX() - getX();
+        int dy = player.getY() - getY();
         return (dx * dx + dy * dy) <= (attackRange * attackRange);
     }
 
@@ -106,7 +106,7 @@ public class SkeletonEnemy extends Enemy
     @Override
     protected void startAttack()
     {
-        faceTarget4Dir();
+        faceTargetFourDir();
         super.startAttack();
         scheduleNextAttack();
     }
@@ -142,10 +142,10 @@ public class SkeletonEnemy extends Enemy
         attackTimer = min + Greenfoot.getRandomNumber(max - min + 1);
     }
 
-    private void faceTarget4Dir()
+    private void faceTargetFourDir()
     {
-        int dx = target.getX() - getX();
-        int dy = target.getY() - getY();
+        int dx = player.getX() - getX();
+        int dy = player.getY() - getY();
 
         if (Math.abs(dx) >= Math.abs(dy))
         {

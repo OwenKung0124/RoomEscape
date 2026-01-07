@@ -1,8 +1,8 @@
 import greenfoot.*;
 
 /**
- * HealthBar renders a health bar for any HasHealth unit.
- * Can follow an actor or display at a fix place on screen
+ * HealthBar draws a health bar for any HasHealth actor
+ * can follow an actor or display at a fix place on screen
  */
 public class HealthBar extends Actor
 {
@@ -15,12 +15,12 @@ public class HealthBar extends Actor
     private int yOffset;
 
     /**
-     * @param unit         object that provides HP via HasHealth
-     * @param follow       actor to follow (usually same as unit if unit is an Actor)
-     * @param width        bar width in pixels
-     * @param height       bar height in pixels
-     * @param followTarget true to follow follow actor each frame
-     * @param yOffset      y offset from follow actor
+     * @param unit         actor that has health
+     * @param follow       actor to follow
+     * @param width        bar width
+     * @param height       bar height
+     * @param followTarget true to follow follow actor closely
+     * @param yOffset      y offset from the actor to display
      */
     public HealthBar(HasHealth unit, Actor follow, int width, int height, boolean followTarget, int yOffset)
     {
@@ -39,7 +39,7 @@ public class HealthBar extends Actor
     {
         if (getWorld() == null) return;
 
-        //if following something and it disappears, remove this bar too
+        //remove the bar, if actor is dead or removed
         if (followTarget)
         {
             if (follow == null || follow.getWorld() == null)
@@ -78,7 +78,8 @@ public class HealthBar extends Actor
             return;
         }
 
-        int innerX = 3, innerY = 3;
+        int innerX = 3;
+        int innerY = 3;
         int innerW = barW - 6;
         int innerH = barH - 6;
 
@@ -95,6 +96,7 @@ public class HealthBar extends Actor
         int fillW = (int) Math.round(innerW * ratio);
 
         //choose color by percent
+        //be more visual
         Color fill;
         if (ratio > 0.6)
         {

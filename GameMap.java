@@ -1,3 +1,5 @@
+import java.util.StringTokenizer;
+
 /**
  * RoomMap stores all "map data" for the whole game:
  * - which rooms exist (grid)
@@ -10,8 +12,8 @@
 public class GameMap {
 
     //Room grid map 
-    //(1 = room exists, 0 = no room)
-    private int[][] grid = 
+    //(1=room exists, 0 = no room)
+    private int[][] grid=
     {
         {1, 1, 0, 1},
         {0, 1, 1, 1},
@@ -19,8 +21,16 @@ public class GameMap {
         {1, 1, 1, 1}
     };
 
-    /** Background image name per room (same size as grid). */
-    private String[][] roomBg = 
+    private char[][] roomType=
+    {
+        {'T', 'B', 'N', 'T'},
+        {'N', 'B', 'B', 'S'},
+        {'N', 'B', 'N', 'B'},
+        {'T', 'B', 'B', 'T'}
+    };
+    //background image name per room
+    //all the same for now
+    private String[][] roomBg=
     {
         {"bg/general_bg.jpg",   "bg/general_bg.jpg",    null,                   "bg/general_bg.jpg"},
         {null,                  "bg/general_bg.jpg",    "bg/general_bg.jpg",    "bg/general_bg.jpg"},
@@ -36,16 +46,16 @@ public class GameMap {
     //whether this room was visited before
     private boolean[][] visited;
 
-    //ile data per room (same indexing as grid)
+    //tile data per room
     private RoomData[][] rooms;
 
     public GameMap() 
     {
         //initialize to false default value
-        cleared = new boolean[grid.length][grid[0].length];
-        visited = new boolean[grid.length][grid[0].length];
+        cleared=new boolean[grid.length][grid[0].length];
+        visited=new boolean[grid.length][grid[0].length];
 
-        rooms = new RoomData[grid.length][grid[0].length];
+        rooms=new RoomData[grid.length][grid[0].length];
         initRooms();
     }
 
@@ -56,24 +66,24 @@ public class GameMap {
      */
     private void initRooms()
     {
-        for (int r = 0; r < grid.length; r++) {
-            for (int c = 0; c < grid[0].length; c++) {
+        for (int r=0; r < grid.length; r++) {
+            for (int c=0; c < grid[0].length; c++) {
     
                 if (grid[r][c] != 1) {
-                    rooms[r][c] = null;
+                    rooms[r][c]=null;
                     continue;
                 }
     
-                int[][] layout = createLayoutFor(r, c);
+                int[][] layout=createLayoutFor(r, c);
     
                 //for those floor layout not defined
                 //make it all floor so it still works
-                if (layout == null)
+                if (layout== null)
                 {
-                    layout = makeAllFloorLayout();
+                    layout=makeAllFloorLayout();
                 }
     
-                rooms[r][c] = new RoomData(layout);
+                rooms[r][c]=new RoomData(layout);
             }
         }
     }
@@ -84,20 +94,20 @@ public class GameMap {
      */
     private int[][] createLayoutFor(int r, int c)
     {
-        if (r == 0 && c == 0) {
+        if (r== 0 && c==0) {
             return new int[][] {
                 {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},
-                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3},
-                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3},
-                {2,0,1,1,0,0,0,0,0,1,1,0,0,0,0,2},
-                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
+                {2,11,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
+                {2,0,11,0,0,0,0,0,0,0,0,0,0,0,0,2},
+                {2,0,0,11,0,0,0,0,0,0,0,0,0,0,0,3},
+                {2,0,0,0,11,0,0,0,0,0,0,0,0,0,0,3},
+                {2,0,0,0,0,11,0,0,0,0,0,0,0,0,0,3},
+                {2,0,1,1,0,0,11,0,0,1,1,0,0,0,0,2},
+                {2,0,0,0,0,0,0,11,0,0,0,0,0,0,0,2},
                 {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2}
             };
         }
-        if (r == 0 && c == 1) {
+        if (r==0 && c==1) {
             return new int[][] {
                 {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},
                 {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
@@ -110,7 +120,7 @@ public class GameMap {
                 {2,2,2,2,2,2,2,3,3,2,2,2,2,2,2,2}
             };
         }
-        if (r == 0 && c == 2) {
+        if (r==0 && c==2) {
             return new int[][] {
                 {2,2,2,2,2,2,2,3,3,2,2,2,2,2,2,2},
                 {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
@@ -123,21 +133,21 @@ public class GameMap {
                 {2,2,2,2,2,2,2,3,3,2,2,2,2,2,2,2}
             };
         }
-        if (r == 0 && c == 3) {
+        if (r==0 && c==3) {
             return new int[][] {
                 {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},
-                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-                {2,0,1,1,0,0,0,0,0,1,1,0,0,0,0,2},
-                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
+                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,11,2},
+                {2,0,0,0,0,0,0,0,0,0,0,0,0,11,0,2},
+                {2,0,0,0,0,0,0,0,0,0,0,0,11,0,0,2},
+                {2,0,0,0,0,0,0,0,0,0,0,11,0,0,0,2},
+                {2,0,0,0,0,0,0,0,0,0,11,0,0,0,0,2},
+                {2,0,0,0,0,0,0,0,0,0,11,0,0,0,0,2},
+                {2,0,0,0,0,0,0,0,0,11,0,0,0,0,0,2},
                 {2,2,2,2,2,2,2,3,3,2,2,2,2,2,2,2}
             };
         }
         //starting room
-        if (r == 1 && c == 1) {
+        if (r==1 && c==1) {
             return new int[][] {
                 {2,2,2,2,2,2,2,3,3,2,2,2,2,2,2,2},
                 {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
@@ -150,7 +160,7 @@ public class GameMap {
                 {2,2,2,2,2,2,2,3,3,2,2,2,2,2,2,2}
             };
         }
-        if (r == 1 && c == 2) {
+        if (r==1 && c==2) {
             return new int[][] {
                 {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},
                 {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
@@ -163,11 +173,11 @@ public class GameMap {
                 {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2}
             };
         }
-        if (r == 1 && c == 3) {
+        if (r==1 && c==3) {
             return new int[][] {
                 {2,2,2,2,2,2,2,3,3,2,2,2,2,2,2,2},
                 {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-                {2,0,1,0,0,0,0,0,1,1,0,0,0,0,0,2},
+                {2,0,1,0,0,0,0,0,0,1,0,0,0,0,0,2},
                 {3,0,11,0,0,0,0,0,0,0,0,0,0,0,0,3},
                 {3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3},
                 {2,0,0,0,0,11,0,0,0,0,0,0,0,0,0,2},
@@ -176,7 +186,7 @@ public class GameMap {
                 {2,2,2,2,2,2,2,3,3,2,2,2,2,2,2,2}
             };
         }
-        if (r == 2 && c == 1) {
+        if (r==2 && c==1) {
             return new int[][] {
                 {2,2,2,2,2,2,2,3,3,2,2,2,2,2,2,2},
                 {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
@@ -189,7 +199,7 @@ public class GameMap {
                 {2,2,2,2,2,2,2,3,3,2,2,2,2,2,2,2}
             };
         }
-        if (r == 2 && c == 3) {
+        if (r==2 && c==3) {
             return new int[][] {
                 {2,2,2,2,2,2,2,3,3,2,2,2,2,2,2,2},
                 {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
@@ -202,20 +212,20 @@ public class GameMap {
                 {2,2,2,2,2,2,2,3,3,2,2,2,2,2,2,2}
             };
         }
-        if (r == 3 && c == 0 ){
+        if (r==3 && c==0 ){
             return new int[][] {
                 {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},
-                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-                {2,0,1,0,0,0,0,0,1,1,0,0,0,0,0,2},
-                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3},
-                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3},
-                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-                {2,0,1,1,0,0,0,0,0,1,1,0,0,0,0,2},
-                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
+                {2,11,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
+                {2,0,11,0,0,0,0,0,11,11,0,0,0,0,0,2},
+                {2,0,0,11,0,0,0,0,0,0,0,0,0,0,0,3},
+                {2,0,0,0,11,0,0,0,0,0,0,0,0,0,0,3},
+                {2,0,0,0,0,11,0,0,0,11,0,0,0,0,0,2},
+                {2,0,1,1,0,0,11,0,11,0,0,0,0,0,0,2},
+                {2,0,0,0,0,0,0,11,0,0,0,0,0,0,0,2},
                 {2,2,2,2,2,2,2,3,3,2,2,2,2,2,2,2}
             };
         }
-        if (r == 3 && c == 1 ){
+        if (r==3 && c==1 ){
             return new int[][] {
                 {2,2,2,2,2,2,2,3,3,2,2,2,2,2,2,2},
                 {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
@@ -228,12 +238,12 @@ public class GameMap {
                 {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2}
             };
         }
-        if (r == 3 && c == 2 ){
+        if (r==3 && c==2 ){
             return new int[][] {
                 {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},
                 {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
                 {2,0,1,0,0,0,0,0,1,1,0,0,0,0,0,2},
-                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
+                {3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3},
                 {3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3},
                 {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
                 {2,0,1,1,0,0,0,0,0,1,1,0,0,0,0,2},
@@ -241,16 +251,16 @@ public class GameMap {
                 {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2}
             };
         }
-        if (r == 3 && c == 3 ){
+        if (r==3 && c==3 ){
             return new int[][] {
                 {2,2,2,2,2,2,2,3,3,2,2,2,2,2,2,2},
-                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-                {2,0,1,0,0,0,0,0,1,1,0,0,0,0,0,2},
-                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-                {3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-                {2,0,1,1,0,0,0,0,0,1,1,0,0,0,0,2},
-                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
+                {2,11,0,0,0,0,0,0,0,0,11,0,0,0,0,2},
+                {2,0,11,0,0,0,0,0,0,0,11,0,0,0,0,2},
+                {3,0,0,11,0,0,0,0,0,0,11,0,0,0,0,2},
+                {3,0,0,11,0,0,0,0,0,0,11,0,0,0,0,2},
+                {2,0,0,11,0,0,0,0,0,0,11,0,0,0,0,2},
+                {2,0,0,11,0,0,0,0,0,11,0,0,0,0,0,2},
+                {2,0,11,0,0,0,0,0,11,0,0,0,0,0,0,2},
                 {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2}
             };
         }
@@ -263,10 +273,10 @@ public class GameMap {
     //Makes a safe default 16x9 layout: all walkable floor
     private int[][] makeAllFloorLayout()
     {
-        int[][] out = new int[GameConfig.MAP_ROWS][GameConfig.MAP_COLS];
-        for (int tr = 0; tr < GameConfig.MAP_ROWS; tr++) 
+        int[][] out=new int[GameConfig.MAP_ROWS][GameConfig.MAP_COLS];
+        for (int tr=0; tr < GameConfig.MAP_ROWS; tr++) 
         {
-            for (int tc = 0; tc < GameConfig.MAP_COLS; tc++) out[tr][tc] = GameConfig.FLOOR;
+            for (int tc=0; tc < GameConfig.MAP_COLS; tc++) out[tr][tc]=GameConfig.FLOOR;
         }
         return out;
     }
@@ -282,7 +292,7 @@ public class GameMap {
     {
         return r >= 0 && r < grid.length
             && c >= 0 && c < grid[0].length
-            && grid[r][c] == 1;
+            && grid[r][c]==1;
     }
 
     public String getBgName(int r, int c) 
@@ -295,7 +305,7 @@ public class GameMap {
     }
 
     public void setVisited(int r, int c) {
-        visited[r][c] = true;
+        visited[r][c]=true;
     }
 
     public boolean wasVisited(int r, int c) {
@@ -313,7 +323,7 @@ public class GameMap {
     public boolean markCleared(int r, int c) 
     {
         if (!cleared[r][c]) {
-            cleared[r][c] = true;
+            cleared[r][c]=true;
             return true;
         }
         return false;
@@ -329,28 +339,153 @@ public class GameMap {
      */
     public int[] findFirstRoom()
     {
-        //Preferred starting room (you labelled this in createLayoutFor)
+        //preferred starting room
         if (hasRoom(1, 1))
         {
             return new int[] {1, 1};
         }
     
         //scan for the first existing room
-        for (int r = 0; r < grid.length; r++)
+        for (int r=0; r < grid.length; r++)
         {
-            for (int c = 0; c < grid[0].length; c++)
+            for (int c=0; c < grid[0].length; c++)
             {
-                if (grid[r][c] == 1)
+                if (grid[r][c]==1)
                 {
                     return new int[] {r, c};
                 }
             }
         }
     
-        //Safety fallback 
         return new int[] {0, 0};
     }
-    // ===== MiniMap helpers =====
-    public int getRows() { return grid.length; }
-    public int getCols() { return grid[0].length; }
+    public char getRoomType(int r, int c)
+    {
+        return roomType[r][c];
+    }
+    
+    /**
+     * Combat room rule:
+     * 'B' means batlle room in roomType[][].
+     */
+    public boolean isCombatRoom(int r, int c)
+    {
+        return hasRoom(r, c) && getRoomType(r, c) == 'B';
+    }
+
+    /**
+     * Export visited[][] into a string like: 1101/0111/0101/1111
+     */
+    public String exportVisited()
+    {
+        String exportStr = "";
+
+        for (int r = 0; r < getRows(); r++)
+        {
+            if (r > 0) 
+            {
+                exportStr += "/";
+            }
+            for (int c = 0; c < getCols(); c++)
+            {
+                if (visited[r][c]) 
+                {
+                    exportStr += "1";
+                } 
+                else 
+                {
+                    exportStr += "0";
+                }
+            }
+        }
+        
+        return exportStr;
+    }
+    
+    /**
+     * Export cleared[][] into a string like: 1000/0100/0000/0000
+     */
+    public String exportCleared()
+    {
+        StringBuilder sb=new StringBuilder();
+    
+        for (int r=0; r < getRows(); r++)
+        {
+            if (r > 0) sb.append('/');
+    
+            for (int c=0; c < getCols(); c++)
+            {
+                sb.append(cleared[r][c] ? '1' : '0');
+            }
+        }
+    
+        return sb.toString();
+    }
+    
+    /**
+     * Import visited string and apply to visited[][].
+     * Only sets true for '1'. Leaves everything else as-is/false.
+     */
+    public void importVisited(String data)
+    {
+        if (data==null) return;
+        
+        data=data.trim();
+        if (data.length()==0) return;
+    
+        String[] rows=data.split("/");
+    
+        for (int r=0; r < rows.length && r < getRows(); r++)
+        {
+            String row=rows[r];
+    
+            for (int c=0; c < row.length() && c < getCols(); c++)
+            {
+                if (row.charAt(c)=='1')
+                {
+                    visited[r][c]=true;
+                }
+            }
+        }
+    }
+    /**
+     * Import cleared string and apply to cleared[][].
+     * Also sets visited=true when a room is cleared (same behavior as your old applyCleared).
+     */
+    public void importCleared(String data)
+    {
+        if (data == null) return;
+
+        data = data.trim();
+        if (data.length() == 0) return;
+        
+        StringTokenizer rows = new StringTokenizer(data, "/");
+        int r = 0;
+        while (rows.hasMoreTokens() && r < getRows())
+        {
+            String row = rows.nextToken();
+            if (row == null) { r++; continue; }
+        
+            int maxC = Math.min(row.length(), getCols());
+        
+            for (int c = 0; c < maxC; c++)
+            {
+                if (row.charAt(c) == '1')
+                {
+                    cleared[r][c] = true;
+                    visited[r][c] = true;
+                }
+            }
+        
+            r++;
+        }
+    }
+    public int getRows()
+    { 
+        return grid.length; 
+    }
+    public int getCols()
+    { 
+        return grid[0].length; 
+    }
 }

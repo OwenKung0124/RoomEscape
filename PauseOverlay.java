@@ -17,12 +17,12 @@ public class PauseOverlay extends Actor
     private void redraw()
     {
         int w = 360;
-        int h = 160;
+        int h = 190;
 
         GreenfootImage img = new GreenfootImage(w, h);
 
         //semi-transparent black background
-        img.setColor(new Color(0, 0, 0, 170));
+        img.setColor(new Color(0, 0, 0, 0));
         img.fillRect(0, 0, w, h);
 
         //white border
@@ -33,6 +33,7 @@ public class PauseOverlay extends Actor
         img.drawString("PAUSED", 140, 40);
         img.drawString("ESC = Resume", 110, 80);
         img.drawString("Q = Exit to Setup", 95, 110);
+        //img.drawString("S = Quit to Save", 95, 140);
 
         setImage(img);
     }

@@ -2,7 +2,7 @@ import greenfoot.*;
 
 /**
  * SpawnerSystem handles random spawning:
- * - enemies in a room
+ * e.g enemies
  *
  */
 public class SpawnerSystem 
@@ -13,33 +13,39 @@ public class SpawnerSystem
 
     public SpawnerSystem(GameWorld world, GameMap map) 
     {
-        this.world = world;
-        this.map = map;
+        this.world=world;
+        this.map=map;
     }
     /**
      * Spawns enemies only if the room is not cleared.
      */
     public void spawnEnemiesIfNeeded(int r, int c, Player player)
     {
-        //Spawn enemies only if room not cleared
+        //non-combat rooms never spawn enemies
+        if (!map.isCombatRoom(r, c))
+        {
+            return;
+        }
+
+        //spawn enemies only if room not cleared
         if (map.isCleared(r, c))
         {
             return;   
         }
 
-        int enemiesToSpawn = 1 + Greenfoot.getRandomNumber(GameConfig.ENEMIES_TO_SPAWN); //1 to GameConfigENEMIES_TO_SPAWN
-        for (int i = 0; i < enemiesToSpawn; i++) 
+        int enemiesToSpawn=1 + Greenfoot.getRandomNumber(GameConfig.ENEMIES_TO_SPAWN); //1 to GameConfigENEMIES_TO_SPAWN
+        for (int i=0; i < enemiesToSpawn; i++) 
         {
             //randomly assigned x, y for eaach player
             //p is x, y co-ordiantes to spawn the enemy
-            int[] p = randomFloorSpawn(r, c);
+            int[] p=randomFloorSpawn(r, c);
 
             //adds different typs of enemies randomly
-            if (Greenfoot.getRandomNumber(2) == 0)
+            if (Greenfoot.getRandomNumber(2)==0)
             {
                 world.addObject(new ChaserEnemy(player),  p[0], p[1]);
             } 
-            else if (Greenfoot.getRandomNumber(2) == 1)
+            else if (Greenfoot.getRandomNumber(2)==1)
             {
                 world.addObject(new WanderEnemy(player),  p[0], p[1]);
             }
@@ -68,39 +74,36 @@ public class SpawnerSystem
     {
         //Get the RoomData for this room
         //to get the tile map
-        RoomData rd = map.getRoomData(r, c);
-
-       
+        RoomData rd=map.getRoomData(r, c);
         return  randomFloomSpawnInRoom(rd);
     }
-    /*
+    /**
      * Given roomdata and returns x, y where floor tile it.
      * makes it static
      * it can also acs as a helper method for boss to spawn mini enemies
      */
     public static int[] randomFloomSpawnInRoom(RoomData rd)
     {
-        if (rd == null)
+        if (rd==null)
         {
              //if something is wrong, don't crash
              //give the x, y co-ordinates at room centre
             return new int[]{GameConfig.roomCenterX(), GameConfig.roomCenterY()};
         }
 
-        //Try up to 250 random tiles to find a FLOOR tile
-        //Avoid the outer border by choosing ROWS-2 and COLS-2)
-        for (int tries = 0; tries < 250; tries++) 
+        //try up to 250 random tiles 
+        for (int  i=0; i < 250; i++) 
         {
-            //Pick a random interior tile row/col
-            int tr = 1 + Greenfoot.getRandomNumber(GameConfig.MAP_ROWS - 2);
-            int tc = 1 + Greenfoot.getRandomNumber(GameConfig.MAP_COLS - 2);
+            //pick a random interior tile
+            int tr=1 + Greenfoot.getRandomNumber(GameConfig.MAP_ROWS - 2);
+            int tc=1 + Greenfoot.getRandomNumber(GameConfig.MAP_COLS - 2);
 
-            //Only spawn on walkable floor tiles
-            if (rd.tiles[tr][tc] == GameConfig.FLOOR) {
+            //only spawn on walkable floor tiles
+            if (rd.tiles[tr][tc]==GameConfig.FLOOR) {
 
                 //Convert tile position to the center pixel position in the room
-                int x = GameConfig.tileCenterX(tc);
-                int y = GameConfig.tileCenterY(tr);
+                int x=GameConfig.tileCenterX(tc);
+                int y=GameConfig.tileCenterY(tr);
 
                 //return the spawn position as [x, y]
                 return new int[]{x, y};

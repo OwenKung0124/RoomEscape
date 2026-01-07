@@ -317,10 +317,10 @@ public abstract class SuperSmoothMover extends Actor
      * @param int x: x coordinate to display text
      * @param int y: y coordinate to display text
      */
-    //protected void showText(String text, int x, int y)
-    //{
-    //    getWorld().addObject(new FloatingText(text), x,y);
-    //}
+    protected void showText(String text, int x, int y)
+    {
+       // getWorld().addObject(new FloatingText(text), x,y);
+    }
     /**
      * Help to show status of an actor.
      * The text will be removed in a short time
@@ -329,10 +329,10 @@ public abstract class SuperSmoothMover extends Actor
      * @param int x: x coordinate to display text
      * @param int y: y coordinate to display text
      */
-    //protected void showText(String text, Color color,int x, int y)
-    //{
-    //    getWorld().addObject(new FloatingText(text,color), x,y);
-    //}
+    protected void showText(String text, Color color,int x, int y)
+    {
+        //getWorld().addObject(new FloatingText(text,color), x,y);
+    }
      /**
      * Checks for pixel-perfect collision with another Actor.
      * It makes collision more precise.
