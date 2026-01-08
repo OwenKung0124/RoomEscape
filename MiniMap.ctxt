@@ -9,4 +9,6 @@ comment2.target=void\ act()
 comment3.params=
 comment3.target=void\ updateImage()
 comment3.text=\n\ Rebuilds\ the\ minimap\ image\ based\ on\ visited/cleared\ states.\n
-numComments=4
+comment4.params=img\ x\ y\ type
+comment4.target=void\ drawRoomTypeMarker(greenfoot.GreenfootImage,\ int,\ int,\ char)
+numComments=5

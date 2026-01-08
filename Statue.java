@@ -1,28 +1,20 @@
 import greenfoot.*;
 
 /**
- * A Statue is a solid blocker that 
- * also shows a larger decorative image on top.
+ * A Statue is a solid blocker that also shows a larger decorative image on top.
  *
- * The Statue itself uses an invisible, tile-sized image for collision.
- * 
- * A separate Decoration actor ("visual") is added to the world 
- * to display the actual statue sprite (often bigger than a tile)
- * aligned so the bottom of the sprite sits on the tile.
  */
 public class Statue extends Blocker
 {
     //The visible statue sprite actor 
     //so that the sprite can display
-    private Decoration visual;
+    private AnimatedDecoration visual;
 
     /**
      * Creates a statue with a collision hitbox of size (w, h).
-     * The statue's own image is made transparent so it blocks movement
-     * without visibly covering the decoration sprite.
      *
-     * @param w hitbox width (usually tile width)
-     * @param h hitbox height (usually tile height)
+     * @param w:    hitbox width
+     * @param h:    hitbox height
      */
     public Statue(int w, int h)
     {
@@ -37,15 +29,17 @@ public class Statue extends Blocker
 
     /**
      * after the hitbox ix created
-     * spawns the visible statue decoration 
-     * and positions it so its bottom lines up with this tile.
+     * creates the visible statue decoration and 
+     * positions it so its bottom lines up with this tile.
      *
-     * @param world the world this actor was added to
+     * @param world:    the world this actor was added to
      */
     protected void addedToWorld(World world)
     {
         //create the visual decoration
-        visual = new Decoration(GameConfig.STATUE_IMG, GameConfig.STATUE_W, GameConfig.STATUE_H);
+        //visual = new Decoration(GameConfig.STATUE_IMG, GameConfig.STATUE_W, GameConfig.STATUE_H); 
+        //public AnimatedDecoration(String baseFileName, int frameCount, int w, int h)
+        visual=new AnimatedDecoration(GameConfig.STATUE_IMG, 2,GameConfig.STATUE_W, GameConfig.STATUE_H);  
 
         //add the decoration at the same tile position as the hitbox.
         world.addObject(visual, getX(), getY());

@@ -1,53 +1,50 @@
 import greenfoot.*;
 
 /**
- *  Axe Warrior:
- * - Walks using WalkingActor movement (WASD / arrow keys)
- * - Attacks with SPACE using directional attack sprites
- * - Melee hit is an invisible hitbox (AxeSlash) spawned in front
+ *  Axe Warrior uses Axe to kill enemy
  */
 public class AxeWarrior extends Player
 {
-    //space "just pressed" detection
-    private boolean lastSpace = false;
-    private boolean spaceJustPressed = false;
+    //space"just presse detection
+    private boolean lastSpace=false;
+    private boolean spaceJustPressed=false;
 
     public AxeWarrior()
     {
         //movement
-        speed = 4;
+        speed=4;
 
         //walk animation timing
-        animDelay = 6;
+        animDelay=6;
 
         //sprite size
-        spriteW = 75;
-        spriteH = 80;
+        spriteW=75;
+        spriteH=80;
 
         //walk frames
-        loadDirectionalFrames("player/axe_warrior/walking", 9);
-        left = mirrorImage(right);
+        loadDirectionalFrames("player/axe_warrior/walking", 8);
+        left=mirrorImage(right);
 
         //attack frames
         loadAttackFrames("player/axe_warrior/attack", 5);
 
         //attack tuning
-        atkAnimDelay = 5;         //smaller = faster swing
-        attackCooldownMax = 12;   //bigger = slower swing rate
-        hitFrame = 2;             //damage happens on this frame
+        atkAnimDelay=5;         //smaller=faster swing
+        attackCooldownMax=12;   //bigger=slower swing rate
+        hitFrame=2;             //damage happens on this frame
 
         //default facing
-        dir = DOWN;
+        dir=DOWN;
         setImage(framesFor(dir)[0]);
     }
 
     public void act()
     {
         //space just pressed detection
-        //so holding space does not trigger multiple attack
-        boolean space = Greenfoot.isKeyDown("space");
-        spaceJustPressed = space && !lastSpace;
-        lastSpace = space;
+        //so holding space does not cause multiple attack
+        boolean space=Greenfoot.isKeyDown("space");
+        spaceJustPressed=space && !lastSpace;
+        lastSpace=space;
 
         super.act();
     }
@@ -61,41 +58,41 @@ public class AxeWarrior extends Player
 
     /**
      * Spawn a short-lived hitbox in front of the player on the hit frame.
-     * This matches an axe swing in front like your sprite.
      */
     protected void onAttackHit()
     {
-        if (getWorld() == null) return;
+        if (getWorld()==null) return;
 
-        //hitbox size (tune these)
-        int boxW = 55;
-        int boxH = 45;
 
-        //how far in front of the player the hitbox is placed
-        int reach = 35;
+        //hitbox size
+        int boxW=55;
+        int boxH=45;
 
-        int ox = 0;
-        int oy = 0;
+        //distance
+        int distance=35;
 
-        if (dir == UP)
+        int offsetx=0;
+        int offsety=0;
+
+        if (dir==UP)
         {
-            oy = -reach;
+            offsety=-distance;
         }
-        else if (dir == DOWN)
+        else if (dir==DOWN)
         {
-            oy = reach;
+            offsety=distance;
         }
-        else if (dir == LEFT)
+        else if (dir==LEFT)
         {
-            ox = -reach;
+            offsetx=-distance;
         }
         else //RIGHT
         {
-            ox = reach;
+            offsetx=distance;
         }
 
-        //spawn a short-lived hitbox (lasts a few frames to match swing)
-        AxeSlash slash = new AxeSlash(boxW, boxH, 3);
-        getWorld().addObject(slash, getX() + ox, getY() + oy);
+        //put a short-lived hitbox 
+        HitBox hitbox=new HitBox(boxW, boxH, 3);
+        getWorld().addObject(hitbox, getX() + offsetx, getY() + offsety);
     }
 }

@@ -18,6 +18,7 @@ import java.util.Scanner;
  * playerHealt=5
  * roomsCleared=2
  * coins=10;
+ * tiles=0,0:2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2/2,1.....,0,.....2,2,2
  */
 public class SaveManager
 {

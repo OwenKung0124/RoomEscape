@@ -27,7 +27,7 @@ comment17.target=void\ importVisited(java.lang.String)
 comment17.text=\n\ Import\ visited\ string\ and\ apply\ to\ visited[][].\n\ Only\ sets\ true\ for\ '1'.\ Leaves\ everything\ else\ as-is/false.\n
 comment18.params=data
 comment18.target=void\ importCleared(java.lang.String)
-comment18.text=\n\ Import\ cleared\ string\ and\ apply\ to\ cleared[][].\n\ Also\ sets\ visited\=true\ when\ a\ room\ is\ cleared\ (same\ behavior\ as\ your\ old\ applyCleared).\n
+comment18.text=\n\ Import\ cleared\ string\ and\ apply\ to\ cleared[][].\n\ Also\ sets\ visited\=true\ when\ a\ room\ is\ cleared\n
 comment19.params=
 comment19.target=int\ getRows()
 comment2.params=

@@ -21,8 +21,6 @@ public class SaveData
     //currently handed by GameMap class
     //public String visited;
     //public String cleared;
-    
-    
 
     public SaveData()
     {

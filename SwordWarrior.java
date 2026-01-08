@@ -2,13 +2,11 @@ import greenfoot.*;
 
 /**
  *  Sword Warrior:
- * - Walks using WalkingActor movement (WASD / arrow keys)
- * - Attacks with SPACE using directional attack sprites
- * - Melee hit is an invisible hitbox (AxeSlash) spawned in front
+ *      attacks with sword
  */
 public class SwordWarrior extends Player
 {
-    //space "just pressed" detection
+    //space pressed detection
     private boolean lastSpace = false;
     private boolean spaceJustPressed = false;
 
@@ -31,9 +29,9 @@ public class SwordWarrior extends Player
         //attack frames
         loadAttackFrames("player/sword_warrior/attack", 10);
 
-        //attack tuning
-        atkAnimDelay = 3;         //smaller = faster swing
-        attackCooldownMax = 12;   //bigger = slower swing rate
+        //attack setting
+        atkAnimDelay = 3;         //smalle, faster attack movement
+        attackCooldownMax = 12;   //bigger, slower swing rate
         hitFrame = 2;             //damage happens on this frame
 
         //default facing
@@ -52,7 +50,7 @@ public class SwordWarrior extends Player
         super.act();
     }
     /**
-     * Start attack when SPACE is pressed.
+     * start attack when space is pressed.
      */
     protected boolean wantsToAttack()
     {
@@ -60,8 +58,7 @@ public class SwordWarrior extends Player
     }
 
     /**
-     * Spawn a short-lived hitbox in front of the player on the hit frame.
-     * This matches an axe swing in front like your sprite.
+     * puts a short-lived hitbox in front of the warrior on the hit frame.
      */
     protected void onAttackHit()
     {
@@ -72,30 +69,30 @@ public class SwordWarrior extends Player
         int boxH = 45;
 
         //how far in front of the player the hitbox is placed
-        int reach = 35;
+        int distance = 35;
 
-        int ox = 0;
-        int oy = 0;
+        int offSetX = 0;
+        int offSetY = 0;
 
         if (dir == UP)
         {
-            oy = -reach;
+            offSetY = -distance;
         }
         else if (dir == DOWN)
         {
-            oy = reach;
+            offSetY = distance;
         }
         else if (dir == LEFT)
         {
-            ox = -reach;
+            offSetX = -distance;
         }
         else //RIGHT
         {
-            ox = reach;
+            offSetX = distance;
         }
 
-        //spawn a short-lived hitbox (lasts a few frames to match swing)
-        AxeSlash slash = new AxeSlash(boxW, boxH, 3);
-        getWorld().addObject(slash, getX() + ox, getY() + oy);
+        //puts a short-lived hitbox
+        HitBox hitbox = new HitBox(boxW, boxH, 3);
+        getWorld().addObject(hitbox, getX() + offSetX, getY() + offSetY);
     }
 }

@@ -1,13 +1,11 @@
 import greenfoot.*;
 
 /**
- * CombatActor adds reusable directional one-shot attack animation logic.
+ * CombatActor attacks and has attack animation logic
+
  *
- * Used by:
- * - Player (warriors)
- * - AttackingEnemy (enemies that attack)
- *
- * It does NOT decide *when* to attack. Subclasses decide when to call startAttack().
+ * It does not decide when to attack. 
+ * Subclasses decide when to call startAttack().
  */
 public abstract class CombatActor extends WalkingActor
 {
@@ -18,38 +16,34 @@ public abstract class CombatActor extends WalkingActor
     protected GreenfootImage[] atkRight;
 
     //attack state and animation timing
-    protected boolean attacking = false;
-    protected int atkAnimDelay = 2;
-    protected int atkAnimTick = 0;
-    protected int atkFrameIndex = 0;
+    protected boolean attacking=false;
+    protected int atkAnimDelay=2;
+    protected int atkAnimTick=0;
+    protected int atkFrameIndex=0;
 
-    //cooldown (frames)
-    protected int attackCooldownMax = 12;
-    protected int attackCooldown = 0;
+    //cooldown frames
+    protected int attackCooldownMax=12;
+    protected int attackCooldown=0;
 
     //which frame triggers the hit (0-based)
-    protected int hitFrame = 2;
-    protected boolean hitDone = false;
+    protected int hitFrame=2;
+    protected boolean hitDone=false;
 
     /**
-     * Loads directional attack frames from:
-     *   images/<folder>/up1.png ...
-     *   images/<folder>/down1.png ...
-     *   images/<folder>/right1.png ...
+     * Loads directional attack frames
      *
-     * LEFT is auto-created by mirroring the right frames.
      *
-     * @param folder     the folder prefix in images
-     * @param frameCount number of attack frames for each direction
+     * @param folder:   the folder prefix
+     * @param frameCount:number of attack frames for each direction
      */
     protected void loadAttackFrames(String folder, int frameCount)
     {
-        atkUp    = loadFramesRequired(folder + "/up", frameCount);
-        atkDown  = loadFramesRequired(folder + "/down", frameCount);
-        atkRight = loadFramesRequired(folder + "/right", frameCount);
+        atkUp   =loadFramesRequired(folder + "/up", frameCount);
+        atkDown =loadFramesRequired(folder + "/down", frameCount);
+        atkRight=loadFramesRequired(folder + "/right", frameCount);
 
         //left mirror from right
-        atkLeft  = mirrorImage(atkRight);
+        atkLeft =mirrorImage(atkRight);
     }
 
     /**
@@ -57,9 +51,9 @@ public abstract class CombatActor extends WalkingActor
      */
     protected GreenfootImage[] attackFramesFor(int direction)
     {
-        if (direction == UP) return atkUp;
-        if (direction == DOWN) return atkDown;
-        if (direction == LEFT) return atkLeft;
+        if (direction==UP) return atkUp;
+        if (direction==DOWN) return atkDown;
+        if (direction==LEFT) return atkLeft;
         return atkRight;
     }
 
@@ -69,12 +63,12 @@ public abstract class CombatActor extends WalkingActor
      */
     protected void startAttack()
     {
-        attacking = true;
-        atkAnimTick = 0;
-        atkFrameIndex = 0;
-        hitDone = false;
+        attacking=true;
+        atkAnimTick=0;
+        atkFrameIndex=0;
+        hitDone=false;
 
-        GreenfootImage[] frames = attackFramesFor(dir);
+        GreenfootImage[] frames=attackFramesFor(dir);
         if (frames != null && frames.length > 0)
         {
             setImage(frames[0]);
@@ -82,30 +76,31 @@ public abstract class CombatActor extends WalkingActor
     }
 
     /**
-     * Plays attack animation as a one-shot, triggers onAttackHit() once.
-     * Call this while (attacking == true).
+     * plays attack animation 
+     * calls onAttackHit()
+     * call this while (attacking==true).
      */
     protected void doAttackAnim()
     {
-        GreenfootImage[] frames = attackFramesFor(dir);
-        if (frames == null || frames.length == 0)
+        GreenfootImage[] frames=attackFramesFor(dir);
+        if (frames==null || frames.length==0)
         {
-            //fail-safe: if attack frames missing, end attack immediately
-            attacking = false;
-            attackCooldown = attackCooldownMax;
+            //if attack frames missing
+            //end attack immediately
+            attacking=false;
+            attackCooldown=attackCooldownMax;
             setImage(framesFor(dir)[0]);
             return;
         }
 
         //trigger hit exactly once at hitFrame
-        int safeHitFrame = Math.min(hitFrame, frames.length - 1);
-        if (!hitDone && atkFrameIndex == safeHitFrame)
+        if (!hitDone && atkFrameIndex==hitFrame)
         {
-            hitDone = true;
+            hitDone=true;
             onAttackHit();
         }
 
-        //animate one-shot
+        //animate
         atkAnimTick++;
         if (atkAnimTick < atkAnimDelay)
         {
@@ -113,14 +108,14 @@ public abstract class CombatActor extends WalkingActor
             return;
         }
 
-        atkAnimTick = 0;
+        atkAnimTick=0;
         atkFrameIndex++;
 
         //end attack when finished
         if (atkFrameIndex >= frames.length)
         {
-            attacking = false;
-            attackCooldown = attackCooldownMax;
+            attacking=false;
+            attackCooldown=attackCooldownMax;
             resetAnim();
             setImage(framesFor(dir)[0]);
             return;
@@ -131,7 +126,6 @@ public abstract class CombatActor extends WalkingActor
 
     /**
      * Called exactly once during the attack animation at hitFrame.
-     * Default is no-op; Player / AttackingEnemy can make it abstract.
      */
     protected void onAttackHit()
     {
