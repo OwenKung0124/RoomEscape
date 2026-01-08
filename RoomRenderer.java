@@ -6,10 +6,10 @@ import greenfoot.*;
  *  collision borders
  *  doors.
  *
- * It does NOT decide door lock rules
- * and it does NOT spawn enemies/coins.
+ * it does not decide door lock rules
+ * it does NOT spawn enemies/coins.
  * 
- * It only builds the room "structure".
+ * it only builds the room structure.
  */
 public class RoomRenderer 
 {
@@ -39,14 +39,14 @@ public class RoomRenderer
     {
         GreenfootImage bg = new GreenfootImage(world.getWidth(), world.getHeight());
     
-        //side panel area (fill ALL the way to the right edge)
+        //side panel area
         int panelX = GameConfig.ROOM_X + GameConfig.ROOM_W;
         int panelW = world.getWidth() - panelX;
     
         bg.setColor(new Color(40, 40, 40));
         bg.fillRect(panelX, 0, panelW, world.getHeight());
     
-        //Draw the room background to cover the entire LEFT area (everything except side panel)
+        //Draw the room background to cover the entire room area
         String bgName = map.getBgName(r, c);
         if (bgName != null) 
         {
@@ -94,10 +94,9 @@ public class RoomRenderer
     
                 int w = x2 - x1;
                 int h = y2 - y1;
-    
+                
                 int x = x1 + w / 2;
                 int y = y1 + h / 2;
-                
     
                 if (code == GameConfig.INTERIOR_WALL)
                 {
@@ -120,6 +119,37 @@ public class RoomRenderer
                     int dy = (s.getImage().getHeight() / 2) - (h / 2);
                     
                     world.addObject(s, x, y-dy);
+                
+                }
+                else if (code == GameConfig.LION_RIGHT) 
+                {
+                    LionRight lion = new LionRight(w,h);
+                    
+                    //to allow status to sit 
+                    //on the floor" instead of centered
+                    int dy = (lion.getImage().getHeight() / 2) - (h / 2);
+                    
+                    world.addObject(lion, x, y-dy);
+                
+                }
+                else if (code == GameConfig.LION_LEFT) 
+                {
+                    LionLeft lion = new LionLeft(w,h);
+                    
+                    //to allow status to sit 
+                    //on the floor" instead of centered
+                    int dy = (lion.getImage().getHeight() / 2) - (h / 2);
+                    
+                    world.addObject(lion, x, y-dy);
+                
+                }
+                else if (code == GameConfig.FIRE) 
+                {
+                    Fire fire = new Fire(w,h);
+                    
+                    int dy = (fire.getImage().getHeight() / 2) - (h / 2);
+                    
+                    world.addObject(fire, x, y-dy);
                 
                 }
             }
@@ -253,8 +283,6 @@ public class RoomRenderer
         int bottomPx = GameConfig.tileBottom(end);
         return topPx + (bottomPx - topPx) / 2;
     }
-
-    // ===== Door-opening helpers (tile-layout based) =====
 
     /**
      * Walkable tiles are allowed to be an opening.

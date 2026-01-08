@@ -249,7 +249,7 @@ public class GameWorld extends World
         showText("Rooms cleared: " + roomsClearedCount + " / " + GameConfig.WIN_ROOMS, hudX, 70);
         showText("Coin Collected: " + player.getCoinCount(), hudX, 550);
         showText("Score: " + player.getScore(), hudX, 600);
-        showText("Heath Remaind: " + player.getHealth(), hudX, 650);
+        showText("Heath Remain: " + player.getHealth(), hudX, 650);
 
         //Win check
         //show in the window of the room
@@ -541,5 +541,9 @@ public class GameWorld extends World
     public int getRoomsClearedCount()
     {
         return roomsClearedCount;
+    }
+    public char getRoomType(int r, int c)
+    {
+        return map.getRoomType(r, c); 
     }
 }

@@ -15,9 +15,9 @@ public class SkeletonEnemy extends Enemy
     //attack settings
     private int attackRange = 200;
 
-    //random attack interval (frames)
-    private int attackIntervalMin = 120; //2s
-    private int attackIntervalMax = 300; //5s
+    //random attack interval in frames
+    private int attackIntervalMin = 120; 
+    private int attackIntervalMax = 300; 
     private int attackTimer = 0;
 
     public SkeletonEnemy(Player target)
@@ -103,20 +103,17 @@ public class SkeletonEnemy extends Enemy
      * Start attack: face player, then use CombatActor attack animation,
      * then schedule next random attack.
      */
-    @Override
     protected void startAttack()
     {
-        faceTargetFourDir();
+        faceTarget();
         super.startAttack();
         scheduleNextAttack();
     }
 
     /**
-     * Called exactly once on hitFrame by CombatActor.
-     * Shoots an EnemyArrow in the facing direction.
+     * Called exactly once on hitFrame by CombatActor
      */
-    @Override
-    protected void onAttackHit()
+    protected void attack()
     {
         if (getWorld() == null) return;
 
@@ -142,7 +139,7 @@ public class SkeletonEnemy extends Enemy
         attackTimer = min + Greenfoot.getRandomNumber(max - min + 1);
     }
 
-    private void faceTargetFourDir()
+    private void faceTarget()
     {
         int dx = player.getX() - getX();
         int dy = player.getY() - getY();

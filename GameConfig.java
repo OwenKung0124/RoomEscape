@@ -51,11 +51,29 @@ public class GameConfig
     public static final int COIN = 11;   
     //station object 21-30
     public static final int STATUE = 21; 
+    public static final int LION_RIGHT = 22;
+    public static final int LION_LEFT = 23;
+    public static final int FIRE = 24;
 
     //status constants
-    public static final int STATUE_W = 96;
-    public static final int STATUE_H = 128;
-    public static final String STATUE_IMG = "statue.png";
+    public static final int STATUE_W = 115;
+    public static final int STATUE_H = 180;
+    public static final String STATUE_IMG = "statue/statue";
+    
+     //lion right
+    public static final int LION_RIGHT_W = 90;
+    public static final int LION_RIGHT_H = 80;
+    public static final String LION_RIGHT_IMG = "lion_statue_right.png";
+    
+     //lion left
+    public static final int LION_LEFT_W = 90;
+    public static final int LION_LEFT_H = 80;
+    public static final String LION_LEFT_IMG = "lion_statue_left.png";
+    
+     //fire
+    public static final int FIRE_W = 30;
+    public static final int FIRE_H = 60;
+    public static final String FIRE_IMG = "fire/fire";
     
     //Door/border sizes
     public static final int BORDER_THICK = 10;
@@ -66,7 +84,7 @@ public class GameConfig
     public static final int WIN_ROOMS = 6;
     
     //SummonerBoss
-    public static final int SUMMONER_BOSS_DOOR_CLEARED=8;
+    public static final int SUMMONER_BOSS_DOOR_CLEARED=2;
     
     //Warrior Selection
     public static final int WARRIOR_AXE=1;

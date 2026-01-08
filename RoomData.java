@@ -96,13 +96,15 @@ public class RoomData
             String rowStr=rowTok.nextToken();
             if (rowStr==null) 
             { 
-                r++; continue; 
+                r++; 
+                continue; 
             }
         
             rowStr=rowStr.trim();
             if (rowStr.length()==0) 
             { 
-                r++; continue; 
+                r++; 
+                continue; 
             }
         
             StringTokenizer colStr=new StringTokenizer(rowStr, ",");
@@ -121,6 +123,7 @@ public class RoomData
                     catch (NumberFormatException e)
                     {
                         System.out.println(cell+" can't be converted to number.");
+                        tiles[r][c]=GameConfig.FLOOR; //assume it's a floor
                     }
                 }
                 

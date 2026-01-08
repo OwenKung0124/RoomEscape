@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=RoomRenderer
-comment0.text=\n\ RoomRenderer\ draws\ and\ builds\ \n\ \ the\ room\ visuals\n\ \ collision\ borders\n\ \ doors.\n\n\ It\ does\ NOT\ decide\ door\ lock\ rules\n\ and\ it\ does\ NOT\ spawn\ enemies/coins.\n\ \n\ It\ only\ builds\ the\ room\ "structure".\n
+comment0.text=\n\ RoomRenderer\ draws\ and\ builds\ \n\ \ the\ room\ visuals\n\ \ collision\ borders\n\ \ doors.\n\n\ it\ does\ not\ decide\ door\ lock\ rules\n\ it\ does\ NOT\ spawn\ enemies/coins.\n\ \n\ it\ only\ builds\ the\ room\ structure.\n
 comment1.params=world\ map
 comment1.target=RoomRenderer(GameWorld,\ GameMap)
 comment10.params=rd\ cols

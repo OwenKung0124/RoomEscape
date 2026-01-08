@@ -15,21 +15,18 @@ public abstract class Enemy extends CombatActor implements HasHealth
 {
 
     //The player this enemy can interact with 
-    //(chase and/or knockback)
     protected Player player;
 
-    //Damage cooldown so enemy doesn't hit every single frame
+    //damage cooldown so enemy doesn't hit every single frame
+    //when cooldown=0, take damage
     protected int hitCooldown = 0;
 
-    //Knockback strength in pixels
-    protected int knockBack = 20;
-
-    //Knockback cooldown frames
+    //cooldown frames
+    //before next damage can count
     protected int hitCooldownFrames = 30;
     
-    //damage to the player when this enemy touches them
+    //damage to player when in contact
     protected int contactDamage = 1;
-    
     
     //enemy health
     protected int maxHealth = 5;
@@ -61,8 +58,9 @@ public abstract class Enemy extends CombatActor implements HasHealth
 
     //subclass must implement this method
     protected abstract int[] computeMove();
+    
     /**
-     * Creates a health bar that follows underneath the enemy.
+     * creates a health bar that follows underneath the enemy.
      */
     protected void addedToWorld(World world)
     {
@@ -79,7 +77,7 @@ public abstract class Enemy extends CombatActor implements HasHealth
     }
     /**
      * When enemy is removed
-     * Ensures its health bar disappears too.
+     * its health bar disappears too.
      */
     protected void removedFromWorld(World world)
     {
@@ -98,7 +96,6 @@ public abstract class Enemy extends CombatActor implements HasHealth
             return;   
         }
         
-
         if (hitCooldown > 0)
         {
             hitCooldown--;

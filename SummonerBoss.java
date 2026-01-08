@@ -48,8 +48,9 @@ public class SummonerBoss extends Enemy
         maxHealth=100;
         health=maxHealth;
 
-        //contact damage when touching the player
-        contactDamage=2;
+        //no damage
+        //otherwise sword and axe warrior can't kill boss
+        contactDamage=0;
 
         //health bar
         HP_BAR_W=spriteW-20;
@@ -79,7 +80,6 @@ public class SummonerBoss extends Enemy
     /**
      * Main update loop:
      * - Handles pause
-     * - Applies contact damage logic (reused from Enemy)
      * - Either counts down to summon OR plays the summon animation
      * - Spawns minions only at the end of the animation
      */
@@ -90,10 +90,9 @@ public class SummonerBoss extends Enemy
 
         if (getWorld()==null) return;
 
-        //enemy uses hitCooldown 
-        //so the player isn't damaged every single frame.
+       
         //summoner enemy does not hit
-        if (hitCooldown > 0) hitCooldown--;
+        //if (hitCooldown > 0) hitCooldown--;
 
         //move to centre of the room
         if(getY()<=GameConfig.roomCenterY())
@@ -160,9 +159,6 @@ public class SummonerBoss extends Enemy
      */
     private void playSummonAnimation()
     {
-        //animTimer counts 
-        //how many acts have passed
-        //since last frame change.
         animTimer++;
 
         //only change frame when reach delay value
@@ -176,7 +172,7 @@ public class SummonerBoss extends Enemy
         if (frameIndex >= summonFrames.length)
         {
             summoning=false;
-            setImage(summonFrames[0]); // idle
+            setImage(summonFrames[0]); //idle image
 
             //spawn happens
             //at the end of the animation.

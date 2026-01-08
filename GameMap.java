@@ -12,7 +12,8 @@ import java.util.StringTokenizer;
 public class GameMap {
 
     //Room grid map 
-    //(1=room exists, 0 = no room)
+    //1=room exists
+    //0 = no room)
     private int[][] grid=
     {
         {1, 1, 0, 1},
@@ -97,7 +98,7 @@ public class GameMap {
         if (r== 0 && c==0) {
             return new int[][] {
                 {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},
-                {2,11,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
+                {2,11,0,0,0,21,0,0,0,0,21,0,0,0,0,2},
                 {2,0,11,0,0,0,0,0,0,0,0,0,0,0,0,2},
                 {2,0,0,11,0,0,0,0,0,0,0,0,0,0,0,3},
                 {2,0,0,0,11,0,0,0,0,0,0,0,0,0,0,3},
@@ -113,9 +114,9 @@ public class GameMap {
                 {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
                 {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
                 {3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-                {3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
+                {3,0,0,0,0,0,0,21,0,0,0,0,0,0,0,2},
                 {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-                {2,0,1,1,0,0,0,0,0,1,1,0,0,0,0,2},
+                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
                 {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
                 {2,2,2,2,2,2,2,3,3,2,2,2,2,2,2,2}
             };
@@ -138,9 +139,9 @@ public class GameMap {
                 {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},
                 {2,0,0,0,0,0,0,0,0,0,0,0,0,0,11,2},
                 {2,0,0,0,0,0,0,0,0,0,0,0,0,11,0,2},
-                {2,0,0,0,0,0,0,0,0,0,0,0,11,0,0,2},
+                {23,0,0,0,0,0,0,0,0,0,0,0,11,0,0,2},
                 {2,0,0,0,0,0,0,0,0,0,0,11,0,0,0,2},
-                {2,0,0,0,0,0,0,0,0,0,11,0,0,0,0,2},
+                {23,0,0,0,0,0,0,0,0,0,11,0,0,0,0,2},
                 {2,0,0,0,0,0,0,0,0,0,11,0,0,0,0,2},
                 {2,0,0,0,0,0,0,0,0,11,0,0,0,0,0,2},
                 {2,2,2,2,2,2,2,3,3,2,2,2,2,2,2,2}
@@ -152,11 +153,11 @@ public class GameMap {
                 {2,2,2,2,2,2,2,3,3,2,2,2,2,2,2,2},
                 {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
                 {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3},
-                {2,0,11,21,0,0,0,0,0,11,21,0,0,0,0,3},
-                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3},
+                {23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3},
+                {2,0,0,0,0,21,0,0,0,0,21,0,0,0,0,3},
+                {23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3},
                 {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-                {2,0,0,0,11,0,0,0,0,0,0,0,0,0,0,2},
+                {2,0,0,0,11,0,0,24,0,0,0,0,0,0,0,2},
                 {2,2,2,2,2,2,2,3,3,2,2,2,2,2,2,2}
             };
         }
@@ -191,9 +192,9 @@ public class GameMap {
                 {2,2,2,2,2,2,2,3,3,2,2,2,2,2,2,2},
                 {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
                 {2,0,1,0,0,0,0,0,0,0,0,0,0,0,0,2},
+                {23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,22},
                 {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
+                {23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,22},
                 {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
                 {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
                 {2,2,2,2,2,2,2,3,3,2,2,2,2,2,2,2}
@@ -265,8 +266,6 @@ public class GameMap {
             };
         }
        
-
-        // TODO: define every room you want (r,c)
         return null;
     }
 
@@ -407,50 +406,63 @@ public class GameMap {
      */
     public String exportCleared()
     {
-        StringBuilder sb=new StringBuilder();
-    
-        for (int r=0; r < getRows(); r++)
+        String exportStr = "";
+
+        for (int r = 0; r < getRows(); r++)
         {
-            if (r > 0) sb.append('/');
-    
-            for (int c=0; c < getCols(); c++)
+            if (r > 0) 
             {
-                sb.append(cleared[r][c] ? '1' : '0');
+                exportStr += "/";
+            }
+            for (int c = 0; c < getCols(); c++)
+            {
+                if (cleared[r][c]) 
+                {
+                    exportStr += "1";
+                } 
+                else 
+                {
+                    exportStr += "0";
+                }
             }
         }
-    
-        return sb.toString();
+        
+        return exportStr;
     }
     
     /**
      * Import visited string and apply to visited[][].
      * Only sets true for '1'. Leaves everything else as-is/false.
      */
+
     public void importVisited(String data)
     {
-        if (data==null) return;
-        
-        data=data.trim();
-        if (data.length()==0) return;
+        if (data == null) return;
     
-        String[] rows=data.split("/");
+        data = data.trim();
+        if (data.length() == 0) return;
     
-        for (int r=0; r < rows.length && r < getRows(); r++)
+        StringTokenizer st = new StringTokenizer(data, "/");
+        int r = 0;
+    
+        while (st.hasMoreTokens() && r < getRows())
         {
-            String row=rows[r];
+            String row = st.nextToken();
     
-            for (int c=0; c < row.length() && c < getCols(); c++)
+            for (int c = 0; c < row.length() && c < getCols(); c++)
             {
-                if (row.charAt(c)=='1')
+                if (row.charAt(c) == '1')
                 {
-                    visited[r][c]=true;
+                    visited[r][c] = true;
                 }
             }
+    
+            r++;
         }
     }
     /**
      * Import cleared string and apply to cleared[][].
-     * Also sets visited=true when a room is cleared (same behavior as your old applyCleared).
+     * Also sets visited=true when a room is cleared
      */
     public void importCleared(String data)
     {
@@ -473,7 +485,7 @@ public class GameMap {
                 if (row.charAt(c) == '1')
                 {
                     cleared[r][c] = true;
-                    visited[r][c] = true;
+                    //visited[r][c] = true;
                 }
             }
         

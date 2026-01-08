@@ -97,6 +97,14 @@ public class MiniMap extends Actor
                     img.setColor(new Color(220, 220, 220));
                 }
                 img.fillRect(x, y, CELL, CELL);
+                
+                char type = w.getRoomType(r, c);
+                //show markers for special rooms
+                if (type == 'T' || type == 'S')
+                {
+                    drawRoomTypeMarker(img, x, y, type);
+                }
+
 
                 //highlight the player's current room with a cyan outline
                 if (r == w.getRoomR() && c == w.getRoomC()) {
@@ -109,4 +117,21 @@ public class MiniMap extends Actor
 
         setImage(img);
     }
+    private void drawRoomTypeMarker(GreenfootImage img, int x, int y, char type)
+    {
+        //draw a small badge in the top-right of the cell
+        int badge = Math.max(10, CELL / 3);
+        int bx = x + CELL - badge - 2;
+        int by = y + 2;
+    
+        //adge background
+        img.setColor(new Color(0, 0, 0, 160));
+        img.fillRect(bx, by, badge, badge);
+    
+        //letter
+        img.setColor(Color.WHITE);
+        img.setFont(new greenfoot.Font(Math.max(10, badge))); //font size
+        img.drawString(""+type, bx + 2, by + badge - 2);
+    }
+    
 }
