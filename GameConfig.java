@@ -84,7 +84,7 @@ public class GameConfig
     public static final int WIN_ROOMS = 6;
     
     //SummonerBoss
-    public static final int SUMMONER_BOSS_DOOR_CLEARED=2;
+    public static final int SUMMONER_BOSS_DOOR_CLEARED=1;
     
     //Warrior Selection
     public static final int WARRIOR_AXE=1;

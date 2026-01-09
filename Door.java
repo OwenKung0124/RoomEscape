@@ -67,6 +67,10 @@ public class Door extends Actor
             updateImage();
         }
     }
+    public boolean isLocked()
+    {
+        return !unlocked;
+    }
 
     /**
      * Draws the door image.

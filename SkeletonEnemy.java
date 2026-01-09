@@ -113,7 +113,7 @@ public class SkeletonEnemy extends Enemy
     /**
      * Called exactly once on hitFrame by CombatActor
      */
-    protected void attack()
+    protected void onAttackHit()
     {
         if (getWorld() == null) return;
 

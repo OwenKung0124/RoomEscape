@@ -3,7 +3,7 @@ import greenfoot.*;
 /**
  * ChaseEnemy moves toward the player.
  */
-public class ChaserEnemy extends Enemy {
+public class ZombieEnemy extends Enemy {
 
 
 
@@ -12,10 +12,11 @@ public class ChaserEnemy extends Enemy {
      *
      * @param target the Player to chase
      */
-    public ChaserEnemy(Player target) 
+    public ZombieEnemy(Player target) 
     {
         super(target);
         speed=2;
+        loadDirectionalFrames("enemy/zombie", 4);
     }
 
     /**
@@ -34,7 +35,7 @@ public class ChaserEnemy extends Enemy {
         int dy =player .getY() - getY();
 
         double dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 0.0001)
+        if (dist < 2)
         {
             return new int[]{0, 0};   
         }

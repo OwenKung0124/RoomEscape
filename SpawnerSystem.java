@@ -43,7 +43,7 @@ public class SpawnerSystem
             //adds different typs of enemies randomly
             if (Greenfoot.getRandomNumber(2)==0)
             {
-                world.addObject(new ChaserEnemy(player),  p[0], p[1]);
+                world.addObject(new ZombieEnemy(player),  p[0], p[1]);
             } 
             else if (Greenfoot.getRandomNumber(2)==1)
             {

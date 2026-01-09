@@ -94,12 +94,21 @@ public class SummonerBoss extends Enemy
         //summoner enemy does not hit
         //if (hitCooldown > 0) hitCooldown--;
 
-        //move to centre of the room
+        //landing
         if(getY()<=GameConfig.roomCenterY())
         {
-            setLocation(getX(),getY()+5);
+            //avoid landing into Blocker in the ro
+            if (!getWorld().getObjectsAt(getX(),   
+                                        GameConfig.roomCenterY(), 
+                                        Blocker.class).isEmpty())
+            {
+               setLocation(GameConfig.roomCenterX()/2,getY()+5);
+            }
+            else
+            {
+                setLocation(getX(),getY()+5);
+            }
         }
-        
         //summoner is big
         //when player touches
         //it does not takeDamage of player
@@ -200,7 +209,7 @@ public class SummonerBoss extends Enemy
         GameWorld gw=(GameWorld) getWorld();
         RoomData rd=gw.getCurrentRoomData();
     
-        int radius=140; //where to spawn the minions
+        int radius=120; //where to spawn the minions
     
         //how many random tries per minion
         int triesPerMinion=30;
@@ -219,7 +228,7 @@ public class SummonerBoss extends Enemy
             int choice=Greenfoot.getRandomNumber(3);
             if (choice==0)
             {
-                getWorld().addObject(new ChaserEnemy(player), point[0], point[1]);
+                getWorld().addObject(new ZombieEnemy(player), point[0], point[1]);
             }
             else if (choice==1)
             {

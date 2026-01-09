@@ -1,8 +1,8 @@
 #BlueJ class context
-comment0.target=ChaserEnemy
+comment0.target=ZombieEnemy
 comment0.text=\n\ ChaseEnemy\ moves\ toward\ the\ player.\n
 comment1.params=target
-comment1.target=ChaserEnemy(Player)
+comment1.target=ZombieEnemy(Player)
 comment1.text=\n\ Creates\ a\ chasing\ enemy.\n\n\ @param\ target\ the\ Player\ to\ chase\n
 comment2.params=
 comment2.target=int[]\ computeMove()

@@ -134,7 +134,8 @@ public class GameWorld extends World
         setPaintOrder(
             PauseOverlay.class,
             Decoration.class,   //the statue image actor
-            Enemy.class
+            Enemy.class,
+            SummonerBoss.class
         );
     }
     /**

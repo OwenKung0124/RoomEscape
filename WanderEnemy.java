@@ -10,9 +10,12 @@ public class WanderEnemy extends Enemy
     public WanderEnemy(Player target)
     {
         super(target);
-        speed=4;  //must set the speed, otherwise won't move
+        //must set the speed, otherwise won't move
+        speed=4;  
+       
     }
 
+    
     /**
      * Computes wandering movement using WanderBrain.
      */
