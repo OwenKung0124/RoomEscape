@@ -43,6 +43,9 @@ public class Coin extends Actor
      */
     private void collect() 
     {
+        //playSoundEffect
+        SoundManager.playCoinSound();
+        
         //update RoomData directly so it won't respawn next time
         if (roomData != null) 
         {

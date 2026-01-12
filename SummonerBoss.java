@@ -23,14 +23,14 @@ public class SummonerBoss extends Enemy
 
     //animations
     private GreenfootImage[] summonFrames;
-    private int summonAnimDelay=20;
+    private int summonAnimDelay=35;  //adjust this to match the sound effect timing
 
     //summoning state
     private boolean summoning=false;
 
     //How many minions to spawn 
     //after each summon animation finishes
-    private int minionsPerSummon=1;
+    private int minionsPerSummon=GameConfig.SUMMOMER_BOSS_MINION_SPWAN;
 
     /**
      * Creates a SummonerBoss that targets the given Player (required by Enemy).
@@ -97,6 +97,7 @@ public class SummonerBoss extends Enemy
         //landing
         if(getY()<=GameConfig.roomCenterY())
         {
+            SoundManager.playDescendingSound();
             //avoid landing into Blocker in the ro
             if (!getWorld().getObjectsAt(getX(),   
                                         GameConfig.roomCenterY(), 
@@ -107,8 +108,15 @@ public class SummonerBoss extends Enemy
             else
             {
                 setLocation(getX(),getY()+5);
+                
+                if(getY()>=GameConfig.roomCenterY())
+                {
+                    SoundManager.stopDescendingSound();
+                    SoundManager.playSummonerBossFightSound();
+                }
             }
         }
+   
         //summoner is big
         //when player touches
         //it does not takeDamage of player
@@ -171,7 +179,10 @@ public class SummonerBoss extends Enemy
         animTimer++;
 
         //only change frame when reach delay value
-        if (animTimer < summonAnimDelay) return;
+        if (animTimer < summonAnimDelay)
+        {
+            return; 
+        }
 
         animTimer=0;
         frameIndex++;
@@ -192,6 +203,9 @@ public class SummonerBoss extends Enemy
             return;
         }
 
+        //play only once during the animation
+        SoundManager.playSummonerBossSound();//
+    
         //show the next frame.
         setImage(summonFrames[frameIndex]);
     }
@@ -278,5 +292,15 @@ public class SummonerBoss extends Enemy
         }
     
         return null;
+    }
+    protected void playAttackSoundEffect()
+    {
+        //SoundManager.playZombieSound();
+    }
+    protected void playEndOfLifeSoundEffect()
+    {
+        //to prevent hearing summoning sound after boss dead
+        SoundManager.stopSummonerBossSound();
+        SoundManager.playSummonBossDisappear();
     }
 }

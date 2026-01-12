@@ -16,6 +16,7 @@ public class ZombieEnemy extends Enemy {
     {
         super(target);
         speed=2;
+        hitCooldownFrames=90; //when in contact only damages every 90 frames, same as attack sound effect
         loadDirectionalFrames("enemy/zombie", 4);
     }
 
@@ -44,5 +45,13 @@ public class ZombieEnemy extends Enemy {
         int my = (int)Math.round((dy / dist) * speed);
 
         return new int[]{mx, my};
+    }
+    protected void playAttackSoundEffect()
+    {
+        SoundManager.playZombieSound();
+    }
+    protected void playEndOfLifeSoundEffect()
+    {
+        //SoundManager.playZombieSound();
     }
 }

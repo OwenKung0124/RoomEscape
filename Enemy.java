@@ -8,8 +8,11 @@ import greenfoot.*;
  * Required images in images/enemy/:
  * up1.png up2.png
  * down1.png down2.png
- * left1.png left2.png
+ * left1.png left2.png  //mirrored from right
  * right1.png right2.png
+ * 
+ * @author:     Owen Kung
+ * @version:    Jan 2026
  */
 public abstract class Enemy extends CombatActor implements HasHealth
 {
@@ -56,8 +59,12 @@ public abstract class Enemy extends CombatActor implements HasHealth
         setImage(framesFor(dir)[0]);
     }
 
-    //subclass must implement this method
+    //subclass must implement these methods
     protected abstract int[] computeMove();
+    
+    protected abstract void playAttackSoundEffect();
+    
+    protected abstract void playEndOfLifeSoundEffect();
     
     /**
      * creates a health bar that follows underneath the enemy.
@@ -193,6 +200,7 @@ public abstract class Enemy extends CombatActor implements HasHealth
             //deal damage to the player (player has its own invincibility too)
             if (player != null)
             {
+                playAttackSoundEffect();
                 player.takeDamage(contactDamage);     
             }
         }
@@ -210,7 +218,8 @@ public abstract class Enemy extends CombatActor implements HasHealth
     }
     
     /**
-     * Damage this enemy. If HP reaches 0, remove it.
+     * Damage this enemy. 
+     * If HP reaches 0, remove it.
      *
      * @param amount damage amount
      */
@@ -224,6 +233,7 @@ public abstract class Enemy extends CombatActor implements HasHealth
         if (health <= 0 && getWorld() != null)
         {
             player.addScore(maxHealth);
+            playEndOfLifeSoundEffect();  //play sound effect when enemy dies
             getWorld().removeObject(this);
         }
     }

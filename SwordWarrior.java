@@ -94,5 +94,8 @@ public class SwordWarrior extends Player
         //puts a short-lived hitbox
         HitBox hitbox = new HitBox(boxW, boxH, 3);
         getWorld().addObject(hitbox, getX() + offSetX, getY() + offSetY);
+        
+        //play sword sound effect
+        SoundManager.playSwordSound();
     }
 }

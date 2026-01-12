@@ -23,4 +23,12 @@ public class WanderEnemy extends Enemy
     {
         return wonderAround.nextMove(speed);
     }
+    protected void playAttackSoundEffect()
+    {
+        //SoundManager.playZombieSound();
+    }
+    protected void playEndOfLifeSoundEffect()
+    {
+        //SoundManager.playZombieSound();
+    }
 }
