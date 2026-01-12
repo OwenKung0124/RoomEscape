@@ -103,7 +103,7 @@ public class MiniMap extends Actor
                 
                 char type = w.getRoomType(r, c);
                 //show markers for special rooms
-                if (type == 'T' || type == 'S')
+                if (type == 'T' || type == 'S'|| type == 'B')
                 {
                     drawRoomTypeMarker(img, x, y, type);
                 }

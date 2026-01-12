@@ -15,10 +15,10 @@ public class DoorSystem
     private final GameWorld world;
     private final GameMap map;
 
-    //Invisible wall blocks added across door gaps while locked.
+    //invisible wall blocks added across door gaps while locked.
     private ArrayList<Blocker> doorBlockers = new ArrayList<Blocker>();
 
-    //Used to rebuild door blockers
+    //used to rebuild door blockers
     //when lock/unlock state changes
     private boolean lastUnlocked = true;
 
@@ -37,40 +37,40 @@ public class DoorSystem
     {
         doorBlockers.clear();
 
-        //Reset so the next syncDoorBlockers() call rebuilds correctly in the new room.
+        //reset so the next syncDoorBlockers() 
+        //call rebuilds correctly in the new room.
         lastUnlocked = true;
     }
 
     /**
-     * Updates which doors are usable (unlocked) in the current room.
+     * updates which doors are unlocked in the current room.
      *
-     * Rule:
+     * rule:
      * - If the room is cleared (no enemies), unlock all doors.
      * - If the room is NOT cleared, only unlock the door that goes back to the previous room.
      *
-     * @param roomR current room row
-     * @param roomC current room col
-     * @param lastRoomR previous room row
-     * @param lastRoomC previous room col
-     * @param unlockedNow true if the current room has 0 enemies
+     * @param roomR:        current room row
+     * @param roomC:        current room col
+     * @param lastRoomR:    previous room row
+     * @param lastRoomC:    previous room col
+     * @param unlockedNow:  true if the current room has 0 enemies
      */
     public void updateDoorStates(int roomR, int roomC, int lastRoomR, int lastRoomC, boolean unlockedNow) 
     {
         //Calculate which direction would take us back to the previous room.
-        //Example: if last room was above, backDr = -1 and backDc = 0.
+        //if last room was above
+        //backDr = -1, backDc = 0
         int backDr = lastRoomR - roomR;
         int backDc = lastRoomC - roomC;
     
-        //Loop through every door currently in this room and decide if it should be unlocked.
         for (Door d : world.getObjects(Door.class)) 
         {
-            //A "back door" is the door whose (dr, dc) points 
+            //backdooris the door whose (dr, dc) points 
             //to the last room the player came from.
             boolean isBackDoor = (d.getDr() == backDr && d.getDc() == backDc);
     
-            // Unlock logic:
-            // - If the room is cleared -> unlock everything
-            // - If not cleared -> only unlock the back door
+            //if the room is cleared -> unlock everything
+            //if not cleared -> only unlock the back door
             d.setUnlocked(unlockedNow || isBackDoor);
         }
     }

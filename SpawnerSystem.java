@@ -21,6 +21,18 @@ public class SpawnerSystem
      */
     public void spawnEnemiesIfNeeded(int r, int c, Player player)
     {
+        //if(world.getRoomsClearedCount()==GameConfig.SUMMONER_BOSS_DOOR_CLEARED)
+        if (map.isBossRoom(r, c))
+        {
+            //start from the top
+            //descend to centre
+            //create visual effect
+            world.addObject(new SummonerBoss(player),  GameConfig.roomCenterX(),0);  
+            
+            //don't spawn enemies in boss room
+            return;
+        }
+        
         //non-combat rooms never spawn enemies
         if (!map.isCombatRoom(r, c))
         {
@@ -33,6 +45,7 @@ public class SpawnerSystem
             return;   
         }
 
+        
         int enemiesToSpawn=1 + Greenfoot.getRandomNumber(GameConfig.ENEMIES_TO_SPAWN); //1 to GameConfigENEMIES_TO_SPAWN
         for (int i=0; i < enemiesToSpawn; i++) 
         {
@@ -54,13 +67,7 @@ public class SpawnerSystem
                  world.addObject(new SkeletonEnemy(player),  p[0], p[1]);
             }
         }
-        if(world.getRoomsClearedCount()==GameConfig.SUMMONER_BOSS_DOOR_CLEARED)
-        {
-            //start from the top
-            //descend to centre
-            //create visual effect
-            world.addObject(new SummonerBoss(player),  GameConfig.roomCenterX(),0);  
-        }
+       
          
     }
     /**

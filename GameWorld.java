@@ -38,6 +38,7 @@ public class GameWorld extends World
     private HealthBar playerBar;
     
     private int roomsClearedCount=0;
+    private int totalRoomsToClear=0;
 
     
     public GameWorld()
@@ -86,6 +87,11 @@ public class GameWorld extends World
         //HealthBar(HasHealth unit, Actor follow, int width, int height, boolean followTarget, int yOffset)
         playerBar=new HealthBar(player, null, barW, barH, false, 0);    
         addObject(playerBar, panelCenterX, barY);
+        
+        
+        //set total number of room to clean
+        //must clean all the combat room and boss room
+        totalRoomsToClear=map.countTotalForRoomType('C')+map.countTotalForRoomType('B');
         
         //pick starting room:
         //resume,load roomR/roomC visited/cleared into map
@@ -150,6 +156,8 @@ public class GameWorld extends World
         {
             //add overlay in the center of the room
             pauseUI=new PauseOverlay();
+            //when pause, make sure no sounds are playing
+            SoundManager.stopAllBossSounds();
             addObject(pauseUI, GameConfig.roomCenterX(), GameConfig.roomCenterY());
         }
         else
@@ -248,14 +256,15 @@ public class GameWorld extends World
         int hudX=GameConfig.ROOM_X + GameConfig.ROOM_W + GameConfig.SIDE_PANEL_W / 2;
         showText("Room: (" + roomR + "," + roomC + ")", hudX, 30);
         showText("Enemies: " + countEnemies(), hudX, 50);
-        showText("Rooms cleared: " + roomsClearedCount + " / " + GameConfig.WIN_ROOMS, hudX, 70);
+        showText("Rooms cleared: " + roomsClearedCount + " / " + totalRoomsToClear, hudX, 70);
         showText("Coin Collected: " + player.getCoinCount(), hudX, 550);
         showText("Score: " + player.getScore(), hudX, 600);
         showText("Heath Remain: " + player.getHealth(), hudX, 650);
 
         //Win check
         //show in the window of the room
-        if (roomsClearedCount >= GameConfig.WIN_ROOMS) 
+        //if (roomsClearedCount >= GameConfig.WIN_ROOMS) 
+        if(roomsClearedCount>=totalRoomsToClear)
         {
             showText("YOU WIN!", 
             GameConfig.ROOM_X + GameConfig.ROOM_W / 2, 
@@ -294,6 +303,10 @@ public class GameWorld extends World
             if (a != player && a != minimap && a!=playerBar) removeObject(a);
         }
 
+        //when changing room
+        //stop all boss sounds
+        SoundManager.stopAllBossSounds();
+        
         //Door blockers list is owned by DoorSystem now
         doorSystem.onRoomLoaded();
 
