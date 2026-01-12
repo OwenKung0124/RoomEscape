@@ -1,9 +1,9 @@
 #BlueJ class context
 comment0.target=AnimatedDecoration
-comment0.text=\n\ AnimatedDecoration\:\ a\ decoration\ that\ plays\ an\ animation\ using\n\ files\ like\ basePath\ +\ index\ +\ extension\n\ e.g.\ "decor/lion"\ +\ 0\ +\ ".png"\ \ ->\ "decor/lion0.png"\n
-comment1.params=baseFileName\ frameCount\ w\ h
+comment0.text=\n\ Decoration\ that\ uses\ animated\ images\n
+comment1.params=basePath\ frameCount\ w\ h
 comment1.target=AnimatedDecoration(java.lang.String,\ int,\ int,\ int)
-comment1.text=\n\ Room\ display\ that\ has\ animation\n\n\ @param\ \ baseFileName\n\ @param\ frameCount\:\ \ \ how\ many\ frames\ total\n\ @param\ w\:\ \ \ \ \ \ \ \ \ \ \ \ scaled\ width\n\ @param\ h\:\ \ \ \ \ \ \ \ \ \ \ \ scaled\ height\n
+comment1.text=\n\ @param\ basePath\:\ \ \ \ \ basePath\ of\ the\ images\n\ @param\ frameCount\:\ \ \ number\ of\ frames\n\ @param\ w,h\:\ \ \ \ \ \ \ \ \ \ scaled\ size\n
 comment2.params=
 comment2.target=void\ act()
 numComments=3

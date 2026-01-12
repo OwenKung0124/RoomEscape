@@ -38,6 +38,10 @@ public class SettingWorld extends World
 
         addObject(newGameBotton, GameConfig.WORLD_W / 2 - 120, 650);
         addObject(resumeBotton,  GameConfig.WORLD_W / 2 + 120, 650);
+        
+        //sound effects toggles
+        addObject(new SoundToggleButton(SoundToggleButton.TYPE_MUSIC), GameConfig.WORLD_W - 100, 600);
+        addObject(new SoundToggleButton(SoundToggleButton.TYPE_SFX),   GameConfig.WORLD_W - 100, 650);
 
         //disable resume if no save exists
         resumeBotton.setEnabled(SaveManager.hasSave());

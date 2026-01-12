@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=GameWorld
-comment0.text=\n\ GameWorld\ is\ a\ room-to-room\ battle\ game.\n\n\ Door\ rules\:\n\ If\ the\ current\ room\ is\ cleared\ or\ simply\ treasure/shop\n\ Locked\ door\ gaps\ are\ physically\ blocked\ using\ invisible\ Wall\ objects.\n
+comment0.text=\n\ GameWorld\ is\ a\ room-to-room\ battle\ game.\n\n\ @author\:\ \ \ \ \ Owen\ Kung\n\ @version\:\ \ \ \ Jan\ 2026\n
 comment1.params=
 comment1.target=GameWorld()
 comment10.params=dr\ dc

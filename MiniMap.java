@@ -9,6 +9,9 @@ import greenfoot.*;
  *   White: visited but not cleared
  *   Green: cleared
  *   Cyan outline: current room
+ *   
+ * @author:     Owen Kung
+ * @version:    Jan 2026
  */
 public class MiniMap extends Actor 
 {

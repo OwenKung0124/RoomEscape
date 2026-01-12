@@ -3,11 +3,13 @@ import greenfoot.*;
 /**
  * WalkingActor is a superclass for Player and Enemy.
  * Hepls player and enemy actor to walk in the gameworld
- * with correct dirction images
+ * with correct direction images
  * 
  * When attack, use correct images too.
  * It also avoid walking through wall.
-
+ * 
+ * @author:     Owen Kung
+ * @version:    Jan 2026
  *
  */
 public abstract class WalkingActor extends SuperSmoothMover 
@@ -346,6 +348,11 @@ public abstract class WalkingActor extends SuperSmoothMover
 
         if (dx != 0) {
             setLocation(getX() + dx, getY());
+             //make sure enemy does not wonder off open door
+            if (this instanceof Enemy && isTouching(Door.class)) 
+            {
+                 setLocation(oldX,getY());
+            }
             if (isTouching(Blocker.class)) 
             {
                 setLocation(oldX,getY());
@@ -355,6 +362,11 @@ public abstract class WalkingActor extends SuperSmoothMover
         if (dy != 0) 
         {
             setLocation(getX(), getY() + dy);
+            //make sure enemy does not wonder off open door
+            if (this instanceof Enemy && isTouching(Door.class)) 
+            {
+                setLocation(getX(),oldY);
+            }
             if (isTouching(Blocker.class)) 
             {
                 setLocation(getX(),oldY);

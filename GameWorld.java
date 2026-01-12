@@ -4,9 +4,8 @@ import java.util.*;
 /**
  * GameWorld is a room-to-room battle game.
  *
- * Door rules:
- * If the current room is cleared or simply treasure/shop
- * Locked door gaps are physically blocked using invisible Wall objects.
+ * @author:     Owen Kung
+ * @version:    Jan 2026
  */
 public class GameWorld extends World 
 {
@@ -134,8 +133,11 @@ public class GameWorld extends World
         setPaintOrder(
             PauseOverlay.class,
             Decoration.class,   //the statue image actor
-            Enemy.class
+            Enemy.class,
+            SummonerBoss.class
         );
+        
+        SoundManager.playGameMusic();
     }
     /**
      * pause on/off and shows/hides the pause overlay.

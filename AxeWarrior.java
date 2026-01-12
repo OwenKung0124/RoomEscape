@@ -22,7 +22,7 @@ public class AxeWarrior extends Player
         spriteH=80;
 
         //walk frames
-        loadDirectionalFrames("player/axe_warrior/walking", 8);
+        loadDirectionalFrames("player/axe_warrior/walking", 4);  //more than 4, the axe warrior's horizontal movement looks weird
         left=mirrorImage(right);
 
         //attack frames
@@ -93,6 +93,7 @@ public class AxeWarrior extends Player
 
         //put a short-lived hitbox 
         HitBox hitbox=new HitBox(boxW, boxH, 3);
+        SoundManager.playAxeSound();
         getWorld().addObject(hitbox, getX() + offsetx, getY() + offsety);
     }
 }

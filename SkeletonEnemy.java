@@ -113,7 +113,7 @@ public class SkeletonEnemy extends Enemy
     /**
      * Called exactly once on hitFrame by CombatActor
      */
-    protected void attack()
+    protected void onAttackHit()
     {
         if (getWorld() == null) return;
 
@@ -129,6 +129,7 @@ public class SkeletonEnemy extends Enemy
         int sx = getX() + dirX * offset;
         int sy = getY() + dirY * offset;
 
+        SoundManager.playArrowSound();
         getWorld().addObject(new EnemyArrow(dirX, dirY), sx, sy);
     }
 
@@ -152,5 +153,13 @@ public class SkeletonEnemy extends Enemy
         {
             dir = (dy < 0) ? UP : DOWN;
         }
+    }
+    protected void playAttackSoundEffect()
+    {
+        //SoundManager.playArrowSound();
+    }
+    protected void playEndOfLifeSoundEffect()
+    {
+        //SoundManager.playZombieSound();
     }
 }

@@ -1,59 +1,43 @@
 import greenfoot.*;
-
-/**
- * AnimatedDecoration: a decoration that plays an animation using
- * files like basePath + index + extension
- * e.g. "decor/lion" + 0 + ".png"  -> "decor/lion0.png"
+/*
+ * Decoration that uses animated images
  */
-public class AnimatedDecoration extends SuperSmoothMover
+
+public class AnimatedDecoration extends Decoration
 {
     private GreenfootImage[] frames;
-    private int frameIndex = 0;
-
-    private int animDelay=20;  // bigger.slower
-    private int animTick = 0;
-
+    private int frameIndex=0;
+    private int animDelay=20;
+    private int animTimer=0;
 
     /**
-     * Room display that has animation
-     *
-     * @param  baseFileName
-     * @param frameCount:   how many frames total
-     * @param w:            scaled width
-     * @param h:            scaled height
-    */
-    public AnimatedDecoration(String baseFileName, int frameCount, int w, int h)
+     * @param basePath:     basePath of the images
+     * @param frameCount:   number of frames
+     * @param w,h:          scaled size
+     */
+    public AnimatedDecoration(String basePath, int frameCount, int w, int h)
     {
-        frames = new GreenfootImage[frameCount];
+        super(basePath + "1.png", w, h); // set initial image using Decoration constructor
 
-        for (int i = 0; i < frameCount; i++)
+        this.animDelay=animDelay;
+
+        //animation frames
+        frames=new GreenfootImage[frameCount];
+        for (int i=0; i < frameCount; i++)
         {
-            String filename = baseFileName + (i+1) + ".png"; 
-            GreenfootImage img = new GreenfootImage(filename);
+            GreenfootImage img=new GreenfootImage(basePath + (i + 1) + ".png");
             img.scale(w, h);
-            frames[i] = img;
+            frames[i]=img;
         }
-
-        setImage(frames[0]);
     }
 
     public void act()
     {
-        super.act();
-
-        if (frames == null || frames.length <= 1) return;
-
-        animTick++;
-        if (animTick >= animDelay)
+        animTimer++;
+        if (animTimer >= animDelay)
         {
-            animTick = 0;
-            frameIndex++;
-
-            if (frameIndex >= frames.length)
-            {
-                frameIndex = 0;
-            }
-
+            animTimer=0;
+            frameIndex=(frameIndex + 1) % frames.length;
             setImage(frames[frameIndex]);
         }
     }

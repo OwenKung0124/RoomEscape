@@ -23,14 +23,14 @@ public class SummonerBoss extends Enemy
 
     //animations
     private GreenfootImage[] summonFrames;
-    private int summonAnimDelay=20;
+    private int summonAnimDelay=35;  //adjust this to match the sound effect timing
 
     //summoning state
     private boolean summoning=false;
 
     //How many minions to spawn 
     //after each summon animation finishes
-    private int minionsPerSummon=1;
+    private int minionsPerSummon=GameConfig.SUMMOMER_BOSS_MINION_SPWAN;
 
     /**
      * Creates a SummonerBoss that targets the given Player (required by Enemy).
@@ -94,12 +94,29 @@ public class SummonerBoss extends Enemy
         //summoner enemy does not hit
         //if (hitCooldown > 0) hitCooldown--;
 
-        //move to centre of the room
+        //landing
         if(getY()<=GameConfig.roomCenterY())
         {
-            setLocation(getX(),getY()+5);
+            SoundManager.playDescendingSound();
+            //avoid landing into Blocker in the ro
+            if (!getWorld().getObjectsAt(getX(),   
+                                        GameConfig.roomCenterY(), 
+                                        Blocker.class).isEmpty())
+            {
+               setLocation(GameConfig.roomCenterX()/2,getY()+5);
+            }
+            else
+            {
+                setLocation(getX(),getY()+5);
+                
+                if(getY()>=GameConfig.roomCenterY())
+                {
+                    SoundManager.stopDescendingSound();
+                    SoundManager.playSummonerBossFightSound();
+                }
+            }
         }
-        
+   
         //summoner is big
         //when player touches
         //it does not takeDamage of player
@@ -162,7 +179,10 @@ public class SummonerBoss extends Enemy
         animTimer++;
 
         //only change frame when reach delay value
-        if (animTimer < summonAnimDelay) return;
+        if (animTimer < summonAnimDelay)
+        {
+            return; 
+        }
 
         animTimer=0;
         frameIndex++;
@@ -183,6 +203,9 @@ public class SummonerBoss extends Enemy
             return;
         }
 
+        //play only once during the animation
+        SoundManager.playSummonerBossSound();//
+    
         //show the next frame.
         setImage(summonFrames[frameIndex]);
     }
@@ -200,7 +223,7 @@ public class SummonerBoss extends Enemy
         GameWorld gw=(GameWorld) getWorld();
         RoomData rd=gw.getCurrentRoomData();
     
-        int radius=140; //where to spawn the minions
+        int radius=120; //where to spawn the minions
     
         //how many random tries per minion
         int triesPerMinion=30;
@@ -219,7 +242,7 @@ public class SummonerBoss extends Enemy
             int choice=Greenfoot.getRandomNumber(3);
             if (choice==0)
             {
-                getWorld().addObject(new ChaserEnemy(player), point[0], point[1]);
+                getWorld().addObject(new ZombieEnemy(player), point[0], point[1]);
             }
             else if (choice==1)
             {
@@ -269,5 +292,15 @@ public class SummonerBoss extends Enemy
         }
     
         return null;
+    }
+    protected void playAttackSoundEffect()
+    {
+        //SoundManager.playZombieSound();
+    }
+    protected void playEndOfLifeSoundEffect()
+    {
+        //to prevent hearing summoning sound after boss dead
+        SoundManager.stopSummonerBossSound();
+        SoundManager.playSummonBossDisappear();
     }
 }

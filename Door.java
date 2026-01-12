@@ -8,6 +8,9 @@ import greenfoot.*;
  * DOWN = (1, 0)
  * LEFT = (0, -1)
  * RIGHT = (0, 1)
+ * 
+ * @author: Owen Kung
+ * @version: Jan 2026
  */
 public class Door extends Actor
 {
@@ -67,6 +70,10 @@ public class Door extends Actor
             updateImage();
         }
     }
+    public boolean isLocked()
+    {
+        return !unlocked;
+    }
 
     /**
      * Draws the door image.
@@ -100,6 +107,8 @@ public class Door extends Actor
         String path = null;
         if(unlocked)
         {
+            //play sound when door opens
+            SoundManager.playDoorOpenSound();
             path= IMG_UNLOCKED;
         }
         else
