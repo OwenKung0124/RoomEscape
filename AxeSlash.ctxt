@@ -1,9 +1,9 @@
 #BlueJ class context
 comment0.target=AxeSlash
-comment0.text=\n\ AxeSlash\ is\ a\ short-lived\ invisible\ hitbox\ that\ removes\ enemies\ it\ touches.\n\n\n\ Usage\:\n\ \ \ getWorld().addObject(new\ AxeSlash(w,\ h,\ lifeFrames),\ x,\ y);\n
+comment0.text=\r\n\ AxeSlash\ is\ a\ short-lived\ invisible\ hitbox\ that\ removes\ enemies\ it\ touches.\r\n\r\n\r\n\ Usage\:\r\n\ \ \ getWorld().addObject(new\ AxeSlash(w,\ h,\ lifeFrames),\ x,\ y);\r\n
 comment1.params=w\ h\ lifeFrames
 comment1.target=AxeSlash(int,\ int,\ int)
-comment1.text=\n\ Creates\ an\ invisible\ hitbox.\n\n\ @param\ w\ \ \ \ \ \ \ \ \ hitbox\ width\n\ @param\ h\ \ \ \ \ \ \ \ \ hitbox\ height\n\ @param\ lifeFrames\ how\ many\ act()\ frames\ it\ lasts\n
+comment1.text=\r\n\ Creates\ an\ invisible\ hitbox.\r\n\r\n\ @param\ w\ \ \ \ \ \ \ \ \ hitbox\ width\r\n\ @param\ h\ \ \ \ \ \ \ \ \ hitbox\ height\r\n\ @param\ lifeFrames\ how\ many\ act()\ frames\ it\ lasts\r\n
 comment2.params=
 comment2.target=void\ act()
 numComments=3

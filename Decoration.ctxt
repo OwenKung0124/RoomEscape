@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.target=Decoration
-comment0.text=\n\ A\ visual\ display\ for\ large\ decorations\ \n\ (e.g.,\ statues,\ lion\ statue).\n\n
+comment0.text=\r\n\ A\ visual\ display\ for\ large\ decorations\ \r\n\ (e.g.,\ statues,\ lion\ statue).\r\n\r\n
 comment1.params=filename\ w\ h
 comment1.target=Decoration(java.lang.String,\ int,\ int)
-comment1.text=\n\ Creates\ a\ decoration\ from\ an\ image\ file\ and\ scales\ it\ to\ the\ given\ size.\n\n\ @param\ filename\:\ image\ path\ \n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \n\ @param\ w\:\ \ \ \ \ \ \ \ target\ width\ in\ pixels\ after\ scaling\n\ @param\ h\:\ \ \ \ \ \ \ \ target\ height\ in\ pixels\ after\ scaling\n
+comment1.text=\r\n\ Creates\ a\ decoration\ from\ an\ image\ file\ and\ scales\ it\ to\ the\ given\ size.\r\n\r\n\ @param\ filename\:\ image\ path\ \r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \r\n\ @param\ w\:\ \ \ \ \ \ \ \ target\ width\ in\ pixels\ after\ scaling\r\n\ @param\ h\:\ \ \ \ \ \ \ \ target\ height\ in\ pixels\ after\ scaling\r\n
 numComments=2

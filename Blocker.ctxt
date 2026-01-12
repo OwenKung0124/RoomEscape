@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.target=Blocker
-comment0.text=\n\ Blocker\ is\ a\ superclass\ for\ objects\ that\ can\ block\ movement\n\n
+comment0.text=\r\n\ Blocker\ is\ a\ superclass\ for\ objects\ that\ can\ block\ movement\r\n\r\n
 comment1.params=w\ h
 comment1.target=Blocker(int,\ int)
-comment1.text=\n\ Creates\ a\ wall\ collider\ with\ width\ and\ height\ in\ pixels.\n\n\ @param\ w\ width\ in\ pixels\n\ @param\ h\ height\ in\ pixels\n
+comment1.text=\r\n\ Creates\ a\ wall\ collider\ with\ width\ and\ height\ in\ pixels.\r\n\r\n\ @param\ w\ width\ in\ pixels\r\n\ @param\ h\ height\ in\ pixels\r\n
 numComments=2

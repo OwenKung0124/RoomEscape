@@ -1,19 +1,19 @@
 #BlueJ class context
 comment0.target=RoomData
-comment0.text=\n\ RoomData\ stores\ the\ tile\ map\ for\ ONE\ room.\n\ Each\ room\ must\ have\ its\ own\ RoomData,\ so\ changes\ (coins\ collected,\ etc.)\n\ only\ affect\ that\ one\ room.\n
+comment0.text=\r\n\ RoomData\ stores\ the\ tile\ map\ for\ ONE\ room.\r\n\ Each\ room\ must\ have\ its\ own\ RoomData,\ so\ changes\ (coins\ collected,\ etc.)\r\n\ only\ affect\ that\ one\ room.\r\n
 comment1.params=template
 comment1.target=RoomData(int[][])
-comment1.text=\n\ creates\ a\ room\ using\ a\ template\ map\n\n\ @param\ template\:\ the\ template\ tiles\ for\ a\ room\ layout\n
+comment1.text=\r\n\ creates\ a\ room\ using\ a\ template\ map\r\n\r\n\ @param\ template\:\ the\ template\ tiles\ for\ a\ room\ layout\r\n
 comment2.params=src
 comment2.target=int[][]\ deepCopy(int[][])
-comment2.text=\n\ makes\ a\ deep\ copy\ of\ a\ 2D\ int\ array.\n\ this\ prevents\ rooms\ from\ sharing\ the\ same\ tile\ array.\n
+comment2.text=\r\n\ makes\ a\ deep\ copy\ of\ a\ 2D\ int\ array.\r\n\ this\ prevents\ rooms\ from\ sharing\ the\ same\ tile\ array.\r\n
 comment3.params=tr\ tc\ floorCode
 comment3.target=void\ setTile(int,\ int,\ int)
-comment3.text=\n\ Set\ particular\ tile\ @\ tr\ tc\ to\ floor\ type\ where\ code\=floorCode\n\ \n\ @param\ tr\:\ \ \ \ \ \ \ \ \ \ \ the\ tile\ row\n\ @param\ tc\:\ \ \ \ \ \ \ \ \ \ \ the\ tile\ column\n\ @paran\ floorCode\:\ \ \ \ new\ floorcode\n
+comment3.text=\r\n\ Set\ particular\ tile\ @\ tr\ tc\ to\ floor\ type\ where\ code\=floorCode\r\n\ \r\n\ @param\ tr\:\ \ \ \ \ \ \ \ \ \ \ the\ tile\ row\r\n\ @param\ tc\:\ \ \ \ \ \ \ \ \ \ \ the\ tile\ column\r\n\ @paran\ floorCode\:\ \ \ \ new\ floorcode\r\n
 comment4.params=
 comment4.target=java.lang.String\ exportTiles()
-comment4.text=\n\ Translate\ this\ room's\ tiles\ into\ a\ string.\n\ Format\:\ rows\ separated\ by\ '/',\ cols\ separated\ by\ ','\n\ Example\:\ "2,2,2/2,0,0/..."\n
+comment4.text=\r\n\ Translate\ this\ room's\ tiles\ into\ a\ string.\r\n\ Format\:\ rows\ separated\ by\ '/',\ cols\ separated\ by\ ','\r\n\ Example\:\ "2,2,2/2,0,0/..."\r\n
 comment5.params=tileInfoString
 comment5.target=void\ importTiles(java.lang.String)
-comment5.text=\n\ Translate\ a\ tile\ string\ back\ into\ this\ room's\ tiles.\n
+comment5.text=\r\n\ Translate\ a\ tile\ string\ back\ into\ this\ room's\ tiles.\r\n
 numComments=6
