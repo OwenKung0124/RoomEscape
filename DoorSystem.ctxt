@@ -1,21 +1,21 @@
 #BlueJ class context
 comment0.target=DoorSystem
-comment0.text=\r\n\ DoorSystem\ controls\ door\ rules\ and\ the\ physical\ blockers.\r\n\r\n\ Door\ rules\:\r\n\ -\ If\ the\ current\ room\ is\ cleared\ (enemies\ \=\ 0)\:\ all\ doors\ are\ usable.\r\n\ -\ If\ not\ cleared\:\ ONLY\ the\ "back\ door"\ (the\ room\ you\ came\ from)\ is\ usable.\r\n\ -\ Locked\ door\ gaps\ are\ physically\ blocked\ using\ invisible\ Wall\ objects.\r\n
+comment0.text=\n\ DoorSystem\ controls\ door\ rules\ and\ the\ physical\ blockers.\n\n\ Door\ rules\:\n\ -\ If\ the\ current\ room\ is\ cleared\ (enemies\ \=\ 0)\:\ all\ doors\ are\ usable.\n\ -\ If\ not\ cleared\:\ ONLY\ the\ "back\ door"\ (the\ room\ you\ came\ from)\ is\ usable.\n\ -\ Locked\ door\ gaps\ are\ physically\ blocked\ using\ invisible\ Wall\ objects.\n
 comment1.params=world\ map
 comment1.target=DoorSystem(GameWorld,\ GameMap)
 comment2.params=
 comment2.target=void\ onRoomLoaded()
-comment2.text=\r\n\ Call\ this\ when\ a\ new\ room\ is\ loaded.\r\n\ Clear\ the\ old\ blocker\ list\ \r\n\ because\ the\ old\ Walls\ were\ removed\ from\ the\ world.\r\n
+comment2.text=\n\ Call\ this\ when\ a\ new\ room\ is\ loaded.\n\ Clear\ the\ old\ blocker\ list\ \n\ because\ the\ old\ Walls\ were\ removed\ from\ the\ world.\n
 comment3.params=roomR\ roomC\ lastRoomR\ lastRoomC\ unlockedNow
 comment3.target=void\ updateDoorStates(int,\ int,\ int,\ int,\ boolean)
-comment3.text=\r\n\ Updates\ which\ doors\ are\ usable\ (unlocked)\ in\ the\ current\ room.\r\n\r\n\ Rule\:\r\n\ -\ If\ the\ room\ is\ cleared\ (no\ enemies),\ unlock\ all\ doors.\r\n\ -\ If\ the\ room\ is\ NOT\ cleared,\ only\ unlock\ the\ door\ that\ goes\ back\ to\ the\ previous\ room.\r\n\r\n\ @param\ roomR\ current\ room\ row\r\n\ @param\ roomC\ current\ room\ col\r\n\ @param\ lastRoomR\ previous\ room\ row\r\n\ @param\ lastRoomC\ previous\ room\ col\r\n\ @param\ unlockedNow\ true\ if\ the\ current\ room\ has\ 0\ enemies\r\n
+comment3.text=\n\ updates\ which\ doors\ are\ unlocked\ in\ the\ current\ room.\n\n\ rule\:\n\ -\ If\ the\ room\ is\ cleared\ (no\ enemies),\ unlock\ all\ doors.\n\ -\ If\ the\ room\ is\ NOT\ cleared,\ only\ unlock\ the\ door\ that\ goes\ back\ to\ the\ previous\ room.\n\n\ @param\ roomR\:\ \ \ \ \ \ \ \ current\ room\ row\n\ @param\ roomC\:\ \ \ \ \ \ \ \ current\ room\ col\n\ @param\ lastRoomR\:\ \ \ \ previous\ room\ row\n\ @param\ lastRoomC\:\ \ \ \ previous\ room\ col\n\ @param\ unlockedNow\:\ \ true\ if\ the\ current\ room\ has\ 0\ enemies\n
 comment4.params=roomR\ roomC\ lastRoomR\ lastRoomC\ unlocked
 comment4.target=void\ syncDoorBlockers(int,\ int,\ int,\ int,\ boolean)
-comment4.text=\r\n\ Adds/removes\ invisible\ Wall\ objects\ that\ physically\ block\ the\ doorway\ gaps.\r\n\r\n\ Rule\:\r\n\ -\ If\ the\ room\ is\ unlocked\ (enemies\ \=\ 0)\:\ do\ not\ block\ any\ door\ gaps.\r\n\ -\ If\ the\ room\ is\ locked\ (enemies\ >\ 0)\:\ block\ every\ door\ gap\ except\ the\ back\ door\ gap.\r\n\r\n\ IMPORTANT\ UPDATE\:\r\n\ -\ Only\ block\ a\ direction\ if\ a\ Door\ actor\ actually\ exists\ in\ that\ direction.\r\n\ -\ Uses\ DoorBlocker\ so\ blockers\ are\ never\ visible.\r\n\r\n\ @param\ roomR\ current\ room\ row\r\n\ @param\ roomC\ current\ room\ col\r\n\ @param\ lastRoomR\ previous\ room\ row\r\n\ @param\ lastRoomC\ previous\ room\ col\r\n\ @param\ unlocked\ true\ if\ the\ current\ room\ has\ 0\ enemies\r\n
+comment4.text=\n\ Adds/removes\ invisible\ Wall\ objects\ that\ physically\ block\ the\ doorway\ gaps.\n\n\ Rule\:\n\ -\ If\ the\ room\ is\ unlocked\ (enemies\ \=\ 0)\:\ do\ not\ block\ any\ door\ gaps.\n\ -\ If\ the\ room\ is\ locked\ (enemies\ >\ 0)\:\ block\ every\ door\ gap\ except\ the\ back\ door\ gap.\n\n\ IMPORTANT\ UPDATE\:\n\ -\ Only\ block\ a\ direction\ if\ a\ Door\ actor\ actually\ exists\ in\ that\ direction.\n\ -\ Uses\ DoorBlocker\ so\ blockers\ are\ never\ visible.\n\n\ @param\ roomR\ current\ room\ row\n\ @param\ roomC\ current\ room\ col\n\ @param\ lastRoomR\ previous\ room\ row\n\ @param\ lastRoomC\ previous\ room\ col\n\ @param\ unlocked\ true\ if\ the\ current\ room\ has\ 0\ enemies\n
 comment5.params=dr\ dc\ backDr\ backDc
 comment5.target=void\ blockDoor(int,\ int,\ int,\ int)
-comment5.text=\r\n\ Adds\ a\ blocker\ for\ a\ Door\ in\ direction\ (dr,dc)\ unless\ it's\ the\ back\ door.\r\n
+comment5.text=\n\ Adds\ a\ blocker\ for\ a\ Door\ in\ direction\ (dr,dc)\ unless\ it's\ the\ back\ door.\n
 comment6.params=dr\ dc
 comment6.target=Door\ findDoor(int,\ int)
-comment6.text=\r\n\ Finds\ the\ Door\ in\ this\ room\ that\ matches\ (dr,dc).\r\n
+comment6.text=\n\ Finds\ the\ Door\ in\ this\ room\ that\ matches\ (dr,dc).\n
 numComments=7

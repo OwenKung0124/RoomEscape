@@ -109,10 +109,12 @@ public class SummonerBoss extends Enemy
             {
                 setLocation(getX(),getY()+5);
                 
+                //already in the room centre, play once
                 if(getY()>=GameConfig.roomCenterY())
                 {
                     SoundManager.stopDescendingSound();
                     SoundManager.playSummonerBossFightSound();
+
                 }
             }
         }

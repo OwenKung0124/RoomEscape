@@ -3,10 +3,8 @@ import greenfoot.*;
 /**
  * ChaseEnemy moves toward the player.
  */
-public class ZombieEnemy extends Enemy {
-
-
-
+public class ZombieEnemy extends Enemy 
+{
     /**
      * Creates a chasing enemy.
      *

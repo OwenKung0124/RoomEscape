@@ -1,5 +1,3 @@
-
-
 /**
  * GameConfig stores the shared constants for the game
  * The static methods were originally from the GameWorld and moved here
@@ -80,12 +78,12 @@ public class GameConfig
     public static final int DOOR_GAP_W = 90;
     public static final int DOOR_GAP_H = 120;
 
-    public static final int ENEMIES_TO_SPAWN = 5;
-    public static final int WIN_ROOMS = 6;
+    public static final int ENEMIES_TO_SPAWN = 1;
+    //public static final int WIN_ROOMS = 6;
     
     //SummonerBoss
     public static final int SUMMONER_BOSS_DOOR_CLEARED=1;
-    public static final int SUMMOMER_BOSS_MINION_SPWAN=5; //use smaller number for testing
+    public static final int SUMMOMER_BOSS_MINION_SPWAN=1; //use smaller number for testing
     
     //Warrior Selection;
     public static final int WARRIOR_AXE=1;

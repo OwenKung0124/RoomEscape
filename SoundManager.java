@@ -13,7 +13,7 @@ public class SoundManager
     private static GreenfootSound summonerBoss = new GreenfootSound("summoner_boss.mp3");
     private static GreenfootSound bossDisappear = new GreenfootSound("boss_disappear.mp3");
     private static GreenfootSound bossFight = new GreenfootSound("fight.mp3");
-    //private static GreenfootSound bossDescending = new GreenfootSound("descending.mp3");
+    private static GreenfootSound bossDescending = new GreenfootSound("descending.mp3");
     
      //door sound
     private static GreenfootSound door = new GreenfootSound("door_open.mp3");
@@ -53,10 +53,20 @@ public class SoundManager
         new GreenfootSound("arrow.mp3"),
         new GreenfootSound("arrow.mp3")
     };
-    
+
+    //bullet sfx
+    private static int bulletSoundIndex;
+    private static GreenfootSound bulletSounds[] = {
+        new GreenfootSound("bullet.mp3"),
+        new GreenfootSound("bullet.mp3"),
+        new GreenfootSound("bullet.mp3"),
+        new GreenfootSound("bullet.mp3")
+    };
      //coin
     private static int coinSoundIndex;
     private static GreenfootSound coinSounds[] = {
+        new GreenfootSound("coin.mp3"),
+        new GreenfootSound("coin.mp3"),
         new GreenfootSound("coin.mp3"),
         new GreenfootSound("coin.mp3"),
         new GreenfootSound("coin.mp3"),
@@ -149,23 +159,46 @@ public class SoundManager
     {
         if (!sfxOn) return;
 
-        //bossDescending.setVolume(40);
-        //if (!bossDescending.isPlaying()) 
+        bossDescending.setVolume(40);
+        if (!bossDescending.isPlaying()) 
         {
-            //bossDescending.play();
+            bossDescending.play();
         }
     }
     public static void stopDescendingSound()
     {
         if (!sfxOn) return;
 
-        //bossDescending.setVolume(10);
-        //if (bossDescending.isPlaying()) 
+        bossDescending.setVolume(10);
+        if (bossDescending.isPlaying()) 
         {
-        //    bossDescending.stop();
+            bossDescending.stop();
         }
     }
-    public static void playDoorOpenSound()
+    public static void stopAllBossSounds()
+    {
+        if(summonerBoss.isPlaying())
+        {
+             summonerBoss.stop();
+             
+        }
+        if(bossDisappear.isPlaying())
+        {
+             bossDisappear.stop();
+             
+        }
+        if(bossFight.isPlaying())
+        {
+             bossFight.stop();
+             
+        }
+        if(bossDescending.isPlaying())
+        {
+             bossDescending.stop();
+             
+        }
+    }
+        public static void playDoorOpenSound()
     {
          if (!sfxOn) return;
 
@@ -206,12 +239,19 @@ public class SoundManager
         
         arrowSoundIndex=arraySoundPlay(arrowSounds,arrowSoundIndex,30);
     }
+    public static void playBulletSound()
+    {
+        if (!sfxOn) return;
+        
+        bulletSoundIndex=arraySoundPlay(bulletSounds,bulletSoundIndex,30);
+    }
     public static void playCoinSound()
     {
         if (!sfxOn) return;
         
         coinSoundIndex=arraySoundPlay(coinSounds,coinSoundIndex,30);
     }
+    
     private static int arraySoundPlay(GreenfootSound sounds[], int index, int volumn)
     {
         if (!sfxOn) return 0;
