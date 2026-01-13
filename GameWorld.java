@@ -40,10 +40,12 @@ public class GameWorld extends World
     private int roomsClearedCount=0;
     private int totalRoomsToClear=0;
 
+    private SaveData data;   //this data is passed around between world and is used to save to file when needed
     
     public GameWorld()
     {
-        this(GameConfig.WARRIOR_AXE,false); //default warrior selection
+
+        this(GameConfig.WARRIOR_AXE, false, null);   //default warrior selection, new game, no save data passed
     }
     /**
      * Constructs the world
@@ -51,10 +53,19 @@ public class GameWorld extends World
      * spawns Playe, MiniMap,
      * loads the starting room.
      */
-    public GameWorld(int warriorType,boolean resume)
+    public GameWorld(int warriorType,boolean resume, SaveData data)
     {
         super(GameConfig.WORLD_W, GameConfig.WORLD_H, 1);
         
+        //if there's already an existing savedata
+        if(data!=null)
+        {
+            this.data=data;
+        }
+        else
+        {
+            this.data=new SaveData();
+        }
         map=new GameMap();
 
         renderer=new RoomRenderer(this, map);
@@ -105,8 +116,13 @@ public class GameWorld extends World
         //must also update this section
         if (resume)
         {
-            SaveData data=SaveManager.load(map);
-        
+            SaveData loadedData=SaveManager.load(map);
+            
+            if(loadedData!=null)
+            {
+                 data=loadedData;
+            }
+ 
             if (data != null && map.hasRoom(data.roomR, data.roomC))
             {
                 roomR=data.roomR;
@@ -178,7 +194,7 @@ public class GameWorld extends World
         save();
         
         paused=false;
-        Greenfoot.setWorld(new SettingWorld());
+        Greenfoot.setWorld(new SettingWorld(data));
     }
     /**
      * exit to setup screen, but end the game
@@ -187,14 +203,23 @@ public class GameWorld extends World
     private void saveAndLeave()
     {
         save();
-        Greenfoot.setWorld(new SettingWorld());
+        Greenfoot.setWorld(new SettingWorld(data));
         paused=false;
         Greenfoot.stop();
     }
+    public void onPlayerDefeated()
+    {
+        save();
+        paused = false;
+        Greenfoot.setWorld(new DefeatWorld(data));
+    }
     private void save()
     {
-        SaveData data=new SaveData();
-    
+        if(data==null)
+        {
+            return;
+        }
+        
         data.roomR=roomR;
         data.roomC=roomC;
         data.lastRoomR=lastRoomR;
@@ -204,7 +229,7 @@ public class GameWorld extends World
         data.roomsCleared=roomsClearedCount;
         data.coins=player.getCoinCount();
         data.score=player.getScore();
-        
+    
         //roomCleared,roomVisited,roomData handled by
         //GameMap, RoomData in SavaMAnager
         SaveManager.save(data,map);
@@ -276,7 +301,7 @@ public class GameWorld extends World
 
         boolean unlockedNow=isRoomUnlocked();
 
-        //unlock all doors if cleared, otherwise only the "back door"
+        //unlock all doors if cleared, otherwise only the back door
         doorSystem.updateDoorStates(roomR, roomC, lastRoomR, lastRoomC, unlockedNow);
 
         //block door gaps while locked, but not the back door gap

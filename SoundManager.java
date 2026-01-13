@@ -7,7 +7,7 @@ public class SoundManager
     private static boolean sfxOn   = false;
 
     //game music
-    private static GreenfootSound gameMusic = new GreenfootSound("dark_ambient.mp3");
+    private static GreenfootSound gameMusic = new GreenfootSound("dark_ambient_2.mp3");
 
     //summoner boss
     private static GreenfootSound summonerBoss = new GreenfootSound("summoner_boss.mp3");
@@ -113,7 +113,7 @@ public class SoundManager
     {
         if (!musicOn) return;
 
-        gameMusic.setVolume(20);
+        gameMusic.setVolume(30);
         if (!gameMusic.isPlaying()) 
         {
             gameMusic.playLoop();

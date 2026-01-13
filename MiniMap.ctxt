@@ -1,14 +1,14 @@
 #BlueJ class context
 comment0.target=MiniMap
-comment0.text=\r\n\ MiniMap\ draws\ a\ small\ map\ of\ the\ room-grid\ on\ the\ side\ panel.\r\n\r\n\ Color\ key\:\r\n\ \ \ Dark\ gray\:\ no\ room\r\n\ \ \ Light\ Gray\:\ room\ exists\ but\ not\ visited\r\n\ \ \ White\:\ visited\ but\ not\ cleared\r\n\ \ \ Green\:\ cleared\r\n\ \ \ Cyan\ outline\:\ current\ room\r\n\ \ \ \r\n\ @author\:\ \ \ \ \ Owen\ Kung\r\n\ @version\:\ \ \ \ Jan\ 2026\r\n
+comment0.text=\n\ MiniMap\ draws\ a\ small\ map\ of\ the\ room-grid\ on\ the\ side\ panel.\n\n\ Color\ key\:\n\ \ \ Dark\ gray\:\ no\ room\n\ \ \ Light\ Gray\:\ room\ exists\ but\ not\ visited\n\ \ \ White\:\ visited\ but\ not\ cleared\n\ \ \ Green\:\ cleared\n\ \ \ Cyan\ outline\:\ current\ room\n\ \ \ \n\ @author\:\ \ \ \ \ Owen\ Kung\n\ @version\:\ \ \ \ Jan\ 2026\n
 comment1.params=world
 comment1.target=void\ addedToWorld(greenfoot.World)
-comment1.text=\r\n\ Called\ automatically\ when\ MiniMap\ is\ added\ to\ the\ world.\r\n\ The\ minimap\ is\ created\ first\ and\ then\ added\ to\ the\ world\r\n\ \r\n\r\n\ @param\ world\ the\ world\ this\ actor\ was\ added\ to\r\n
+comment1.text=\n\ Called\ automatically\ when\ MiniMap\ is\ added\ to\ the\ world.\n\ The\ minimap\ is\ created\ first\ and\ then\ added\ to\ the\ world\n\ \n\n\ @param\ world\ the\ world\ this\ actor\ was\ added\ to\n
 comment2.params=
 comment2.target=void\ act()
 comment3.params=
 comment3.target=void\ updateImage()
-comment3.text=\r\n\ Rebuilds\ the\ minimap\ image\ based\ on\ visited/cleared\ states.\r\n
+comment3.text=\n\ Rebuilds\ the\ minimap\ image\ based\ on\ visited/cleared\ states.\n
 comment4.params=img\ x\ y\ type
 comment4.target=void\ drawRoomTypeMarker(greenfoot.GreenfootImage,\ int,\ int,\ char)
 numComments=5

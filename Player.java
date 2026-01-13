@@ -229,7 +229,16 @@ public abstract class Player extends CombatActor implements HasHealth
         //if dead, end the game
         if (health <= 0)
         {
-           Greenfoot.setWorld(new DefeatWorld());
+            World w = getWorld();
+            
+            if (w !=null)
+            {
+                ((GameWorld) w).onPlayerDefeated();
+            }
+            else
+            {
+                Greenfoot.setWorld(new DefeatWorld(null));
+            }
         }
     }
     /*

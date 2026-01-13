@@ -16,15 +16,20 @@ public class SettingWorld extends World
     private StartButton newGameBotton;
     private StartButton resumeBotton;
     
-    private GameWorld gw;
+    private SaveData data;
 
     public SettingWorld()
     {
+        this(null);
+    }
+    public SettingWorld(SaveData data)
+    {
         super(GameConfig.WORLD_W, GameConfig.WORLD_H, 1);
+        this.data = data;
         
-        GreenfootImage bg = new GreenfootImage("setting.jpg");
-        bg.scale(GameConfig.WORLD_W, GameConfig.WORLD_H);
-        setBackground(bg);
+        //GreenfootImage bg = new GreenfootImage("setting.jpg");
+        //bg.scale(GameConfig.WORLD_W, GameConfig.WORLD_H);
+        //setBackground(bg);
 
         showText("Click a warrior image to select", GameConfig.WORLD_W / 2, 200);
 
@@ -62,14 +67,18 @@ public class SettingWorld extends World
 
     private void showState()
     {
-        if(SaveManager.hasSave())
+        if(data==null && SaveManager.hasSave())
+        {
+            data=SaveManager.load();
+        }
+        if(data!=null)
         {
             SaveData data=SaveManager.load();//only quick data, not requiring gamemap
             
             showText(""+data.coins,220, 70);
             showText(""+data.roomsCleared,600, 70);
             showText(""+data.playerHealth,1020, 70);
-        }
+        }        
     }
     /**
      * highlight which warrior is selected
@@ -85,7 +94,8 @@ public class SettingWorld extends World
     public void startNewGame()
     {
         SaveManager.deleteSave();
-        Greenfoot.setWorld(new GameWorld(selectedType, false));
+        //pass null for SaveData
+        Greenfoot.setWorld(new GameWorld(selectedType, false, null));
     }
 
     /**
@@ -99,7 +109,7 @@ public class SettingWorld extends World
             return;
         }
 
-        Greenfoot.setWorld(new GameWorld(selectedType, true));
+        Greenfoot.setWorld(new GameWorld(selectedType, true,data));
     }
 
     /**
