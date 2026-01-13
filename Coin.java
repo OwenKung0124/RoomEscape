@@ -10,7 +10,14 @@ public class Coin extends Actor
     private RoomData roomData;
     private int r,c,tr,tc;
 
-    private static final String COIN_SPRITE = "coin.png";
+    //animation related variables
+    private GreenfootImage[] frames;
+    private int frameIndex = 0;
+    private int animTimer = 0;
+    private int animDelay = 6; 
+    
+    private static final int FRAME_COUNT = 6;  
+    private static final String FRAME_PREFIX = "coin/coin";
     /**
      * @param RoomDate rd
      * @param roomR room 
@@ -25,17 +32,33 @@ public class Coin extends Actor
         this.c=c;
         this.tr=tr;
         this.tc=tc;
-        setImage(loadCoinImage());
+        frames = loadCoinFrames();
+        setImage(frames[0]);
     }
 
     public void act() 
     {
+        animate();
         if (isTouching(Player.class)) 
         {
             collect();
         }
     }
-
+    private void animate()
+    {
+        if (frames == null || frames.length == 0)
+        {
+            return;   
+        }
+    
+        animTimer++;
+        if (animTimer >= animDelay)
+        {
+            animTimer = 0;
+            frameIndex = (frameIndex + 1) % frames.length;
+            setImage(frames[frameIndex]);
+        }
+    }
     /**
      * Collect the coin:
      * remove the coin
@@ -61,23 +84,34 @@ public class Coin extends Actor
             world.removeObject(this);   
         }
     }
-    private GreenfootImage loadCoinImage() 
+    private GreenfootImage[] loadCoinFrames()
     {
-        try 
+        GreenfootImage[] imgs = new GreenfootImage[FRAME_COUNT];
+    
+        try
         {
-            GreenfootImage img = new GreenfootImage(COIN_SPRITE);
-            img.scale(30, 30);
-            return img;
-        } 
-        catch (IllegalArgumentException e) 
+            for (int i = 0; i < FRAME_COUNT; i++)
+            {
+                GreenfootImage img = new GreenfootImage(FRAME_PREFIX + (i+1) + ".png");
+                img.scale(30, 30);
+                imgs[i] = img;
+            }
+            return imgs;
+        }
+        catch (IllegalArgumentException e)
         {
-            //use drawing instead
-            GreenfootImage img = new GreenfootImage(30, 30);
-            img.setColor(Color.YELLOW);
-            img.fillOval(2, 2, 26, 26);
-            img.setColor(Color.ORANGE);
-            img.drawOval(2, 2, 26, 26);
-            return img;
+            //file not found
+            //create placeholderimage
+            GreenfootImage placeHolderImage = new GreenfootImage(30, 30);
+            placeHolderImage.setColor(Color.YELLOW);
+            placeHolderImage.fillOval(2, 2, 26, 26);
+            placeHolderImage.setColor(Color.ORANGE);
+            placeHolderImage.drawOval(2, 2, 26, 26);
+    
+            return new GreenfootImage[]
+            {
+                placeHolderImage 
+            };
         }
     }
 }

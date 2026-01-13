@@ -21,6 +21,19 @@ public class SpawnerSystem
      */
     public void spawnEnemiesIfNeeded(int r, int c, Player player)
     {
+        
+        //non-combat rooms never spawn enemies
+        if (!map.isCombatRoom(r, c) && ! map.isBossRoom(r,c))
+        {
+            return;
+        }
+
+        //spawn enemies only if room not cleared
+        if (map.isCleared(r, c))
+        {
+            return;   
+        }
+
         //if(world.getRoomsClearedCount()==GameConfig.SUMMONER_BOSS_DOOR_CLEARED)
         if (map.isBossRoom(r, c))
         {
@@ -32,19 +45,6 @@ public class SpawnerSystem
             //don't spawn enemies in boss room
             return;
         }
-        
-        //non-combat rooms never spawn enemies
-        if (!map.isCombatRoom(r, c))
-        {
-            return;
-        }
-
-        //spawn enemies only if room not cleared
-        if (map.isCleared(r, c))
-        {
-            return;   
-        }
-
         
         int enemiesToSpawn=1 + Greenfoot.getRandomNumber(GameConfig.ENEMIES_TO_SPAWN); //1 to GameConfigENEMIES_TO_SPAWN
         for (int i=0; i < enemiesToSpawn; i++) 

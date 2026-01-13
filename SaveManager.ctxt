@@ -13,12 +13,14 @@ comment3.text=\n\ Saves\ progress\ to\ file\ using\ SaveData.\n\n\ @param\ data\
 comment4.params=map
 comment4.target=SaveData\ load(GameMap)
 comment4.text=\n\ Loads\ progress\ from\ file\ and\ applies\ visited/cleared\ onto\ the\ map.\n\n\ @param\ map\ map\ to\ apply\ visited/cleared\ into\n\ @return\ SaveData\ if\ loaded,\ or\ null\ if\ missing/invalid\n
-comment5.params=map\ roomTiles
-comment5.target=void\ applyRoomTiles(GameMap,\ java.lang.String)
-comment5.text=\n\ Applies\ one\ "tiles\="\ record\ onto\ the\ map.\n\ roomTiles\ format\:\ r,c\:<encodedTiles>\n
-comment6.params=map\ out
-comment6.target=void\ saveRoomData(GameMap,\ java.io.PrintWriter)
-comment7.params=s\ defaultValue
-comment7.target=int\ parseIntSafe(java.lang.String,\ int)
-comment7.text=\n\ Parses\ an\ integer\ safely,\ returning\ a\ default\ value\ if\ invalid.\n
-numComments=8
+comment5.params=
+comment5.target=SaveData\ load()
+comment6.params=map\ roomTiles
+comment6.target=void\ applyRoomTiles(GameMap,\ java.lang.String)
+comment6.text=\n\ Applies\ one\ "tiles\="\ record\ onto\ the\ map.\n\ roomTiles\ format\:\ r,c\:<encodedTiles>\n
+comment7.params=map\ out
+comment7.target=void\ saveRoomData(GameMap,\ java.io.PrintWriter)
+comment8.params=s\ defaultValue
+comment8.target=int\ parseIntSafe(java.lang.String,\ int)
+comment8.text=\n\ Parses\ an\ integer\ safely,\ returning\ a\ default\ value\ if\ invalid.\n
+numComments=9
