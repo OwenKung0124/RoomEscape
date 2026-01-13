@@ -83,7 +83,7 @@ public class GameConfig
     
     //SummonerBoss
     public static final int SUMMONER_BOSS_DOOR_CLEARED=1;
-    public static final int SUMMOMER_BOSS_MINION_SPWAN=1; //use smaller number for testing
+    public static final int SUMMOMER_BOSS_MINION_SPWAN=10; //use smaller number for testing
     
     //Warrior Selection;
     public static final int WARRIOR_AXE=1;
