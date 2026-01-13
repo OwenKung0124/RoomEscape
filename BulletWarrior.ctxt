@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=BulletWarrior
-comment0.text=\r\n\ BulletWarrior\:\r\n\ -\ Walks\ with\ keyboard\r\n\ -\ Attacks\ with\ SPACE\r\n\ -\ Shoots\ a\ Bullet\ on\ the\ hit\ frame\r\n
+comment0.text=\n\ BulletWarrior\:\n\ -\ Walks\ with\ keyboard\n\ -\ Attacks\ with\ SPACE\n\ -\ Shoots\ a\ Bullet\ on\ the\ hit\ frame\n
 comment1.params=
 comment1.target=BulletWarrior()
 comment2.params=

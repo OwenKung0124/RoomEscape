@@ -1,12 +1,12 @@
 #BlueJ class context
 comment0.target=Player
-comment0.text=\r\n\ Warrior\r\n\ -\ walk\ using\ WalkingActor's\ movement/facing/walk\ animation\r\n\ -\ play\ a\ directional\ attack\ animation\r\n\ -\ trigger\ a\ "hit"\ once\ at\ a\ chosen\ frame\r\n\r\n\ Subclass\ constructor,\ call\:\r\n\ \ \ \ \ \ loadDirectionalFrames();\r\n\ \ \ \ \ \ loadAttackFrames();\r\n\ \ Subclass\ implement\ wantsToAttack()\r\n\ \ Subclass\ implement\ onAttackHit()\r\n
+comment0.text=\n\ Warrior\n\ -\ walk\ using\ WalkingActor's\ movement/facing/walk\ animation\n\ -\ play\ a\ directional\ attack\ animation\n\ -\ trigger\ a\ "hit"\ once\ at\ a\ chosen\ frame\n\n\ Subclass\ constructor,\ call\:\n\ \ \ \ \ \ loadDirectionalFrames();\n\ \ \ \ \ \ loadAttackFrames();\n\ \ Subclass\ implement\ wantsToAttack()\n\ \ Subclass\ implement\ onAttackHit()\n
 comment1.params=
 comment1.target=int[]\ computeMove()
-comment1.text=\r\n\ Subclass\ can\ override\r\n\ \r\n\ Parant\ class\ provides\ default\ movement\r\n\r\n\ @return\ int[]{dx,\ dy}\r\n
+comment1.text=\n\ Subclass\ can\ override\n\ \n\ Parant\ class\ provides\ default\ movement\n\n\ @return\ int[]{dx,\ dy}\n
 comment10.params=
 comment10.target=void\ collect()
-comment10.text=\r\n\ keep\ track\ of\ collectible\ itemes\r\n
+comment10.text=\n\ keep\ track\ of\ collectible\ itemes\n
 comment11.params=
 comment11.target=int\ getCoinCount()
 comment12.params=coinCount
@@ -19,25 +19,25 @@ comment15.params=score
 comment15.target=void\ addScore(int)
 comment2.params=
 comment2.target=boolean\ wantsToAttack()
-comment2.text=\r\n\ Subclass\ decides\ when\ to\ start\ an\ attack.\r\n\r\n\ @return\ true\ if\ attack\ should\ begin\ this\ frame\r\n
+comment2.text=\n\ Subclass\ decides\ when\ to\ start\ an\ attack.\n\n\ @return\ true\ if\ attack\ should\ begin\ this\ frame\n
 comment3.params=
 comment3.target=void\ onAttackHit()
-comment3.text=\r\n\ Called\ exactly\ once\ during\ the\ attack\ animation\ at\ hitFrame.\r\n\ Subclass\ defines\ the\ attack\ logic\ (melee\ hitbox,\ projectile,\ etc.)\r\n
+comment3.text=\n\ Called\ exactly\ once\ during\ the\ attack\ animation\ at\ hitFrame.\n\ Subclass\ defines\ the\ attack\ logic\ (melee\ hitbox,\ projectile,\ etc.)\n
 comment4.params=
 comment4.target=void\ act()
 comment5.params=
 comment5.target=int\ getHealth()
-comment5.text=\r\n\ @return\ the\ player's\ current\ health\r\n
+comment5.text=\n\ @return\ the\ player's\ current\ health\n
 comment6.params=
 comment6.target=int\ getMaxHealth()
-comment6.text=\r\n\ @return\ the\ player's\ maximum\ health.\r\n
+comment6.text=\n\ @return\ the\ player's\ maximum\ health.\n
 comment7.params=amount
 comment7.target=void\ heal(int)
-comment7.text=\r\n\ Heals\ the\ player\ by\ a\ given\ amount\r\n\ without\ exceeding\ maxHealth.\r\n\r\n\ @param\ amount\ how\ much\ to\ heal\ (ignored\ if\ <\=\ 0)\r\n
+comment7.text=\n\ Heals\ the\ player\ by\ a\ given\ amount\n\ without\ exceeding\ maxHealth.\n\n\ @param\ amount\ how\ much\ to\ heal\ (ignored\ if\ <\=\ 0)\n
 comment8.params=amount
 comment8.target=void\ setHealth(int)
-comment8.text=\r\n\ setHealth\ of\ the\ player\ when\ resume\ the\ game\r\n
+comment8.text=\n\ setHealth\ of\ the\ player\ when\ resume\ the\ game\n
 comment9.params=amount
 comment9.target=void\ takeDamage(int)
-comment9.text=\r\n\ Damages\ the\ player\ by\ a\ given\ amount.\r\n\ Uses\ invincibility\ frames\ (hurtCooldown)\ to\ prevent\ rapid\ repeat\ damage.\r\n\ If\ health\ reaches\ 0,\ the\ player\ dies\ and\ the\ game\ stops.\r\n\r\n\ @param\ amount\ how\ much\ damage\ to\ take\ (ignored\ if\ <\=\ 0)\r\n
+comment9.text=\n\ Damages\ the\ player\ by\ a\ given\ amount.\n\ Uses\ invincibility\ frames\ (hurtCooldown)\ to\ prevent\ rapid\ repeat\ damage.\n\ If\ health\ reaches\ 0,\ the\ player\ dies\ and\ the\ game\ stops.\n\n\ @param\ amount\ how\ much\ damage\ to\ take\ (ignored\ if\ <\=\ 0)\n
 numComments=16
