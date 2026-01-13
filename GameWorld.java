@@ -241,8 +241,8 @@ public class GameWorld extends World
         }
     
 
-        //only combat rooms can be cleared
-        if (map.isCombatRoom(roomR, roomC) && 
+        //only combat/bossrooms can be cleared
+        if ( (map.isCombatRoom(roomR, roomC) || map.isBossRoom(roomR, roomC))&& 
             countEnemies()==0 && 
             !map.isCleared(roomR, roomC))
         {
@@ -251,6 +251,7 @@ public class GameWorld extends World
                 roomsClearedCount++;
             }
         }
+        
         
         //HUD text in side panel
         int hudX=GameConfig.ROOM_X + GameConfig.ROOM_W + GameConfig.SIDE_PANEL_W / 2;
@@ -451,7 +452,7 @@ public class GameWorld extends World
     public boolean isRoomUnlocked()
     {
         //not a combat room, doors always open
-        if (!map.isCombatRoom(roomR, roomC))
+        if (!map.isCombatRoom(roomR, roomC) && !map.isBossRoom(roomR,roomC))
         {
             return true;
         }
@@ -560,5 +561,9 @@ public class GameWorld extends World
     public char getRoomType(int r, int c)
     {
         return map.getRoomType(r, c); 
+    }
+    public GameMap getGameMap()
+    {
+        return map;
     }
 }
