@@ -176,9 +176,77 @@ public class SaveManager
                 }
             }
         }
-        catch (Exception e)
+        catch (FileNotFoundException e)
         {
-            System.out.println("Load failed: " + e.getMessage());
+            System.out.println("Load failed, file not found: " + e.getMessage());
+            return null;
+        }
+        finally
+        {
+            if (sc != null) sc.close();
+        }
+    
+        return data;
+    }
+    public static SaveData load()
+    {
+        if (!hasSave()) return null;
+    
+        SaveData data = new SaveData();
+    
+        //defaults
+        data.roomR = 0;
+        data.roomC = 0;
+        data.lastRoomR = 0;
+        data.lastRoomC = 0;
+    
+        Scanner sc = null;
+    
+        try
+        {
+            sc = new Scanner(new File(GameConfig.SAVE_FILE));
+    
+            while (sc.hasNextLine())
+            {
+                String line = sc.nextLine().trim();
+    
+                if (line.startsWith("roomR="))
+                {
+                    data.roomR = parseIntSafe(line.substring("roomR=".length()), 0);
+                }
+                else if (line.startsWith("roomC="))
+                {
+                    data.roomC = parseIntSafe(line.substring("roomC=".length()), 0);
+                }
+                else if (line.startsWith("lastRoomR="))
+                {
+                    data.lastRoomR = parseIntSafe(line.substring("lastRoomR=".length()), data.roomR);
+                }
+                else if (line.startsWith("lastRoomC="))
+                {
+                    data.lastRoomC = parseIntSafe(line.substring("lastRoomC=".length()), data.roomC);
+                }
+                else if (line.startsWith("roomsCleared="))
+                {
+                    data.roomsCleared=parseIntSafe(line.substring("roomsCleared=".length()), 0);
+                }
+                else if (line.startsWith("coins="))
+                {
+                    data.coins=parseIntSafe(line.substring("coins=".length()), 0);
+                }
+                else if (line.startsWith("score="))
+                {
+                    data.score=parseIntSafe(line.substring("score=".length()), 0);
+                }
+                else if (data!=null&&line.startsWith("playerHealth="))
+                {
+                    data.playerHealth=parseIntSafe(line.substring("playerHealth=".length()), 0);
+                }
+            }
+        }
+        catch (FileNotFoundException e)
+        {
+            System.out.println("Load failed, file not found: " + e.getMessage());
             return null;
         }
         finally

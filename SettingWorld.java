@@ -15,13 +15,18 @@ public class SettingWorld extends World
     //new game or resume
     private StartButton newGameBotton;
     private StartButton resumeBotton;
+    
+    private GameWorld gw;
 
     public SettingWorld()
     {
         super(GameConfig.WORLD_W, GameConfig.WORLD_H, 1);
+        
+        GreenfootImage bg = new GreenfootImage("setting.jpg");
+        bg.scale(GameConfig.WORLD_W, GameConfig.WORLD_H);
+        setBackground(bg);
 
-        showText("SETUP", GameConfig.WORLD_W / 2, 80);
-        showText("Click a warrior image to select", GameConfig.WORLD_W / 2, 120);
+        showText("Click a warrior image to select", GameConfig.WORLD_W / 2, 200);
 
         //selections
         axeIcon = new WarriorSelectIcon("axe_warrior.png", GameConfig.WARRIOR_AXE);
@@ -36,20 +41,36 @@ public class SettingWorld extends World
         newGameBotton = new StartButton("start.png", StartButton.MODE_NEW_GAME);
         resumeBotton  = new StartButton("resume.png", StartButton.MODE_RESUME);
 
-        addObject(newGameBotton, GameConfig.WORLD_W / 2 - 120, 650);
-        addObject(resumeBotton,  GameConfig.WORLD_W / 2 + 120, 650);
+        addObject(newGameBotton, GameConfig.WORLD_W / 2, 650);
+        addObject(resumeBotton,  GameConfig.WORLD_W / 2 + 260, 650);
         
         //sound effects toggles
-        addObject(new SoundToggleButton(SoundToggleButton.TYPE_MUSIC), GameConfig.WORLD_W - 100, 600);
-        addObject(new SoundToggleButton(SoundToggleButton.TYPE_SFX),   GameConfig.WORLD_W - 100, 650);
+        addObject(new SoundToggleButton(SoundToggleButton.TYPE_MUSIC), GameConfig.WORLD_W/2 - 220, 650);
+        addObject(new SoundToggleButton(SoundToggleButton.TYPE_SFX),   GameConfig.WORLD_W/2 - 320, 650);
 
         //disable resume if no save exists
         resumeBotton.setEnabled(SaveManager.hasSave());
 
         //default highlight
         updateHighlights();
+
+        //show state on the top status bar
+        showState();
+        
+       
     }
 
+    private void showState()
+    {
+        if(SaveManager.hasSave())
+        {
+            SaveData data=SaveManager.load();//only quick data, not requiring gamemap
+            
+            showText(""+data.coins,220, 70);
+            showText(""+data.roomsCleared,600, 70);
+            showText(""+data.playerHealth,1020, 70);
+        }
+    }
     /**
      * highlight which warrior is selected
      */
@@ -107,7 +128,7 @@ public class SettingWorld extends World
             "Selected: " + 
             selectedStr,
             GameConfig.WORLD_W / 2,
-            175
+            225
         );
     }
 }

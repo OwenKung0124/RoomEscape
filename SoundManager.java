@@ -90,6 +90,7 @@ public class SoundManager
         {
             stopGameMusic(); 
         }
+
     }
 
     public static void setSfxOn(boolean on)
@@ -100,6 +101,7 @@ public class SoundManager
     public static void toggleMusic()
     {
         setMusicOn(!musicOn);
+        //setMusicOn(musicOn);
     }
 
     public static void toggleSfx()
