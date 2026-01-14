@@ -17,7 +17,13 @@ public class SaveData
     //collectibles
     public int coins=0;
     public int score=0;
-
+    
+    //default attack powers
+    public int axeAttackPower=GameConfig.WARRIOR_AXE_DEFAULT_ATTACK;
+    public int swordAttackPower=GameConfig.WARRIOR_SWORD_DEFAULT_ATTACK;
+    public int bulletAttackPower=GameConfig.WARRIOR_BULLET_DEFAULT_ATTACK;
+    
+    
     //currently handed by GameMap class
     //public String visited;
     //public String cleared;

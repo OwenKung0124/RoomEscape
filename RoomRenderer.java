@@ -110,6 +110,10 @@ public class RoomRenderer
                 {
                     world.addObject(new Coin(rd,r, c, tr, tc), x, y);
                 }
+                else if (code == GameConfig.ATTACK_UPGRADE) 
+                {
+                    world.addObject(new AttackUpgrade(rd,r, c, tr, tc), x, y);
+                }
                 else if (code == GameConfig.STATUE) 
                 {
                     Statue s = new Statue(w,h);

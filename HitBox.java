@@ -9,18 +9,20 @@ import java.util.*;
 public class HitBox extends SuperSmoothMover
 {
     private int life;
-
-    private static final int DAMAGE_POWER=1;
+    private int attackPower;
+    
     /*
      * Creates an invisible hitbox.
      *
-     * @param w         hitbox width
-     * @param h         hitbox height
+     * @param w          hitbox width
+     * @param h          hitbox height
      * @param lifeFrames how many act() frames it lasts
+     * @oaram attackPower passed by the player
      */
-    public HitBox(int w, int h, int lifeFrames)
+    public HitBox(int w, int h, int lifeFrames, int attackPower)
     {
         life = lifeFrames;
+        this.attackPower=attackPower;
 
         //invisible rectangle
         GreenfootImage img = new GreenfootImage(w, h);
@@ -38,7 +40,7 @@ public class HitBox extends SuperSmoothMover
             {
                 if (e != null && e.getWorld() != null)
                 {
-                    e.takeDamage(DAMAGE_POWER);
+                    e.takeDamage(attackPower);
                     if(e.getHealth()<=0)
                     {
                         getWorld().removeObject(e);

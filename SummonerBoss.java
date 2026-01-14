@@ -45,7 +45,7 @@ public class SummonerBoss extends Enemy
         spriteH=125;
 
         //boos health
-        maxHealth=100;
+        maxHealth=GameConfig.SUMMONER_BOSS_MAX_HEALTH;
         health=maxHealth;
 
         //no damage

@@ -7,9 +7,36 @@ public class SoundToggleButton extends Actor
 
     private int type;
 
+    //filenames
+    private static final String MUSIC_ON  = "setting/music_on.png";
+    private static final String MUSIC_OFF = "setting/music_off.png";
+    private static final String SFX_ON    = "setting/sfx_on.png";
+    private static final String SFX_OFF   = "setting/sfx_off.png";
+
+    private static final int width = 90;
+    private static final int height = 90;
+
+    //cached images so we don't reload every click
+    private GreenfootImage musicOnImg;
+    private GreenfootImage musicOffImg;
+    private GreenfootImage sfxOnImg;
+    private GreenfootImage sfxOffImg;
+
     public SoundToggleButton(int type)
     {
         this.type = type;
+
+        // load once
+        musicOnImg  = new GreenfootImage(MUSIC_ON);
+        musicOffImg = new GreenfootImage(MUSIC_OFF);
+        sfxOnImg    = new GreenfootImage(SFX_ON);
+        sfxOffImg   = new GreenfootImage(SFX_OFF);
+
+        musicOnImg.scale(width, height);
+        musicOffImg.scale(width, height);
+        sfxOnImg.scale(width, height);
+        sfxOffImg.scale(width, height);
+
         updateImage();
     }
 
@@ -21,9 +48,9 @@ public class SoundToggleButton extends Actor
             {
                 SoundManager.toggleMusic();
             }
-            else 
+            else
             {
-                SoundManager.toggleSfx(); 
+                SoundManager.toggleSfx();
             }
 
             updateImage();
@@ -32,22 +59,13 @@ public class SoundToggleButton extends Actor
 
     private void updateImage()
     {
-        GreenfootImage img = new GreenfootImage(100, 45);
-        img.setColor(Color.BLACK);
-        img.fill();
-
-        img.setColor(Color.WHITE);
-        img.drawRect(0, 0, img.getWidth()-1, img.getHeight()-1);
-
-        String label;
-        if (type == TYPE_MUSIC) 
+        if (type == TYPE_MUSIC)
         {
-            label = "Music: " + (SoundManager.isMusicOn() ? "ON" : "OFF");
-        } else {
-            label = "SFX: " + (SoundManager.isSfxOn() ? "ON" : "OFF");
+            setImage(SoundManager.isMusicOn() ? musicOnImg : musicOffImg);
         }
-
-        img.drawString(label, 30, 40);
-        setImage(img);
+        else
+        {
+            setImage(SoundManager.isSfxOn() ? sfxOnImg : sfxOffImg);
+        }
     }
 }

@@ -22,7 +22,7 @@ public class StartButton extends Actor
     public StartButton(String imgPath, int mode)
     {
         setImage(new GreenfootImage(imgPath));
-        getImage().scale(100,50);
+        getImage().scale(100,100);
         this.mode = mode;
     }
 

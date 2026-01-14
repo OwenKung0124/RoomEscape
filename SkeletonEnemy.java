@@ -19,6 +19,7 @@ public class SkeletonEnemy extends Enemy
     private int attackIntervalMin = 120; 
     private int attackIntervalMax = 300; 
     private int attackTimer = 0;
+    private int attackPower=1;
 
     public SkeletonEnemy(Player target)
     {
@@ -130,7 +131,7 @@ public class SkeletonEnemy extends Enemy
         int sy = getY() + dirY * offset;
 
         SoundManager.playArrowSound();
-        getWorld().addObject(new EnemyArrow(dirX, dirY), sx, sy);
+        getWorld().addObject(new EnemyArrow(dirX, dirY,attackPower), sx, sy);
     }
 
     private void scheduleNextAttack()

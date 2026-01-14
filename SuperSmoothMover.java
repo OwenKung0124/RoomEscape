@@ -319,7 +319,7 @@ public abstract class SuperSmoothMover extends Actor
      */
     protected void showText(String text, int x, int y)
     {
-       // getWorld().addObject(new FloatingText(text), x,y);
+           getWorld().addObject(new FloatingText(text), x,y);
     }
     /**
      * Help to show status of an actor.
@@ -331,7 +331,7 @@ public abstract class SuperSmoothMover extends Actor
      */
     protected void showText(String text, Color color,int x, int y)
     {
-        //getWorld().addObject(new FloatingText(text,color), x,y);
+            getWorld().addObject(new FloatingText(text,color), x,y);
     }
      /**
      * Checks for pixel-perfect collision with another Actor.

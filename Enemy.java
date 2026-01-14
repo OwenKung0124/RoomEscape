@@ -97,7 +97,8 @@ public abstract class Enemy extends CombatActor implements HasHealth
     {
          //freeze  while paused
         if (GameWorld.isPaused()) return;
-    
+if (!GameWorld.allowSlowUpdate()) return;
+
         if (getWorld() == null)
         {
             return;   

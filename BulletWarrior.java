@@ -14,6 +14,10 @@ public class BulletWarrior extends Player
     public BulletWarrior()
     {
         speed = 4;
+        
+        //attackPower default
+        attackPower=GameConfig.WARRIOR_BULLET_DEFAULT_ATTACK;
+        
         animDelay = 6;
 
         spriteW = 70;
@@ -64,6 +68,6 @@ public class BulletWarrior extends Player
         int by = getY() + dirY * reach;
         
         SoundManager.playBulletSound();
-        getWorld().addObject(new Bullet(dirX, dirY), bx, by);
+        getWorld().addObject(new Bullet(dirX, dirY,getAttackPower()), bx, by);
     }
 }

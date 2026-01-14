@@ -27,31 +27,34 @@ public class SettingWorld extends World
         super(GameConfig.WORLD_W, GameConfig.WORLD_H, 1);
         this.data = data;
         
-        //GreenfootImage bg = new GreenfootImage("setting.jpg");
-        //bg.scale(GameConfig.WORLD_W, GameConfig.WORLD_H);
-        //setBackground(bg);
+        GreenfootImage bg = new GreenfootImage("setting/setting_bg.png");
+        bg.scale(GameConfig.WORLD_W, GameConfig.WORLD_H);
+        setBackground(bg);
 
-        showText("Click a warrior image to select", GameConfig.WORLD_W / 2, 200);
+        showText("Click a warrior image to select", GameConfig.WORLD_W / 2, 100);
 
         //selections
-        axeIcon = new WarriorSelectIcon("axe_warrior.png", GameConfig.WARRIOR_AXE);
-        bulletIcon = new WarriorSelectIcon("bullet_warrior.png", GameConfig.WARRIOR_BULLET);
-        swordIcon = new WarriorSelectIcon("sword_warrior.png", GameConfig.WARRIOR_SWORD);
-
-        addObject(axeIcon, GameConfig.WORLD_W / 2 - 250, 400);
-        addObject(bulletIcon, GameConfig.WORLD_W / 2 , 400);
-        addObject(swordIcon, GameConfig.WORLD_W / 2 + 250, 400);
+        //axeIcon = new WarriorSelectIcon("setting/axe_warrior.png", GameConfig.WARRIOR_AXE);
+        //bulletIcon = new WarriorSelectIcon("setting/bullet_warrior.png", GameConfig.WARRIOR_BULLET);
+        //swordIcon = new WarriorSelectIcon("setting/sword_warrior.png", GameConfig.WARRIOR_SWORD);
+        //WarriorSelectIcon(String framePrefix, int frameCount, int type, int w, int h)
+        axeIcon = new WarriorSelectIcon("player/axe_warrior/walking/down", 4,GameConfig.WARRIOR_AXE,245,260);
+        bulletIcon = new WarriorSelectIcon("player/bullet_warrior/walking/down",4, GameConfig.WARRIOR_BULLET,245,260);
+        swordIcon = new WarriorSelectIcon("player/sword_warrior/walking/down",4, GameConfig.WARRIOR_SWORD,245,260);
+        addObject(axeIcon, GameConfig.WORLD_W / 2 - 275, 375);
+        addObject(bulletIcon, GameConfig.WORLD_W / 2+10 , 375);
+        addObject(swordIcon, GameConfig.WORLD_W / 2 + 270, 375);
 
         //new game and resume buttons (images)
-        newGameBotton = new StartButton("start.png", StartButton.MODE_NEW_GAME);
-        resumeBotton  = new StartButton("resume.png", StartButton.MODE_RESUME);
+        newGameBotton = new StartButton("setting/start.png", StartButton.MODE_NEW_GAME);
+        resumeBotton  = new StartButton("setting/resume.png", StartButton.MODE_RESUME);
 
-        addObject(newGameBotton, GameConfig.WORLD_W / 2, 650);
-        addObject(resumeBotton,  GameConfig.WORLD_W / 2 + 260, 650);
+        addObject(newGameBotton, GameConfig.WORLD_W / 2, 635);
+        addObject(resumeBotton,  GameConfig.WORLD_W / 2 + 260, 635);
         
         //sound effects toggles
-        addObject(new SoundToggleButton(SoundToggleButton.TYPE_MUSIC), GameConfig.WORLD_W/2 - 220, 650);
-        addObject(new SoundToggleButton(SoundToggleButton.TYPE_SFX),   GameConfig.WORLD_W/2 - 320, 650);
+        addObject(new SoundToggleButton(SoundToggleButton.TYPE_MUSIC), GameConfig.WORLD_W/2 +450, 100);
+        addObject(new SoundToggleButton(SoundToggleButton.TYPE_SFX),   GameConfig.WORLD_W/2 +550, 100);
 
         //disable resume if no save exists
         resumeBotton.setEnabled(SaveManager.hasSave());
@@ -64,7 +67,6 @@ public class SettingWorld extends World
         
        
     }
-
     private void showState()
     {
         if(data==null && SaveManager.hasSave())
@@ -73,12 +75,30 @@ public class SettingWorld extends World
         }
         if(data!=null)
         {
-            SaveData data=SaveManager.load();//only quick data, not requiring gamemap
+            SoundManager.playGameMusic();
+            //SaveData data=SaveManager.load();//only quick data, not requiring gamemap
             
-            showText(""+data.coins,220, 70);
-            showText(""+data.roomsCleared,600, 70);
-            showText(""+data.playerHealth,1020, 70);
-        }        
+            showText(""+data.coins,250, 100);
+            //showText(""+data.roomsCleared,600, 70);
+            showText(""+data.playerHealth,250, 200);
+            
+            //display attack power
+            showText(""+data.axeAttackPower,375, 565);
+            showText(""+data.bulletAttackPower,665, 565);
+            showText(""+data.swordAttackPower,955, 565);
+        }
+        else
+        {
+            showText(""+0,250, 100);
+            //showText(""+data.roomsCleared,600, 70);
+            showText(""+GameConfig.DEFAULT_MAX_HP,250, 200);
+            
+            //display attack power
+            showText(""+GameConfig.WARRIOR_AXE_DEFAULT_ATTACK,375, 565);
+            showText(""+GameConfig.WARRIOR_BULLET_DEFAULT_ATTACK,665, 565);
+            showText(""+GameConfig.WARRIOR_SWORD_DEFAULT_ATTACK,955, 565);
+
+        }
     }
     /**
      * highlight which warrior is selected
@@ -138,7 +158,7 @@ public class SettingWorld extends World
             "Selected: " + 
             selectedStr,
             GameConfig.WORLD_W / 2,
-            225
+            125
         );
     }
 }

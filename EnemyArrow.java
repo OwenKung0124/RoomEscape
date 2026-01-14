@@ -6,16 +6,16 @@ import greenfoot.*;
  */
 public class EnemyArrow extends Bullet
 {
-    private int DAMAGE_LEVEL = 5;
+    private int attackPower;
 
     /**
      * Create an arrow moving in a 4-direction unit vector.
      * dirX/dirY should be -1, 0, or 1 (same as Bullet).
      */
-    public EnemyArrow(int dirX, int dirY)
+    public EnemyArrow(int dirX, int dirY,int attackPower)
     {
-        super(dirX, dirY);
-
+        super(dirX, dirY,attackPower);
+        
         speed=2;
 
         // arrow sprite points LEFT by default
@@ -55,7 +55,7 @@ public class EnemyArrow extends Bullet
         Player p = (Player) getOneIntersectingObject(Player.class);
         if (p != null)
         {
-            p.takeDamage(DAMAGE_LEVEL);
+            p.takeDamage(attackPower);
 
             if (getWorld() != null)
             {

@@ -97,13 +97,19 @@ public class SoundManager
     {
         sfxOn = on;
     }
-
     public static void toggleMusic()
     {
-        setMusicOn(!musicOn);
-        //setMusicOn(musicOn);
+        musicOn = !musicOn;
+    
+        if (musicOn)
+        {
+            playGameMusic();   // start RIGHT NOW
+        }
+        else
+        {
+            stopGameMusic();   // stop RIGHT NOW
+        }
     }
-
     public static void toggleSfx()
     {
         setSfxOn(!sfxOn);

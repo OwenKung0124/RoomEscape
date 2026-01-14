@@ -1,7 +1,7 @@
 import greenfoot.*;
 
 /**
- * A collectible coin
+ * A collectible potion called by player's collect
  * updates RoomData when collected.
  */
 public class Coin extends Actor 
@@ -32,7 +32,7 @@ public class Coin extends Actor
         this.c=c;
         this.tr=tr;
         this.tc=tc;
-        frames = loadCoinFrames();
+        frames = loadFrames();
         setImage(frames[0]);
     }
 
@@ -84,7 +84,7 @@ public class Coin extends Actor
             world.removeObject(this);   
         }
     }
-    private GreenfootImage[] loadCoinFrames()
+    private GreenfootImage[] loadFrames()
     {
         GreenfootImage[] imgs = new GreenfootImage[FRAME_COUNT];
     

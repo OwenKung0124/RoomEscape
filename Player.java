@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * Warrior
  * - walk using WalkingActor's movement/facing/walk animation
  * - play a directional attack animation
- * - trigger a "hit" once at a chosen frame
+ * - trigger a hit once at a chosen frame
  *
  * Subclass constructor, call:
  *      loadDirectionalFrames();
@@ -20,6 +20,9 @@ public abstract class Player extends CombatActor implements HasHealth
     protected int maxHealth = GameConfig.DEFAULT_MAX_HP;
     protected int health = maxHealth;
     
+    //attack upgrade
+    protected int attackPower = 1;
+
     
     //While > 0, 
     //the player cannot take damage again
@@ -91,6 +94,7 @@ public abstract class Player extends CombatActor implements HasHealth
     {
         //Freeze while paused 
         if (GameWorld.isPaused()) return;
+if (!GameWorld.allowSlowUpdate()) return;
         
         //reduce invincibility timer each frame
         if (hurtCooldown > 0) hurtCooldown--;
@@ -250,7 +254,18 @@ public abstract class Player extends CombatActor implements HasHealth
         if(isTouching(Coin.class))
         {
             coins++;
-        }      
+        }  
+        if(isTouching(AttackUpgrade.class))
+        {
+           //testing
+           //the higher that attack power
+           //the higher the scores needed to be taken
+           //to prevent gaining attack power too fast
+           if(upgradeAttackPower(1,attackPower*5))
+           {
+               removeTouching(AttackUpgrade.class);
+           }
+        } 
     }
     public int getCoinCount()
     {
@@ -271,6 +286,42 @@ public abstract class Player extends CombatActor implements HasHealth
     public void addScore(int score)
     {
         this.score+=score;
+    }
+
+    public int getAttackPower()
+    {
+        return attackPower;
+    }
+    public void setAttackPower(int attackPower)
+    {
+        this.attackPower=attackPower;
+    }
+    //if successfully upgraded return true
+    public boolean upgradeAttackPower(int upgrade, int scoresTaken)
+    {
+        //not enough score to upgrade
+        if(scoresTaken>score)
+        {
+            //showText("Not Enough Scores to upgrade",Color.RED,getX(),getY());
+            return false;
+        }
+        
+        //must be above this level to upgrade
+        if(score<GameConfig.MINIMUM_HP_TO_UPGRADE)
+        {
+            return false;
+        }
+        
+        //upgrade requires score to upgrade
+        score=score-scoresTaken;
+        
+        //attack power upgrade
+        attackPower+=upgrade;
+        
+        showText("Successfully Upgraded",Color.GREEN,getX(),getY());
+        
+        return true;
+
     }
     
 }
