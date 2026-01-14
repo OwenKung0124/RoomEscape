@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.target=TypewriterText
+comment1.params=message\ fontSize\ textColor\ boxW\ boxH\ typingSpeed
+comment1.target=TypewriterText(java.lang.String,\ int,\ greenfoot.Color,\ int,\ int,\ int)
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=boolean\ isFinished()
+comment4.params=
+comment4.target=void\ skipToEnd()
+comment4.text=\n\ when\ player\ skip\ the\ text\n
+comment5.params=message
+comment5.target=void\ loadLines(java.lang.String)
+comment5.text=\ \n\ Load\ message\ into\ queue\ line\ by\ line\ \n
+comment6.params=
+comment6.target=boolean\ nextLine()
+comment6.text=\ \n\ Move\ queue\ ->\ currentLine.\ \n\ Returns\ false\ if\ no\ more\ lines.\ \n
+comment7.params=
+comment7.target=void\ redraw()
+comment8.params=img\ line\ y
+comment8.target=void\ drawLine(greenfoot.GreenfootImage,\ java.lang.String,\ int)
+numComments=9

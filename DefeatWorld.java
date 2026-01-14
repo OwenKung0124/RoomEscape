@@ -7,10 +7,18 @@ import greenfoot.*;
  */
 public class DefeatWorld extends World
 {
+
+    private SaveData data; //shared data that passed around
+
     public DefeatWorld()
     {
+        this(null);
+    }
+    public DefeatWorld(SaveData data)
+    {
         super(GameConfig.WORLD_W, GameConfig.WORLD_H, 1);
-
+        this.data = data;
+        
         //dark background
         GreenfootImage bg = new GreenfootImage(getWidth(), getHeight());
         bg.setColor(new Color(0, 0, 0, 220));
@@ -28,14 +36,15 @@ public class DefeatWorld extends World
         //restart
         if (Greenfoot.isKeyDown("r"))
         {
-            Greenfoot.setWorld(new GameWorld());
+            SaveManager.deleteSave();
+            Greenfoot.setWorld(new GameWorld(GameConfig.WARRIOR_AXE, false, null));
         }
 
         //go back to settings page
         if (Greenfoot.isKeyDown("s"))
         {
             //return to setting
-            Greenfoot.setWorld(new SettingWorld());
+            Greenfoot.setWorld(new SettingWorld(data));
         }
     }
 }

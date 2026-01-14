@@ -15,6 +15,9 @@ public class SwordWarrior extends Player
         //movement
         speed = 4;
 
+        //attackPower default
+        attackPower=GameConfig.WARRIOR_SWORD_DEFAULT_ATTACK;
+        
         //walk animation timing
         animDelay = 6;
 
@@ -92,7 +95,7 @@ public class SwordWarrior extends Player
         }
 
         //puts a short-lived hitbox
-        HitBox hitbox = new HitBox(boxW, boxH, 3);
+        HitBox hitbox = new HitBox(boxW, boxH,1,getAttackPower());
         getWorld().addObject(hitbox, getX() + offSetX, getY() + offSetY);
         
         //play sword sound effect

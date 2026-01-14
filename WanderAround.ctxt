@@ -1,16 +1,16 @@
 #BlueJ class context
 comment0.target=WanderAround
-comment0.text=\r\n\ WanderAround\ helps\ wondring\ actor\ move\ in\ the\ world\r\n\ \ pick\ a\ random\ direction\r\n\ \ Keep\ moving\ in\ that\ direction\ for\ a\ random\ time\r\n\ \ then\ pick\ again\r\n\r\n
+comment0.text=\n\ WanderAround\ helps\ wondring\ actor\ move\ in\ the\ world\n\ \ pick\ a\ random\ direction\n\ \ Keep\ moving\ in\ that\ direction\ for\ a\ random\ time\n\ \ then\ pick\ again\n\n
 comment1.params=minHoldFrames\ extraHoldFrames
 comment1.target=WanderAround(int,\ int)
-comment1.text=\r\n\ @param\ minHoldFrames\:\ \ \ \ minimum\ frames\ to\ keep\ a\ direction\r\n\ @param\ extraHoldFrames\:\ \ additional\ random\ frames\r\n
+comment1.text=\n\ @param\ minHoldFrames\:\ \ \ \ minimum\ frames\ to\ keep\ a\ direction\n\ @param\ extraHoldFrames\:\ \ additional\ random\ frames\n
 comment2.params=
 comment2.target=WanderAround()
-comment2.text=\r\n\ \ \ By\ default\r\n\ \ \ minHoldFramees\=30\r\n\ \ \ extraHoldFrames\=60;\r\n
+comment2.text=\n\ \ \ By\ default\n\ \ \ minHoldFramees\=30\n\ \ \ extraHoldFrames\=60;\n
 comment3.params=speed
 comment3.target=int[]\ nextMove(int)
-comment3.text=\r\n\ @param\ speed\:\ \ \ \ movement\ speed\r\n\ @return\:\ \ \ \ \ \ \ \ \ int[]{dx,\ dy}\ \r\n
+comment3.text=\n\ @param\ speed\:\ \ \ \ movement\ speed\n\ @return\:\ \ \ \ \ \ \ \ \ int[]{dx,\ dy}\ \n
 comment4.params=
 comment4.target=void\ pickNewDirection()
-comment4.text=\r\n\ Chooses\ a\ new\ random\ direction\ and\ a\ random\ duration\ to\ walk.\r\n
+comment4.text=\n\ Chooses\ a\ new\ random\ direction\ and\ a\ random\ duration\ to\ walk.\n
 numComments=5

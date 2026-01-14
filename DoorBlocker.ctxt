@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.target=DoorBlocker
-comment0.text=\r\n\ DoorBlocker\ is\ a\ Wall\ collider\ that\ is\ always\ invisible.\r\n\r\n
+comment0.text=\n\ DoorBlocker\ is\ a\ Wall\ collider\ that\ is\ always\ invisible.\n\n
 comment1.params=w\ h
 comment1.target=DoorBlocker(int,\ int)
-comment1.text=\r\n\ Creates\ an\ invisible\ blocker\ rectangle\ with\ width\ and\ height\ in\ pixels.\r\n\r\n\ @param\ w\ width\ in\ pixels\r\n\ @param\ h\ height\ in\ pixels\r\n
+comment1.text=\n\ Creates\ an\ invisible\ blocker\ rectangle\ with\ width\ and\ height\ in\ pixels.\n\n\ @param\ w\ width\ in\ pixels\n\ @param\ h\ height\ in\ pixels\n
 numComments=2

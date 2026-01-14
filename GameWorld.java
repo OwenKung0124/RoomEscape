@@ -40,10 +40,30 @@ public class GameWorld extends World
     private int roomsClearedCount=0;
     private int totalRoomsToClear=0;
 
+    private SaveData data;   //this data is passed around between world and is used to save to file when needed
+//Auto slow motion settings
+private static int slowTimer = 0;      // how long slow motion lasts
+private static int slowTick = 0;       // frame counter (for skipping frames)
+private static int slowCooldown = 300; // time until next trigger
+
+// Change these numbers to what you want
+private static final int SLOW_EVERY = 10800;   // every 3 mintues
+private static final int SLOW_DURATION = 360; // slow lasts 120 acts (~2s)
+public static boolean isSlowMotion()
+{
+    return slowTimer > 0;
+}
+
+public static boolean allowSlowUpdate()
+{
+    if (!isSlowMotion()) return true;
+    return (slowTick % 2 == 0); // half speed
+}
     
     public GameWorld()
     {
-        this(GameConfig.WARRIOR_AXE,false); //default warrior selection
+
+        this(GameConfig.WARRIOR_AXE, false, null);   //default warrior selection, new game, no save data passed
     }
     /**
      * Constructs the world
@@ -51,10 +71,19 @@ public class GameWorld extends World
      * spawns Playe, MiniMap,
      * loads the starting room.
      */
-    public GameWorld(int warriorType,boolean resume)
+    public GameWorld(int warriorType,boolean resume, SaveData data)
     {
         super(GameConfig.WORLD_W, GameConfig.WORLD_H, 1);
         
+        //if there's already an existing savedata
+        if(data!=null)
+        {
+            this.data=data;
+        }
+        else
+        {
+            this.data=new SaveData();
+        }
         map=new GameMap();
 
         renderer=new RoomRenderer(this, map);
@@ -105,8 +134,13 @@ public class GameWorld extends World
         //must also update this section
         if (resume)
         {
-            SaveData data=SaveManager.load(map);
-        
+            SaveData loadedData=SaveManager.load(map);
+            
+            if(loadedData!=null)
+            {
+                 data=loadedData;
+            }
+ 
             if (data != null && map.hasRoom(data.roomR, data.roomC))
             {
                 roomR=data.roomR;
@@ -128,6 +162,18 @@ public class GameWorld extends World
             player.setHealth(data.playerHealth);
             player.setCoinCount(data.coins);
             player.setScore(data.score);
+            if(player instanceof AxeWarrior)
+            {
+                 player.setAttackPower(data.axeAttackPower);
+            }
+            if(player instanceof BulletWarrior)
+            {
+                 player.setAttackPower(data.bulletAttackPower);
+            }
+            if(player instanceof SwordWarrior)
+            {
+                 player.setAttackPower(data.swordAttackPower);
+            }
             
             //RoomData, cleared and visited already handled in SavvaManger
             //by RoomData and GameMap classes
@@ -178,7 +224,7 @@ public class GameWorld extends World
         save();
         
         paused=false;
-        Greenfoot.setWorld(new SettingWorld());
+        Greenfoot.setWorld(new SettingWorld(data));
     }
     /**
      * exit to setup screen, but end the game
@@ -187,14 +233,23 @@ public class GameWorld extends World
     private void saveAndLeave()
     {
         save();
-        Greenfoot.setWorld(new SettingWorld());
+        Greenfoot.setWorld(new SettingWorld(data));
         paused=false;
         Greenfoot.stop();
     }
+    public void onPlayerDefeated()
+    {
+        save();
+        paused = false;
+        Greenfoot.setWorld(new DefeatWorld(data));
+    }
     private void save()
     {
-        SaveData data=new SaveData();
-    
+        if(data==null)
+        {
+            return;
+        }
+        
         data.roomR=roomR;
         data.roomC=roomC;
         data.lastRoomR=lastRoomR;
@@ -204,7 +259,18 @@ public class GameWorld extends World
         data.roomsCleared=roomsClearedCount;
         data.coins=player.getCoinCount();
         data.score=player.getScore();
-        
+        if(player instanceof AxeWarrior)
+        {
+            data.axeAttackPower=player.getAttackPower();
+        }
+        if(player instanceof BulletWarrior)
+        {
+            data.bulletAttackPower=player.getAttackPower();
+        }
+        if(player instanceof SwordWarrior)
+        {
+            data.swordAttackPower=player.getAttackPower();
+        }
         //roomCleared,roomVisited,roomData handled by
         //GameMap, RoomData in SavaMAnager
         SaveManager.save(data,map);
@@ -239,7 +305,24 @@ public class GameWorld extends World
             }
             return;
         }
-    
+        
+// frame counter for slow motion pacing
+slowTick++;
+
+// handle auto slow motion trigger
+if (slowTimer > 0)
+{
+    slowTimer--;
+}
+else
+{
+    slowCooldown--;
+    if (slowCooldown <= 0)
+    {
+        slowTimer = SLOW_DURATION;   // start slow motion
+        slowCooldown = SLOW_EVERY;   // reset countdown for next trigger
+    }
+}
 
         //only combat/bossrooms can be cleared
         if ( (map.isCombatRoom(roomR, roomC) || map.isBossRoom(roomR, roomC))&& 
@@ -258,10 +341,18 @@ public class GameWorld extends World
         showText("Room: (" + roomR + "," + roomC + ")", hudX, 30);
         showText("Enemies: " + countEnemies(), hudX, 50);
         showText("Rooms cleared: " + roomsClearedCount + " / " + totalRoomsToClear, hudX, 70);
-        showText("Coin Collected: " + player.getCoinCount(), hudX, 550);
+        showText("Coin Collected: " + player.getCoinCount(), hudX, 575);
         showText("Score: " + player.getScore(), hudX, 600);
+        showText("Attack Power:"+player.getAttackPower(),hudX,625);
         showText("Heath Remain: " + player.getHealth(), hudX, 650);
-
+if (isSlowMotion())
+{
+    showText("SLOW MOTION!  (" + slowTimer/60 + ")", hudX, 545);
+}
+else
+{
+    showText("Next Slow Motion: "+slowCooldown/60, hudX, 545); // clear the text when not slow
+}
         //Win check
         //show in the window of the room
         //if (roomsClearedCount >= GameConfig.WIN_ROOMS) 
@@ -276,7 +367,7 @@ public class GameWorld extends World
 
         boolean unlockedNow=isRoomUnlocked();
 
-        //unlock all doors if cleared, otherwise only the "back door"
+        //unlock all doors if cleared, otherwise only the back door
         doorSystem.updateDoorStates(roomR, roomC, lastRoomR, lastRoomC, unlockedNow);
 
         //block door gaps while locked, but not the back door gap

@@ -13,7 +13,10 @@ public class AxeWarrior extends Player
     {
         //movement
         speed=4;
-
+        
+        //attackPower default
+        attackPower=GameConfig.WARRIOR_AXE_DEFAULT_ATTACK;
+        
         //walk animation timing
         animDelay=6;
 
@@ -92,7 +95,7 @@ public class AxeWarrior extends Player
         }
 
         //put a short-lived hitbox 
-        HitBox hitbox=new HitBox(boxW, boxH, 3);
+        HitBox hitbox=new HitBox(boxW, boxH, 1,getAttackPower());
         SoundManager.playAxeSound();
         getWorld().addObject(hitbox, getX() + offsetx, getY() + offsety);
     }

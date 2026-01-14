@@ -21,8 +21,7 @@ public class Bullet extends SuperSmoothMover
 
     //life time of bullet in frames
     private int life = 60;
-    
-    protected int DAMAGE_LEVEL=1;
+    private int attackPower=0;
 
     /**
      * Constructs a Bullet moving in direction (dirX, dirY).
@@ -36,11 +35,12 @@ public class Bullet extends SuperSmoothMover
      * @param dirX direction in x (-1, 0, 1)
      * @param dirY direction in y (-1, 0, 1)
      */
-    public Bullet(int dirX, int dirY)
+    public Bullet(int dirX, int dirY,int attackPower)
     {
         //calculate velocity
         vx = dirX * speed;
         vy = dirY * speed;
+        this.attackPower=attackPower;
 
         //Simple circle bullet image
         GreenfootImage img = new GreenfootImage(10, 10);
@@ -59,7 +59,7 @@ public class Bullet extends SuperSmoothMover
     {
         //freeze while paused 
         if (GameWorld.isPaused()) return;
-        
+if (!GameWorld.allowSlowUpdate()) return;
         //removed already, do nothing
         if (getWorld() == null) return;
 
@@ -112,7 +112,7 @@ public class Bullet extends SuperSmoothMover
         if (e != null)
         {
             //the takeDamage, will handle remove enemy when health<=0
-            e.takeDamage(DAMAGE_LEVEL);
+            e.takeDamage(attackPower);
             getWorld().removeObject(this);
             return true;
         }

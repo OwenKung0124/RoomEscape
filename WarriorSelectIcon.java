@@ -1,73 +1,92 @@
 import greenfoot.*;
-
 /**
  * WarriorSelectIcon is a clickable image used on the setup screen.
  *
- * - Shows a warrior picture (png)
+ * - Shows animated warrior picture
  * - When clicked, it tells SetupWorld which warrior type was chosen
  * - If selected, it draws a highlight border
  */
+
 public class WarriorSelectIcon extends Actor
 {
-    private String imgPath;
-    private int warriorType;
+    private int type;
     private boolean selected = false;
 
-    //store the original image
-    private GreenfootImage baseImg;
+    //animation
+    private GreenfootImage[] frames;
+    private int frameIndex = 0;
+    private int animTick = 0;
+    private int animDelay = 35; 
+
+    //sizes
+    private int w, h;
 
     /**
-     * @param imgPath path inside images folder
-     * @param warriorType the selection code (GameConfig.WARRIOR_AXE)
+     * prefix example: setting/axe_  loads axe_1.png, axe_2.png ...
      */
-    public WarriorSelectIcon(String imgPath, int warriorType)
+    public WarriorSelectIcon(String framePrefix, int frameCount, int type, int w, int h)
     {
-        this.imgPath = imgPath;
-        this.warriorType = warriorType;
+        this.type = type;
+        this.w = w;
+        this.h = h;
 
-        baseImg = new GreenfootImage(imgPath);
-        baseImg.scale(245,260);
- setImage(new GreenfootImage(baseImg)); //show it
+        frames = loadFrames(framePrefix, frameCount, w, h);
+        setImage(frames[0]);
     }
 
     public void act()
     {
+        animate();
+
         if (Greenfoot.mouseClicked(this))
         {
-            World w = getWorld();
-            if (w instanceof SettingWorld)
-            {
-                SettingWorld sw = (SettingWorld) w;
-                sw.chooseWarrior(warriorType);
-            }
+            SettingWorld sw = (SettingWorld)getWorld();
+            sw.chooseWarrior(type);
         }
     }
 
-    /**
-     * Set whether this icon is currently selected.
-     * If selected, draw a border to show it.
-     */
+    private void animate()
+    {
+        if (frames == null || frames.length == 0) return;
+
+        animTick++;
+        if (animTick >= animDelay)
+        {
+            animTick = 0;
+            frameIndex = (frameIndex + 1) % frames.length;
+            setImage(frames[frameIndex]);
+
+            if (selected) drawSelectedBorder();
+        }
+    }
+
     public void setSelected(boolean sel)
     {
         selected = sel;
-        redraw();
+
+        // refresh current frame + border
+        setImage(frames[frameIndex]);
+        if (selected) drawSelectedBorder();
     }
 
-    /**
-     * Rebuilds the displayed image with or without highlight.
-     */
-    private void redraw()
+    private void drawSelectedBorder()
     {
-        GreenfootImage img = new GreenfootImage(baseImg);
-
-        if (selected)
-        {
-            //draw a bright border around the icon
-            img.setColor(Color.YELLOW);
-            img.drawRect(0, 0, img.getWidth() - 1, img.getHeight() - 1);
-            img.drawRect(1, 1, img.getWidth() - 3, img.getHeight() - 3);
-        }
-
+        GreenfootImage img = new GreenfootImage(getImage()); // copy
+        img.setColor(Color.CYAN);
+        img.drawRect(0, 0, img.getWidth() - 1, img.getHeight() - 1);
+        img.drawRect(2, 2, img.getWidth() - 5, img.getHeight() - 5);
         setImage(img);
+    }
+
+    private GreenfootImage[] loadFrames(String prefix, int count, int w, int h)
+    {
+        GreenfootImage[] arr = new GreenfootImage[count];
+        for (int i = 0; i < count; i++)
+        {
+            GreenfootImage img = new GreenfootImage(prefix + (i + 1) + ".png");
+            img.scale(w, h);
+            arr[i] = img;
+        }
+        return arr;
     }
 }

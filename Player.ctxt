@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Player
-comment0.text=\n\ Warrior\n\ -\ walk\ using\ WalkingActor's\ movement/facing/walk\ animation\n\ -\ play\ a\ directional\ attack\ animation\n\ -\ trigger\ a\ "hit"\ once\ at\ a\ chosen\ frame\n\n\ Subclass\ constructor,\ call\:\n\ \ \ \ \ \ loadDirectionalFrames();\n\ \ \ \ \ \ loadAttackFrames();\n\ \ Subclass\ implement\ wantsToAttack()\n\ \ Subclass\ implement\ onAttackHit()\n
+comment0.text=\n\ Warrior\n\ -\ walk\ using\ WalkingActor's\ movement/facing/walk\ animation\n\ -\ play\ a\ directional\ attack\ animation\n\ -\ trigger\ a\ hit\ once\ at\ a\ chosen\ frame\n\n\ Subclass\ constructor,\ call\:\n\ \ \ \ \ \ loadDirectionalFrames();\n\ \ \ \ \ \ loadAttackFrames();\n\ \ Subclass\ implement\ wantsToAttack()\n\ \ Subclass\ implement\ onAttackHit()\n
 comment1.params=
 comment1.target=int[]\ computeMove()
 comment1.text=\n\ Subclass\ can\ override\n\ \n\ Parant\ class\ provides\ default\ movement\n\n\ @return\ int[]{dx,\ dy}\n
@@ -17,6 +17,12 @@ comment14.params=score
 comment14.target=void\ setScore(int)
 comment15.params=score
 comment15.target=void\ addScore(int)
+comment16.params=
+comment16.target=int\ getAttackPower()
+comment17.params=attackPower
+comment17.target=void\ setAttackPower(int)
+comment18.params=upgrade\ scoresTaken
+comment18.target=boolean\ upgradeAttackPower(int,\ int)
 comment2.params=
 comment2.target=boolean\ wantsToAttack()
 comment2.text=\n\ Subclass\ decides\ when\ to\ start\ an\ attack.\n\n\ @return\ true\ if\ attack\ should\ begin\ this\ frame\n
@@ -40,4 +46,4 @@ comment8.text=\n\ setHealth\ of\ the\ player\ when\ resume\ the\ game\n
 comment9.params=amount
 comment9.target=void\ takeDamage(int)
 comment9.text=\n\ Damages\ the\ player\ by\ a\ given\ amount.\n\ Uses\ invincibility\ frames\ (hurtCooldown)\ to\ prevent\ rapid\ repeat\ damage.\n\ If\ health\ reaches\ 0,\ the\ player\ dies\ and\ the\ game\ stops.\n\n\ @param\ amount\ how\ much\ damage\ to\ take\ (ignored\ if\ <\=\ 0)\n
-numComments=16
+numComments=19

@@ -19,6 +19,8 @@ import java.util.Scanner;
  * roomsCleared=2
  * coins=10;
  * tiles=0,0:2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2/2,1.....,0,.....2,2,2
+ * axeAttackPower=10;
+ * 
  */
 public class SaveManager
 {
@@ -75,6 +77,9 @@ public class SaveManager
             out.println("roomsCleared=" + data.roomsCleared);
             out.println("coins=" + data.coins);
             out.println("score=" + data.score);
+            out.println("axeAttackPower="+data.axeAttackPower);
+            out.println("bulletAttackPower="+data.bulletAttackPower);
+            out.println("swordAttackPower="+data.swordAttackPower);
             
             if(map!=null)
             {
@@ -173,6 +178,18 @@ public class SaveManager
                 else if (data!=null&&line.startsWith("playerHealth="))
                 {
                     data.playerHealth=parseIntSafe(line.substring("playerHealth=".length()), 0);
+                }
+                else if (data!=null&&line.startsWith("axeAttackPower="))
+                {
+                    data.axeAttackPower=parseIntSafe(line.substring("axeAttackPower=".length()), 0);
+                }
+                else if (data!=null&&line.startsWith("bulletAttackPower="))
+                {
+                    data.bulletAttackPower=parseIntSafe(line.substring("bulletAttackPower=".length()), 0);
+                }
+                else if (data!=null&&line.startsWith("swordAttackPower="))
+                {
+                    data.swordAttackPower=parseIntSafe(line.substring("swordAttackPower=".length()), 0);
                 }
             }
         }
