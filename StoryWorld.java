@@ -15,11 +15,16 @@ public class StoryWorld extends World
      */
     public StoryWorld()
     {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(600, 400, 1); 
+        super(GameConfig.WORLD_W, GameConfig.WORLD_H, 1);
+        prepare();
+    }
+    
+    private void prepare(){
+        StoryPlayer player = new StoryPlayer();
         
-       
+        int startX = GameConfig.ROOM_X + 100;
+        int startY = GameConfig.roomBottom() - 60;
         
-
+        addObject(player, startX, startY);
     }
 }
