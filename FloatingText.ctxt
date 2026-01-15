@@ -1,13 +1,13 @@
 #BlueJ class context
 comment0.target=FloatingText
-comment0.text=\n\ Floating\ Text\ that\ fades\ out\ after\ appearing.\n\ \n\ This\ is\ particularly\ helpful\ to\ display\ the\ status\ of\ a\ player\ and\ create\ visual\ effects\n\ \n\ @author\:\ Owen\ Kung\ (edited\ by\ Joe)\n\ @version\:\ Oct\ 2025\ \ //reused\ from\ vehicle\ simulation\n
+comment0.text=\r\n\ Floating\ Text\ that\ fades\ out\ after\ appearing.\r\n\ \r\n\ This\ is\ particularly\ helpful\ to\ display\ the\ status\ of\ a\ player\ and\ create\ visual\ effects\r\n\ \r\n\ @author\:\ Owen\ Kung\ (edited\ by\ Joe)\r\n\ @version\:\ Oct\ 2025\ \ //reused\ from\ vehicle\ simulation\r\n
 comment1.params=message
 comment1.target=FloatingText(java.lang.String)
-comment1.text=\n\ Without\ specifying\ color,\ \n\ Use\ Color.Green\n\ Font\ 20\n\ Transparent\ background\n\ \n\ @param\ messages\:\ message\ to\ display\n
+comment1.text=\r\n\ Without\ specifying\ color,\ \r\n\ Use\ Color.Green\r\n\ Font\ 20\r\n\ Transparent\ background\r\n\ \r\n\ @param\ messages\:\ message\ to\ display\r\n
 comment2.params=message\ color
 comment2.target=FloatingText(java.lang.String,\ greenfoot.Color)
-comment2.text=\n\ Without\ specifying\ color,\ \n\ Font\ 20\n\ Transparent\ background\n\ \n\ @param\ String\ messages\:\ message\ to\ display\n\ @param\ Color\ color\:\ color\ for\ displaying\ the\ text\n
+comment2.text=\r\n\ Without\ specifying\ color,\ \r\n\ Font\ 20\r\n\ Transparent\ background\r\n\ \r\n\ @param\ String\ messages\:\ message\ to\ display\r\n\ @param\ Color\ color\:\ color\ for\ displaying\ the\ text\r\n
 comment3.params=
 comment3.target=void\ act()
-comment3.text=\n\ Determine\ how\ long\ the\ text\ will\ stay\ on\ the\ screen\n
+comment3.text=\r\n\ Determine\ how\ long\ the\ text\ will\ stay\ on\ the\ screen\r\n
 numComments=4

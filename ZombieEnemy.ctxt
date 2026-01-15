@@ -1,12 +1,12 @@
 #BlueJ class context
 comment0.target=ZombieEnemy
-comment0.text=\n\ ChaseEnemy\ moves\ toward\ the\ player.\n
+comment0.text=\r\n\ ChaseEnemy\ moves\ toward\ the\ player.\r\n
 comment1.params=target
 comment1.target=ZombieEnemy(Player)
-comment1.text=\n\ Creates\ a\ chasing\ enemy.\n\n\ @param\ target\ the\ Player\ to\ chase\n
+comment1.text=\r\n\ Creates\ a\ chasing\ enemy.\r\n\r\n\ @param\ target\ the\ Player\ to\ chase\r\n
 comment2.params=
 comment2.target=int[]\ computeMove()
-comment2.text=\n\ Computes\ movement\ toward\ the\ player.\n\n\ @return\ {dx,\ dy}\n
+comment2.text=\r\n\ Computes\ movement\ toward\ the\ player.\r\n\r\n\ @return\ {dx,\ dy}\r\n
 comment3.params=
 comment3.target=void\ playAttackSoundEffect()
 comment4.params=

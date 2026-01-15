@@ -1,9 +1,9 @@
 #BlueJ class context
 comment0.target=WarriorSelectIcon
-comment0.text=\n\ WarriorSelectIcon\ is\ a\ clickable\ image\ used\ on\ the\ setup\ screen.\n\n\ -\ Shows\ animated\ warrior\ picture\n\ -\ When\ clicked,\ it\ tells\ SetupWorld\ which\ warrior\ type\ was\ chosen\n\ -\ If\ selected,\ it\ draws\ a\ highlight\ border\n
+comment0.text=\r\n\ WarriorSelectIcon\ is\ a\ clickable\ image\ used\ on\ the\ setup\ screen.\r\n\r\n\ -\ Shows\ animated\ warrior\ picture\r\n\ -\ When\ clicked,\ it\ tells\ SetupWorld\ which\ warrior\ type\ was\ chosen\r\n\ -\ If\ selected,\ it\ draws\ a\ highlight\ border\r\n
 comment1.params=framePrefix\ frameCount\ type\ w\ h
 comment1.target=WarriorSelectIcon(java.lang.String,\ int,\ int,\ int,\ int)
-comment1.text=\n\ prefix\ example\:\ setting/axe_\ \ loads\ axe_1.png,\ axe_2.png\ ...\n
+comment1.text=\r\n\ prefix\ example\:\ setting/axe_\ \ loads\ axe_1.png,\ axe_2.png\ ...\r\n
 comment2.params=
 comment2.target=void\ act()
 comment3.params=

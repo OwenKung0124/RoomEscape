@@ -1,13 +1,13 @@
 #BlueJ class context
 comment0.target=Statue
-comment0.text=\n\ A\ Statue\ is\ a\ solid\ blocker\ that\ also\ shows\ a\ larger\ decorative\ image\ on\ top.\n\n
+comment0.text=\r\n\ A\ Statue\ is\ a\ solid\ blocker\ that\ also\ shows\ a\ larger\ decorative\ image\ on\ top.\r\n\r\n
 comment1.params=w\ h
 comment1.target=Statue(int,\ int)
-comment1.text=\n\ Creates\ a\ statue\ with\ a\ collision\ hitbox\ of\ size\ (w,\ h).\n\n\ @param\ w\:\ \ \ \ hitbox\ width\n\ @param\ h\:\ \ \ \ hitbox\ height\n
+comment1.text=\r\n\ Creates\ a\ statue\ with\ a\ collision\ hitbox\ of\ size\ (w,\ h).\r\n\r\n\ @param\ w\:\ \ \ \ hitbox\ width\r\n\ @param\ h\:\ \ \ \ hitbox\ height\r\n
 comment2.params=world
 comment2.target=void\ addedToWorld(greenfoot.World)
-comment2.text=\n\ after\ the\ hitbox\ ix\ created\n\ creates\ the\ visible\ statue\ decoration\ and\ \n\ positions\ it\ so\ its\ bottom\ lines\ up\ with\ this\ tile.\n\n\ @param\ world\:\ \ \ \ the\ world\ this\ actor\ was\ added\ to\n
+comment2.text=\r\n\ after\ the\ hitbox\ ix\ created\r\n\ creates\ the\ visible\ statue\ decoration\ and\ \r\n\ positions\ it\ so\ its\ bottom\ lines\ up\ with\ this\ tile.\r\n\r\n\ @param\ world\:\ \ \ \ the\ world\ this\ actor\ was\ added\ to\r\n
 comment3.params=world
 comment3.target=void\ removedFromWorld(greenfoot.World)
-comment3.text=\n\ when\ the\ hitbox\ is\ removed\n\ removes\ the\ visible\ decoration\ too\n\ so\ it\ doesn't\ get\ left\ behind.\n\n\ @param\ world\ the\ world\ this\ actor\ was\ removed\ from\n
+comment3.text=\r\n\ when\ the\ hitbox\ is\ removed\r\n\ removes\ the\ visible\ decoration\ too\r\n\ so\ it\ doesn't\ get\ left\ behind.\r\n\r\n\ @param\ world\ the\ world\ this\ actor\ was\ removed\ from\r\n
 numComments=4

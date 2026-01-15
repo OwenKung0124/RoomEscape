@@ -1,14 +1,14 @@
 #BlueJ class context
 comment0.target=AxeWarrior
-comment0.text=\n\ \ Axe\ Warrior\ uses\ Axe\ to\ kill\ enemy\n
+comment0.text=\r\n\ \ Axe\ Warrior\ uses\ Axe\ to\ kill\ enemy\r\n
 comment1.params=
 comment1.target=AxeWarrior()
 comment2.params=
 comment2.target=void\ act()
 comment3.params=
 comment3.target=boolean\ wantsToAttack()
-comment3.text=\n\ Start\ attack\ when\ SPACE\ is\ pressed.\n
+comment3.text=\r\n\ Start\ attack\ when\ SPACE\ is\ pressed.\r\n
 comment4.params=
 comment4.target=void\ onAttackHit()
-comment4.text=\n\ Spawn\ a\ short-lived\ hitbox\ in\ front\ of\ the\ player\ on\ the\ hit\ frame.\n
+comment4.text=\r\n\ Spawn\ a\ short-lived\ hitbox\ in\ front\ of\ the\ player\ on\ the\ hit\ frame.\r\n
 numComments=5
