@@ -1,0 +1,32 @@
+import greenfoot.*;
+
+/**
+ * Animated Stone Skill that player can aquire
+ */
+public class StoneSkill extends Upgrade
+{
+    /**
+     * @param RoomDate rd
+     * @param roomR room
+     * @param roomC room
+     * @param tr tile row
+     * @param tc tile col
+     */
+    public StoneSkill (RoomData rd,int r, int c, int tr, int tc)
+    {
+        super(rd, r, c, tr, tc);
+        FRAME_PREFIX = "stone_skill/upgrade";
+        frames = loadFrames();
+        setImage(frames[0]);
+    }
+    protected void upgrade(Player p)
+    {
+        GameWorld gw = (GameWorld) getWorld();
+        PromptManager pm = gw.getPromptManager();
+        if (pm != null)
+        {
+            pm.showUpgrade(p, this);
+        }
+    }
+
+}

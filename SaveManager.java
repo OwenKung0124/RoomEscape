@@ -18,8 +18,10 @@ import java.util.Scanner;
  * playerHealt=5
  * roomsCleared=2
  * coins=10;
+ * stones=1;
  * tiles=0,0:2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2/2,1.....,0,.....2,2,2
  * axeAttackPower=10;
+ 
  * 
  */
 public class SaveManager
@@ -61,7 +63,7 @@ public class SaveManager
      *
      * @param data all info to save
      */
-    public static void save(SaveData data, GameMap map)
+    public static void save(GameData data, GameMap map)
     {
         if (data == null) return;
     
@@ -77,6 +79,7 @@ public class SaveManager
             out.println("roomsCleared=" + data.roomsCleared);
             out.println("coins=" + data.coins);
             out.println("score=" + data.score);
+            out.println("stones=" + data.stones);
             out.println("axeAttackPower="+data.axeAttackPower);
             out.println("bulletAttackPower="+data.bulletAttackPower);
             out.println("swordAttackPower="+data.swordAttackPower);
@@ -103,12 +106,12 @@ public class SaveManager
      * @param map map to apply visited/cleared into
      * @return SaveData if loaded, or null if missing/invalid
      */
-    public static SaveData load(GameMap map)
+    public static GameData load(GameMap map)
     {
         if (map == null) return null;
         if (!hasSave()) return null;
     
-        SaveData data = new SaveData();
+        GameData data = new GameData();
     
         //defaults
         data.roomR = 0;
@@ -153,6 +156,10 @@ public class SaveManager
                 else if (line.startsWith("score="))
                 {
                     data.score=parseIntSafe(line.substring("score=".length()), 0);
+                }
+                 else if (line.startsWith("stones="))
+                {
+                    data.stones=parseIntSafe(line.substring("stones=".length()), 0);
                 }
                 else if (line.startsWith("tiles="))
                 {
@@ -205,11 +212,11 @@ public class SaveManager
     
         return data;
     }
-    public static SaveData load()
+    public static GameData load()
     {
         if (!hasSave()) return null;
     
-        SaveData data = new SaveData();
+        GameData data = new GameData();
     
         //defaults
         data.roomR = 0;

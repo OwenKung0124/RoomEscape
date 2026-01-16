@@ -1,10 +1,13 @@
 #BlueJ class context
 comment0.target=EnemyArrow
-comment0.text=\r\n\ EnemyArrow\ is\ a\ Bullet\ that\ hits\ the\ Player\ instead\ of\ Enemy.\r\n\ It\ reuses\ Bullet\ movement,\ wall\ collision,\ bounds\ removal,\ and\ lifetime.\r\n
-comment1.params=dirX\ dirY\ attackPower
+comment0.text=\n\ EnemyArrow\ is\ a\ Bullet\ that\ hits\ the\ Player\ instead\ of\ Enemy.\n\ It\ reuses\ Bullet\ movement,\ wall\ collision,\ bounds\ removal,\ and\ lifetime.\n
+comment1.params=dirX\ dirY\ damagePower
 comment1.target=EnemyArrow(int,\ int,\ int)
-comment1.text=\r\n\ Create\ an\ arrow\ moving\ in\ a\ 4-direction\ unit\ vector.\r\n\ dirX/dirY\ should\ be\ -1,\ 0,\ or\ 1\ (same\ as\ Bullet).\r\n
+comment1.text=\n\ Create\ an\ arrow\ moving\ in\ a\ 4-direction\ unit\ vector.\n\ dirX/dirY\ should\ be\ -1,\ 0,\ or\ 1\ (same\ as\ Bullet).\n
 comment2.params=
 comment2.target=boolean\ handleHit()
-comment2.text=\r\n\ Hook\ override\:\ enemy\ arrow\ hits\ Player,\ not\ Enemy.\r\n
-numComments=3
+comment2.text=\n\ eEnemy\ arrow\ hits\ Player\n
+comment3.params=
+comment3.target=int\ getDamagePower()
+comment3.text=\n\ @reaturn\ damage\ power\ of\ the\ enemy,\ based\ on\ difficulty\ level\n
+numComments=4

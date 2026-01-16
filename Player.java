@@ -2,18 +2,18 @@ import greenfoot.*;
 import java.util.ArrayList;
 
 /**
- * Warrior
+ * Player
  * - walk using WalkingActor's movement/facing/walk animation
  * - play a directional attack animation
  * - trigger a hit once at a chosen frame
  *
- * Subclass constructor, call:
- *      loadDirectionalFrames();
- *      loadAttackFrames();
+ * Subclass constructor call:
+ *      loadDirectionalFrames()
+ *      loadAttackFrames()
  *  Subclass implement wantsToAttack()
  *  Subclass implement onAttackHit()
  */
-public abstract class Player extends CombatActor implements HasHealth
+public abstract class Player extends CombatActor
 {
     //health and damges
     //Maximum health the player can have. */
@@ -22,7 +22,6 @@ public abstract class Player extends CombatActor implements HasHealth
     
     //attack upgrade
     protected int attackPower = 1;
-
     
     //While > 0, 
     //the player cannot take damage again
@@ -31,8 +30,13 @@ public abstract class Player extends CombatActor implements HasHealth
     protected int hurtCooldownFrames = GameConfig.DEFAULT_INVINCIBILITY_FRAMES;
     
     //keep track of coins collected
-    int coins=0;
-    int score=0;
+    private int coins=0;
+    private int score=0;
+    
+    //stone related fields
+    private int stoneSkills=GameConfig.DEFAULT_STONE_COUNT;  //default
+    private boolean keyWasDown = false;
+    
 
     /**
      * Subclass can override
@@ -92,10 +96,20 @@ public abstract class Player extends CombatActor implements HasHealth
 
     public void act()
     {
-        //Freeze while paused 
+        //freeze while paused 
         if (GameWorld.isPaused()) return;
-if (!GameWorld.allowSlowUpdate()) return;
         
+        //freeze player while PromptManager is waiting for a choice
+        GameWorld gw = (GameWorld) getWorld();
+        if (gw != null)
+        {
+            PromptManager pm = gw.getPromptManager(); 
+            if (pm != null && pm.isActive() )
+            {
+                return;
+            }
+        }
+
         //reduce invincibility timer each frame
         if (hurtCooldown > 0) hurtCooldown--;
     
@@ -162,8 +176,33 @@ if (!GameWorld.allowSlowUpdate()) return;
         {
             startAttack();
         }
-    }
+        
+        //if k is pressed, trigger stone skill
+        boolean keyDown = Greenfoot.isKeyDown("k"); 
+        if (keyDown && !keyWasDown)
+        {
+            useStone();
+        }
+        keyWasDown = keyDown;
 
+    }
+    private void useStone()
+    {
+        
+        if(stoneSkills<1)
+        {
+           return;
+        }
+        //deduct
+        stoneSkills--;
+        
+        ArrayList<Enemy> enemies= (ArrayList<Enemy>) getWorld().getObjects(Enemy.class);
+        for(Enemy e: enemies)
+        {
+            e.freeze(GameConfig.STONE_TIME);//freeze for 120 frames
+        }
+        
+    }
     /**
      * @return the player's current health
      */
@@ -191,10 +230,12 @@ if (!GameWorld.allowSlowUpdate()) return;
         if (amount <= 0) return;
     
         health += amount;
-        if (health > maxHealth) 
-        {
-            health = maxHealth;   
-        }
+        
+        //allow players to help unlimited health
+        //if (health > maxHealth) 
+        //{
+        //    health = maxHealth;   
+        //}
     }
     /**
      * setHealth of the player when resume the game
@@ -204,10 +245,12 @@ if (!GameWorld.allowSlowUpdate()) return;
         if (amount <= 0) return;
     
         health=amount;
-        if (health > maxHealth) 
-        {
-            health = maxHealth;   
-        }
+        
+        //allow players to help unlimited health
+        //if (health > maxHealth) 
+        //{
+        //    health = maxHealth;   
+        //}
     }
     /**
      * Damages the player by a given amount.
@@ -220,15 +263,28 @@ if (!GameWorld.allowSlowUpdate()) return;
     {
         if (amount <= 0) return;
     
+        
         //if invincibility is active, ignore this damage
         if (hurtCooldown > 0) return;
     
+        //start invincibility frames
+        hurtCooldown = hurtCooldownFrames;
+        
+        //don't take damage while player is attacking
+        //so that axe and sword warrior won't loose health
+        //while attacking enemy
+        if (attacking)
+        {
+            //getWorld().addObject(new TextLabel("attacking",
+            //                                        20,Color.YELLOW,120), //msg, size,color, life
+            //                        GameConfig.sidePanelCentreX(),
+            //                        GameConfig.sidePanelCentreY()+45);
+            //return;
+        }
+        
         //apply damage
         health -= amount;
         if (health < 0) health = 0;
-    
-        //start invincibility frames
-        hurtCooldown = hurtCooldownFrames;
     
         //if dead, end the game
         if (health <= 0)
@@ -257,14 +313,21 @@ if (!GameWorld.allowSlowUpdate()) return;
         }  
         if(isTouching(AttackUpgrade.class))
         {
-           //testing
-           //the higher that attack power
-           //the higher the scores needed to be taken
-           //to prevent gaining attack power too fast
-           if(upgradeAttackPower(1,attackPower*5))
-           {
-               removeTouching(AttackUpgrade.class);
-           }
+          //handled in AttackUpgrade
+          //the PrompManager will call upgradeAttackPower
+          //if player wants to upgrade
+        } 
+        if(isTouching(HealthUpgrade.class))
+        {
+          //handled in HealthUpgrade
+          //the PrompManager will call upgradeHealthPower
+          //if player wants to upgrade
+        } 
+        if(isTouching(StoneSkill.class))
+        {
+          //handled in StoneSkill
+          //the PrompManager will call upgradeStoneSkills
+          //if player wants to upgrade
         } 
     }
     public int getCoinCount()
@@ -296,13 +359,28 @@ if (!GameWorld.allowSlowUpdate()) return;
     {
         this.attackPower=attackPower;
     }
-    //if successfully upgraded return true
+    public int getStoneSkillCount()
+    {
+        return stoneSkills;
+    }
+     public void setStoneSkillCount(int count)
+    {
+        stoneSkills=count;
+    }
+    /**
+     * Logic to upgrade Player's attack power
+     * if successfully upgraded return true
+     * 
+     * @param upgrade:              amount of attack power to upgrade
+     * @param scoresTakes:          amount of score needed to upgrade
+     * @return upgradeAttackPower:  returns true if upgrade is scccessful
+     */
     public boolean upgradeAttackPower(int upgrade, int scoresTaken)
     {
+                                    
         //not enough score to upgrade
         if(scoresTaken>score)
         {
-            //showText("Not Enough Scores to upgrade",Color.RED,getX(),getY());
             return false;
         }
         
@@ -318,7 +396,66 @@ if (!GameWorld.allowSlowUpdate()) return;
         //attack power upgrade
         attackPower+=upgrade;
         
+        SoundManager.playCoinSound();
         showText("Successfully Upgraded",Color.GREEN,getX(),getY());
+        
+        return true;
+
+    }
+    /**
+     * Logic to upgrade Player's health power
+     * if successfully upgraded return true
+     * 
+     * @param upgrade:              amount of health power to upgrade
+     * @param scoresTakes:          amount of coins needed to upgrade
+     * @return upgradeAttackPower:  returns true if upgrade is scccessful
+     */
+    public boolean upgradeHealthPower(int upgrade, int coinsTaken)
+    {
+                                    
+        //not enough score to upgrade
+        if(coinsTaken>coins)
+        {
+            return false;
+        }
+        
+        //deduct coins
+        coins=coins-coinsTaken;
+        
+        //heal
+        heal(upgrade);
+        
+        SoundManager.playHealthSound();
+        showText("Successfully Healed",Color.GREEN,getX(),getY());
+        
+        return true;
+
+    }
+    /**
+     * Logic to aquire Player's stone skill
+     * if successfully upgraded return true
+     * 
+     * @param upgrade:              amount of stone skill to aquire
+     * @param scoresTakes:          amount of coins needed to upgrade
+     * @return upgradeAttackPower:  returns true if upgrade is scccessful
+     */
+    public boolean aquireStoneSkill(int upgrade, int coinsTaken)
+    {
+                                    
+        //not enough score to upgrade
+        if(coinsTaken>coins)
+        {
+            return false;
+        }
+        
+        //deduct coins
+        coins=coins-coinsTaken;
+        
+        //stoneSkill aquired
+        stoneSkills++;
+        
+        SoundManager.playCoinSound();
+        showText("Successfully Aquired Stone Skill",Color.GREEN,getX(),getY());
         
         return true;
 

@@ -2,9 +2,16 @@ import greenfoot.*;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
-
-public class TypewriterText extends Actor
+/**
+ * TypeWritter class to display text like a typwriter style
+ * Adds visual interest to the story page
+ * 
+ * @author: 
+ * @version
+ */
+public class TypeWriterText extends Actor
 {
+    //remove text in order
     private Queue<String> lines=new LinkedList<String>();
 
     private String currentLine="";
@@ -19,11 +26,23 @@ public class TypewriterText extends Actor
     private int typingSpeed;
     private int typingTimer=0;
 
-    public TypewriterText(String message, int fontSize, Color textColor,int boxW, int boxH, int typingSpeed)
+    private int soundTimer=0;
+    /**
+     * Constructor for TypeWritterText
+     * 
+     * @param message       the message to type
+     * @param fontsize      size of the text
+     * @param textColor     text color
+     * @param boxW          box width where text will be dislayed
+     * @param boxH          box height where text will be dislayed
+     * @param typingSpeed   how fast to display the text
+     */
+    public TypeWriterText(String message, int fontSize, Color textColor,int boxW, int boxH, int typingSpeed)
     {
         this.fontSize=fontSize;
         this.boxW=boxW;
         this.boxH=boxH;
+        this.textColor=textColor;
         this.typingSpeed=Math.max(1, typingSpeed);
 
         //fill the queue with lines
@@ -39,19 +58,38 @@ public class TypewriterText extends Actor
         nextLine();
         redraw();
     }
-
+    /**
+     * play typing sound while text is not finished displaying
+     * shows character one at a time
+     * where there's no more line, marks text complete
+     * redraw char
+     */
     public void act()
     {
-        if (finished) return;
+        soundTimer++;
+        if(soundTimer%10==0 && !isFinished())
+        {
+            SoundManager.playTypingSound();
+        }
+        if(isFinished())
+        {
+             SoundManager.stopTypingSound();
+        }
+        
+        if (finished) 
+        {
+             return;   
+        }
 
         typingTimer++;
         if (typingTimer < typingSpeed) return;
         typingTimer=0;
 
-        //Type next character in currentLine
+        //type next character in currentLine
         if (charIndex < currentLine.length())
         {
-            shownText += currentLine.charAt(charIndex);  //add character to the text string to be shown
+            //add character to the text string to be shown
+            shownText += currentLine.charAt(charIndex);
             charIndex++;
 
             redraw();
@@ -62,7 +100,8 @@ public class TypewriterText extends Actor
         shownText += "\n";
         if (!nextLine())
         {
-            finished=true; //no more lines
+            //no more lines
+            finished=true; 
         }
         redraw();
     }
@@ -92,8 +131,14 @@ public class TypewriterText extends Actor
      */
     private void loadLines(String message)
     {
-        if (message == null) message="";
+        if (message == null)
+        {
+            message="";   
+        }
 
+        //true-->the tokenizer gives newline tokens as separate tokens
+        //helps to tell if there's a new line between two tokens
+        //helps to tell if we need to insert a new line
         StringTokenizer tok=new StringTokenizer(message, "\n", true);
         String line="";
 

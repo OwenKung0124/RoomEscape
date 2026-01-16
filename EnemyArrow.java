@@ -6,15 +6,15 @@ import greenfoot.*;
  */
 public class EnemyArrow extends Bullet
 {
-    private int attackPower;
+    private int damagePower=1;
 
     /**
      * Create an arrow moving in a 4-direction unit vector.
      * dirX/dirY should be -1, 0, or 1 (same as Bullet).
      */
-    public EnemyArrow(int dirX, int dirY,int attackPower)
+    public EnemyArrow(int dirX, int dirY,int damagePower)
     {
-        super(dirX, dirY,attackPower);
+        super(dirX, dirY,damagePower);
         
         speed=2;
 
@@ -48,14 +48,14 @@ public class EnemyArrow extends Bullet
     }
 
     /**
-     * Hook override: enemy arrow hits Player, not Enemy.
+     * eEnemy arrow hits Player
      */
     protected boolean handleHit()
     {
         Player p = (Player) getOneIntersectingObject(Player.class);
         if (p != null)
         {
-            p.takeDamage(attackPower);
+            p.takeDamage(getDamagePower());
 
             if (getWorld() != null)
             {
@@ -64,6 +64,23 @@ public class EnemyArrow extends Bullet
             return true;
         }
         return false;
+    }
+    /**
+     * @reaturn damage power of the enemy, based on difficulty level
+     */
+    public int getDamagePower()
+    {
+        if(getWorld()==null)
+        {
+            return damagePower;
+        }
+        int difficultyLevel = ((GameWorld) getWorld()).difficultyLevel();
+         
+        if (difficultyLevel == 0) return damagePower;
+        if (difficultyLevel == 1) return damagePower*2;
+        if (difficultyLevel == 2) return damagePower*3;
+   
+        return damagePower*4;
     }
     
     
