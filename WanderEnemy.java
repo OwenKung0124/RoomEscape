@@ -15,7 +15,6 @@ public class WanderEnemy extends Enemy
        
     }
 
-    
     /**
      * Computes wandering movement using WanderBrain.
      */

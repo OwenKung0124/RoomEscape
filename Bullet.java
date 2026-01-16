@@ -59,7 +59,7 @@ public class Bullet extends SuperSmoothMover
     {
         //freeze while paused 
         if (GameWorld.isPaused()) return;
-if (!GameWorld.allowSlowUpdate()) return;
+
         //removed already, do nothing
         if (getWorld() == null) return;
 

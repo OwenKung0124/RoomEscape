@@ -2,7 +2,7 @@
  * SaveData stores information that will be saved.
  *
  */
-public class SaveData
+public class GameData
 {
     public int roomR;
     public int roomC;
@@ -17,6 +17,7 @@ public class SaveData
     //collectibles
     public int coins=0;
     public int score=0;
+    public int stones=0;
     
     //default attack powers
     public int axeAttackPower=GameConfig.WARRIOR_AXE_DEFAULT_ATTACK;
@@ -28,7 +29,7 @@ public class SaveData
     //public String visited;
     //public String cleared;
 
-    public SaveData()
+    public GameData()
     {
     }
 }

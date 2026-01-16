@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=VictoryWorld
+comment0.text=\n\ DefeatWorld\ (Game\ Over\ Screen)\n\ \n\ \n
+comment1.params=
+comment1.target=VictoryWorld()
+comment2.params=data
+comment2.target=VictoryWorld(GameData)
+comment3.params=
+comment3.target=void\ act()
+numComments=4

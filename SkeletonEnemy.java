@@ -55,6 +55,15 @@ public class SkeletonEnemy extends Enemy
         if (getWorld() == null) return;
         if (player == null || player.getWorld() == null) return;
 
+        //countdown freeze
+        //stop movement  contact damage while frozen
+        if (freezeTimer > 0)
+        {
+            showText("Stoned",Color.YELLOW,getX(),getY()+50,false);
+            freezeTimer--;
+            return; 
+        }
+        
         //Enemy contact cooldown
         if (hitCooldown > 0) hitCooldown--;
 

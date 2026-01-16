@@ -23,6 +23,9 @@ public class GameWorld extends World
     private DoorSystem doorSystem;
     private SpawnerSystem spawner;
     
+    //handling game play prompts for user input
+    private PromptManager promptManager;
+    
     //(1,1), starting room
     private int roomR=1;
     private int roomC=1;
@@ -39,30 +42,17 @@ public class GameWorld extends World
     
     private int roomsClearedCount=0;
     private int totalRoomsToClear=0;
+    
+    //session only game data
+    //not saving into file
+    public static int enemiesKilled=0;
+    public static int attackCount=0;
+    public static int playerTimeFrames=0;
 
-    private SaveData data;   //this data is passed around between world and is used to save to file when needed
-//Auto slow motion settings
-private static int slowTimer = 0;      // how long slow motion lasts
-private static int slowTick = 0;       // frame counter (for skipping frames)
-private static int slowCooldown = 300; // time until next trigger
-
-// Change these numbers to what you want
-private static final int SLOW_EVERY = 10800;   // every 3 mintues
-private static final int SLOW_DURATION = 360; // slow lasts 120 acts (~2s)
-public static boolean isSlowMotion()
-{
-    return slowTimer > 0;
-}
-
-public static boolean allowSlowUpdate()
-{
-    if (!isSlowMotion()) return true;
-    return (slowTick % 2 == 0); // half speed
-}
+    private GameData data;   //this data is passed around between world and is used to save to file when needed
     
     public GameWorld()
     {
-
         this(GameConfig.WARRIOR_AXE, false, null);   //default warrior selection, new game, no save data passed
     }
     /**
@@ -71,7 +61,7 @@ public static boolean allowSlowUpdate()
      * spawns Playe, MiniMap,
      * loads the starting room.
      */
-    public GameWorld(int warriorType,boolean resume, SaveData data)
+    public GameWorld(int warriorType,boolean resume, GameData data)
     {
         super(GameConfig.WORLD_W, GameConfig.WORLD_H, 1);
         
@@ -82,7 +72,7 @@ public static boolean allowSlowUpdate()
         }
         else
         {
-            this.data=new SaveData();
+            this.data=new GameData();
         }
         map=new GameMap();
 
@@ -130,11 +120,16 @@ public static boolean allowSlowUpdate()
         roomR=start[0];
         roomC=start[1];
     
+        //new game clear old session data
+        if(!resume)
+        {
+            clearSessionData();  //clear static variables   
+        }
         //whatever data saved
         //must also update this section
         if (resume)
         {
-            SaveData loadedData=SaveManager.load(map);
+            GameData loadedData=SaveManager.load(map);
             
             if(loadedData!=null)
             {
@@ -162,6 +157,7 @@ public static boolean allowSlowUpdate()
             player.setHealth(data.playerHealth);
             player.setCoinCount(data.coins);
             player.setScore(data.score);
+            player.setStoneSkillCount(data.stones);
             if(player instanceof AxeWarrior)
             {
                  player.setAttackPower(data.axeAttackPower);
@@ -187,9 +183,13 @@ public static boolean allowSlowUpdate()
             Decoration.class,   //the statue image actor
             Enemy.class,
             SummonerBoss.class
-        );
+        ); 
         
-        SoundManager.playGameMusic();
+        //prompt manager for handling prompts during game play
+        promptManager = new PromptManager();
+        addObject(promptManager, GameConfig.sidePanelCentreX(), GameConfig.sidePanelCentreY());
+        
+        //SoundManager.playGameMusic();
     }
     /**
      * pause on/off and shows/hides the pause overlay.
@@ -239,9 +239,19 @@ public static boolean allowSlowUpdate()
     }
     public void onPlayerDefeated()
     {
-        save();
+        //save();
+        //start from new game only
+        SaveManager.deleteSave();
         paused = false;
         Greenfoot.setWorld(new DefeatWorld(data));
+    }
+    public void onPlayerVictory()
+    {
+        //save();
+        //start from new game only
+        SaveManager.deleteSave();
+        paused = false;
+        Greenfoot.setWorld(new VictoryWorld(data));
     }
     private void save()
     {
@@ -259,6 +269,8 @@ public static boolean allowSlowUpdate()
         data.roomsCleared=roomsClearedCount;
         data.coins=player.getCoinCount();
         data.score=player.getScore();
+        data.stones=player.getStoneSkillCount();
+        
         if(player instanceof AxeWarrior)
         {
             data.axeAttackPower=player.getAttackPower();
@@ -281,8 +293,10 @@ public static boolean allowSlowUpdate()
      * - Updates door lock states and physical door blockers
      */
      public void act() 
-     {
-
+     {         
+        //keep track how long the player stays in game world
+        playerTimeFrames++;
+        
         //esc=just pressed
         boolean esc=Greenfoot.isKeyDown("escape");
         boolean escJustPressed=esc && !lastEsc;
@@ -306,24 +320,6 @@ public static boolean allowSlowUpdate()
             return;
         }
         
-// frame counter for slow motion pacing
-slowTick++;
-
-// handle auto slow motion trigger
-if (slowTimer > 0)
-{
-    slowTimer--;
-}
-else
-{
-    slowCooldown--;
-    if (slowCooldown <= 0)
-    {
-        slowTimer = SLOW_DURATION;   // start slow motion
-        slowCooldown = SLOW_EVERY;   // reset countdown for next trigger
-    }
-}
-
         //only combat/bossrooms can be cleared
         if ( (map.isCombatRoom(roomR, roomC) || map.isBossRoom(roomR, roomC))&& 
             countEnemies()==0 && 
@@ -339,31 +335,31 @@ else
         //HUD text in side panel
         int hudX=GameConfig.ROOM_X + GameConfig.ROOM_W + GameConfig.SIDE_PANEL_W / 2;
         showText("Room: (" + roomR + "," + roomC + ")", hudX, 30);
-        showText("Enemies: " + countEnemies(), hudX, 50);
-        showText("Rooms cleared: " + roomsClearedCount + " / " + totalRoomsToClear, hudX, 70);
-        showText("Coin Collected: " + player.getCoinCount(), hudX, 575);
+        showText("Enemies: " + countEnemies(), hudX, 55);
+        showText("Rooms Cleared: " + roomsClearedCount + " / " + totalRoomsToClear, hudX, 80);
+        showText("Press ESC to Exit\n Press Space to Attack\n Press k to Stone Enemy", hudX, 250);
+        showText("Difficulty Level:"+ difficultyLevel(), hudX,450);
+        showText("Attacks : " + attackCount, hudX, 475);
+        showText("Enemies defeated: " + enemiesKilled, hudX, 500);
+        showText("Time: " +playerTimeFrames/60+ " seconds", hudX, 525);
+        showText("Coin Collected: " +  player.getCoinCount(),hudX, 550);
+        showText("Stone Skill: "+  player.getStoneSkillCount(),hudX, 575);
         showText("Score: " + player.getScore(), hudX, 600);
         showText("Attack Power:"+player.getAttackPower(),hudX,625);
         showText("Heath Remain: " + player.getHealth(), hudX, 650);
-if (isSlowMotion())
-{
-    showText("SLOW MOTION!  (" + slowTimer/60 + ")", hudX, 545);
-}
-else
-{
-    showText("Next Slow Motion: "+slowCooldown/60, hudX, 545); // clear the text when not slow
-}
+
+
         //Win check
         //show in the window of the room
         //if (roomsClearedCount >= GameConfig.WIN_ROOMS) 
         if(roomsClearedCount>=totalRoomsToClear)
         {
-            showText("YOU WIN!", 
-            GameConfig.ROOM_X + GameConfig.ROOM_W / 2, 
-            GameConfig.ROOM_Y + GameConfig.ROOM_H / 2);
-            Greenfoot.stop();
+            Greenfoot.setWorld(new VictoryWorld(data)); 
+            //showText("YOU WIN!", 
+            //GameConfig.ROOM_X + GameConfig.ROOM_W / 2, 
+            //GameConfig.ROOM_Y + GameConfig.ROOM_H / 2);
+            //Greenfoot.stop();
         }
-
 
         boolean unlockedNow=isRoomUnlocked();
 
@@ -372,9 +368,38 @@ else
 
         //block door gaps while locked, but not the back door gap
         doorSystem.syncDoorBlockers(roomR, roomC, lastRoomR, lastRoomC, unlockedNow);
-    }   
-
-    
+    }  
+    /**
+     * all seession varibles to be cleared for new game
+     */
+    private void clearSessionData()
+    {
+            enemiesKilled=0;
+            attackCount=0;
+            playerTimeFrames=0;
+    }
+    /**
+     * Scale games difficutly level based on rooms cleared
+     * and on player's attack power
+     */
+    public int difficultyLevel()
+    {
+        if (roomsClearedCount <= 1)
+        {
+             return 0;   
+        }
+        if (roomsClearedCount <= 3)
+        {
+            return 1;
+        }
+        if (roomsClearedCount <= 5)
+        {
+            return 2;
+        }
+        
+        //more than 5 rooms
+        return 3;
+    }
     /**
      * Loads a room.
      * removes everything except player and MiniMap
@@ -388,18 +413,21 @@ else
      */
     private void loadRoom(int r, int c, int enterDr, int enterDc)
     {
-        //Remove everything except player + minimap
-        List<Actor> all=new ArrayList<Actor>(getObjects(Actor.class));
+        //remove everything except player, minimap, player status baar, prompt manager
+        ArrayList<Actor> all=new ArrayList<Actor>(getObjects(Actor.class));
         for (Actor a : all) 
         {
-            if (a != player && a != minimap && a!=playerBar) removeObject(a);
+             if (a != player && a != minimap && a!=playerBar && a!=promptManager) 
+             {
+                removeObject(a);   
+             }
         }
 
         //when changing room
         //stop all boss sounds
         SoundManager.stopAllBossSounds();
         
-        //Door blockers list is owned by DoorSystem now
+        //Door blockers are owned by DoorSystem
         doorSystem.onRoomLoaded();
 
         //set visited of 
@@ -414,7 +442,8 @@ else
         //spawner.spawnObjectsFromTiles(r, c);
 
         //Place the player where he enters the room with
-        //unless it's the first room, the player will appear in the middle
+        //unless it's the first room
+        //the player will appear in the middle
         placeAtEntrance(enterDr, enterDc);
 
         //Spawn enemies only if room not cleared
@@ -656,5 +685,26 @@ else
     public GameMap getGameMap()
     {
         return map;
+    }
+    /**
+     * Make sure game music starts after restarted
+     */
+    public void started()
+    {
+        SoundManager.playGameMusic();
+    }
+    /**
+     * Make sure game music stops when paused
+     */
+    public void stopped()
+    {
+        SoundManager.stopAll();
+    }
+     /**
+     * @return promptManager
+     */
+    public PromptManager getPromptManager()
+    {
+        return promptManager;
     }
 }

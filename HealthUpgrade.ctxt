@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=HealthUpgrade
+comment0.text=\n\ Animated\ HealthUpgrade\ to\ upgrade\ player's\ attack\ power\n
+comment1.params=rd\ r\ c\ tr\ tc
+comment1.target=HealthUpgrade(RoomData,\ int,\ int,\ int,\ int)
+comment1.text=\n\ @param\ RoomDate\ rd\n\ @param\ roomR\ room\n\ @param\ roomC\ room\n\ @param\ tr\ tile\ row\n\ @param\ tc\ tile\ col\n
+comment2.params=p
+comment2.target=void\ upgrade(Player)
+numComments=3

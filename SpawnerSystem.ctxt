@@ -1,15 +1,17 @@
 #BlueJ class context
 comment0.target=SpawnerSystem
-comment0.text=\n\ SpawnerSystem\ handles\ random\ spawning\:\n\ e.g\ enemies\n\n
+comment0.text=\n\ SpawnerSystem\ handles\ random\ spawning\:\n\ e.g\ enemies,boss\n\n
 comment1.params=world\ map
 comment1.target=SpawnerSystem(GameWorld,\ GameMap)
 comment2.params=r\ c\ player
 comment2.target=void\ spawnEnemiesIfNeeded(int,\ int,\ Player)
 comment2.text=\n\ Spawns\ enemies\ only\ if\ the\ room\ is\ not\ cleared.\n
-comment3.params=r\ c
-comment3.target=int[]\ randomFloorSpawn(int,\ int)
-comment3.text=\n\ Spawns\ enemies\ only\ on\ FLOOR\ tiles\ so\ they\ never\ appear\ inside\ wall\ colliders.\n\n\ @param\ r\ room\ row\n\ @param\ c\ room\ col\n\ @return\ int[]{x,y}\ coordinates\ in\ pixel\n
-comment4.params=rd
-comment4.target=int[]\ randomFloomSpawnInRoom(RoomData)
-comment4.text=\n\ Given\ roomdata\ and\ returns\ x,\ y\ where\ floor\ tile\ it.\n\ makes\ it\ static\n\ it\ can\ also\ acs\ as\ a\ helper\ method\ for\ boss\ to\ spawn\ mini\ enemies\n
-numComments=5
+comment3.params=
+comment3.target=int\ maxiumEnemySpawn()
+comment4.params=r\ c
+comment4.target=int[]\ randomFloorSpawn(int,\ int)
+comment4.text=\n\ Spawns\ enemies\ only\ on\ FLOOR\ tiles\ so\ they\ never\ appear\ inside\ wall\ colliders.\n\n\ @param\ r\ room\ row\n\ @param\ c\ room\ col\n\ @return\ int[]{x,y}\ coordinates\ in\ pixel\n
+comment5.params=rd
+comment5.target=int[]\ randomFloomSpawnInRoom(RoomData)
+comment5.text=\n\ Given\ roomdata\ and\ returns\ x,\ y\ where\ floor\ tile\ it.\n\ makes\ it\ static\n\ it\ can\ also\ acs\ as\ a\ helper\ method\ for\ boss\ to\ spawn\ mini\ enemies\n
+numComments=6

@@ -114,6 +114,14 @@ public class RoomRenderer
                 {
                     world.addObject(new AttackUpgrade(rd,r, c, tr, tc), x, y);
                 }
+                else if (code == GameConfig.HEALTH_UPGRADE) 
+                {
+                    world.addObject(new HealthUpgrade(rd,r, c, tr, tc), x, y);
+                }
+                else if (code == GameConfig.STONE_SKILL) 
+                {
+                    world.addObject(new StoneSkill(rd,r, c, tr, tc), x, y);
+                }
                 else if (code == GameConfig.STATUE) 
                 {
                     Statue s = new Statue(w,h);

@@ -48,6 +48,8 @@ public class GameConfig
     //collectables starting with 11-20
     public static final int COIN = 11; 
     public static final int ATTACK_UPGRADE = 12; 
+    public static final int HEALTH_UPGRADE = 13; 
+    public static final int STONE_SKILL = 14; 
     
     //station object 21-30
     public static final int STATUE = 21; 
@@ -80,12 +82,12 @@ public class GameConfig
     public static final int DOOR_GAP_W = 90;
     public static final int DOOR_GAP_H = 120;
 
-    public static final int ENEMIES_TO_SPAWN = 10;
+    public static final int ENEMIES_TO_SPAWN = 5;//this is for level 0
     //public static final int WIN_ROOMS = 6;
     
     //SummonerBoss
     //public static final int SUMMONER_BOSS_DOOR_CLEARED=1;
-    public static final int SUMMOMER_BOSS_MINION_SPWAN=2; //use smaller number for testingpublic static final int SUMMOMER_BOSS_MINION_SPWAN=1; 
+    public static final int SUMMOMER_BOSS_MINION_SPWAN=3; //use smaller number for testingpublic static final int SUMMOMER_BOSS_MINION_SPWAN=1; 
     public static final int SUMMONER_BOSS_MAX_HEALTH=50;
     
     //Warrior Selection;
@@ -93,24 +95,43 @@ public class GameConfig
     public static final int WARRIOR_BULLET=2;
     public static final int WARRIOR_SWORD=3;
     
-
     //Warrior default attack power
-    public static final int WARRIOR_AXE_DEFAULT_ATTACK=1;
+    public static final int WARRIOR_AXE_DEFAULT_ATTACK=2;
     public static final int WARRIOR_BULLET_DEFAULT_ATTACK=5;
-    public static final int WARRIOR_SWORD_DEFAULT_ATTACK=1;
+    public static final int WARRIOR_SWORD_DEFAULT_ATTACK=2;
     
     public static final int PLAYER_DOOR_OFFSET_X=50; //as player gets bigger, this should get bigger too
     public static final int PLAYER_DOOR_OFFSET_Y=40;
     
     
     //Default max HP for the player.
-    public static final int DEFAULT_MAX_HP = 100;
-    public static final int DEFAULT_INVINCIBILITY_FRAMES = 30;
+    public static final int DEFAULT_MAX_HP=100;
+    public static final int DEFAULT_INVINCIBILITY_FRAMES=30;
     public static final int MINIMUM_HP_TO_UPGRADE=20;
+    
+    //default stone
+     public static final int DEFAULT_STONE_COUNT=2;
+    
+    //stone time
+    public static final int STONE_TIME=120;//frames
     
     //file for reloading data later
     public static final String SAVE_FILE = "save.txt";
     
+     /**
+     * @return  SidePanel centreX position
+     */
+    public static int sidePanelCentreX() 
+    {
+        return PLAY_W + SIDE_PANEL_W / 2;
+    }
+    /**
+     * @return  SidePanel centreX position
+     */
+    public static int sidePanelCentreY() 
+    {
+        return  WORLD_H / 2;
+    }
     /**
      * @return  left pixel of tile column tc
      */
