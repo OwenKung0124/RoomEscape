@@ -1,12 +1,12 @@
 #BlueJ class context
 comment0.target=StartButton
-comment0.text=\n\ StartButton\n\n\ Modes\:\n\ \ \ MODE_NEW_GAME\:\ deletes\ save\ and\ starts\ from\ beginning\n\ \ \ MODE_RESUME\:\ loads\ save\ and\ continues\n
+comment0.text=\r\n\ StartButton\r\n\r\n\ Modes\:\r\n\ \ \ MODE_NEW_GAME\:\ deletes\ save\ and\ starts\ from\ beginning\r\n\ \ \ MODE_RESUME\:\ loads\ save\ and\ continues\r\n
 comment1.params=imgPath\ mode
 comment1.target=StartButton(java.lang.String,\ int)
-comment1.text=\n\ @param\ imgPath\ image\ path\n\ @param\ mode\ MODE_NEW_GAME\ or\ MODE_RESUME\n
+comment1.text=\r\n\ @param\ imgPath\ image\ path\r\n\ @param\ mode\ MODE_NEW_GAME\ or\ MODE_RESUME\r\n
 comment2.params=enabled
 comment2.target=void\ setEnabled(boolean)
-comment2.text=\n\ allows\ SetupWorld\ to\ disable\ the\ Resume\ button\ if\ there\ is\ no\ save.\n
+comment2.text=\r\n\ allows\ SetupWorld\ to\ disable\ the\ Resume\ button\ if\ there\ is\ no\ save.\r\n
 comment3.params=
 comment3.target=void\ act()
 numComments=4

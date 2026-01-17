@@ -1,16 +1,16 @@
 #BlueJ class context
 comment0.target=WarriorSelectIcon
-comment0.text=\n\ WarriorSelectIcon\ is\ a\ clickable\ image\ used\ on\ the\ setup\ screen.\n\ \ shows\ animated\ warrior\ picture\n\ \ When\ clicked,\ it\ tells\ SettingWorld\ which\ warrior\ type\ was\ chosen\n\ \ Selected,\ it\ draws\ a\ highlight\ border\n
+comment0.text=\r\n\ WarriorSelectIcon\ is\ a\ clickable\ image\ used\ on\ the\ setup\ screen.\r\n\ \ shows\ animated\ warrior\ picture\r\n\ \ When\ clicked,\ it\ tells\ SettingWorld\ which\ warrior\ type\ was\ chosen\r\n\ \ Selected,\ it\ draws\ a\ highlight\ border\r\n
 comment1.params=framePrefix\ frameCount\ type\ w\ h
 comment1.target=WarriorSelectIcon(java.lang.String,\ int,\ int,\ int,\ int)
-comment1.text=\n\ prefix\ example\:\ setting/axe_\ \ loads\ axe_1.png,\ axe_2.png\ ...\n
+comment1.text=\r\n\ prefix\ example\:\ setting/axe_\ \ loads\ axe_1.png,\ axe_2.png\ ...\r\n
 comment2.params=
 comment2.target=void\ act()
 comment3.params=
 comment3.target=void\ animate()
 comment4.params=sel
 comment4.target=void\ setSelected(boolean)
-comment4.text=\n\ called\ by\ setting\ world\ to\ indicate\ which\ warrior\ is\ selected\n
+comment4.text=\r\n\ called\ by\ setting\ world\ to\ indicate\ which\ warrior\ is\ selected\r\n
 comment5.params=
 comment5.target=void\ drawSelectedBorder()
 comment6.params=prefix\ count\ w\ h

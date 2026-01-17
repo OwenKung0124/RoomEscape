@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=PauseOverlay
-comment0.text=\r\n\ PauseOverlay\ displays\ a\ pause\ message\ on\ top\ of\ the\ game.\r\n\r\n
+comment0.text=\r\n\ PauseOverlay\:\ displays\ a\ pause\ message\ on\ top\ of\ the\ game.\r\n\ \r\n\ @author\ Clifton\ Lin\r\n\ @version\ Jan\ 2026\r\n
 comment1.params=
 comment1.target=PauseOverlay()
 comment2.params=

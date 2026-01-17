@@ -1,21 +1,20 @@
 import greenfoot.*;
 
 /**
- * DefeatWorld (Game Over Screen)
+ * Defeat World: The world that appears when the player dies, stating that the game is over. 
  * 
- * 
+ * @author Clifton Lin
+ * @version Jan, 2026
  */
 public class DefeatWorld extends World
 {
-
     private GameData data; //shared data that passed around
 
-    public DefeatWorld()
-    {
+    public DefeatWorld(){
         this(null);
     }
-    public DefeatWorld(GameData data)
-    {
+    
+    public DefeatWorld(GameData data){
         super(GameConfig.WORLD_W, GameConfig.WORLD_H, 1);
         SoundManager.stopGameMusic();
         
@@ -34,18 +33,15 @@ public class DefeatWorld extends World
         showText("Press S to go to Setting", getWidth()/2, getHeight()/2 + 70);
     }
 
-    public void act()
-    {
+    public void act(){
         //restart
-        if (Greenfoot.isKeyDown("r"))
-        {
+        if (Greenfoot.isKeyDown("r")){
             SaveManager.deleteSave();
             Greenfoot.setWorld(new GameWorld(GameConfig.WARRIOR_AXE, false, null));
         }
 
         //go back to settings page
-        if (Greenfoot.isKeyDown("s"))
-        {
+        if (Greenfoot.isKeyDown("s")){
             //return to setting
             Greenfoot.setWorld(new SettingWorld(data));
         }

@@ -1,21 +1,21 @@
 import greenfoot.*;
 
 /**
- * PauseOverlay displays a pause message on top of the game.
- *
+ * PauseOverlay: displays a pause message on top of the game.
+ * 
+ * @author Clifton Lin
+ * @version Jan 2026
  */
 public class PauseOverlay extends Actor
 {
-    public PauseOverlay()
-    {
+    public PauseOverlay(){
         redraw();
     }
 
     /**
      * Builds the pause overlay image.
      */
-    private void redraw()
-    {
+    private void redraw(){
         int w = 360;
         int h = 190;
 

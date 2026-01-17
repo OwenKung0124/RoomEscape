@@ -1,15 +1,15 @@
 #BlueJ class context
 comment0.target=StoryWorld
-comment0.text=\n\ World\ for\ the\ story\ of\ the\ main\ character\n\ \n\ @author\ Clifton\ Lin\n\ @version\ Jan,\ 2026\n
+comment0.text=\r\n\ World\ for\ the\ story\ of\ the\ main\ character\r\n\ \r\n\ @author\ Clifton\ Lin\r\n\ @version\ Jan,\ 2026\r\n
 comment1.params=
 comment1.target=StoryWorld()
-comment1.text=\n\ Constructor\ for\ objects\ of\ class\ StoryWorld.\n\ \n
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ StoryWorld.\r\n\ \r\n
 comment2.params=
 comment2.target=void\ act()
 comment3.params=
 comment3.target=void\ started()
-comment3.text=\n\ Make\ sure\ game\ music\ starts\ after\ restarted\n
+comment3.text=\r\n\ Make\ sure\ game\ music\ starts\ after\ restarted\r\n
 comment4.params=
 comment4.target=void\ stopped()
-comment4.text=\n\ Make\ sure\ game\ music\ stops\ when\ paused\n
+comment4.text=\r\n\ Make\ sure\ game\ music\ stops\ when\ paused\r\n
 numComments=5

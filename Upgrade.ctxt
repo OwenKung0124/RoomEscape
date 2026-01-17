@@ -1,16 +1,16 @@
 #BlueJ class context
 comment0.target=Upgrade
-comment0.text=\n\ Parent\ class\ for\ animated\ upgrade\n
+comment0.text=\r\n\ Parent\ class\ for\ animated\ upgrade\r\n
 comment1.params=rd\ r\ c\ tr\ tc
 comment1.target=Upgrade(RoomData,\ int,\ int,\ int,\ int)
-comment1.text=\n\ @param\ RoomDate\ rd\n\ @param\ roomR\ room\ \n\ @param\ roomC\ room\n\ @param\ tr\ tile\ row\n\ @param\ tc\ tile\ col\n
+comment1.text=\r\n\ @param\ RoomDate\ rd\r\n\ @param\ roomR\ room\ \r\n\ @param\ roomC\ room\r\n\ @param\ tr\ tile\ row\r\n\ @param\ tc\ tile\ col\r\n
 comment2.params=player
 comment2.target=void\ upgrade(Player)
 comment3.params=
 comment3.target=void\ act()
 comment4.params=p
 comment4.target=void\ markDeclined(Player)
-comment4.text=\n\ called\ by\ PromptManager\ to\ mark\ who\ decline\ the\ prompt\n\ \n\ @param\ p\:\ Player\ who\ declines\ the\ prompt\n
+comment4.text=\r\n\ called\ by\ PromptManager\ to\ mark\ who\ decline\ the\ prompt\r\n\ \r\n\ @param\ p\:\ Player\ who\ declines\ the\ prompt\r\n
 comment5.params=
 comment5.target=void\ clearDeclined()
 comment6.params=
