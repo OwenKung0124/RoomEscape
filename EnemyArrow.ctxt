@@ -1,13 +1,13 @@
 #BlueJ class context
 comment0.target=EnemyArrow
-comment0.text=\n\ EnemyArrow\ is\ a\ Bullet\ that\ hits\ the\ Player\ instead\ of\ Enemy.\n\ It\ reuses\ Bullet\ movement,\ wall\ collision,\ bounds\ removal,\ and\ lifetime.\n
+comment0.text=\r\n\ EnemyArrow\ is\ a\ Bullet\ that\ hits\ the\ Player\ instead\ of\ Enemy.\r\n\ It\ reuses\ Bullet\ movement,\ wall\ collision,\ bounds\ removal,\ and\ lifetime.\r\n\ \r\n\ @author\ Clifton\ Lin\r\n\ @version\ Jan\ 2026\r\n
 comment1.params=dirX\ dirY\ damagePower
 comment1.target=EnemyArrow(int,\ int,\ int)
-comment1.text=\n\ Create\ an\ arrow\ moving\ in\ a\ 4-direction\ unit\ vector.\n\ dirX/dirY\ should\ be\ -1,\ 0,\ or\ 1\ (same\ as\ Bullet).\n
+comment1.text=\r\n\ Create\ an\ arrow\ moving\ in\ a\ 4-direction\ unit\ vector.\r\n\ dirX/dirY\ should\ be\ -1,\ 0,\ or\ 1\ (same\ as\ Bullet).\r\n
 comment2.params=
 comment2.target=boolean\ handleHit()
-comment2.text=\n\ eEnemy\ arrow\ hits\ Player\n
+comment2.text=\r\n\ When\ the\ enemy's\ arrow\ hit\ the\ player\:\ \r\n
 comment3.params=
 comment3.target=int\ getDamagePower()
-comment3.text=\n\ @reaturn\ damage\ power\ of\ the\ enemy,\ based\ on\ difficulty\ level\n
+comment3.text=\r\n\ @return\ damage\ power\ of\ the\ enemy,\ based\ on\ difficulty\ level\r\n
 numComments=4

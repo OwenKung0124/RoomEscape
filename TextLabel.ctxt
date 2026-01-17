@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=TextLabel
-comment0.text=\n\ \n\ Helper\ TextLebel\ to\ help\ display\ texts\n
+comment0.text=\r\n\ \r\n\ Helper\ TextLebel\ to\ help\ display\ texts\r\n
 comment1.params=text\ size\ textColor\ life
 comment1.target=TextLabel(java.lang.String,\ int,\ greenfoot.Color,\ int)
 comment2.params=
