@@ -1,14 +1,15 @@
 import greenfoot.*;
 
 /**
- * Bullet class
- *
- * What it does:
+ * Bullet class: 
  * - Moves straight using a velocity (vx, vy)
  * - Disappears if it hits a Blocker (wall)
  * - Disappears if it leaves the room
  * - Destroys the first Enemy it touches, then disappears
  * - Disappears after a short lifetime so it can't exist forever
+ * 
+ * @author Clifton Lin
+ * @version Jan 2026
  */
 public class Bullet extends SuperSmoothMover
 {
@@ -35,12 +36,11 @@ public class Bullet extends SuperSmoothMover
      * @param dirX direction in x (-1, 0, 1)
      * @param dirY direction in y (-1, 0, 1)
      */
-    public Bullet(int dirX, int dirY,int attackPower)
-    {
+    public Bullet(int dirX, int dirY, int attackPower){
         //calculate velocity
         vx = dirX * speed;
         vy = dirY * speed;
-        this.attackPower=attackPower;
+        this.attackPower = attackPower;
 
         //Simple circle bullet image
         GreenfootImage img = new GreenfootImage(10, 10);
@@ -58,17 +58,20 @@ public class Bullet extends SuperSmoothMover
     public void act()
     {
         //freeze while paused 
-        if (GameWorld.isPaused()) return;
+        if (GameWorld.isPaused()){
+            return;
+        }
 
         //removed already, do nothing
-        if (getWorld() == null) return;
+        if (getWorld() == null){
+            return;
+        }
 
         //Move straight
         setLocation(getX() + vx, getY() + vy);
 
         //1) Remove if hit a wall (Blocker includes walls/statues/etc)
-        if (isTouching(Blocker.class))
-        {
+        if (isTouching(Blocker.class)){
             getWorld().removeObject(this);
             return;
         }
@@ -76,29 +79,25 @@ public class Bullet extends SuperSmoothMover
         //remove if outside the room rectangle
         //prevents bullets from flying into the side panel forever.
         World ww = getWorld();
-        if (ww instanceof GameWorld)
-        {
-            if (getX() < GameConfig.roomLeft() || getX() > GameConfig.roomRight()
-             || getY() < GameConfig.roomTop()  || getY() > GameConfig.roomBottom())
-            {
+        if (ww instanceof GameWorld){
+            if (getX() < GameConfig.roomLeft() || getX() > GameConfig.roomRight() || getY() < GameConfig.roomTop() || getY() > GameConfig.roomBottom()){
                 getWorld().removeObject(this);
                 return;
             }
         }
 
         //enemy hit
-        if (handleHit()) 
-        {
+        if (handleHit()){
              return;   
         }
 
         //lifetime countdown (auto-remove after life frames)
         life--;
-        if (life <= 0 && getWorld() != null)
-        {
+        if (life <= 0 && getWorld() != null){
             getWorld().removeObject(this);
         }
     }
+    
     /**
      * Hook for handling what the bullet hits.
      * Default behavior: destroy the first Enemy it touches.
@@ -106,16 +105,15 @@ public class Bullet extends SuperSmoothMover
      *
      * @return true if the bullet handled a hit and should stop acting this frame
      */
-    protected boolean handleHit()
-    {
+    protected boolean handleHit(){
         Enemy e = (Enemy) getOneIntersectingObject(Enemy.class);
-        if (e != null)
-        {
+        if (e != null){
             //the takeDamage, will handle remove enemy when health<=0
             e.takeDamage(attackPower);
             getWorld().removeObject(this);
             return true;
         }
+        
         return false;
     }
 }

@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Bullet
-comment0.text=\r\n\ Bullet\ class\r\n\r\n\ What\ it\ does\:\r\n\ -\ Moves\ straight\ using\ a\ velocity\ (vx,\ vy)\r\n\ -\ Disappears\ if\ it\ hits\ a\ Blocker\ (wall)\r\n\ -\ Disappears\ if\ it\ leaves\ the\ room\r\n\ -\ Destroys\ the\ first\ Enemy\ it\ touches,\ then\ disappears\r\n\ -\ Disappears\ after\ a\ short\ lifetime\ so\ it\ can't\ exist\ forever\r\n
+comment0.text=\r\n\ Bullet\ class\:\ \r\n\ -\ Moves\ straight\ using\ a\ velocity\ (vx,\ vy)\r\n\ -\ Disappears\ if\ it\ hits\ a\ Blocker\ (wall)\r\n\ -\ Disappears\ if\ it\ leaves\ the\ room\r\n\ -\ Destroys\ the\ first\ Enemy\ it\ touches,\ then\ disappears\r\n\ -\ Disappears\ after\ a\ short\ lifetime\ so\ it\ can't\ exist\ forever\r\n\ \r\n\ @author\ Clifton\ Lin\r\n\ @version\ Jan\ 2026\r\n
 comment1.params=dirX\ dirY\ attackPower
 comment1.target=Bullet(int,\ int,\ int)
 comment1.text=\r\n\ Constructs\ a\ Bullet\ moving\ in\ direction\ (dirX,\ dirY).\r\n\r\n\ dirX\ and\ dirY\ should\ be\ -1,\ 0,\ or\ 1.\r\n\ -\ (1,\ 0)\ \ \=\ right\r\n\ -\ (-1,\ 0)\ \=\ left\r\n\ -\ (0,\ -1)\ \=\ up\r\n\ -\ (0,\ 1)\ \ \=\ down\r\n\r\n\ @param\ dirX\ direction\ in\ x\ (-1,\ 0,\ 1)\r\n\ @param\ dirY\ direction\ in\ y\ (-1,\ 0,\ 1)\r\n
