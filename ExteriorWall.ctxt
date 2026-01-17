@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.target=ExteriorWall
-comment0.text=\r\n\ ExteriorWall\ is\ a\ wall\ collider\ that\ uses\ a\ different\ PNG,\r\n\ but\ works\ the\ same\ as\ Wall\ for\ collisions.\r\n\r\n\ Checks\ Wall.class\ collisions\r\n
+comment0.text=\n\ ExteriorWall\ is\ a\ wall\ collider\ that\ uses\ a\ different\ PNG,\n\ but\ works\ the\ same\ as\ Wall\ for\ collisions.\n\n\ Checks\ Wall.class\ collisions\n
 comment1.params=w\ h
 comment1.target=ExteriorWall(int,\ int)
-comment1.text=\r\n\ Creates\ an\ exterior\ wall\ collider\ with\ width\ and\ height\ in\ pixels.\r\n\r\n\ @param\ w\ width\ in\ pixels\r\n\ @param\ h\ height\ in\ pixels\r\n
+comment1.text=\n\ Creates\ an\ exterior\ wall\ collider\ with\ width\ and\ height\ in\ pixels.\n\n\ @param\ w\ width\ in\ pixels\n\ @param\ h\ height\ in\ pixels\n
 numComments=2

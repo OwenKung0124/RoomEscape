@@ -28,4 +28,5 @@ comment8.params=
 comment8.target=void\ decline()
 comment9.params=msg\ frames
 comment9.target=void\ show(java.lang.String,\ int)
+comment9.text=\n\ For\ showing\ msg\ in\ side\ panel\ \n
 numComments=12

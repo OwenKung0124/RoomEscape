@@ -53,11 +53,12 @@ public class SpawnerSystem
             int[] p=randomFloorSpawn(r, c);
 
             //adds different typs of enemies randomly
-            if (Greenfoot.getRandomNumber(2)==0)
+            int choice = Greenfoot.getRandomNumber(3);
+            if (choice==0)
             {
                 world.addObject(new ZombieEnemy(player),  p[0], p[1]);
             } 
-            else if (Greenfoot.getRandomNumber(2)==1)
+            else if (choice==1)
             {
                 world.addObject(new WanderEnemy(player),  p[0], p[1]);
             }

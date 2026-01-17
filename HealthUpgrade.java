@@ -5,17 +5,23 @@ import greenfoot.*;
  */
 public class HealthUpgrade extends Upgrade
 {
-    /**
+    
+   /**
      * @param RoomDate rd
      * @param roomR room
      * @param roomC room
      * @param tr tile row
      * @param tc tile col
      */
-    public HealthUpgrade(RoomData rd,int r, int c, int tr, int tc)
+    //public HealthUpgrade(RoomData rd,int r, int c, int tr, int tc)
+     //HealthUpgrade(RoomData rd,int r, int c, int tr, int tc)
+    public HealthUpgrade(int w, int h)
     {
-        super(rd, r, c, tr, tc);
+        //super(rd, r, c, tr, tc);
+        super(w,h);
+        FRAME_COUNT=3;
         FRAME_PREFIX = "health_upgrade/upgrade";
+        animDelay=20;
         frames = loadFrames();
         setImage(frames[0]);
     }

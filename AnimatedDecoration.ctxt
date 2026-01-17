@@ -1,9 +1,9 @@
 #BlueJ class context
 comment0.target=AnimatedDecoration
-comment0.text=\r\n\ Decoration\ that\ uses\ animated\ images\r\n
+comment0.text=\n\ Decoration\ that\ uses\ animated\ images\n
 comment1.params=basePath\ frameCount\ w\ h
 comment1.target=AnimatedDecoration(java.lang.String,\ int,\ int,\ int)
-comment1.text=\r\n\ @param\ basePath\:\ \ \ \ \ basePath\ of\ the\ images\r\n\ @param\ frameCount\:\ \ \ number\ of\ frames\r\n\ @param\ w,h\:\ \ \ \ \ \ \ \ \ \ scaled\ size\r\n
+comment1.text=\n\ @param\ basePath\:\ \ \ \ \ basePath\ of\ the\ images\n\ @param\ frameCount\:\ \ \ number\ of\ frames\n\ @param\ w,h\:\ \ \ \ \ \ \ \ \ \ scaled\ size\n
 comment2.params=
 comment2.target=void\ act()
 numComments=3

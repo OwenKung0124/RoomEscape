@@ -7,7 +7,7 @@ import greenfoot.*;
  *  doors.
  *
  * it does not decide door lock rules
- * it does NOT spawn enemies/coins.
+ * it does not spawn enemies/coins.
  * 
  * it only builds the room structure.
  */
@@ -34,6 +34,7 @@ public class RoomRenderer
         loadRoomBg(r, c);
         addBorderDoors(r, c);
         buildObjectsFromTiles(r, c);
+        buildShopObjects(r, c); //shop objects can't be build from tiles
     }
     private void loadRoomBg(int r, int c)
     {
@@ -63,14 +64,31 @@ public class RoomRenderer
         }
         world.setBackground(bg);
     }
-
     /**
-     * Builds wall colliders using ONLY the RoomData tile layout.
+     * /shop objects can't be build from tiles
+     * 
+     */ 
+    private void buildShopObjects(int r, int c)
+    {
+        char roomType = map.getRoomType(r, c);
+        if(roomType!='S')
+        {
+            return;
+        }
+        
+        //don't put too close to entrances
+        AttackUpgrade attackUpgrade = new AttackUpgrade(240,190);
+        world.addObject(attackUpgrade, 250,550);
+        
+        HealthUpgrade healthUpgrade = new HealthUpgrade(240,190);
+        world.addObject(healthUpgrade, 700,250);
+        
+        StoneSkill stoneSkill = new StoneSkill(240,190);
+        world.addObject(stoneSkill, 700,550);
+    }
+    /**
+     * Builds wall, blockers using the RoomData tile layout.
      *
-     *
-     * NOTE:
-     * Uses exact tile-to-pixel math so the right wall never "disappears"
-     * when ROOM_W isn't divisible by MAP_COLS.
      */
     public void buildObjectsFromTiles(int r, int c)
     {
@@ -83,10 +101,6 @@ public class RoomRenderer
             {
                 int code = rd.tiles[tr][tc];
     
-                if (code == GameConfig.DOOR) 
-                {
-                    continue;
-                }
                 int x1 = GameConfig.tileLeft(tc);
                 int x2 = GameConfig.tileRight(tc);
                 int y1 = GameConfig.tileTop(tr);
@@ -95,8 +109,15 @@ public class RoomRenderer
                 int w = x2 - x1;
                 int h = y2 - y1;
                 
+                //centre x y for adding objects
                 int x = x1 + w / 2;
                 int y = y1 + h / 2;
+            
+                if (code == GameConfig.DOOR) 
+                {
+                    //use addBorderDoors
+                    continue;
+                }
     
                 if (code == GameConfig.INTERIOR_WALL)
                 {
@@ -110,28 +131,13 @@ public class RoomRenderer
                 {
                     world.addObject(new Coin(rd,r, c, tr, tc), x, y);
                 }
-                else if (code == GameConfig.ATTACK_UPGRADE) 
-                {
-                    world.addObject(new AttackUpgrade(rd,r, c, tr, tc), x, y);
-                }
-                else if (code == GameConfig.HEALTH_UPGRADE) 
-                {
-                    world.addObject(new HealthUpgrade(rd,r, c, tr, tc), x, y);
-                }
-                else if (code == GameConfig.STONE_SKILL) 
-                {
-                    world.addObject(new StoneSkill(rd,r, c, tr, tc), x, y);
-                }
                 else if (code == GameConfig.STATUE) 
                 {
                     Statue s = new Statue(w,h);
-                    
                     //to allow status to sit 
                     //on the floor" instead of centered
                     int dy = (s.getImage().getHeight() / 2) - (h / 2);
-                    
                     world.addObject(s, x, y-dy);
-                
                 }
                 else if (code == GameConfig.LION_RIGHT) 
                 {
@@ -141,8 +147,7 @@ public class RoomRenderer
                     //on the floor" instead of centered
                     int dy = (lion.getImage().getHeight() / 2) - (h / 2);
                     
-                    world.addObject(lion, x, y-dy);
-                
+                    world.addObject(lion, x, y-dy);          
                 }
                 else if (code == GameConfig.LION_LEFT) 
                 {
@@ -152,8 +157,7 @@ public class RoomRenderer
                     //on the floor" instead of centered
                     int dy = (lion.getImage().getHeight() / 2) - (h / 2);
                     
-                    world.addObject(lion, x, y-dy);
-                
+                    world.addObject(lion, x, y-dy); 
                 }
                 else if (code == GameConfig.FIRE) 
                 {
@@ -162,29 +166,24 @@ public class RoomRenderer
                     int dy = (fire.getImage().getHeight() / 2) - (h / 2);
                     
                     world.addObject(fire, x, y-dy);
-                
                 }
             }
         }
     }
     /**
      * Places Door actors based on:
-     * 1) Neighbor room exists in the RoomMap grid
-     * 2) The tile layout has DOOR (3) markers on the edge.
-     *
-     * NEW:
-     * - Door spawns at the position of the DOOR markers (not always in the center).
-     * - If multiple DOOR tiles are touching, we use the center of that run.
+     *   Neighbor room exists in the RoomMap grid
+     *   The tile layout has DOOR (3) markers on the edge.
      */
     private void addBorderDoors(int r, int c)
     {
         RoomData rd = map.getRoomData(r, c);
         if (rd == null) return;
     
-        // UP edge (row 0): look for DOOR markers on the top border
+        //UP edge (row 0): look for DOOR markers on the top border
         if (map.hasRoom(r - 1, c))
         {
-            int x = findDoorRunCenterXOnRow(rd, 0);
+            int x = findDoorCentreX(rd, 0);
             if (x != -1)
             {
                 int y = GameConfig.tileCenterY(0);
@@ -192,11 +191,11 @@ public class RoomRenderer
             }
         }
     
-        // DOWN edge (last row)
+        //DOWN edge (last row)
         if (map.hasRoom(r + 1, c))
         {
             int tr = GameConfig.MAP_ROWS - 1;
-            int x = findDoorRunCenterXOnRow(rd, tr);
+            int x = findDoorCentreX(rd, tr);
             if (x != -1)
             {
                 int y = GameConfig.tileCenterY(tr);
@@ -204,10 +203,10 @@ public class RoomRenderer
             }
         }
     
-        // LEFT edge (col 0)
+        //LEFT edge (col 0)
         if (map.hasRoom(r, c - 1))
         {
-            int y = findDoorRunCenterYOnCol(rd, 0);
+            int y = findDoorCenterY(rd, 0);
             if (y != -1)
             {
                 int x = GameConfig.tileCenterX(0);
@@ -215,11 +214,11 @@ public class RoomRenderer
             }
         }
     
-        // RIGHT edge (last col)
+        //RIGHT edge (last col)
         if (map.hasRoom(r, c + 1))
         {
             int tc = GameConfig.MAP_COLS - 1;
-            int y = findDoorRunCenterYOnCol(rd, tc);
+            int y = findDoorCenterY(rd, tc);
             if (y != -1)
             {
                 int x = GameConfig.tileCenterX(tc);
@@ -236,7 +235,7 @@ public class RoomRenderer
      * @param tr which row (0 for top, MAP_ROWS-1 for bottom)
      * @return center X in pixels, or -1 if no DOOR tiles on that edge
      */
-    private int findDoorRunCenterXOnRow(RoomData rd, int tr)
+    private int findDoorCentreX(RoomData rd, int tr)
     {
         int start = -1;
         int end = -1;
@@ -250,7 +249,7 @@ public class RoomRenderer
             }
             else
             {
-                // if we already started a run, stop at the first gap
+                //if we already started a run, stop at the first gap
                 if (start != -1) break;
             }
         }
@@ -271,7 +270,7 @@ public class RoomRenderer
      * @param tc which column (0 for left, MAP_COLS-1 for right)
      * @return center Y in pixels, or -1 if no DOOR tiles on that edge
      */
-    private int findDoorRunCenterYOnCol(RoomData rd, int tc)
+    private int findDoorCenterY(RoomData rd, int tc)
     {
         int start = -1;
         int end = -1;
@@ -312,7 +311,8 @@ public class RoomRenderer
     private boolean hasTopOpening(RoomData rd, int[] cols)
     {
         int tr = 0;
-        for (int tc : cols) {
+        for (int tc : cols) 
+        {
             if (!isWalkable(rd.tiles[tr][tc])) return false;
         }
         return true;
@@ -321,7 +321,8 @@ public class RoomRenderer
     private boolean hasBottomOpening(RoomData rd, int[] cols)
     {
         int tr = GameConfig.MAP_ROWS - 1;
-        for (int tc : cols) {
+        for (int tc : cols) 
+        {
             if (!isWalkable(rd.tiles[tr][tc])) return false;
         }
         return true;
@@ -330,7 +331,8 @@ public class RoomRenderer
     private boolean hasLeftOpening(RoomData rd, int[] rows)
     {
         int tc = 0;
-        for (int tr : rows) {
+        for (int tr : rows) 
+        {
             if (!isWalkable(rd.tiles[tr][tc])) return false;
         }
         return true;
@@ -390,6 +392,4 @@ public class RoomRenderer
         for (int tr : rows) sum += GameConfig.tileCenterY(tr);
         return sum / rows.length;
     }
-
-
 }

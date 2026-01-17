@@ -73,6 +73,9 @@ public class HealthBar extends Actor
 
         int hp = unit.getHealth();
         int max = unit.getMaxHealth();
+        //System.out.println("hp:="+hp);
+        //System.out.println("max:="+max);
+        
         if (max <= 0) 
         {
             return;
@@ -117,5 +120,7 @@ public class HealthBar extends Actor
 
         img.setColor(fill);
         img.fillRect(innerX, innerY, fillW, innerH);
+        
+        
     }
 }

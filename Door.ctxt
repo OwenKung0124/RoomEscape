@@ -1,24 +1,24 @@
 #BlueJ class context
 comment0.target=Door
-comment0.text=\r\n\ Door\ moves\ the\ player\ to\ a\ neighboring\ room\ when\ unlocked\ and\ touched.\r\n\r\n\ The\ movement\ direction\ is\ stored\ as\ (dr,\ dc).\r\n\ UP\ \=\ (-1,\ 0)\r\n\ DOWN\ \=\ (1,\ 0)\r\n\ LEFT\ \=\ (0,\ -1)\r\n\ RIGHT\ \=\ (0,\ 1)\r\n\ \r\n\ @author\:\ Owen\ Kung\r\n\ @version\:\ Jan\ 2026\r\n
+comment0.text=\n\ Door\ moves\ the\ player\ to\ a\ neighboring\ room\ when\ unlocked\ and\ touched.\n\n\ The\ movement\ direction\ is\ stored\ as\ (dr,\ dc).\n\ UP\ \=\ (-1,\ 0)\n\ DOWN\ \=\ (1,\ 0)\n\ LEFT\ \=\ (0,\ -1)\n\ RIGHT\ \=\ (0,\ 1)\n\ \n\ @author\:\ Owen\ Kung\n\ @version\:\ Jan\ 2026\n
 comment1.params=name\ dr\ dc
 comment1.target=Door(java.lang.String,\ int,\ int)
-comment1.text=\r\n\ Creates\ a\ Door\ with\ a\ label\ and\ a\ direction.\r\n\r\n\ @param\ name\ label\ text\r\n\ @param\ dr\ row\ change\r\n\ @param\ dc\ col\ change\r\n
+comment1.text=\n\ Creates\ a\ Door\ with\ a\ label\ and\ a\ direction.\n\n\ @param\ name\ label\ text\n\ @param\ dr\ row\ change\n\ @param\ dc\ col\ change\n
 comment2.params=
 comment2.target=int\ getDr()
-comment2.text=\r\n\ @return\ the\ row\ that\ door\ opens\ to\r\n
+comment2.text=\n\ @return\ the\ row\ that\ door\ opens\ to\n
 comment3.params=
 comment3.target=int\ getDc()
-comment3.text=\r\n\ @return\ the\ col\ that\ the\ door\ opens\ to\r\n
+comment3.text=\n\ @return\ the\ col\ that\ the\ door\ opens\ to\n
 comment4.params=on
 comment4.target=void\ setUnlocked(boolean)
-comment4.text=\r\n\ Locks/unlocks\ the\ door\ and\ redraws\ the\ image.\r\n\r\n\ @param\ on\ true\ to\ unlock,\ false\ to\ lock\r\n
+comment4.text=\n\ Locks/unlocks\ the\ door\ and\ redraws\ the\ image.\n\n\ @param\ on\ true\ to\ unlock,\ false\ to\ lock\n
 comment5.params=
 comment5.target=boolean\ isLocked()
 comment6.params=
 comment6.target=void\ updateImage()
-comment6.text=\r\n\ Draws\ the\ door\ image.\r\n\r\n\ UPDATE\:\r\n\ -\ Uses\ door_locked.png\ /\ door_unlocked.png\r\n\ -\ UP/DOWN\ doors\ use\ a\ horizontal\ image\ scaled\ to\ (DOOR_GAP_W\ x\ BORDER_THICK)\r\n\ -\ LEFT/RIGHT\ doors\ use\ a\ vertical\ image\ scaled\ to\ (BORDER_THICK\ x\ DOOR_GAP_H)\r\n\ -\ If\ image\ is\ missing,\ falls\ back\ to\ a\ colored\ rectangle\ (your\ old\ style)\r\n
+comment6.text=\n\ Draws\ the\ door\ image.\n\n\ UPDATE\:\n\ -\ Uses\ door_locked.png\ /\ door_unlocked.png\n\ -\ UP/DOWN\ doors\ use\ a\ horizontal\ image\ scaled\ to\ (DOOR_GAP_W\ x\ BORDER_THICK)\n\ -\ LEFT/RIGHT\ doors\ use\ a\ vertical\ image\ scaled\ to\ (BORDER_THICK\ x\ DOOR_GAP_H)\n\ -\ If\ image\ is\ missing,\ falls\ back\ to\ a\ colored\ rectangle\ (your\ old\ style)\n
 comment7.params=
 comment7.target=void\ act()
-comment7.text=\r\n\ When\ unlocked\ and\ the\ player\ touches\ the\ door\r\n\ ask\ GameWorld\ to\ move\ rooms.\r\n
+comment7.text=\n\ When\ unlocked\ and\ the\ player\ touches\ the\ door\n\ ask\ GameWorld\ to\ move\ rooms.\n
 numComments=8

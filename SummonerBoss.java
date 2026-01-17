@@ -45,8 +45,10 @@ public class SummonerBoss extends Enemy
         spriteH=125;
 
         //boos health
-        maxHealth=GameConfig.SUMMONER_BOSS_MAX_HEALTH;
+        baseMaxHealth=GameConfig.SUMMONER_BOSS_MAX_HEALTH;
+        maxHealth=baseMaxHealth;
         health=maxHealth;
+        
 
         //no damage
         //otherwise sword and axe warrior can't kill boss
@@ -130,7 +132,7 @@ public class SummonerBoss extends Enemy
         //summoner is big
         //when player touches
         //it does not takeDamage of player
-        handlePlayerContact();
+        //handlePlayerContact();
 
         if (summoning)
         {
@@ -145,16 +147,16 @@ public class SummonerBoss extends Enemy
             }
         }
     }
-    /*
-  protected void handlePlayerContact() 
+    /**
+     * Boss does not handle player contact
+     * otherwise sword and axe warrior has no way to kill the boss
+     */
+    protected void handlePlayerContact() 
     {
         //do nothing
         //otherwise, axe or sword player has now way to kill the boos
         return;
     }
-     */
-   
-
     /**
      * Schedules the next summon by setting summonTimer to a random value
      * between minInterval and maxInterval (inclusive).
@@ -306,10 +308,16 @@ public class SummonerBoss extends Enemy
     
         return null;
     }
+    /**
+     * Summoner boss does not playAttackSoundEffect
+     */
     protected void playAttackSoundEffect()
     {
         //SoundManager.playZombieSound();
     }
+    /**
+     * Summoner boss does play end of life sound effect
+     */
     protected void playEndOfLifeSoundEffect()
     {
         //to prevent hearing summoning sound after boss dead

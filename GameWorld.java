@@ -49,6 +49,7 @@ public class GameWorld extends World
     public static int attackCount=0;
     public static int playerTimeFrames=0;
 
+    
     private GameData data;   //this data is passed around between world and is used to save to file when needed
     
     public GameWorld()
@@ -179,11 +180,23 @@ public class GameWorld extends World
         loadRoom(roomR, roomC, 0, 0); 
         
         setPaintOrder(
+            FloatingText.class,
             PauseOverlay.class,
             Decoration.class,   //the statue image actor
             Enemy.class,
             SummonerBoss.class
         ); 
+        
+        //image Icons for side panels
+        int hudX=GameConfig.ROOM_X + GameConfig.ROOM_W + GameConfig.SIDE_PANEL_W / 2;
+        addObject(new ImageIcon("difficulty_icon.png","Difficulty Level",35,35,255),hudX-110,385);  
+        addObject(new ImageIcon("attacks_icon.png","# 0f Attacks",35,35,255),hudX-110,420);
+        addObject(new ImageIcon("enemy_defeated_icon.png","Enemy Defeated",35,35,255),hudX-110,455);
+        addObject(new ImageIcon("attack_power_icon.png","Attack Power",35,35,255),hudX-110,490);
+        addObject(new ImageIcon("coin.png","Coins Earned",35,35,255),hudX-110,525);
+        addObject(new ImageIcon("stone_icon.png","Stone Skill Earned",35,35,255),hudX-110,565);
+        addObject(new ImageIcon("score_icon.png","Score",40,20,255),hudX-110,595);
+        addObject(new ImageIcon("time_icon.png","Time Lapsed",40,20,255),hudX-110,630);
         
         //prompt manager for handling prompts during game play
         promptManager = new PromptManager();
@@ -221,7 +234,7 @@ public class GameWorld extends World
      */
     private void exitToSetup()
     {  
-        save();
+        saveToFile();
         
         paused=false;
         Greenfoot.setWorld(new SettingWorld(data));
@@ -232,14 +245,14 @@ public class GameWorld extends World
      */
     private void saveAndLeave()
     {
-        save();
+        saveToFile();
         Greenfoot.setWorld(new SettingWorld(data));
         paused=false;
         Greenfoot.stop();
     }
     public void onPlayerDefeated()
     {
-        //save();
+        save();
         //start from new game only
         SaveManager.deleteSave();
         paused = false;
@@ -247,7 +260,7 @@ public class GameWorld extends World
     }
     public void onPlayerVictory()
     {
-        //save();
+        save();
         //start from new game only
         SaveManager.deleteSave();
         paused = false;
@@ -270,7 +283,6 @@ public class GameWorld extends World
         data.coins=player.getCoinCount();
         data.score=player.getScore();
         data.stones=player.getStoneSkillCount();
-        
         if(player instanceof AxeWarrior)
         {
             data.axeAttackPower=player.getAttackPower();
@@ -283,6 +295,12 @@ public class GameWorld extends World
         {
             data.swordAttackPower=player.getAttackPower();
         }
+ 
+    }
+    private void saveToFile()
+    {
+        save();
+        
         //roomCleared,roomVisited,roomData handled by
         //GameMap, RoomData in SavaMAnager
         SaveManager.save(data,map);
@@ -315,7 +333,7 @@ public class GameWorld extends World
             }
             if (Greenfoot.isKeyDown("s"))
             {
-                //saveAndLeave();   //<<<<<<<open this feature later
+                //saveAndLeave();   //<<<<<<<may open this feature later
             }
             return;
         }
@@ -332,33 +350,27 @@ public class GameWorld extends World
         }
         
         
-        //HUD text in side panel
+        //HUD text in side panel;
         int hudX=GameConfig.ROOM_X + GameConfig.ROOM_W + GameConfig.SIDE_PANEL_W / 2;
         showText("Room: (" + roomR + "," + roomC + ")", hudX, 30);
         showText("Enemies: " + countEnemies(), hudX, 55);
         showText("Rooms Cleared: " + roomsClearedCount + " / " + totalRoomsToClear, hudX, 80);
-        showText("Press ESC to Exit\n Press Space to Attack\n Press k to Stone Enemy", hudX, 250);
-        showText("Difficulty Level:"+ difficultyLevel(), hudX,450);
-        showText("Attacks : " + attackCount, hudX, 475);
-        showText("Enemies defeated: " + enemiesKilled, hudX, 500);
-        showText("Time: " +playerTimeFrames/60+ " seconds", hudX, 525);
-        showText("Coin Collected: " +  player.getCoinCount(),hudX, 550);
-        showText("Stone Skill: "+  player.getStoneSkillCount(),hudX, 575);
-        showText("Score: " + player.getScore(), hudX, 600);
-        showText("Attack Power:"+player.getAttackPower(),hudX,625);
-        showText("Heath Remain: " + player.getHealth(), hudX, 650);
-
+        //showText("Press ESC to Exit\n Press Space to Attack\n Press k to Stone Enemy", hudX, 250);
+        showText(": "+ difficultyLevel(), hudX-60,385);
+        showText(": " + attackCount, hudX-60, 420);
+        showText(": " + enemiesKilled, hudX-60, 455);
+        showText(": "+player.getAttackPower(),hudX-60,490);
+        showText(": " +  player.getCoinCount(),hudX-60, 525);
+        showText(": "+  player.getStoneSkillCount(),hudX-60, 565);
+        showText(": " + player.getScore(), hudX-60, 595);
+        showText(": " +playerTimeFrames/60+ " Seconds", hudX-10, 630);
+        showText("" + player.getHealth(), hudX+115, 655);
 
         //Win check
         //show in the window of the room
-        //if (roomsClearedCount >= GameConfig.WIN_ROOMS) 
         if(roomsClearedCount>=totalRoomsToClear)
         {
             Greenfoot.setWorld(new VictoryWorld(data)); 
-            //showText("YOU WIN!", 
-            //GameConfig.ROOM_X + GameConfig.ROOM_W / 2, 
-            //GameConfig.ROOM_Y + GameConfig.ROOM_H / 2);
-            //Greenfoot.stop();
         }
 
         boolean unlockedNow=isRoomUnlocked();
@@ -417,7 +429,7 @@ public class GameWorld extends World
         ArrayList<Actor> all=new ArrayList<Actor>(getObjects(Actor.class));
         for (Actor a : all) 
         {
-             if (a != player && a != minimap && a!=playerBar && a!=promptManager) 
+             if (a != player && a != minimap && a != playerBar && a != promptManager && !(a instanceof ImageIcon))
              {
                 removeObject(a);   
              }
@@ -593,7 +605,7 @@ public class GameWorld extends World
         return null;
     }
     /**
-     * Allows any cctor to check if the game is paused.
+     * Allows any actor to check if the game is paused.
      */
     public static boolean isPaused()
     {

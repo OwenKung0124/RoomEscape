@@ -4,9 +4,11 @@ import greenfoot.*;
  */
 public class AttackUpgrade extends Upgrade
 {
-    public AttackUpgrade(RoomData rd, int r, int c, int tr, int tc)
+    //public AttackUpgrade(RoomData rd, int r, int c, int tr, int tc)
+    public AttackUpgrade(int w, int h)
     {
-        super(rd, r, c, tr, tc);
+        //super(rd, r, c, tr, tc);
+        super(w,h);
         FRAME_PREFIX = "attack_upgrade/upgrade";
         frames = loadFrames();
         setImage(frames[0]);

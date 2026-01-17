@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=StoryPlayer
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ StoryPlayer\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\n\ Write\ a\ description\ of\ class\ StoryPlayer\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
 comment1.params=
 comment1.target=StoryPlayer()
 comment2.params=
@@ -11,7 +11,7 @@ comment4.params=left\ right
 comment4.target=void\ updateAnimation(boolean,\ boolean)
 comment5.params=
 comment5.target=void\ act()
-comment5.text=\r\n\ Lock\ Y\ position\ every\ frame\r\n
+comment5.text=\n\ Lock\ Y\ position\ every\ frame\n
 comment6.params=
 comment6.target=boolean\ wantsToAttack()
 comment7.params=

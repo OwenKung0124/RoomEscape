@@ -39,6 +39,7 @@ public class GameConfig
     //Tiles
     public static final int MAP_COLS = 16;
     public static final int MAP_ROWS = 9;
+    
     //Tiles constant
     //1-10 structure constants
     public static final int FLOOR = 0;
@@ -47,9 +48,6 @@ public class GameConfig
     public static final int DOOR = 3;
     //collectables starting with 11-20
     public static final int COIN = 11; 
-    public static final int ATTACK_UPGRADE = 12; 
-    public static final int HEALTH_UPGRADE = 13; 
-    public static final int STONE_SKILL = 14; 
     
     //station object 21-30
     public static final int STATUE = 21; 
@@ -62,7 +60,7 @@ public class GameConfig
     public static final int STATUE_H = 180;
     public static final String STATUE_IMG = "statue/statue";
     
-     //lion right
+    //lion right
     public static final int LION_RIGHT_W = 90;
     public static final int LION_RIGHT_H = 80;
     public static final String LION_RIGHT_IMG = "lion_statue_right.png";
@@ -82,13 +80,13 @@ public class GameConfig
     public static final int DOOR_GAP_W = 90;
     public static final int DOOR_GAP_H = 120;
 
-    public static final int ENEMIES_TO_SPAWN = 5;//this is for level 0
+    public static final int ENEMIES_TO_SPAWN = 1;//this is for level 0
     //public static final int WIN_ROOMS = 6;
     
     //SummonerBoss
     //public static final int SUMMONER_BOSS_DOOR_CLEARED=1;
-    public static final int SUMMOMER_BOSS_MINION_SPWAN=3; //use smaller number for testingpublic static final int SUMMOMER_BOSS_MINION_SPWAN=1; 
-    public static final int SUMMONER_BOSS_MAX_HEALTH=50;
+    public static final int SUMMOMER_BOSS_MINION_SPWAN=2; //2 for gampley, use smaller number for testingpublic static final int SUMMOMER_BOSS_MINION_SPWAN=1; 
+    public static final int SUMMONER_BOSS_MAX_HEALTH=150;  //180 for game, other numbers for testing
     
     //Warrior Selection;
     public static final int WARRIOR_AXE=1;
@@ -106,7 +104,9 @@ public class GameConfig
     
     //Default max HP for the player.
     public static final int DEFAULT_MAX_HP=100;
-    public static final int DEFAULT_INVINCIBILITY_FRAMES=30;
+    //the larger the number reduce damage 
+    //to sword and axe warrior as they need to be very close to enemy to hit
+    public static final int DEFAULT_INVINCIBILITY_FRAMES=45;  
     public static final int MINIMUM_HP_TO_UPGRADE=20;
     
     //default stone

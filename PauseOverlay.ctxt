@@ -1,9 +1,9 @@
 #BlueJ class context
 comment0.target=PauseOverlay
-comment0.text=\r\n\ PauseOverlay\ displays\ a\ pause\ message\ on\ top\ of\ the\ game.\r\n\r\n
+comment0.text=\n\ PauseOverlay\ displays\ a\ pause\ message\ on\ top\ of\ the\ game.\n\n
 comment1.params=
 comment1.target=PauseOverlay()
 comment2.params=
 comment2.target=void\ redraw()
-comment2.text=\r\n\ Builds\ the\ pause\ overlay\ image.\r\n
+comment2.text=\n\ Builds\ the\ pause\ overlay\ image.\n
 numComments=3
