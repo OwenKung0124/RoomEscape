@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=WanderAround
-comment0.text=\n\ WanderAround\ helps\ wondring\ actor\ move\ in\ the\ world\n\ \ pick\ a\ random\ direction\n\ \ Keep\ moving\ in\ that\ direction\ for\ a\ random\ time\n\ \ then\ pick\ again\n\n
+comment0.text=\n\ WanderAround\ helps\ wondring\ actor\ move\ in\ the\ world\n\ \ pick\ a\ random\ direction\n\ \ Keep\ moving\ in\ that\ direction\ for\ a\ random\ time\n\ \ then\ pick\ again\n\ \ \n\ \ @author\:\ Owen\ Kung\n\ \ @version\:\ Jan\ 2026\n
 comment1.params=minHoldFrames\ extraHoldFrames
 comment1.target=WanderAround(int,\ int)
 comment1.text=\n\ @param\ minHoldFrames\:\ \ \ \ minimum\ frames\ to\ keep\ a\ direction\n\ @param\ extraHoldFrames\:\ \ additional\ random\ frames\n

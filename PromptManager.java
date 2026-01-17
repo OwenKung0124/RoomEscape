@@ -22,16 +22,19 @@ public class PromptManager extends Actor
     //for attack upgrade prompt
     private AttackUpgrade attackUpgrade;
     private AttackUpgrade attackUpgradeDeclined;
+    private AttackUpgrade attackUpgradeAccepted;
     private int upgradeAmount;
     private int upgradeCost;
     
     //for health upgrade prompt
     private HealthUpgrade healthUpgrade;
     private HealthUpgrade healthUpgradeDeclined;
+    private HealthUpgrade healthUpgradeAccepted;
     
     //for stoneskill upgrade prompt
     private StoneSkill stoneSkillUpgrade;
     private StoneSkill stoneSkillUpgradeDeclined;
+    private StoneSkill stoneSkillUpgradeAccepted;
 
     //prevent multiple keey press
     private boolean uWasDown=false;
@@ -231,9 +234,11 @@ public class PromptManager extends Actor
             if (player != null &&attackUpgrade!= null&& attackUpgrade.getWorld() != null)
             {
                 boolean ok=player.upgradeAttackPower(upgradeAmount, upgradeCost);
+                
+                attackUpgrade.markAccepted(player);
                 if (ok &&  attackUpgrade.getWorld() != null)
                 {
-                        attackUpgrade.getWorld().removeObject( attackUpgrade);
+                    //attackUpgrade.getWorld().removeObject( attackUpgrade);
                 }
             }
         }
@@ -242,9 +247,11 @@ public class PromptManager extends Actor
             if (player != null &&healthUpgrade!= null&& healthUpgrade.getWorld() != null)
             {
                 boolean ok=player.upgradeHealthPower(upgradeAmount, upgradeCost);
+                healthUpgrade.markAccepted(player);
                 if (ok &&  healthUpgrade.getWorld() != null)
                 {
-                    healthUpgrade.getWorld().removeObject( healthUpgrade);
+                    //don't remove, it's a stand
+                    //healthUpgrade.getWorld().removeObject( healthUpgrade);
                 }
             }
         }
@@ -253,9 +260,10 @@ public class PromptManager extends Actor
             if (player != null &&stoneSkillUpgrade!= null&& stoneSkillUpgrade.getWorld() != null)
             {
                 boolean ok=player.aquireStoneSkill(upgradeAmount, upgradeCost);
+                stoneSkillUpgrade.markAccepted(player);
                 if (ok &&  stoneSkillUpgrade.getWorld() != null)
                 {
-                    stoneSkillUpgrade.getWorld().removeObject( healthUpgrade);
+                    //stoneSkillUpgrade.getWorld().removeObject( healthUpgrade);
                 }
             }
         }
@@ -275,7 +283,10 @@ public class PromptManager extends Actor
             stoneSkillUpgrade.markDeclined(player);
         }  
     }
-    private void show(String msg,int frames)
+    /**
+     * For showing msg in side panel 
+     */
+    public void show(String msg,int frames)
     {
         removeLabel();
         label=new TextLabel(msg, 20, Color.YELLOW, frames);
@@ -283,7 +294,7 @@ public class PromptManager extends Actor
         World w=getWorld();
         if (w != null)
         {
-            w.addObject(label, GameConfig.sidePanelCentreX(), GameConfig.sidePanelCentreY());
+            w.addObject(label, GameConfig.sidePanelCentreX(), GameConfig.sidePanelCentreY()-50);
         }
     }   
     private void close()

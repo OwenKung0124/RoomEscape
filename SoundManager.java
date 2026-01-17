@@ -7,12 +7,16 @@ import greenfoot.*;
 public class SoundManager
 {
     //user preferences
-    private static boolean musicOn = false;
-    private static boolean sfxOn   = false;
+    private static boolean musicOn = true;
+    private static boolean sfxOn   = true;
 
     //game music
     private static GreenfootSound gameMusic = new GreenfootSound("dark_ambient_2.mp3");
+    //private static GreenfootSound gameMusic = new GreenfootSound("anna_theme.mp3");
     //private static GreenfootSound gameMusic = new GreenfootSound("game_music.mp3");
+    private static GreenfootSound defeat = new GreenfootSound("defeat.mp3");
+    private static GreenfootSound help = new GreenfootSound("fire.mp3");
+    private static GreenfootSound victory = new GreenfootSound("victory.mp3");
     
     //summoner boss
     private static GreenfootSound summonerBoss = new GreenfootSound("summoner_boss.mp3");
@@ -78,6 +82,10 @@ public class SoundManager
         new GreenfootSound("coin.mp3"),
         new GreenfootSound("coin.mp3"),
         new GreenfootSound("coin.mp3"),
+        new GreenfootSound("coin.mp3"),
+        new GreenfootSound("coin.mp3"),
+        new GreenfootSound("coin.mp3"),
+        new GreenfootSound("coin.mp3"),
         new GreenfootSound("coin.mp3")
     };
     
@@ -101,6 +109,7 @@ public class SoundManager
         new GreenfootSound("health_upgrade.mp3"),
         new GreenfootSound("health_upgrade.mp3")
     };
+    
     private SoundManager() {}
 
     /**
@@ -179,7 +188,7 @@ public class SoundManager
     {
          if (!sfxOn) return;
 
-        summonerBoss.setVolume(30);
+        summonerBoss.setVolume(35);
         if (!summonerBoss.isPlaying()) 
         {
             summonerBoss.play();
@@ -378,6 +387,81 @@ public class SoundManager
         }
     }
     /**
+     * play defeat sound in defeat page
+     */
+    public static void playDefeatSound()
+    {
+        if (!musicOn) return;
+        
+        defeat.setVolume(30);
+        if (!defeat.isPlaying()) 
+        {
+            defeat.play();
+        }
+    }
+    /**
+     * stop defea sound when not in defeat page
+     */
+    public static void stopDefeatSound()
+    {
+        if (!musicOn) return;
+        
+        if (defeat.isPlaying()) 
+        {
+            defeat.stop();
+        }
+    }
+    /**
+     * play help sound in help page
+     */
+    public static void playHelpSound()
+    {
+        if (!musicOn) return;
+        
+        help.setVolume(40);
+        if (!help.isPlaying()) 
+        {
+            help.playLoop();
+        }
+    }
+    /**
+     * stop help sound when not in help page
+     */
+    public static void stopHelpSound()
+    {
+        if (!musicOn) return;
+        
+        if (help.isPlaying()) 
+        {
+            help.stop();
+        }
+    }
+    /**
+     * play victory sound in victory page
+     */
+    public static void playVictorySound()
+    {
+        if (!musicOn) return;
+        
+        victory.setVolume(40);
+        if (!victory.isPlaying()) 
+        {
+            victory.playLoop();
+        }
+    }
+    /**
+     * stop victory sound when not in victory page
+     */
+    public static void stopVictorySound()
+    {
+        if (!musicOn) return;
+        
+        if (victory.isPlaying()) 
+        {
+            victory.stop();
+        }
+    }
+    /**
      * play game start sound when new game or resume game is pressed
      */
     public static void playStartSound()
@@ -410,10 +494,12 @@ public class SoundManager
     private static int arraySoundPlay(GreenfootSound sounds[], int index, int volumn)
     {
         if (!sfxOn) return 0;
+        if (sounds == null || sounds.length == 0) return 0;
+        if (index < 0 || index >= sounds.length) index = 0;
         
         try
         {
-            sounds[index].setVolume(30);
+            sounds[index].setVolume(volumn);
             sounds[index].play();
         }
         catch(ArrayIndexOutOfBoundsException ao)

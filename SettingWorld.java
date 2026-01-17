@@ -18,7 +18,8 @@ public class SettingWorld extends World
     private StartButton resumeBotton;
     
     private GameData data;
-    private TextLabel warriorTextLabel;
+    //TextLabel
+    private TextLabel hintLabel;
 
     public SettingWorld()
     {
@@ -40,9 +41,10 @@ public class SettingWorld extends World
         bg.scale(GameConfig.WORLD_W, GameConfig.WORLD_H);
         setBackground(bg);
 
-        //showText("Click a warrior image to select", GameConfig.WORLD_W / 2, 100);
-        showText("Click a warrior image to select",30,Color.WHITE,GameConfig.WORLD_W / 2, 100);
-
+        //Warrior Selection
+        hintLabel = new TextLabel("Click a warrior image to select", 30, Color.WHITE, -1);
+        addObject(hintLabel, GameConfig.WORLD_W / 2, 100);
+        
         //selections
         axeIcon = new WarriorSelectIcon("player/axe_warrior/walking/down", 4,GameConfig.WARRIOR_AXE,245,260);
         bulletIcon = new WarriorSelectIcon("player/bullet_warrior/walking/down",4, GameConfig.WARRIOR_BULLET,245,260);
@@ -57,6 +59,9 @@ public class SettingWorld extends World
 
         addObject(newGameBotton, GameConfig.WORLD_W / 2, 635);
         addObject(resumeBotton,  GameConfig.WORLD_W / 2 + 260, 635);
+                
+        //help icon
+        addObject(new ImageIcon("help_icon.png","How to Play",50,50,255), GameConfig.WORLD_W/2 +275, 100);
         
         //sound effects toggles
         addObject(new SoundToggleButton(SoundToggleButton.TYPE_MUSIC), GameConfig.WORLD_W/2 +400, 100);
@@ -161,8 +166,6 @@ public class SettingWorld extends World
         //showText(String msg, int size,Color color, int x, int y)
         showText(
             "Selected: " + selectedStr,
-            //30,
-            //Color.WHITE,
             GameConfig.WORLD_W / 2,
             135
         );

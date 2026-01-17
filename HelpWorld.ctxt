@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=HelpWorld
+comment0.text=\n\ This\ world\ simply\ display\ information\ on\ \n\ \ how\ to\ play\ the\ game\n\ \ how\ scaling,\ coins,\ scores\ work\n\ \n\ @author\:\n\ @version\:\n
+comment1.params=returnWorld
+comment1.target=HelpWorld(greenfoot.World)
+comment1.text=\n\ Creates\ the\ HelpWorld\ and\ displays\ the\ first\ help\ page.\n\n\ @param\ returnWorld\ the\ world\ to\ go\ back\ to\ when\ Esc\ is\ pressed\n
+comment2.params=
+comment2.target=void\ act()
+comment2.text=\n\ Checks\ for\ Up/Down/Esc\ key\ presses\ each\ frame.\n
+comment3.params=index
+comment3.target=void\ showPage(int)
+comment3.text=\n\ Displays\ the\ requested\ page\ index\ by\ setting\ the\ world\ background\ image.\n\n\ @param\ index\ the\ requested\ page\ number\n
+numComments=4

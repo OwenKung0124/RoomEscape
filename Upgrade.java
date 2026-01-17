@@ -1,43 +1,52 @@
 import greenfoot.*;
+import java.util.ArrayList;
 
 /**
  * Parent class for animated upgrade
  */
-public abstract class Upgrade extends Actor
+public abstract class Upgrade extends Blocker
 {
-    private RoomData roomData;
-    private int r,c,tr,tc;
+    //private RoomData roomData;
+    //private int r,c,tr,tc;
 
     //animation related variables
     protected GreenfootImage[] frames;
     private int frameIndex = 0;
     private int animTimer = 0;
-    private int animDelay = 6; 
+    protected int animDelay = 6; 
     
-    private static int FRAME_COUNT = 6;  
+    protected  int FRAME_COUNT = 6;  
     protected String FRAME_PREFIX = "coin/coin";
-    
+    protected int VISUAL_W = 30;
+    protected int VISUAL_H = 30;
+
     //prompt fields
-    private boolean declined = false;
-    private Player declinedBy = null;
+    private boolean declined=false;
+    private boolean accepted=false;
+    private Player declinedBy=null;
+    private Player acceptedBy=null;
     protected Player player=null;
+
+    //how close the player must be to trigger the prompt
+    //protected int TRIGGER_RADIUS = 60;
     
     /**
-     * @param RoomDate rd
-     * @param roomR room 
-     * @param roomC room
-     * @param tr tile row
-     * @param tc tile col
+     * Creates a statue with a collision hitbox of size (w, h).
+     *
+     * @param w:    hitbox width
+     * @param h:    hitbox height
      */
-    public Upgrade(RoomData rd,int r, int c, int tr, int tc) 
+     public Upgrade(int w, int h)
     {
-        this.roomData=rd;
-        this.r=r;
-        this.c=c;
-        this.tr=tr;
-        this.tc=tc;
-        //frames = loadFrames();
-        //setImage(frames[0]);
+        super(w, h);
+        VISUAL_W=w;
+        VISUAL_H=h;
+        
+        //create a transparent image for the hitbox.
+        //the actor still collides because the Blocker logic uses this size,
+        //but the player won't see a sprite drawn for the hitbox.
+        setImage(new GreenfootImage(VISUAL_W, VISUAL_H));
+
     }
     protected abstract void upgrade(Player player);
     
@@ -46,24 +55,46 @@ public abstract class Upgrade extends Actor
         animate();
         
         //always only one player
-        player=(Player) getOneIntersectingObject(Player.class);
-
+        player = getNearestPlayerInRange(triggerRadius());
+        
         //if player not touching anymore 
         //allow prompt again later
         if (player==null)
         {
             clearDeclined();
+            clearAccepted();
             return;
         }
 
-        //if this same player declined and is still standing here, do NOT reopen
+        //if this same player declined and is still standing near, do not reopen
         if (declined && player==declinedBy)
         {
             return;
         }
         
+        //if this same player accepted and is still standing near, do not reopen
+        if (accepted && player==acceptedBy)
+        {
+            return;
+        }
+        
         upgrade(player);
-
+    }
+    private int triggerRadius()
+    {
+        int w = getImage().getWidth();
+        int h = getImage().getHeight();
+        return Math.max(w, h) / 2 + 40; // extra padding
+    }
+    private Player getNearestPlayerInRange(int radius)
+    {
+        ArrayList<Player> ps = (ArrayList<Player>) getObjectsInRange(radius, Player.class);
+        if (ps == null || ps.isEmpty())
+        {
+             return null;    
+        }
+        //usually only one player, so just return the first
+        return ps.get(0);
     }
     /**
      * called by PromptManager to mark who decline the prompt
@@ -75,10 +106,25 @@ public abstract class Upgrade extends Actor
         declined = true;
         declinedBy = p;
     }
-    protected void clearDeclined()
+    private void clearDeclined()
     {
         declined = false;
         declinedBy = null;
+    }
+    /**
+     * called by PromptManager to mark who accepts the prompt
+     * 
+     * @param p: Player who accepts the prompt
+     */
+    public void markAccepted(Player p)
+    {
+        accepted=true;
+        acceptedBy=p;
+    }
+    private void clearAccepted()
+    {
+        accepted=false;
+        acceptedBy=null;
     }
     protected void animate()
     {
@@ -104,7 +150,7 @@ public abstract class Upgrade extends Actor
             for (int i = 0; i < FRAME_COUNT; i++)
             {
                 GreenfootImage img = new GreenfootImage(FRAME_PREFIX + (i+1) + ".png");
-                img.scale(30, 30);
+                img.scale(VISUAL_W,VISUAL_H);
                 imgs[i] = img;
             }
             return imgs;

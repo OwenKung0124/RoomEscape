@@ -12,9 +12,11 @@ public class StoneSkill extends Upgrade
      * @param tr tile row
      * @param tc tile col
      */
-    public StoneSkill (RoomData rd,int r, int c, int tr, int tc)
+    //public StoneSkill (RoomData rd,int r, int c, int tr, int tc)
+    public StoneSkill(int w, int h)
     {
-        super(rd, r, c, tr, tc);
+        //super(rd, r, c, tr, tc);
+        super(w,h);
         FRAME_PREFIX = "stone_skill/upgrade";
         frames = loadFrames();
         setImage(frames[0]);

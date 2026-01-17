@@ -26,21 +26,22 @@ public abstract class Enemy extends CombatActor
 
     //cooldown frames
     //before next damage can count
-    protected int hitCooldownFrames=30;
+    protected int hitCooldownFrames=GameConfig.DEFAULT_INVINCIBILITY_FRAMES;  //make sure enemy does not hurt player more than needed
     
     //damage to player when in contact
     protected int contactDamage=1;
     
     //enemy health
-    protected int maxHealth=5;
+    protected int baseMaxHealth=5;
+    protected int maxHealth=baseMaxHealth;
     protected int health=maxHealth;
     
     //health bar Health bar that follows this enemy
     private HealthBar hpBar;
     protected int HP_BAR_W=40;
     protected int HP_BAR_H=8;
-   //Positive offset=bar appears UNDER the enemy
-    protected int HP_BAR_Y_OFFSET=35;
+    //Positive offset=bar appears UNDER the enemy
+    protected int HP_BAR_Y_OFFSET=50;
     
     //freeze timer (stone skill)
     protected int freezeTimer = 0;
@@ -63,10 +64,11 @@ public abstract class Enemy extends CombatActor
     }
 
     //subclass must implement these methods
+    //calculate how the enemy would move in the world
     protected abstract int[] computeMove();
-    
+    //set specific attack sound effect when needed
     protected abstract void playAttackSoundEffect();
-    
+     //set specific end of life sound effec if needed
     protected abstract void playEndOfLifeSoundEffect();
     
     /**
@@ -78,7 +80,10 @@ public abstract class Enemy extends CombatActor
         
         if (hpBar == null)
         {
-            //HealthBar(HasHealth unit, Actor follow, int width, int height, boolean followTarget, int yOffset)
+            maxHealth=getMaxHealth();
+            health=maxHealth;
+        
+            //HealthBar(CombatActor unit, Actor follow, int width, int height, boolean followTarget, int yOffset)
             hpBar=new HealthBar(this, this, HP_BAR_W, HP_BAR_H, true, HP_BAR_Y_OFFSET);
     
             //add bar at the correct starting position
@@ -266,24 +271,24 @@ public abstract class Enemy extends CombatActor
         //max health based on difficulty level
         if(getWorld()==null)
         {
-            return maxHealth;
+            return baseMaxHealth;
         }
         
         int difficultyLevel= ((GameWorld) getWorld()).difficultyLevel();
         if(difficultyLevel==0)
         {
-            return maxHealth;
+            return baseMaxHealth;
         }
         if(difficultyLevel==1)
         {
-            return (int)(maxHealth*1.4);
+            return (int)(baseMaxHealth*1.4);
         }
         if(difficultyLevel==2)
         {
-            return (int)(maxHealth*1.6);
+            return (int)(baseMaxHealth*1.6);
         }
         
-        return maxHealth*2;
+        return baseMaxHealth*2;
     }
     /**
      * Damage this enemy. 

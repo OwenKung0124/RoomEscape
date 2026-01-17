@@ -21,7 +21,6 @@ import java.util.Scanner;
  * stones=1;
  * tiles=0,0:2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2/2,1.....,0,.....2,2,2
  * axeAttackPower=10;
- 
  * 
  */
 public class SaveManager

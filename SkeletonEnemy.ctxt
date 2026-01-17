@@ -1,10 +1,12 @@
 #BlueJ class context
 comment0.target=SkeletonEnemy
-comment0.text=\n\ SkeletonEnemy\:\n\ -\ extends\ Enemy\ (movement/HP/contact\ damage)\n\ -\ ALSO\ attacks\ (uses\ CombatActor's\ attack\ animation\ system)\n\ -\ wanders\ using\ WanderAround\n\ -\ shoots\ an\ EnemyArrow\ on\ hitFrame\n
+comment0.text=\n\ SkeletonEnemy\:\n\ \ extends\ Enemy\ (movement/HP/contact\ damage)\n\ \ also\ attacks\ (uses\ CombatActor's\ attack\ animation\ system)\n\ \ wanders\ using\ WanderAround\n\ \ shoots\ an\ EnemyArrow\ on\ hitFrame\n\ \ \n\ It\ wanders\ around\ like\ Wander\ Enemy\ but\ fire\ arrow\ at\ a\ random\ time\ interval\ and\ when\ facing\ target.\n\ \ \n\ \ @author\:Owen\ Kung\n\ \ @version\:Jan\ 2026\n
 comment1.params=target
 comment1.target=SkeletonEnemy(Player)
 comment10.params=
-comment10.target=void\ playEndOfLifeSoundEffect()
+comment10.target=void\ playAttackSoundEffect()
+comment11.params=
+comment11.target=void\ playEndOfLifeSoundEffect()
 comment2.params=
 comment2.target=void\ act()
 comment3.params=
@@ -22,7 +24,7 @@ comment6.text=\n\ Called\ exactly\ once\ on\ hitFrame\ by\ CombatActor\n
 comment7.params=
 comment7.target=void\ scheduleNextAttack()
 comment8.params=
-comment8.target=void\ faceTarget()
+comment8.target=int\ getAttackPower()
 comment9.params=
-comment9.target=void\ playAttackSoundEffect()
-numComments=11
+comment9.target=void\ faceTarget()
+numComments=12

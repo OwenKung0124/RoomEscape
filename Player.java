@@ -112,7 +112,7 @@ public abstract class Player extends CombatActor
 
         //reduce invincibility timer each frame
         if (hurtCooldown > 0) hurtCooldown--;
-    
+        
         //cooldown countdown
         if (attackCooldown > 0)
         {
@@ -184,6 +184,20 @@ public abstract class Player extends CombatActor
             useStone();
         }
         keyWasDown = keyDown;
+        
+        //visual feedback to indicate player is hurt
+        //once player got hit, it will flicker
+        //to indicate not taking damage while flickering
+        //for continuous touching, it would look like it takes damage while flickering
+        if (hurtCooldown > 0)
+        {
+            if (hurtCooldown % 6 < 3) getImage().setTransparency(120);
+            else getImage().setTransparency(255);
+        }
+        else
+        {
+            getImage().setTransparency(255);
+        }
 
     }
     private void useStone()
@@ -191,6 +205,11 @@ public abstract class Player extends CombatActor
         
         if(stoneSkills<1)
         {
+            if(getWorld()!=null)
+            {
+                ((GameWorld)getWorld()).getPromptManager().show("No More Stone Skills.",60);
+            }
+            
            return;
         }
         //deduct
@@ -228,14 +247,9 @@ public abstract class Player extends CombatActor
     public void heal(int amount)
     {
         if (amount <= 0) return;
-    
+         //allow players to help unlimited health
         health += amount;
-        
-        //allow players to help unlimited health
-        //if (health > maxHealth) 
-        //{
-        //    health = maxHealth;   
-        //}
+
     }
     /**
      * setHealth of the player when resume the game
@@ -244,13 +258,9 @@ public abstract class Player extends CombatActor
     {
         if (amount <= 0) return;
     
-        health=amount;
-        
         //allow players to help unlimited health
-        //if (health > maxHealth) 
-        //{
-        //    health = maxHealth;   
-        //}
+        health=amount;
+
     }
     /**
      * Damages the player by a given amount.
@@ -265,22 +275,15 @@ public abstract class Player extends CombatActor
     
         
         //if invincibility is active, ignore this damage
-        if (hurtCooldown > 0) return;
+        if (hurtCooldown > 0)
+        {
+            //System.out.println("BLOCKED hit! hurtCooldown=" + hurtCooldown);
+            return;
+        }
     
         //start invincibility frames
         hurtCooldown = hurtCooldownFrames;
-        
-        //don't take damage while player is attacking
-        //so that axe and sword warrior won't loose health
-        //while attacking enemy
-        if (attacking)
-        {
-            //getWorld().addObject(new TextLabel("attacking",
-            //                                        20,Color.YELLOW,120), //msg, size,color, life
-            //                        GameConfig.sidePanelCentreX(),
-            //                        GameConfig.sidePanelCentreY()+45);
-            //return;
-        }
+        //System.out.println("TOOK hit! amount=" + amount + " health(before)=" + health);
         
         //apply damage
         health -= amount;
@@ -307,9 +310,11 @@ public abstract class Player extends CombatActor
     private void collect()
     {
         //collect any collectibles
-        if(isTouching(Coin.class))
+        //player could touch many coins at the same time
+        ArrayList<Coin> coinsTouched = (ArrayList<Coin>)getIntersectingObjects(Coin.class);
+        if(coinsTouched!=null)
         {
-            coins++;
+            coins=coins+coinsTouched.size();
         }  
         if(isTouching(AttackUpgrade.class))
         {

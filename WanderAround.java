@@ -5,7 +5,9 @@ import greenfoot.*;
  *  pick a random direction
  *  Keep moving in that direction for a random time
  *  then pick again
-
+ *  
+ *  @author: Owen Kung
+ *  @version: Jan 2026
  */
 public class WanderAround
 {

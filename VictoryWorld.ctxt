@@ -1,10 +1,16 @@
 #BlueJ class context
 comment0.target=VictoryWorld
-comment0.text=\n\ DefeatWorld\ (Game\ Over\ Screen)\n\ \n\ \n
+comment0.text=\n\ VictoryWorld\ (Win\ Screen)\n\ \n
 comment1.params=
 comment1.target=VictoryWorld()
 comment2.params=data
 comment2.target=VictoryWorld(GameData)
 comment3.params=
 comment3.target=void\ act()
-numComments=4
+comment4.params=
+comment4.target=void\ started()
+comment4.text=\n\ Make\ sure\ game\ music\ starts\ after\ restarted\n
+comment5.params=
+comment5.target=void\ stopped()
+comment5.text=\n\ Make\ sure\ game\ music\ stops\ when\ paused\n
+numComments=6
