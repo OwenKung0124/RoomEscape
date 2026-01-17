@@ -1,7 +1,8 @@
 import greenfoot.*;
 
 /**
- * SettingWorld lets the user pick a warrior then start the game.
+ * SettingWorld lets the user pick a warrior then to start a new game or resume an old game
+ * It also allows for turning music on/off
  */
 public class SettingWorld extends World
 {
@@ -16,13 +17,21 @@ public class SettingWorld extends World
     private StartButton newGameBotton;
     private StartButton resumeBotton;
     
-    private SaveData data;
+    private GameData data;
+    private TextLabel warriorTextLabel;
 
     public SettingWorld()
     {
         this(null);
     }
-    public SettingWorld(SaveData data)
+    /**
+     * Constructor method for setting world
+     * 
+     * Warrior Seelection
+     * Player State
+     * Music/sftx on/off
+     */
+    public SettingWorld(GameData data)
     {
         super(GameConfig.WORLD_W, GameConfig.WORLD_H, 1);
         this.data = data;
@@ -31,13 +40,10 @@ public class SettingWorld extends World
         bg.scale(GameConfig.WORLD_W, GameConfig.WORLD_H);
         setBackground(bg);
 
-        showText("Click a warrior image to select", GameConfig.WORLD_W / 2, 100);
+        //showText("Click a warrior image to select", GameConfig.WORLD_W / 2, 100);
+        showText("Click a warrior image to select",30,Color.WHITE,GameConfig.WORLD_W / 2, 100);
 
         //selections
-        //axeIcon = new WarriorSelectIcon("setting/axe_warrior.png", GameConfig.WARRIOR_AXE);
-        //bulletIcon = new WarriorSelectIcon("setting/bullet_warrior.png", GameConfig.WARRIOR_BULLET);
-        //swordIcon = new WarriorSelectIcon("setting/sword_warrior.png", GameConfig.WARRIOR_SWORD);
-        //WarriorSelectIcon(String framePrefix, int frameCount, int type, int w, int h)
         axeIcon = new WarriorSelectIcon("player/axe_warrior/walking/down", 4,GameConfig.WARRIOR_AXE,245,260);
         bulletIcon = new WarriorSelectIcon("player/bullet_warrior/walking/down",4, GameConfig.WARRIOR_BULLET,245,260);
         swordIcon = new WarriorSelectIcon("player/sword_warrior/walking/down",4, GameConfig.WARRIOR_SWORD,245,260);
@@ -53,8 +59,8 @@ public class SettingWorld extends World
         addObject(resumeBotton,  GameConfig.WORLD_W / 2 + 260, 635);
         
         //sound effects toggles
-        addObject(new SoundToggleButton(SoundToggleButton.TYPE_MUSIC), GameConfig.WORLD_W/2 +450, 100);
-        addObject(new SoundToggleButton(SoundToggleButton.TYPE_SFX),   GameConfig.WORLD_W/2 +550, 100);
+        addObject(new SoundToggleButton(SoundToggleButton.TYPE_MUSIC), GameConfig.WORLD_W/2 +400, 100);
+        addObject(new SoundToggleButton(SoundToggleButton.TYPE_SFX),   GameConfig.WORLD_W/2 +520, 100);
 
         //disable resume if no save exists
         resumeBotton.setEnabled(SaveManager.hasSave());
@@ -63,8 +69,7 @@ public class SettingWorld extends World
         updateHighlights();
 
         //show state on the top status bar
-        showState();
-        
+        showState();     
        
     }
     private void showState()
@@ -75,33 +80,30 @@ public class SettingWorld extends World
         }
         if(data!=null)
         {
-            SoundManager.playGameMusic();
-            //SaveData data=SaveManager.load();//only quick data, not requiring gamemap
-            
-            showText(""+data.coins,250, 100);
+            showText(""+data.score,40, Color.WHITE,250, 100);
             //showText(""+data.roomsCleared,600, 70);
-            showText(""+data.playerHealth,250, 200);
+            showText(""+data.playerHealth,40, Color.WHITE,225, 200);
             
             //display attack power
-            showText(""+data.axeAttackPower,375, 565);
-            showText(""+data.bulletAttackPower,665, 565);
-            showText(""+data.swordAttackPower,955, 565);
+            showText(""+data.axeAttackPower,40, Color.WHITE,370, 560);
+            showText(""+data.bulletAttackPower,40, Color.WHITE,660, 560);
+            showText(""+data.swordAttackPower,40, Color.WHITE,950, 560);
         }
         else
         {
-            showText(""+0,250, 100);
+            showText(""+0,40,Color.WHITE,250,100);
             //showText(""+data.roomsCleared,600, 70);
-            showText(""+GameConfig.DEFAULT_MAX_HP,250, 200);
+            showText(""+GameConfig.DEFAULT_MAX_HP,40, Color.WHITE,225, 200);
             
             //display attack power
-            showText(""+GameConfig.WARRIOR_AXE_DEFAULT_ATTACK,375, 565);
-            showText(""+GameConfig.WARRIOR_BULLET_DEFAULT_ATTACK,665, 565);
-            showText(""+GameConfig.WARRIOR_SWORD_DEFAULT_ATTACK,955, 565);
+            showText(""+GameConfig.WARRIOR_AXE_DEFAULT_ATTACK,40, Color.WHITE,370, 560);
+            showText(""+GameConfig.WARRIOR_BULLET_DEFAULT_ATTACK,40, Color.WHITE,660, 560);
+            showText(""+GameConfig.WARRIOR_SWORD_DEFAULT_ATTACK,40,Color.WHITE,950, 560);
 
         }
     }
     /**
-     * highlight which warrior is selected
+     * called by Warrior Selection to highlight which warrior is selected
      */
     public void chooseWarrior(int type)
     {
@@ -109,20 +111,22 @@ public class SettingWorld extends World
         updateHighlights();
     }
     /**
-     * starts a brand new game.
+     * called but start button to start a brand new game.
      */
     public void startNewGame()
     {
+        SoundManager.playStartSound();
         SaveManager.deleteSave();
         //pass null for SaveData
         Greenfoot.setWorld(new GameWorld(selectedType, false, null));
     }
 
     /**
-     * resume a saved game
+     * called by resume button to resume a saved game
      */
     public void resumeGame()
     {
+        SoundManager.playStartSound();
         if (!SaveManager.hasSave())
         {
             showText("No save found.", GameConfig.WORLD_W / 2, 470);
@@ -154,11 +158,31 @@ public class SettingWorld extends World
         {
             selectedStr="Sword Warrior";
         }
+        //showText(String msg, int size,Color color, int x, int y)
         showText(
-            "Selected: " + 
-            selectedStr,
+            "Selected: " + selectedStr,
+            //30,
+            //Color.WHITE,
             GameConfig.WORLD_W / 2,
-            125
+            135
         );
+    }
+    private  void showText(String msg, int size,Color color, int x, int y)
+    {
+        addObject(new TextLabel(msg,size,color,-1),x,y);
+    }
+    /**
+     * Make sure game music starts after restarted
+     */
+    public void started()
+    {
+        SoundManager.playGameMusic();
+    }
+    /**
+     * Make sure game music stops when paused
+     */
+    public void stopped()
+    {
+        SoundManager.stopAll();
     }
 }

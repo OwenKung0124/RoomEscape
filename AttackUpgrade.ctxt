@@ -1,16 +1,8 @@
 #BlueJ class context
 comment0.target=AttackUpgrade
-comment0.text=\r\n\ A\ collectible\ potion\ called\ by\ player's\ collect\r\n\ updates\ RoomData\ when\ collected.\r\n
+comment0.text=\n\ Animated\ AttckUpgrade\ to\ upgrade\ player's\ attack\ power\n
 comment1.params=rd\ r\ c\ tr\ tc
 comment1.target=AttackUpgrade(RoomData,\ int,\ int,\ int,\ int)
-comment1.text=\r\n\ @param\ RoomDate\ rd\r\n\ @param\ roomR\ room\ \r\n\ @param\ roomC\ room\r\n\ @param\ tr\ tile\ row\r\n\ @param\ tc\ tile\ col\r\n
-comment2.params=
-comment2.target=void\ act()
-comment3.params=
-comment3.target=void\ animate()
-comment4.params=
-comment4.target=void\ collect()
-comment4.text=\r\n\ do\ nothing\ now\ for\ now\r\n
-comment5.params=
-comment5.target=greenfoot.GreenfootImage[]\ loadFrames()
-numComments=6
+comment2.params=p
+comment2.target=void\ upgrade(Player)
+numComments=3

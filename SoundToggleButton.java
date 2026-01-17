@@ -1,5 +1,9 @@
 import greenfoot.*;
-
+/**
+ * Graphic buttons for Music and Sound
+ * 
+ * @author:
+ */
 public class SoundToggleButton extends Actor
 {
     public static final int TYPE_MUSIC = 0;
@@ -8,34 +12,26 @@ public class SoundToggleButton extends Actor
     private int type;
 
     //filenames
-    private static final String MUSIC_ON  = "setting/music_on.png";
-    private static final String MUSIC_OFF = "setting/music_off.png";
-    private static final String SFX_ON    = "setting/sfx_on.png";
-    private static final String SFX_OFF   = "setting/sfx_off.png";
+    private static final String MUSIC  = "setting/music_on.png";
+    private static final String SFX    = "setting/sfx_on.png";
 
-    private static final int width = 90;
-    private static final int height = 90;
+    private static final int width = 150;
+    private static final int height = 150;
 
     //cached images so we don't reload every click
-    private GreenfootImage musicOnImg;
-    private GreenfootImage musicOffImg;
-    private GreenfootImage sfxOnImg;
-    private GreenfootImage sfxOffImg;
+    private GreenfootImage musicImg;
+    private GreenfootImage sfxImg;
 
     public SoundToggleButton(int type)
     {
         this.type = type;
 
-        // load once
-        musicOnImg  = new GreenfootImage(MUSIC_ON);
-        musicOffImg = new GreenfootImage(MUSIC_OFF);
-        sfxOnImg    = new GreenfootImage(SFX_ON);
-        sfxOffImg   = new GreenfootImage(SFX_OFF);
+        //load once
+        musicImg  = new GreenfootImage(MUSIC);
+        sfxImg    = new GreenfootImage(SFX);
 
-        musicOnImg.scale(width, height);
-        musicOffImg.scale(width, height);
-        sfxOnImg.scale(width, height);
-        sfxOffImg.scale(width, height);
+        musicImg.scale(width, height);
+        sfxImg.scale(width, height);
 
         updateImage();
     }
@@ -61,11 +57,19 @@ public class SoundToggleButton extends Actor
     {
         if (type == TYPE_MUSIC)
         {
-            setImage(SoundManager.isMusicOn() ? musicOnImg : musicOffImg);
+            setImage(musicImg);
+            if(SoundManager.isMusicOn())
+                getImage().setTransparency(255);
+            else
+                getImage().setTransparency(120);
         }
         else
         {
-            setImage(SoundManager.isSfxOn() ? sfxOnImg : sfxOffImg);
+            setImage(sfxImg);
+            if(SoundManager.isSfxOn())
+                getImage().setTransparency(255);
+            else
+                getImage().setTransparency(120);
         }
     }
 }

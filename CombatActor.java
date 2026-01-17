@@ -28,6 +28,25 @@ public abstract class CombatActor extends WalkingActor
     //which frame triggers the hit (0-based)
     protected int hitFrame=2;
     protected boolean hitDone=false;
+    
+    //health related
+    protected int maxHealth = 1;
+    protected int health = maxHealth;
+
+    /** 
+     * @return current HP 
+     */
+    public int getHealth() 
+    { 
+        return health; 
+    }
+    /** 
+     * @return maximum HP 
+     */
+    public int getMaxHealth() 
+    { 
+        return maxHealth; 
+    }
 
     /**
      * Loads directional attack frames

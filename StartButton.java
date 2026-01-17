@@ -4,8 +4,8 @@ import greenfoot.*;
  * StartButton
  *
  * Modes:
- * - MODE_NEW_GAME: deletes save and starts from beginning
- * - MODE_RESUME: loads save and continues
+ *   MODE_NEW_GAME: deletes save and starts from beginning
+ *   MODE_RESUME: loads save and continues
  */
 public class StartButton extends Actor
 {
@@ -36,7 +36,15 @@ public class StartButton extends Actor
         //transparent when disabled
         if (getImage() != null)
         {
-            getImage().setTransparency(enabled ? 255 : 120);
+            if(enabled)
+            {
+                getImage().setTransparency(255);
+            }
+            else
+            {
+                getImage().setTransparency(120);
+            }
+            
         }
     }
 
@@ -50,7 +58,6 @@ public class StartButton extends Actor
             if (w instanceof SettingWorld)
             {
                 SettingWorld sw = (SettingWorld) w;
-
                 if (mode == MODE_NEW_GAME)
                 {
                     sw.startNewGame();

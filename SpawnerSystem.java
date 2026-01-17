@@ -2,7 +2,7 @@ import greenfoot.*;
 
 /**
  * SpawnerSystem handles random spawning:
- * e.g enemies
+ * e.g enemies,boss
  *
  */
 public class SpawnerSystem 
@@ -46,8 +46,7 @@ public class SpawnerSystem
             return;
         }
         
-        int enemiesToSpawn=1 + Greenfoot.getRandomNumber(GameConfig.ENEMIES_TO_SPAWN); //1 to GameConfigENEMIES_TO_SPAWN
-        for (int i=0; i < enemiesToSpawn; i++) 
+        for (int i=0; i < maxiumEnemySpawn(); i++) 
         {
             //randomly assigned x, y for eaach player
             //p is x, y co-ordiantes to spawn the enemy
@@ -69,6 +68,30 @@ public class SpawnerSystem
         }
        
          
+    }
+    private int maxiumEnemySpawn()
+    {
+        if(world==null)
+        {
+            return 1 + Greenfoot.getRandomNumber(GameConfig.ENEMIES_TO_SPAWN); //1 to GameConfigENEMIES_TO_SPAWN
+        }
+        
+        //based on difficultyLevel
+        int difficultyLevel=world.difficultyLevel();
+        if(difficultyLevel==0)
+        {
+            return 1+ Greenfoot.getRandomNumber(GameConfig.ENEMIES_TO_SPAWN*2); 
+        }
+        if(difficultyLevel==1)
+        {
+            return( GameConfig.ENEMIES_TO_SPAWN+2 )+ Greenfoot.getRandomNumber(GameConfig.ENEMIES_TO_SPAWN*2); 
+        }
+        if(difficultyLevel==2)
+        {
+            return (GameConfig.ENEMIES_TO_SPAWN +3) + Greenfoot.getRandomNumber(GameConfig.ENEMIES_TO_SPAWN*3); 
+        }
+        
+        return (GameConfig.ENEMIES_TO_SPAWN  +4)+ Greenfoot.getRandomNumber(GameConfig.ENEMIES_TO_SPAWN*4); 
     }
     /**
      * Spawns enemies only on FLOOR tiles so they never appear inside wall colliders.

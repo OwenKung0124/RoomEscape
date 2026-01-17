@@ -6,7 +6,7 @@ import greenfoot.*;
  */
 public class HealthBar extends Actor
 {
-    private HasHealth unit;      // read HP from this
+    private CombatActor unit;      // read HP from this
     private Actor follow;        // optional: follow this actor's position
     private boolean followTarget;
 
@@ -22,7 +22,7 @@ public class HealthBar extends Actor
      * @param followTarget true to follow follow actor closely
      * @param yOffset      y offset from the actor to display
      */
-    public HealthBar(HasHealth unit, Actor follow, int width, int height, boolean followTarget, int yOffset)
+    public HealthBar(CombatActor unit, Actor follow, int width, int height, boolean followTarget, int yOffset)
     {
         this.unit = unit;
         this.follow = follow;

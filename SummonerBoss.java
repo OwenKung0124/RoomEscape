@@ -50,7 +50,7 @@ public class SummonerBoss extends Enemy
 
         //no damage
         //otherwise sword and axe warrior can't kill boss
-        contactDamage=0;
+        contactDamage=1;
 
         //health bar
         HP_BAR_W=spriteW-20;
@@ -90,6 +90,14 @@ public class SummonerBoss extends Enemy
 
         if (getWorld()==null) return;
 
+        //countdown freeze
+        //stop movement  contact damage while frozen
+        if (freezeTimer > 0)
+        {
+            showText("Stoned",Color.YELLOW,getX(),getY()+100,false);
+            freezeTimer--;
+            return; 
+        }
        
         //summoner enemy does not hit
         //if (hitCooldown > 0) hitCooldown--;
@@ -137,12 +145,15 @@ public class SummonerBoss extends Enemy
             }
         }
     }
-    protected void handlePlayerContact() 
+    /*
+  protected void handlePlayerContact() 
     {
         //do nothing
         //otherwise, axe or sword player has now way to kill the boos
         return;
     }
+     */
+   
 
     /**
      * Schedules the next summon by setting summonTimer to a random value

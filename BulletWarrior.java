@@ -68,6 +68,8 @@ public class BulletWarrior extends Player
         int by = getY() + dirY * reach;
         
         SoundManager.playBulletSound();
+         //increase attackcount
+        GameWorld.attackCount++;
         getWorld().addObject(new Bullet(dirX, dirY,getAttackPower()), bx, by);
     }
 }

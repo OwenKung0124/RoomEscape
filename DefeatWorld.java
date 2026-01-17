@@ -8,15 +8,17 @@ import greenfoot.*;
 public class DefeatWorld extends World
 {
 
-    private SaveData data; //shared data that passed around
+    private GameData data; //shared data that passed around
 
     public DefeatWorld()
     {
         this(null);
     }
-    public DefeatWorld(SaveData data)
+    public DefeatWorld(GameData data)
     {
         super(GameConfig.WORLD_W, GameConfig.WORLD_H, 1);
+        SoundManager.stopGameMusic();
+        
         this.data = data;
         
         //dark background
@@ -27,8 +29,9 @@ public class DefeatWorld extends World
 
         //show exit
         showText("GAME OVER", getWidth()/2, getHeight()/2 - 40);
-        showText("Press R to Restart", getWidth()/2, getHeight()/2 + 10);
-        showText("Press S to go to Setting", getWidth()/2, getHeight()/2 + 40);
+        showText("Enemies Killed:" + GameWorld.enemiesKilled, getWidth()/2, getHeight()/2 +10);
+        showText("Press R to Restart", getWidth()/2, getHeight()/2 + 40);
+        showText("Press S to go to Setting", getWidth()/2, getHeight()/2 + 70);
     }
 
     public void act()

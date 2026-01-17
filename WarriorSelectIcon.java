@@ -1,12 +1,10 @@
 import greenfoot.*;
 /**
  * WarriorSelectIcon is a clickable image used on the setup screen.
- *
- * - Shows animated warrior picture
- * - When clicked, it tells SetupWorld which warrior type was chosen
- * - If selected, it draws a highlight border
+ *  shows animated warrior picture
+ *  When clicked, it tells SettingWorld which warrior type was chosen
+ *  Selected, it draws a highlight border
  */
-
 public class WarriorSelectIcon extends Actor
 {
     private int type;
@@ -60,15 +58,17 @@ public class WarriorSelectIcon extends Actor
         }
     }
 
+    /**
+     * called by setting world to indicate which warrior is selected
+     */
     public void setSelected(boolean sel)
     {
         selected = sel;
 
-        // refresh current frame + border
+        //refresh current frame + border
         setImage(frames[frameIndex]);
         if (selected) drawSelectedBorder();
     }
-
     private void drawSelectedBorder()
     {
         GreenfootImage img = new GreenfootImage(getImage()); // copy
@@ -77,7 +77,6 @@ public class WarriorSelectIcon extends Actor
         img.drawRect(2, 2, img.getWidth() - 5, img.getHeight() - 5);
         setImage(img);
     }
-
     private GreenfootImage[] loadFrames(String prefix, int count, int w, int h)
     {
         GreenfootImage[] arr = new GreenfootImage[count];

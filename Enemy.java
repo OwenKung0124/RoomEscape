@@ -14,7 +14,7 @@ import greenfoot.*;
  * @author:     Owen Kung
  * @version:    Jan 2026
  */
-public abstract class Enemy extends CombatActor implements HasHealth
+public abstract class Enemy extends CombatActor
 {
 
     //The player this enemy can interact with 
@@ -22,29 +22,32 @@ public abstract class Enemy extends CombatActor implements HasHealth
 
     //damage cooldown so enemy doesn't hit every single frame
     //when cooldown=0, take damage
-    protected int hitCooldown = 0;
+    protected int hitCooldown=0;
 
     //cooldown frames
     //before next damage can count
-    protected int hitCooldownFrames = 30;
+    protected int hitCooldownFrames=30;
     
     //damage to player when in contact
-    protected int contactDamage = 1;
+    protected int contactDamage=1;
     
     //enemy health
-    protected int maxHealth = 5;
-    protected int health = maxHealth;
+    protected int maxHealth=5;
+    protected int health=maxHealth;
     
     //health bar Health bar that follows this enemy
     private HealthBar hpBar;
-    protected int HP_BAR_W = 40;
-    protected int HP_BAR_H = 8;
-   //Positive offset = bar appears UNDER the enemy
-    protected int HP_BAR_Y_OFFSET = 35;
+    protected int HP_BAR_W=40;
+    protected int HP_BAR_H=8;
+   //Positive offset=bar appears UNDER the enemy
+    protected int HP_BAR_Y_OFFSET=35;
+    
+    //freeze timer (stone skill)
+    protected int freezeTimer = 0;
 
     public Enemy(Player target) 
     {
-        player = target;
+        player=target;
         animDelay=8;
         
         //use default sprite size
@@ -54,7 +57,7 @@ public abstract class Enemy extends CombatActor implements HasHealth
         
         //default
         loadDirectionalFrames("enemy", 2);
-        dir = DOWN;
+        dir=DOWN;
         //initial facing down
         setImage(framesFor(dir)[0]);
     }
@@ -76,7 +79,7 @@ public abstract class Enemy extends CombatActor implements HasHealth
         if (hpBar == null)
         {
             //HealthBar(HasHealth unit, Actor follow, int width, int height, boolean followTarget, int yOffset)
-            hpBar = new HealthBar(this, this, HP_BAR_W, HP_BAR_H, true, HP_BAR_Y_OFFSET);
+            hpBar=new HealthBar(this, this, HP_BAR_W, HP_BAR_H, true, HP_BAR_Y_OFFSET);
     
             //add bar at the correct starting position
             world.addObject(hpBar, getX(), getY() + HP_BAR_Y_OFFSET);
@@ -97,31 +100,37 @@ public abstract class Enemy extends CombatActor implements HasHealth
     {
          //freeze  while paused
         if (GameWorld.isPaused()) return;
-if (!GameWorld.allowSlowUpdate()) return;
 
         if (getWorld() == null)
         {
             return;   
         }
         
+        //countdown freeze
+        //stop movement  contact damage while frozen
+        if (freezeTimer > 0)
+        {
+            showText("Stoned",Color.YELLOW,getX(),getY()+50,false);
+            freezeTimer--;
+            return; 
+        }
+    
         if (hitCooldown > 0)
         {
             hitCooldown--;
         }
 
         regularMovement();
-        
         handlePlayerContact();
     }
-
     protected void regularMovement()
     {
         
-        int[] mv = computeMove(); //subclass decides movement
-        int dx = mv[0];
-        int dy = mv[1];
+        int[] mv=computeMove(); //subclass decides movement
+        int dx=mv[0];
+        int dy=mv[1];
 
-        boolean moving = false;
+        boolean moving=false;
         if (dx != 0 || dy != 0)
         {
             moving=true;
@@ -137,7 +146,7 @@ if (!GameWorld.allowSlowUpdate()) return;
         else 
         {
             //idle frame
-            frameIndex = 0;
+            frameIndex=0;
             setImage(framesFor(dir)[0]);
         }
     }
@@ -145,37 +154,37 @@ if (!GameWorld.allowSlowUpdate()) return;
      * Updates the actor's facing direction based on movement (dx, dy).
      * If the facing direction changes, the animation is reset to frame 0.
      *
-     * @param dx change in x (negative = left, positive = right)
-     * @param dy change in y (negative = up, positive = down)
+     * @param dx change in x (negative=left, positive=right)
+     * @param dy change in y (negative=up, positive=down)
      */
     protected void updateDirectionFromMove(int dx, int dy)
     {
-        int oldDir = dir;
+        int oldDir=dir;
     
         //decide whether horizontal or vertical movement is "stronger".
-        //if |dx| >= |dy|, face LEFT/RIGHT; otherwise face UP/DOWN.
-        if (Math.abs(dx) >= Math.abs(dy)) 
+        //if |dx|>=|dy|, face LEFT/RIGHT; otherwise face UP/DOWN.
+        if (Math.abs(dx)>=Math.abs(dy)) 
         {
             //horizontal direction
             if (dx < 0)
             {
-                dir = LEFT;   
+                dir=LEFT;   
             }
             else if (dx > 0)
             {
-                dir = RIGHT;   
+                dir=RIGHT;   
             }
         }
         else 
         {
             //vertical direction
-            if (dy < 0) 
+            if (dy<=0) 
             {
-                dir = UP;   
+                dir=UP;   
             }
             else if (dy > 0)
             {
-                dir = DOWN;   
+                dir=DOWN;   
             }
         }
     
@@ -186,7 +195,6 @@ if (!GameWorld.allowSlowUpdate()) return;
             resetAnim();   
         }
     }
-
     //Damages/knocks the player on contact
     protected void handlePlayerContact() 
     {
@@ -197,27 +205,86 @@ if (!GameWorld.allowSlowUpdate()) return;
 
         if (isTouching(Player.class) && hitCooldown == 0) 
         {
-            hitCooldown = hitCooldownFrames;
-            //deal damage to the player (player has its own invincibility too)
+            hitCooldown=hitCooldownFrames;
+            //deal damage to the player 
             if (player != null)
             {
                 playAttackSoundEffect();
-                player.takeDamage(contactDamage);     
+                player.takeDamage(getDamagePower());    
+                
+                //getWorld().addObject(new TextLabel(getClass().getSimpleName()+"attack power: "+getDamagePower(),
+                //                                    20,Color.YELLOW,120), //msg, size,color, life
+                //                    GameConfig.sidePanelCentreX(),
+                //                    GameConfig.sidePanelCentreY());
             }
         }
     }
-    //@return enemy current HP
+    /**
+     * @reaturn damage power of the enemy, based on difficulty level
+     */
+    public int getDamagePower()
+    {
+        if(getWorld()==null)
+        {
+            return contactDamage;
+        }
+        int difficultyLevel=((GameWorld) getWorld()).difficultyLevel();
+         
+        if (difficultyLevel == 0) return contactDamage;
+        if (difficultyLevel == 1) return contactDamage*2;
+        if (difficultyLevel == 2) return contactDamage*3;
+   
+        return contactDamage*4;
+    }
+    /**
+     * Freeze this enemy for a number of frames.
+     * While frozen, the enemy will not move or damage the player.
+     *
+     * @param frames number of frames to freeze
+     */
+    public void freeze(int frames)
+    {
+        if (frames <= 0)
+        {
+            return;
+        }
+        freezeTimer = frames;
+    }
+    /**
+    /* @returnenemy current HP
+     */
     public int getHealth() 
     { 
         return health; 
     }
-    
-    //@return enemy max HP
+    /**
+     * @return: Max health of the enemy, difficulty level based
+     */
     public int getMaxHealth() 
     { 
-        return maxHealth;
+        
+        //max health based on difficulty level
+        if(getWorld()==null)
+        {
+            return maxHealth;
+        }
+        
+        int difficultyLevel= ((GameWorld) getWorld()).difficultyLevel();
+        if(difficultyLevel==0)
+        {
+            return maxHealth;
+        }
+        if(difficultyLevel==1)
+        {
+            return (int)(maxHealth*1.4);
+        }
+        if(difficultyLevel==2)
+        {
+            return (int)(maxHealth*1.6);
+        }
+        
+        return maxHealth*2;
     }
-    
     /**
      * Damage this enemy. 
      * If HP reaches 0, remove it.
@@ -229,18 +296,19 @@ if (!GameWorld.allowSlowUpdate()) return;
         if (amount <= 0) return;
     
         health -= amount;
-        if (health < 0) health = 0;
+        if (health<=0) health=0;
     
         if (health <= 0 && getWorld() != null)
         {
             player.addScore(maxHealth);
             playEndOfLifeSoundEffect();  //play sound effect when enemy dies
+            GameWorld.enemiesKilled++;  //increment the enemies killed count
             getWorld().removeObject(this);
         }
     }
     /**
      * If spawn touching a Blocker (wall/statue)
-     * moveto the nearest non-colliding spot it does't get "stuck" forever.
+     * moveto the nearest non-colliding spot it does't get stuck forever.
      */
     private void nudgeOffBlockers()
     {
@@ -249,18 +317,18 @@ if (!GameWorld.allowSlowUpdate()) return;
         // If not touching anything solid, we're fine.
         if (getOneIntersectingObject(Blocker.class) == null) return;
 
-        int startX = getX();
-        int startY = getY();
+        int startX=getX();
+        int startY=getY();
 
         // Search outward in a small spiral/grid
-        int step = 6;          // pixels per attempt
-        int maxRadius = 12;    // how far we search (12*6 = 72px)
+        int step=6;          // pixels per attempt
+        int maxRadius=12;    // how far we search (12*6=72px)
 
-        for (int r = 1; r <= maxRadius; r++)
+        for (int r=1; r <= maxRadius; r++)
         {
-            for (int dx = -r; dx <= r; dx++)
+            for (int dx=-r; dx <= r; dx++)
             {
-                for (int dy = -r; dy <= r; dy++)
+                for (int dy=-r; dy <= r; dy++)
                 {
                     // Only check the perimeter of this "ring" (faster)
                     if (Math.abs(dx) != r && Math.abs(dy) != r) continue;
@@ -279,4 +347,5 @@ if (!GameWorld.allowSlowUpdate()) return;
         //put it back
         setLocation(startX, startY);
     }
+ 
 }

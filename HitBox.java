@@ -28,6 +28,9 @@ public class HitBox extends SuperSmoothMover
         GreenfootImage img = new GreenfootImage(w, h);
         img.setTransparency(0);
         setImage(img);
+        
+        //increase attackcount
+        GameWorld.attackCount++;
     }
 
     public void act()
