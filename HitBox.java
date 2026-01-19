@@ -2,7 +2,7 @@ import greenfoot.*;
 import java.util.*;
 
 /**
- * AxeSlash is a shortlived invisible hitbox.
+ * HitBox is a shortlived invisible hitbox.
  * It removes enemies it touches.
  *
  */
@@ -36,7 +36,7 @@ public class HitBox extends SuperSmoothMover
     public void act()
     {
         //remove enemies touched
-        List<Enemy> enemies = getIntersectingObjects(Enemy.class);
+        ArrayList<Enemy> enemies = (ArrayList<Enemy>)getIntersectingObjects(Enemy.class);
         if (enemies != null && enemies.size() > 0)
         {
             for (Enemy e : enemies)

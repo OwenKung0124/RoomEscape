@@ -1,13 +1,13 @@
 #BlueJ class context
 comment0.target=Bullet
-comment0.text=\r\n\ Bullet\ class\:\ \r\n\ -\ Moves\ straight\ using\ a\ velocity\ (vx,\ vy)\r\n\ -\ Disappears\ if\ it\ hits\ a\ Blocker\ (wall)\r\n\ -\ Disappears\ if\ it\ leaves\ the\ room\r\n\ -\ Destroys\ the\ first\ Enemy\ it\ touches,\ then\ disappears\r\n\ -\ Disappears\ after\ a\ short\ lifetime\ so\ it\ can't\ exist\ forever\r\n\ \r\n\ @author\ Clifton\ Lin\r\n\ @version\ Jan\ 2026\r\n
+comment0.text=\n\ Bullet\ class\:\ \n\ -\ Moves\ straight\ using\ a\ velocity\ (vx,\ vy)\n\ -\ Disappears\ if\ it\ hits\ a\ Blocker\ (wall)\n\ -\ Disappears\ if\ it\ leaves\ the\ room\n\ -\ Destroys\ the\ first\ Enemy\ it\ touches,\ then\ disappears\n\ -\ Disappears\ after\ a\ short\ lifetime\ so\ it\ can't\ exist\ forever\n\ \n\ @author\ Clifton\ Lin\n\ @version\ Jan\ 2026\n
 comment1.params=dirX\ dirY\ attackPower
 comment1.target=Bullet(int,\ int,\ int)
-comment1.text=\r\n\ Constructs\ a\ Bullet\ moving\ in\ direction\ (dirX,\ dirY).\r\n\r\n\ dirX\ and\ dirY\ should\ be\ -1,\ 0,\ or\ 1.\r\n\ -\ (1,\ 0)\ \ \=\ right\r\n\ -\ (-1,\ 0)\ \=\ left\r\n\ -\ (0,\ -1)\ \=\ up\r\n\ -\ (0,\ 1)\ \ \=\ down\r\n\r\n\ @param\ dirX\ direction\ in\ x\ (-1,\ 0,\ 1)\r\n\ @param\ dirY\ direction\ in\ y\ (-1,\ 0,\ 1)\r\n
+comment1.text=\n\ Constructs\ a\ Bullet\ moving\ in\ direction\ (dirX,\ dirY).\n\n\ dirX\ and\ dirY\ should\ be\ -1,\ 0,\ or\ 1.\n\ -\ (1,\ 0)\ \ \=\ right\n\ -\ (-1,\ 0)\ \=\ left\n\ -\ (0,\ -1)\ \=\ up\n\ -\ (0,\ 1)\ \ \=\ down\n\n\ @param\ dirX\ direction\ in\ x\ (-1,\ 0,\ 1)\n\ @param\ dirY\ direction\ in\ y\ (-1,\ 0,\ 1)\n
 comment2.params=
 comment2.target=void\ act()
-comment2.text=\r\n\ Runs\ each\ frame\:\r\n\ -\ move\ bullet\r\n\ -\ check\ collisions\r\n\ -\ remove\ bullet\ if\ needed\r\n
+comment2.text=\n\ Runs\ each\ frame\:\n\ -\ move\ bullet\n\ -\ check\ collisions\n\ -\ remove\ bullet\ if\ needed\n
 comment3.params=
 comment3.target=boolean\ handleHit()
-comment3.text=\r\n\ Hook\ for\ handling\ what\ the\ bullet\ hits.\r\n\ Default\ behavior\:\ destroy\ the\ first\ Enemy\ it\ touches.\r\n\ Subclasses\ can\ override\ this\ to\ hit\ Player\ instead\ (enemy\ projectiles).\r\n\r\n\ @return\ true\ if\ the\ bullet\ handled\ a\ hit\ and\ should\ stop\ acting\ this\ frame\r\n
+comment3.text=\n\ Hook\ for\ handling\ what\ the\ bullet\ hits.\n\ Default\ behavior\:\ destroy\ the\ first\ Enemy\ it\ touches.\n\ Subclasses\ can\ override\ this\ to\ hit\ Player\ instead\ (enemy\ projectiles).\n\n\ @return\ true\ if\ the\ bullet\ handled\ a\ hit\ and\ should\ stop\ acting\ this\ frame\n
 numComments=4

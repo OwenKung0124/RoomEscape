@@ -1,12 +1,12 @@
 #BlueJ class context
 comment0.target=TypeWriterText
-comment0.text=\r\n\ TypeWritter\ class\ to\ display\ text\ like\ a\ typwriter\ style\r\n\ Adds\ visual\ interest\ to\ the\ story\ page\r\n\ \r\n\ @author\:\ \r\n\ @version\r\n
+comment0.text=\n\ TypeWritter\ class\ to\ display\ text\ like\ a\ typwriter\ style\n\ Adds\ visual\ interest\ to\ the\ story\ page\n\ \n\ @author\:\ \n\ @version\n
 comment1.params=message\ fontSize\ textColor\ boxW\ boxH\ typingSpeed
 comment1.target=TypeWriterText(java.lang.String,\ int,\ greenfoot.Color,\ int,\ int,\ int)
-comment1.text=\r\n\ Constructor\ for\ TypeWritterText\r\n\ \r\n\ @param\ message\ \ \ \ \ \ \ the\ message\ to\ type\r\n\ @param\ fontsize\ \ \ \ \ \ size\ of\ the\ text\r\n\ @param\ textColor\ \ \ \ \ text\ color\r\n\ @param\ boxW\ \ \ \ \ \ \ \ \ \ box\ width\ where\ text\ will\ be\ dislayed\r\n\ @param\ boxH\ \ \ \ \ \ \ \ \ \ box\ height\ where\ text\ will\ be\ dislayed\r\n\ @param\ typingSpeed\ \ \ how\ fast\ to\ display\ the\ text\r\n
+comment1.text=\n\ Constructor\ for\ TypeWritterText\n\ \n\ @param\ message\ \ \ \ \ \ \ the\ message\ to\ type\n\ @param\ fontsize\ \ \ \ \ \ size\ of\ the\ text\n\ @param\ textColor\ \ \ \ \ text\ color\n\ @param\ boxW\ \ \ \ \ \ \ \ \ \ box\ width\ where\ text\ will\ be\ dislayed\n\ @param\ boxH\ \ \ \ \ \ \ \ \ \ box\ height\ where\ text\ will\ be\ dislayed\n\ @param\ typingSpeed\ \ \ how\ fast\ to\ display\ the\ text\n
 comment2.params=
 comment2.target=void\ act()
-comment2.text=\r\n\ play\ typing\ sound\ while\ text\ is\ not\ finished\ displaying\r\n\ shows\ character\ one\ at\ a\ time\r\n\ where\ there's\ no\ more\ line,\ marks\ text\ complete\r\n\ redraw\ char\r\n
+comment2.text=\n\ play\ typing\ sound\ while\ text\ is\ not\ finished\ displaying\n\ shows\ character\ one\ at\ a\ time\n\ where\ there's\ no\ more\ line,\ marks\ text\ complete\n\ redraw\ char\n
 comment3.params=
 comment3.target=boolean\ isFinished()
 comment4.params=

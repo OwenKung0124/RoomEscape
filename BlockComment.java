@@ -18,7 +18,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * GameWorld uses GameMap, RoomRenderer, DoorSystem, SpawnSystem for main logics
  * 
  * The player is initailly placed in the centre of the first room (row=1, col=1, for a new game)
- *            is placed in the centre of the room where player is left off (for resume game)
+ *            is placed in the left side of the room where player is left off (for resume game)
  *            
  * Initally all doors are locked, if all enemies are cleared door to neighboring rooms will open.
  * The door going back to the previous room remains open. Player can always go back to the previous room,
@@ -27,14 +27,20 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * For Treasure and shop rooms, door always open.
  * 
  * Room Types:
- * C-combat room (where enemies are spawan)
- * B-boos room (spawns only boss, boss will spawn minions)
+ * C-combat room (where enemies are spawan), to to successfully clear the room, player must defeat all the enemies in a specified time
+ *   If faied, the player is defeated directly and must start new game.
  * T-Treasusre room (main for player to collect coins now)
  * S-Shop (where player can buy health, attack power or stone skill)
+ * R-Rush room, player must exit the room before time is up or a penalty on health will be taken
+ *   If finish within time, score is rewared.
+ * D-Dodge room, player must avoid colliding with the Enemy wondering in the room.
+ *   The enemy in the room does not take damage on player, neither does Playe can kill the enemy.
+ *   If the player successfuly prevent collision with the Enemy in the dodge room for 10 seconds
+ *   then the room is cleared. Whenever player has contact with enemy in the room. timer resets.
  * 
  * MiniMap
  * is placed at the sidepane to help player navigate
- * B, T, S room types will have a little indicator in the Minimap
+ * T,S,D,R room types will have a little indicator in the Minimap
  * 
  * SidePanel:
  *  displays which room player is currently in
@@ -44,6 +50,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  *  Proompt Message requiring player input,
  *  Current game level
  *  Player states(coins,stones,health,attacks fired in the session, attack power etc)
+ *  There's also game message pops up from time to time requring player attention.
  * 
  * Control:
  * player hit space to attack
@@ -51,6 +58,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  *        hit ESC to exit game
  *        WSAD and 4 arrows to navigate dirrections
  *        when propmted, hit u to upgrade, hit d to decline
+ *        
  * Health
  * player is initilaly given a default health of 100
  * for each enemy defeated, player receives the score equal to the enemy's maxhealth
@@ -84,11 +92,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * 
  * Enemies
  * All enemies wander around the room using computeMove to make it move itself
- * It would not go through walls and turn around when hits wall.
+ * It would not go through walls and would turn around when hits wall.
  * Skeleton Enemy -> wanders around and fires arrow when warrior is in range.  The arrow takes damager of the plaery, contact too.
  * Zombie Enemy->targets at the player, when in contact with the player, it sticks to it and takes damages continuously
  * Wander Enemy-> it wanders in the room as well, but does not follow the player, 
  * it also takes damges when in contact with the player. 
+ * HazardEnemy-> It's only spawned in dodge room.  It simply wanders around in the room.  It does not take damag from player.
+ *    when
  * Boss Enemy has the maxium health of around 150 defined in the GameConfig.SUMMONER_BOSS_MAX_HEALTH
  * -->It does not attack, it spawns minions at a random interval.  
  * -->Before it spawns minions, it does animation to indicate it's about to spawn minions
@@ -96,10 +106,15 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * -->It does not take contact damage from player.
  * -->appears when all the other rooms are cleared, it's the last room player need to clear 
  *    
- * Difficulty Level
+ * Difficulty Level:
+ * The difficulty level is based on the number of rooms cleared.
+ * The difficulty level increase every two rooms cleared.
  * 
+ * Enemies' health and contact damage and damage power got scaled with difficulty
+ * Number of enemies spawned in the combat room also increases with difficulty level
  * 
- * 
+ * Player can use the coins collected or score to upgrade their level, such as health, attack power etc.
+ *  
  * 
  * File Save Happens When:
  *  Player press ESC and choose Q, data is saved to file called "save.txt"
@@ -142,7 +157,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  *  all lead to the same problem, music jitter or throw error after pressing reset/ and then play
  *  When play comes back from Victory World to setting and the starts a new game then music jitter
  *  
- * 
  * 
  * Credits:
  * sounds:all from https://pixabay.com/

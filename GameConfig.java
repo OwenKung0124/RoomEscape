@@ -116,11 +116,26 @@ public class GameConfig
     public static final int STONE_TIME=120;//frames
     
     //dodge constants
-    public static final int DODGE_ROOM_HAZARD_COUNT = 8;
+    public static final int DODGE_ROOM_HAZARD_COUNT =7;
+    
+    //combat related
+    public static final int COMBAT_BASE_TIME = 10 * 60;     //10 seconds minimum
+    public static final int COMBAT_PER_ENEMY_TIME = 3 * 60; // +3 for each additionl enemy
+    public static final int COMBAT_MAX_TIME = 60 * 60;      //maxium 60 seconds
+    public static final int COMBAT_BOSS_TIME=COMBAT_MAX_TIME;
+    
+    //trap room related constants
+    public static final int TRAP_TIME_FRAMES = 10 * 60;
+    public static final int TRAP_PENALTY_HP = 40;
+    public static final int TRAP_REWARD_SCORE = 50;
+    
+    //dodge room related constants
+    public static final int DODGE_TIME_FRAMES = 10 * 60; // 10 seconds
+    public static final int DODGE_REWARD_SCORE = 30;    
+    
     
     //file for reloading data later
-    public static final String SAVE_FILE = "save.txt";
-    
+    public static final String SAVE_FILE = "save.txt";  
      /**
      * @return  SidePanel centreX position
      */
@@ -140,7 +155,7 @@ public class GameConfig
      */
     public static int tileLeft(int tc) 
     {
-        return GameConfig.ROOM_X + (int)Math.round(tc * (GameConfig.ROOM_W / (double)GameConfig.MAP_COLS));
+        return ROOM_X + (int)Math.round(tc * (ROOM_W / (double)MAP_COLS));
     }
 
     /**
@@ -148,14 +163,14 @@ public class GameConfig
      */
     public static int tileRight(int tc) 
     {
-        return GameConfig.ROOM_X + (int)Math.round((tc + 1) * (GameConfig.ROOM_W / (double)GameConfig.MAP_COLS));
+        return ROOM_X + (int)Math.round((tc + 1) * (ROOM_W / (double)MAP_COLS));
     }
     /**
      * @return  top pixel of tile row tr
      */
     public static int tileTop(int tr) 
     {
-        return GameConfig.ROOM_Y + (int)Math.round(tr * (GameConfig.ROOM_H / (double)GameConfig.MAP_ROWS));
+        return ROOM_Y + (int)Math.round(tr * (ROOM_H / (double)MAP_ROWS));
     }
 
     /**
@@ -163,7 +178,7 @@ public class GameConfig
      */
     public static int tileBottom(int tr) 
     {
-        return GameConfig.ROOM_Y + (int)Math.round((tr + 1) * (GameConfig.ROOM_H / (double)GameConfig.MAP_ROWS));
+        return ROOM_Y + (int)Math.round((tr + 1) * (ROOM_H / (double)MAP_ROWS));
     }
     /**
      * @return  Center X pixel of tile column tc
@@ -189,7 +204,7 @@ public class GameConfig
      */
     public static int roomCenterX() 
     { 
-        return GameConfig.ROOM_X + GameConfig.ROOM_W / 2; 
+        return ROOM_X + ROOM_W / 2; 
     }
 
     /**
@@ -197,7 +212,7 @@ public class GameConfig
      */
     public static int roomCenterY() 
     { 
-        return GameConfig.ROOM_Y + GameConfig.ROOM_H / 2; 
+        return ROOM_Y + ROOM_H / 2; 
     }
 
     /** 
@@ -213,7 +228,7 @@ public class GameConfig
      */
     public static int roomRight()  
     { 
-        return GameConfig.ROOM_X + GameConfig.ROOM_W; 
+        return ROOM_X + ROOM_W; 
     }
 
     /** 
@@ -221,7 +236,7 @@ public class GameConfig
      */
     public static int roomTop()    
     { 
-        return GameConfig.ROOM_Y; 
+        return ROOM_Y; 
     }
 
     /** 
@@ -229,7 +244,7 @@ public class GameConfig
      */
     public static int roomBottom() 
     { 
-        return GameConfig.ROOM_Y + GameConfig.ROOM_H;
+        return ROOM_Y + ROOM_H;
     }
     
 }

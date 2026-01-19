@@ -34,8 +34,8 @@ public class GameMap
     {
         {'T', 'C', 'N', 'T'},
         {'N', 'C', 'R', 'S'},
-        {'N', 'D', 'N', 'C'},
-        {'T', 'C', 'C', 'T'}
+        {'N', 'C', 'N', 'C'},
+        {'T', 'D', 'C', 'T'}
     };
     //background image name per room
     //all the same for now
@@ -245,7 +245,7 @@ public class GameMap
                 {3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3},
                 {3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3},
                 {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
+                {2,0,0,0,24,0,0,0,0,0,0,24,0,0,0,2},
                 {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
                 {2,2,2,2,2,2,2,24,24,2,2,2,2,2,2,2}
             };
@@ -388,7 +388,33 @@ public class GameMap
      */
     public boolean isBossRoom(int r, int c)
     {
-        return hasRoom(r, c) && getRoomType(r, c) == 'B';
+         //must be a battle room itself
+        if (!isCombatRoom(r,c))
+        {
+            return false;
+        }
+
+        //count how many battle rooms remain uncleared
+        int remaining = 0;
+
+        for (int rr = 0; rr < getRows(); rr++)
+        {
+            for (int cc = 0; cc < getCols(); cc++)
+            {
+                if (hasRoom(rr, cc) && isCombatRoom(rr, cc))
+                {
+                    if (!isCleared(rr, cc))
+                    {
+                         remaining++;   
+                    }
+                }
+            }
+        }
+
+        // If only THIS battle room remains uncleared, then it's the last one
+        return (remaining == 1 && !isCleared(r, c));
+    
+        //return hasRoom(r, c) && getRoomType(r, c) == 'B';
     }
     /**
      * Export visited[][] into a string like: 1101/0111/0101/1111

@@ -75,6 +75,8 @@ public class StoryWorld extends World
         
         addObject(new TextLabel("Press Esc to Skip Intro.",30,Color.WHITE,-1),getWidth()/2, getHeight()-30);
         
+        //SoundManager.playTypingSound();
+        
     }
     public void act()
     {
@@ -110,7 +112,7 @@ public class StoryWorld extends World
      */
     public void stopped()
     {
-        //SoundManager.stopGameMusic();
-        SoundManager.stopTypingSound();
+        SoundManager.stopGameMusic();
+        //SoundManager.stopTypingSound();
     }
 }

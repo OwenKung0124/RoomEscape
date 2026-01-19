@@ -13,7 +13,8 @@ public class HelpWorld extends World
     private String[] pages =
     {
         "help/help1.png",
-        "help/help2.png"
+        "help/help2.png",
+        "help/help3.png"
     };
 
     private int pageIndex = 0;
