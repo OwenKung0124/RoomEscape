@@ -4,6 +4,10 @@ import greenfoot.*;
  * Asking if player would like to upgrade certain feature
  * Usually u to upgrade d to decline
  * 
+ * 
+ * @author:
+ * @version:
+ * 
  */
 public class PromptManager extends Actor
 {
@@ -39,6 +43,10 @@ public class PromptManager extends Actor
     //prevent multiple keey press
     private boolean uWasDown=false;
     private boolean dWasDown=false;
+    
+    //for game Messags
+    //private TextLabel gameMessage;
+    //private int messageTimer = 0;
 
     public PromptManager()
     {
@@ -53,6 +61,7 @@ public class PromptManager extends Actor
      */
     public void act()
     {     
+        
         if (!active) 
         {
             return;
@@ -78,7 +87,6 @@ public class PromptManager extends Actor
             decline();
             close();
         }
-        
     }
     /**
      * tells caller to see if the prompt is active
@@ -116,21 +124,21 @@ public class PromptManager extends Actor
         if(p.getScore()<upgradeCost)
         {
             SoundManager.playMessageSound();
-            show("Upgrade Attack Power.\n  Not Enogh Score.\nYou Need "+upgradeCost+ " Scores to Upgrade",30);
+            showPrompt("Upgrade Attack Power.\n  Not Enogh Score.\nYou Need "+upgradeCost+ " Scores to Upgrade",30);
             type=NONE;
             active=false;
         }
         else if(p.getScore()<GameConfig.MINIMUM_HP_TO_UPGRADE)
         {
             SoundManager.playMessageSound();
-            show("Upgrade Attack Power.\n Not Enough Score.\n You Need "+GameConfig.MINIMUM_HP_TO_UPGRADE+" Score to upgrade",30); 
+            showPrompt("Upgrade Attack Power.\n Not Enough Score.\n You Need "+GameConfig.MINIMUM_HP_TO_UPGRADE+" Score to upgrade",30); 
             type=NONE;
             active=false;
         }
         else
         {
             SoundManager.playMessageSound();
-             show("Upgrade Attack Power? (+" + upgradeAmount + ")\n"
+             showPrompt("Upgrade Attack Power? (+" + upgradeAmount + ")\n"
             + "Cost: " + upgradeCost + " score\n"
             + "Press U=Upgrade, D=Decline",9999);
 
@@ -166,14 +174,14 @@ public class PromptManager extends Actor
         if(p.getCoinCount()<=0)
         {
             SoundManager.playMessageSound();
-            show("Health Upgrade.\n Need Coin to Upgrade",30);
+            showPrompt("Health Upgrade.\n Need Coin to Upgrade",30);
             type=NONE;
             active=false;
         }
         else
         {
             SoundManager.playMessageSound();
-            show("Upgrade Health HP? (+" + upgradeAmount + ")\n"
+            showPrompt("Upgrade Health HP? (+" + upgradeAmount + ")\n"
             + "Cost: " + upgradeCost + " coin\n"
             + "Press U=Upgrade, D=Decline",9999);
 
@@ -210,14 +218,14 @@ public class PromptManager extends Actor
         if(p.getCoinCount()<=upgradeCost)
         {
             SoundManager.playMessageSound();
-            show("Aquire Stone Skill.\n Need ("+upgradeCost+") Coin to Upgrade",30);
+            showPrompt("Aquire Stone Skill.\n Need ("+upgradeCost+") Coin to Upgrade",30);
             type=NONE;
             active=false;
         }
         else
         {
             SoundManager.playMessageSound();
-             show("Aquire Stone SKill? (+" + upgradeAmount + ")\n"
+             showPrompt("Aquire Stone SKill? (+" + upgradeAmount + ")\n"
             + "Cost: " + upgradeCost + " coin\n"
             + "Press U=Upgrade, D=Decline",9999);
 
@@ -227,6 +235,9 @@ public class PromptManager extends Actor
         uWasDown=Greenfoot.isKeyDown("u");
         dWasDown=Greenfoot.isKeyDown("d");
     }
+    /**
+     * when player accept the upgrade
+     */
     private void accept()
     {
         if (type==ATTACK_UPGRADE)
@@ -236,6 +247,7 @@ public class PromptManager extends Actor
                 boolean ok=player.upgradeAttackPower(upgradeAmount, upgradeCost);
                 
                 attackUpgrade.markAccepted(player);
+                GameWorld.numOfAttackUpgrade++;  //keep track of upgrade
                 if (ok &&  attackUpgrade.getWorld() != null)
                 {
                     //attackUpgrade.getWorld().removeObject( attackUpgrade);
@@ -248,6 +260,7 @@ public class PromptManager extends Actor
             {
                 boolean ok=player.upgradeHealthPower(upgradeAmount, upgradeCost);
                 healthUpgrade.markAccepted(player);
+                GameWorld.numOfHealthUpgrade++;
                 if (ok &&  healthUpgrade.getWorld() != null)
                 {
                     //don't remove, it's a stand
@@ -261,6 +274,7 @@ public class PromptManager extends Actor
             {
                 boolean ok=player.aquireStoneSkill(upgradeAmount, upgradeCost);
                 stoneSkillUpgrade.markAccepted(player);
+                GameWorld.numOfStoneUpgrade++;
                 if (ok &&  stoneSkillUpgrade.getWorld() != null)
                 {
                     //stoneSkillUpgrade.getWorld().removeObject( healthUpgrade);
@@ -268,6 +282,9 @@ public class PromptManager extends Actor
             }
         }
     }
+    /**
+     * when player decline the upgrade
+     */
     private void decline()
     {   
         if (attackUpgrade!= null)
@@ -284,9 +301,9 @@ public class PromptManager extends Actor
         }  
     }
     /**
-     * For showing msg in side panel 
+     * For showing prompt messages in side panel
      */
-    public void show(String msg,int frames)
+    private void showPrompt(String msg,int frames)
     {
         removeLabel();
         label=new TextLabel(msg, 20, Color.YELLOW, frames);
@@ -296,7 +313,31 @@ public class PromptManager extends Actor
         {
             w.addObject(label, GameConfig.sidePanelCentreX(), GameConfig.sidePanelCentreY()-50);
         }
-    }   
+    } 
+    /**
+     * Helper method for other classes to display game related messages
+     * 
+     * @param msg: message to display on the side panel
+     * @param frames: for how many frames to display
+     
+    public void showMessage(String msg, int frames)
+    {
+
+        if (gameMessage==null)
+        {
+            //gameMessage = new TextLabel("", 26, Color.YELLOW,messageTimer); 
+            gameMessage = new TextLabel("", 22, Color.YELLOW,-1); 
+            getWorld().addObject(gameMessage, GameConfig.sidePanelCentreX(), GameConfig.sidePanelCentreY()-50);
+        }
+    
+        gameMessage.setText(msg);     
+        gameMessage.setVisible(true);
+        messageTimer = frames;
+    }
+    */
+    /**
+     * close the prompt on the side panel
+     */
     private void close()
     {
         removeLabel();

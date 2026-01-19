@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=SoundToggleButton
-comment0.text=\r\n\ Graphic\ buttons\ for\ Music\ and\ Sound\r\n\ \r\n\ @author\:\r\n
+comment0.text=\n\ Graphic\ buttons\ for\ Music\ and\ Sound\n\ \n\ @author\:\n\ @version\:\n
 comment1.params=type
 comment1.target=SoundToggleButton(int)
 comment2.params=

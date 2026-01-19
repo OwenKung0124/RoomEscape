@@ -25,6 +25,8 @@ public class GameWorld extends World
     
     //handling game play prompts for user input
     private PromptManager promptManager;
+    private TextLabel gameMessage;
+    private int messageTimer=0;
     
     //(1,1), starting room
     private int roomR=1;
@@ -48,7 +50,24 @@ public class GameWorld extends World
     public static int enemiesKilled=0;
     public static int attackCount=0;
     public static int playerTimeFrames=0;
+    public static int numOfHealthUpgrade=0;
+    public static int numOfAttackUpgrade=0;
+    public static int numOfStoneUpgrade=0;
+    public static int numOfStoneUsed=0;
 
+    //trap room related variables/constants
+    private boolean trapActive = false;
+    private int trapTimerFrames = 0;
+    private boolean trapPenaltyDone = false;
+    private static final int TRAP_TIME_FRAMES = 10 * 60;
+    private static final int TRAP_PENALTY_HP = 40;
+    private static final int TRAP_REWARD_SCORE = 50;
+    
+    //dodge room related variables/constants
+    private boolean dodgeActive = false;
+    private int dodgeTimerFrames = 0;
+    private static final int DODGE_TIME_FRAMES = 10 * 60; // 10 seconds
+    private static final int DODGE_REWARD_SCORE = 30;    
     
     private GameData data;   //this data is passed around between world and is used to save to file when needed
     
@@ -110,8 +129,11 @@ public class GameWorld extends World
         
         
         //set total number of room to clean
-        //must clean all the combat room and boss room
-        totalRoomsToClear=map.countTotalForRoomType('C')+map.countTotalForRoomType('B');
+        //must clean all the combat,boss,trap,dodge (any room except t and s)
+        totalRoomsToClear=map.countTotalForRoomType('C')
+                        +map.countTotalForRoomType('B')
+                        +map.countTotalForRoomType('R')
+                        +map.countTotalForRoomType('D');
         
         //pick starting room:
         //resume,load roomR/roomC visited/cleared into map
@@ -176,12 +198,23 @@ public class GameWorld extends World
             //by RoomData and GameMap classes
         }
 
+        //prompt manager for handling prompts during game play
+        promptManager = new PromptManager();
+        addObject(promptManager, GameConfig.sidePanelCentreX(), GameConfig.sidePanelCentreY());
+        
+        //game message
+        //-1 means never removed by TextLabel from the world
+        //instead use textlabel'setVisible or not to show the game message
+        gameMessage=new  TextLabel("", 22, Color.YELLOW,-1); 
+        addObject(gameMessage, GameConfig.sidePanelCentreX(), GameConfig.sidePanelCentreY()-50);
+        
         //start in center only at the beginning
         loadRoom(roomR, roomC, 0, 0); 
         
         setPaintOrder(
             FloatingText.class,
             PauseOverlay.class,
+            //Player.class,
             Decoration.class,   //the statue image actor
             Enemy.class,
             SummonerBoss.class
@@ -197,11 +230,7 @@ public class GameWorld extends World
         addObject(new ImageIcon("stone_icon.png","Stone Skill Earned",35,35,255),hudX-110,565);
         addObject(new ImageIcon("score_icon.png","Score",40,20,255),hudX-110,595);
         addObject(new ImageIcon("time_icon.png","Time Lapsed",40,20,255),hudX-110,630);
-        
-        //prompt manager for handling prompts during game play
-        promptManager = new PromptManager();
-        addObject(promptManager, GameConfig.sidePanelCentreX(), GameConfig.sidePanelCentreY());
-        
+          
         //SoundManager.playGameMusic();
     }
     /**
@@ -338,10 +367,10 @@ public class GameWorld extends World
             return;
         }
         
-        //only combat/bossrooms can be cleared
-        if ( (map.isCombatRoom(roomR, roomC) || map.isBossRoom(roomR, roomC))&& 
-            countEnemies()==0 && 
-            !map.isCleared(roomR, roomC))
+        //only combat/bossrooms needs enemy count to clear
+        if ( (map.isCombatRoom(roomR, roomC) || map.isBossRoom(roomR, roomC) ) && 
+               countEnemies()==0 && 
+              !map.isCleared(roomR, roomC))
         {
             if (map.markCleared(roomR, roomC))
             {
@@ -365,14 +394,34 @@ public class GameWorld extends World
         showText(": " + player.getScore(), hudX-60, 595);
         showText(": " +playerTimeFrames/60+ " Seconds", hudX-10, 630);
         showText("" + player.getHealth(), hudX+115, 655);
-
-        //Win check
+        
+        
+        //track for gameMessage
+        if (messageTimer>=0)
+        {
+            messageTimer--;
+        
+            if (messageTimer == 0 && gameMessage != null)
+            {
+                gameMessage.setVisible(false);
+            }
+        }
+        
+        //win check
         //show in the window of the room
         if(roomsClearedCount>=totalRoomsToClear)
         {
+            onPlayerVictory();
             Greenfoot.setWorld(new VictoryWorld(data)); 
         }
 
+        //update trap room status
+        //in act()
+        updateTrapRoom();
+updateDodgeRoom();
+        //isRoomUnloced
+        //only check escape condition for C and B rooms
+        //as they both lock the room for battle
         boolean unlockedNow=isRoomUnlocked();
 
         //unlock all doors if cleared, otherwise only the back door
@@ -389,6 +438,10 @@ public class GameWorld extends World
             enemiesKilled=0;
             attackCount=0;
             playerTimeFrames=0;
+            numOfHealthUpgrade=0;
+            numOfAttackUpgrade=0;
+            numOfStoneUpgrade=0;
+            numOfStoneUsed=0;
     }
     /**
      * Scale games difficutly level based on rooms cleared
@@ -429,11 +482,17 @@ public class GameWorld extends World
         ArrayList<Actor> all=new ArrayList<Actor>(getObjects(Actor.class));
         for (Actor a : all) 
         {
-             if (a != player && a != minimap && a != playerBar && a != promptManager && !(a instanceof ImageIcon))
+             if (a != player && 
+                 a != minimap && 
+                 a != playerBar && 
+                 a != promptManager && 
+                 a != gameMessage && 
+                 !(a instanceof ImageIcon))
              {
                 removeObject(a);   
              }
         }
+
 
         //when changing room
         //stop all boss sounds
@@ -457,10 +516,21 @@ public class GameWorld extends World
         //unless it's the first room
         //the player will appear in the middle
         placeAtEntrance(enterDr, enterDc);
+        
+        //if in a trap room
+        //trapRoomActive startTimer
+        //but once cleared
+        //treat as a by pass room
+        startTrapIfNeeded(r, c);
+
+startDodgeIfNeeded(r, c);
 
         //Spawn enemies only if room not cleared
         spawner.spawnEnemiesIfNeeded(r, c, player);
 
+        //Spawn hazard enemy only if room not cleared and is dodge room
+        spawner.spawnHazardsIfNeeded(r, c, player);
+        
         //blocker rebuild
         boolean unlocked=isRoomUnlocked();
         doorSystem.updateDoorStates(roomR, roomC, lastRoomR, lastRoomC, unlocked);
@@ -472,10 +542,19 @@ public class GameWorld extends World
      */
     private void placeAtEntrance(int enterDr, int enterDc)
     {
-        if (enterDr==0 && enterDc==0) 
-        {
-            player.setLocation(GameConfig.roomCenterX(), GameConfig.roomCenterY());
-            return;
+        if (enterDr==0 && enterDc==0 ) 
+        {   
+            if(roomsClearedCount==0)
+            {
+                //only place in the cetnre for the first room/new game
+                player.setLocation(GameConfig.roomCenterX(), GameConfig.roomCenterY());
+                return;
+            }
+            else
+            {
+                player.setLocation(GameConfig.roomCenterX()-300, GameConfig.roomCenterY());
+                return;
+            }
         }
     
         int halfW=player.getImage().getWidth() / 2;
@@ -549,6 +628,18 @@ public class GameWorld extends World
         //check if the player is trying to go back to the previous room
         boolean goingBack=(nr==lastRoomR && nc==lastRoomC);
 
+        //trap room escape logic in tryMove
+        if(trapActive && trapTimerFrames>=0 && ! goingBack)
+        {
+            map.markCleared(roomR,roomC);
+            roomsClearedCount++;
+            trapActive=false;
+            trapTimerFrames=0;
+            player.addScore(TRAP_REWARD_SCORE);  //increase score
+            SoundManager.playRewardSound(); //audio feedback
+            showMessage("Rewarded Score(+"+TRAP_REWARD_SCORE+")",120);
+        }
+        
         //the room is still locked
         //not going back, block the move.
         if (!isRoomUnlocked() && !goingBack) 
@@ -570,6 +661,7 @@ public class GameWorld extends World
 
         //load the new room
         loadRoom(roomR, roomC, dr, dc);
+
     }
     /**
      * @return number of Enemy actors currently in the world
@@ -583,15 +675,20 @@ public class GameWorld extends World
      */
     public boolean isRoomUnlocked()
     {
-        //not a combat room, doors always open
-        if (!map.isCombatRoom(roomR, roomC) && !map.isBossRoom(roomR,roomC))
+        //boss/combat rooms: unlock when enemies gone
+        if (map.isCombatRoom(roomR, roomC) || map.isBossRoom(roomR, roomC))
         {
-            return true;
+            return countEnemies() == 0;
         }
     
-        //combat room
-        //unlock when enemies are gone
-        return countEnemies()==0;
+        // dodge room (D): locked until cleared
+        if (map.isDodgeRoom(roomR, roomC))
+        {
+            return map.isCleared(roomR, roomC);
+        }
+    
+        //normal rooms: always open
+        return true;
     }
     /**
      * Finds the Door in the current room that matches (dr, dc).
@@ -703,7 +800,7 @@ public class GameWorld extends World
      */
     public void started()
     {
-        SoundManager.playGameMusic();
+        //SoundManager.playGameMusic();
     }
     /**
      * Make sure game music stops when paused
@@ -718,5 +815,167 @@ public class GameWorld extends World
     public PromptManager getPromptManager()
     {
         return promptManager;
+    }
+    public boolean isBossRoom()
+    {
+        //boss is last battle => all other combat rooms must be cleared first
+        return roomsClearedCount >= totalRoomsToClear - 1;
+    
+    }
+    /**
+     * start trap room rules if it's a trap room
+     * 
+     * @param r     the roomR
+     * @param c     the roomC
+     */
+    private void startTrapIfNeeded(int r, int c)
+    {
+        trapActive = false;
+        trapPenaltyDone = false;
+        trapTimerFrames = 0;
+        
+        //if it's a trap room is not cleared, start trap room game
+        //if it's penalied or reward
+        //then this room is markCleared in tryMove
+        //second time here, it won't trigger
+        if (map.isTrapRoom(r, c) && !map.isCleared(r, c))
+        {
+            trapActive = true;
+            trapTimerFrames = TRAP_TIME_FRAMES;
+    
+            if (promptManager != null)
+            {
+                showMessage("Rush!\n You must leave the room \n from the other sie in\n"
+                             +(TRAP_TIME_FRAMES/60)+" s!\n"
+                             +"Success->Score (+"+TRAP_REWARD_SCORE+")\n"+
+                             "Failure->HP(-"+TRAP_PENALTY_HP +")", 
+                             180);
+            }
+        }
+    }
+    private void updateTrapRoom()
+    {
+        if (!trapActive) return;
+    
+        trapTimerFrames--;
+    
+        //dispaly time to escape count down
+        if (trapTimerFrames < TRAP_TIME_FRAMES - 200 && trapTimerFrames>0)
+        {
+            showMessage("Rush Timer: " + (trapTimerFrames / 60), 60);
+        }
+    
+        //failed to escape in time
+        //penalty applied
+        //the reward part is dealt in tryMove
+        //as the actor will leave the room w/o actually touching the door
+        //leaving touching door and room leaving to tryMove
+        if (trapTimerFrames <= 0 && !trapPenaltyDone)
+        {
+            trapPenaltyDone = true;
+            trapTimerFrames=0;
+            player.takeDamage(TRAP_PENALTY_HP);
+            
+            //trap room only play once
+            //regardless if passed or not
+            map.markCleared(roomR,roomC);
+            roomsClearedCount++;
+
+            SoundManager.playFailSound();
+            showMessage("Too slow! -" + TRAP_PENALTY_HP + " HP", 120);
+        }
+    }
+    /**
+     * start dodge room logic if in dodge room and is not cleared
+     */
+    private void startDodgeIfNeeded(int r, int c)
+    {
+        dodgeActive = false;
+        dodgeTimerFrames = 0;
+    
+        // only start if this is a dodge room AND not cleared yet
+        if (map.getRoomType(r, c) == 'D' && !map.isCleared(r, c))
+        {
+            dodgeActive = true;
+            dodgeTimerFrames = DODGE_TIME_FRAMES;
+    
+            showMessage("DODGE ROOM!\nDon't touch hazards \n for 10 seconds!", 150);
+        }
+    }
+    /**
+     * update dogge room play
+     */
+    private void updateDodgeRoom()
+    {
+        if (!dodgeActive)
+        {
+            return;
+        }
+    
+        //countdown
+        dodgeTimerFrames--;
+    
+        //show timer (don’t spam every frame, just show after the intro)
+        if (dodgeTimerFrames < DODGE_TIME_FRAMES - 180)
+        {
+            showMessage("Dodge Timer: " + (dodgeTimerFrames / 60), 60);
+        }
+    
+        //success
+        if (dodgeTimerFrames <= 0)
+        {
+            dodgeActive = false;
+            dodgeTimerFrames = 0;
+    
+            if (!map.isCleared(roomR, roomC))
+            {
+                map.markCleared(roomR, roomC);
+                roomsClearedCount++;
+    
+                player.addScore(DODGE_REWARD_SCORE); 
+                SoundManager.playRewardSound(); //audio feedback
+                
+                //remove Hazard Visually
+                //remove all hazards so player sees it's finished
+                ArrayList<HazardEnemy> hazards =(ArrayList<HazardEnemy>) getObjects(HazardEnemy.class);
+                for (HazardEnemy h : hazards)
+                {
+                    removeObject(h);
+                }
+                
+                showMessage("Success! +" + DODGE_REWARD_SCORE + " score", 150);
+            }
+        }
+    }
+    /**
+     * Called by HazardEnemy to reset the timer
+     */
+    public void onDodgeRoomHit()
+    {
+        if (!dodgeActive) return;
+        
+        SoundManager.playOuchSound();
+        dodgeTimerFrames = DODGE_TIME_FRAMES;
+        showMessage("Ouch! Timer reset!", 90);
+    }
+    /**
+     * Helper method for games to show game messages on the side panel
+     * 
+     * @param msg message to display
+     * @param how long to display for
+     */  
+    public void showMessage(String msg, int frames)
+    {
+        if (gameMessage==null)
+        { 
+            gameMessage = new TextLabel("", 22, Color.YELLOW,-1); 
+            addObject(gameMessage, GameConfig.sidePanelCentreX(), GameConfig.sidePanelCentreY()-50);
+        }
+    
+        //audio alert
+        SoundManager.playMessageSound();
+        gameMessage.setText(msg);     
+        gameMessage.setVisible(true);
+        messageTimer = frames;
     }
 }

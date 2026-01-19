@@ -1,0 +1,27 @@
+#BlueJ class context
+comment0.target=HazardEnemy
+comment0.text=\n\ HazardEnemy\:\n\ \ moves\ around\ in\ a\ dodge\ room\n\ \ if\ player\ touches\ the\ Hazard,\ the\ timer\ resets\n\ \ it\ does\ not\ damage\ the\ player\n\ \ it\ does\ not\ have\ health,\ as\ it\ does\ not\ combat\n\ \ it\ does\ not\ take\ dmage\ from\ the\ player\n\ \ \n\ \ @author\n\ \ @version\:\n
+comment1.params=target
+comment1.target=HazardEnemy(Player)
+comment2.params=
+comment2.target=int[]\ computeMove()
+comment2.text=\n\ Hazard\ wandering\ movement.\n\ uses\ wander\ logic\n
+comment3.params=
+comment3.target=void\ handlePlayerContact()
+comment3.text=\n\ Override\ Enemy\ contact\ logic\:\n\ \ so\ no\ damage\n\ -\ notify\ GameWorld\ to\ reset\ the\ dodge\ timer\n
+comment4.params=world
+comment4.target=void\ addedToWorld(greenfoot.World)
+comment4.text=\n\ Prevent\ Enemy\ from\ creating\ a\ HP\ bar.\n
+comment5.params=world
+comment5.target=void\ removedFromWorld(greenfoot.World)
+comment5.text=\n\ Prevent\ Enemy\ HP\ bar\ cleanup\ logic\ (we\ never\ created\ one\ anyway).\n
+comment6.params=amount
+comment6.target=void\ takeDamage(int)
+comment6.text=\n\ Hazard\ cannot\ be\ damaged.\n
+comment7.params=
+comment7.target=void\ playAttackSoundEffect()
+comment7.text=\n\ does\ not\ attack\n
+comment8.params=
+comment8.target=void\ playEndOfLifeSoundEffect()
+comment8.text=\n\ no\ end\ of\ life\n
+numComments=9

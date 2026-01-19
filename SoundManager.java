@@ -17,6 +17,7 @@ public class SoundManager
     private static GreenfootSound defeat = new GreenfootSound("defeat.mp3");
     private static GreenfootSound help = new GreenfootSound("fire.mp3");
     private static GreenfootSound victory = new GreenfootSound("victory.mp3");
+    private static GreenfootSound failed=new GreenfootSound("failed.mp3");
     
     //summoner boss
     private static GreenfootSound summonerBoss = new GreenfootSound("summoner_boss.mp3");
@@ -103,13 +104,27 @@ public class SoundManager
         new GreenfootSound("prompt_message.mp3")
     };
     
-     //health upgrade
+    //health upgrade
     private static int healthIndex;
     private static GreenfootSound healthSounds[] = {
         new GreenfootSound("health_upgrade.mp3"),
         new GreenfootSound("health_upgrade.mp3")
     };
     
+    //reward
+    private static int rewardIndex;
+    private static GreenfootSound rewardSounds[] = {
+        new GreenfootSound("reward.mp3"),
+        new GreenfootSound("reward.mp3"),
+        new GreenfootSound("reward.mp3")
+    };
+    //ouch
+    private static int ouchIndex;
+    private static GreenfootSound ouchSounds[] = {
+        new GreenfootSound("ouch.mp3"),
+        new GreenfootSound("ouch.mp3"),
+        new GreenfootSound("ouch.mp3")
+    };
     private SoundManager() {}
 
     /**
@@ -242,6 +257,19 @@ public class SoundManager
         if (!bossDescending.isPlaying()) 
         {
             bossDescending.play();
+        }
+    }
+    /**
+     * play faild sound when mission failed
+     */
+    public static void playFailSound()
+    {
+        if(!sfxOn) return;
+        
+        failed.setVolume(30);
+        if(!failed.isPlaying())
+        {
+            failed.play();
         }
     }
     /**
@@ -477,16 +505,34 @@ public class SoundManager
     {
         if (!sfxOn) return;
         
-        messageIndex=arraySoundPlay(messageSounds,messageIndex,30);
+        messageIndex=arraySoundPlay(messageSounds,messageIndex,35);
     }
      /**
-     * play game start sound when new game or resume game is pressed
+     * play health upgrade sound
      */
     public static void playHealthSound()
     {
         if (!sfxOn) return;
         
         healthIndex=arraySoundPlay(healthSounds,healthIndex,30);
+    }
+    /**
+     * play reward sound, when score is rewarded
+     */
+    public static void playRewardSound()
+    {
+        if (!sfxOn) return;
+        
+        rewardIndex=arraySoundPlay(rewardSounds,rewardIndex,30);
+    }
+    /**
+     * play ouch sound when player touches HazardEnemy
+     */
+    public static void playOuchSound()
+    {
+        if (!sfxOn) return;
+        
+        ouchIndex=arraySoundPlay(ouchSounds,ouchIndex,30);
     }
     /*
      * Helper method to play sounds in array
@@ -534,7 +580,7 @@ public class SoundManager
      */
     public static void stopAll()
     {
-           stop(gameMusic);
+//stop(gameMusic);
            stop(summonerBoss);
            stop(bossFight);
            stop(bossDisappear);

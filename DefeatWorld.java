@@ -3,7 +3,10 @@ import greenfoot.*;
 /**
  * DefeatWorld (Game Over Screen)
  * 
+ * It also display game related information for feedback.
  * 
+ * @author:
+ * @version
  */
 public class DefeatWorld extends World
 {
@@ -33,7 +36,7 @@ public class DefeatWorld extends World
         //story related line
         addObject(new TextLabel("Owen can't go home now. He needs to stay.", 22, Color.WHITE, -1),
                   getWidth()/2, getHeight()/2 - 95);
-         addObject(new TextLabel("He needs to stay.", 22, Color.WHITE, -1),
+        addObject(new TextLabel("He needs to stay.", 22, Color.WHITE, -1),
                   getWidth()/2, getHeight()/2 - 70);
 
         //instructions
@@ -78,7 +81,7 @@ public class DefeatWorld extends World
             //return to setting
             SoundManager.stopDefeatSound();
             SoundManager.playGameMusic();//game music does not load from setting constructor
-            Greenfoot.setWorld(new SettingWorld(data));
+            Greenfoot.setWorld(new SettingWorld(null));
         }
     }
 }

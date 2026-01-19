@@ -25,9 +25,9 @@ public class RoomRenderer
 
     /**
      * Builds everything that visually belongs to the room:
-     * - background + side panel
-     * - doors on the border
-     * - tile-based objects.
+     *  background + side panel
+     *  doors on the border
+     *  tile-based objects.
      */
     public void buildRoom(int r, int c) 
     {
@@ -47,7 +47,7 @@ public class RoomRenderer
         bg.setColor(new Color(40, 40, 40));
         bg.fillRect(panelX, 0, panelW, world.getHeight());
     
-        //Draw the room background to cover the entire room area
+        //draw the room background to cover the entire room area
         String bgName = map.getBgName(r, c);
         if (bgName != null) 
         {
@@ -65,8 +65,7 @@ public class RoomRenderer
         world.setBackground(bg);
     }
     /**
-     * /shop objects can't be build from tiles
-     * 
+     * shop objects can't be build from tiles
      */ 
     private void buildShopObjects(int r, int c)
     {
@@ -77,7 +76,8 @@ public class RoomRenderer
         }
         
         //don't put too close to entrances
-        AttackUpgrade attackUpgrade = new AttackUpgrade(240,190);
+        //AttackUpgrade attackUpgrade = new AttackUpgrade(240,190);
+        AttackUpgrade attackUpgrade = new AttackUpgrade(240,300);
         world.addObject(attackUpgrade, 250,550);
         
         HealthUpgrade healthUpgrade = new HealthUpgrade(240,190);
@@ -88,7 +88,6 @@ public class RoomRenderer
     }
     /**
      * Builds wall, blockers using the RoomData tile layout.
-     *
      */
     public void buildObjectsFromTiles(int r, int c)
     {

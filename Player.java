@@ -207,13 +207,16 @@ public abstract class Player extends CombatActor
         {
             if(getWorld()!=null)
             {
-                ((GameWorld)getWorld()).getPromptManager().show("No More Stone Skills.",60);
+               // ((GameWorld)getWorld()).getPromptManager().showMessage("No More Stone Skills.",60);
+                //((GameWorld)getWorld()).getPromptManager().showMessage("No More Stone Skills.",60);
+                ((GameWorld)getWorld()).showMessage("No More Stone Skills.",60);
             }
             
            return;
         }
         //deduct
         stoneSkills--;
+        GameWorld.numOfStoneUsed++;  //keep track
         
         ArrayList<Enemy> enemies= (ArrayList<Enemy>) getWorld().getObjects(Enemy.class);
         for(Enemy e: enemies)
@@ -464,6 +467,16 @@ public abstract class Player extends CombatActor
         
         return true;
 
+    }
+    /**
+     * helper method for gameworld, used in trap room
+     * 
+     * @return if player touches the door
+     * 
+     */
+    public boolean touchingDoor()
+    {
+        return isTouching(Door.class);
     }
     
 }

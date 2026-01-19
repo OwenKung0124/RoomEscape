@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=ImageIcon
-comment0.text=\n\ ImageIcon\:\ a\ simple\ actor\ that\ only\ displays\ an\ image.\n
+comment0.text=\n\ ImageIcon\:\ a\ simple\ actor\ that\ only\ displays\ an\ image.\n\ \n\ @author\:\n\ @version\:\n
 comment1.params=filename\ name\ w\ h\ alpha
 comment1.target=ImageIcon(java.lang.String,\ java.lang.String,\ int,\ int,\ int)
 comment1.text=\n\ Create\ an\ ImageActor\ with\ an\ image\ file\ and\ scale\ it.\n\ @param\ filename\ e.g.\ "stoneIcon.png"\n\ @param\ w\ image\ width\n\ @param\ h\ image\ height\n\ @param\ alpha\ transparency\ level\n

@@ -92,11 +92,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Boss Enemy has the maxium health of around 150 defined in the GameConfig.SUMMONER_BOSS_MAX_HEALTH
  * -->It does not attack, it spawns minions at a random interval.  
  * -->Before it spawns minions, it does animation to indicate it's about to spawn minions
+ * -->After spawning minions, it relocates to prevent player staying in the same spot hitting the boss
  * -->It does not take contact damage from player.
- * -->appears in the boss room as configured in the GameMap roomType. 
- *    There appearance of boos does not depend on the number of rooms cleared.
- *    The player can decide to face the boss earlier, so the minions spaned are less powerful or
- *    face the boos later when gains more power and skills, but then the minions spawned by the boos can be stronger too.
+ * -->appears when all the other rooms are cleared, it's the last room player need to clear 
  *    
  * Difficulty Level
  * 
@@ -142,6 +140,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  *  such as converting to wav file
  *  or use shorter or file from other source
  *  all lead to the same problem, music jitter or throw error after pressing reset/ and then play
+ *  When play comes back from Victory World to setting and the starts a new game then music jitter
  *  
  * 
  * 

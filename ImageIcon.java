@@ -2,6 +2,9 @@ import greenfoot.*;
 
 /**
  * ImageIcon: a simple actor that only displays an image.
+ * 
+ * @author:
+ * @version:
  */
 public class ImageIcon extends Actor
 {

@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Coin
-comment0.text=\n\ A\ collectible\ potion\ called\ by\ player's\ collect\n\ updates\ RoomData\ when\ collected.\n
+comment0.text=\n\ A\ collectible\ potion\ called\ by\ player's\ collect\n\ updates\ RoomData\ when\ collected.\n\ \n\ @author\:\n\ @version\:\n
 comment1.params=rd\ r\ c\ tr\ tc
 comment1.target=Coin(RoomData,\ int,\ int,\ int,\ int)
 comment1.text=\n\ @param\ RoomDate\ rd\n\ @param\ roomR\ room\ \n\ @param\ roomC\ room\n\ @param\ tr\ tile\ row\n\ @param\ tc\ tile\ col\n
@@ -8,6 +8,7 @@ comment2.params=
 comment2.target=void\ act()
 comment3.params=
 comment3.target=void\ animate()
+comment3.text=\n\ Animate\ the\ actor\n
 comment4.params=
 comment4.target=void\ collect()
 comment4.text=\n\ Collect\ the\ coin\:\n\ remove\ the\ coin\n\ update\ the\ RoomData\n

@@ -6,6 +6,9 @@ import greenfoot.*;
  * Modes:
  *   MODE_NEW_GAME: deletes save and starts from beginning
  *   MODE_RESUME: loads save and continues
+ *   
+ * @author:
+ * @version:
  */
 public class StartButton extends Actor
 {

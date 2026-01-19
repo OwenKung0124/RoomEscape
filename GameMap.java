@@ -23,16 +23,18 @@ public class GameMap
         {1, 1, 1, 1}
     };
 
-    //B=boss
+    //B=boss < no more boss room for now
     //T=treasure
     //C=combat
     //S=shop
+    //R=rush room, must exit in certain time
+    //D=must not touch moving actor in the room for certain time period
     //n=not a room
     private char[][] roomType=
     {
         {'T', 'C', 'N', 'T'},
-        {'N', 'C', 'B', 'S'},
-        {'N', 'C', 'N', 'C'},
+        {'N', 'C', 'R', 'S'},
+        {'N', 'D', 'N', 'C'},
         {'T', 'C', 'C', 'T'}
     };
     //background image name per room
@@ -169,16 +171,17 @@ public class GameMap
             };
         }
         if (r==1 && c==2) {
+            //rush
             return new int[][] {
-                {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},
-                {2,0,0,24,0,0,0,0,0,0,0,0,24,0,0,2},
+                {2,2,2,2,2,2,2,3,3,2,2,2,2,2,2,2},
+                {2,0,11,24,11,0,0,0,0,0,11,24,0,0,0,2},
                 {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-                {3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3},
-                {3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3},
-                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-                {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-                {2,0,0,24,0,0,0,0,0,0,0,0,24,0,0,2},
-                {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2}
+                {3,0,0,0,0,22,0,0,24,0,0,23,0,0,0,3},
+                {3,0,0,0,0,22,0,0,0,0,0,23,0,0,0,3},
+                {2,0,0,0,0,0,0,0,23,0,0,24,0,0,0,2},
+                {2,0,0,0,0,0,0,0,23,0,0,0,0,0,0,2},
+                {2,0,0,0,11,24,11,0,0,0,0,0,0,0,11,2},
+                {2,2,2,2,2,2,2,3,3,2,2,2,2,2,2,2}
             };
         }
         if (r==1 && c==3) {
@@ -527,10 +530,38 @@ public class GameMap
     
         return count;
     }
+    /**
+     * if current room is trap room with room type='R"
+     * 
+     * @return if current room is a trap room
+     */
+    public boolean isTrapRoom(int r, int c)
+    {
+        return getRoomType(r, c) == 'R';
+    }
+     /**
+     * if current room is a dodge room with room type='D"
+     * 
+     * @return if current room is a dodge room
+     */
+    public boolean isDodgeRoom(int r, int c)
+    {
+        return getRoomType(r, c) == 'D';
+    }
+    /**
+     * Helper methods for MiniMap
+     * 
+     * @return total rows in game map
+     */
     public int getRows()
     { 
         return grid.length; 
     }
+    /**
+     * Helper methods for MiniMap
+     * 
+     * @return total columns in game map
+     */
     public int getCols()
     { 
         return grid[0].length; 

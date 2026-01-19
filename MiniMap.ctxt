@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=MiniMap
-comment0.text=\n\ MiniMap\ draws\ a\ small\ map\ of\ the\ room-grid\ on\ the\ side\ panel.\n\n\ Color\ key\:\n\ \ \ Dark\ gray\:\ no\ room\n\ \ \ Light\ Gray\:\ room\ exists\ but\ not\ visited\n\ \ \ White\:\ visited\ but\ not\ cleared\n\ \ \ Green\:\ cleared\n\ \ \ Cyan\ outline\:\ current\ room\n\ \ \ \n\ @author\:\ \ \ \ \ Owen\ Kung\n\ @version\:\ \ \ \ Jan\ 2026\n
+comment0.text=\n\ MiniMap\ draws\ a\ small\ map\ of\ the\ room-grid\ on\ the\ side\ panel.\n\n\ Color\ key\:\n\ \ \ Dark\ gray\:\ no\ room\n\ \ \ Light\ Gray\:\ room\ exists\ but\ not\ visited\n\ \ \ White\:\ visited\ but\ not\ cleared\n\ \ \ Green\:\ cleared\n\ \ \ Cyan\ outline\:\ current\ room\n\ \ \ \n\ @author\:\ \ \ \ \ Owen\ Kung,\ Clifton\ Lin\n\ @version\:\ \ \ \ Jan\ 2026\n
 comment1.params=world
 comment1.target=void\ addedToWorld(greenfoot.World)
 comment1.text=\n\ Called\ automatically\ when\ MiniMap\ is\ added\ to\ the\ world.\n\ The\ minimap\ is\ created\ first\ and\ then\ added\ to\ the\ world\n\ \n\n\ @param\ world\ the\ world\ this\ actor\ was\ added\ to\n

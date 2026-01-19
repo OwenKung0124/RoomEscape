@@ -22,8 +22,8 @@ public class AxeWarrior extends Player
         animDelay=6;
 
         //sprite size
-        spriteW=75;
-        spriteH=80;
+        spriteW=80;
+        spriteH=85;
 
         //walk frames
         loadDirectionalFrames("player/axe_warrior/walking", 4);  //more than 4, the axe warrior's horizontal movement looks weird

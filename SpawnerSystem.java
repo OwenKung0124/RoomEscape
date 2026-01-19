@@ -17,7 +17,11 @@ public class SpawnerSystem
         this.map=map;
     }
     /**
-     * Spawns enemies only if the room is not cleared.
+     * Spawns enemies only if the room is not cleared. and is a combat or boss room
+     * 
+     * @param r roomR
+     * @param c roomC
+     * @play plaer player in the world
      */
     public void spawnEnemiesIfNeeded(int r, int c, Player player)
     {
@@ -34,17 +38,15 @@ public class SpawnerSystem
             return;   
         }
 
-        //if(world.getRoomsClearedCount()==GameConfig.SUMMONER_BOSS_DOOR_CLEARED)
-        if (map.isBossRoom(r, c))
+
+        //if(world.getRoomsClearedCount()==GameConfig.SUMMONER_BOSS_DOOR_CLEARED   
+        //Last battle room is the boss room
+        if (((GameWorld)world).isBossRoom())
         {
-            //start from the top
-            //descend to centre
-            //create visual effect
-            world.addObject(new SummonerBoss(player),  GameConfig.roomCenterX(),0);  
-            
-            //don't spawn enemies in boss room
-            return;
+            world.addObject(new SummonerBoss(player), GameConfig.roomCenterX(), 0);
+            return;  //don't spawn enemies in boss room
         }
+
         
         for (int i=0; i < maxiumEnemySpawn(); i++) 
         {
@@ -69,6 +71,33 @@ public class SpawnerSystem
         }
        
          
+    }
+     /**
+     * Spawns HazardEnemy only if room is a DodgeRoom, roomType='D'
+     * 
+     * @param r roomR
+     * @param c roomC
+     * @play plaer player in the world
+     */
+    public void spawnHazardsIfNeeded(int r, int c, Player player)
+    {
+        //only dodge room spawns hazards
+        if (!map.isDodgeRoom(r, c))
+        {
+            return;   
+        }
+    
+        //if room already cleared -> no hazards
+        if (map.isCleared(r, c))
+        {
+            return;
+        }
+    
+        for (int i = 0; i < GameConfig.DODGE_ROOM_HAZARD_COUNT; i++)
+        {
+            int[] p=randomFloorSpawn(r, c);
+            world.addObject(new HazardEnemy(player), p[0], p[1]);
+        }
     }
     private int maxiumEnemySpawn()
     {

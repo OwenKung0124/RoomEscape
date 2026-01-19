@@ -155,6 +155,7 @@ public class SummonerBoss extends Enemy
     {
         //do nothing
         //otherwise, axe or sword player has now way to kill the boos
+    
         return;
     }
     /**
@@ -212,7 +213,10 @@ public class SummonerBoss extends Enemy
             //spawn happens
             //at the end of the animation.
             spawnMinions();
-
+            
+            //relocate minions
+            //so the player won't stay in the same spot hitting the boss
+            relocate();
             //sart waiting for the next summon.
             scheduleNextSummon();
             return;
@@ -307,6 +311,23 @@ public class SummonerBoss extends Enemy
         }
     
         return null;
+    }
+    /**
+     *  Relocate boss after it spawns minions
+     *  to avoid player staying in the same position hitting boss
+     */
+    private void relocate()
+    {
+            int[] newLocation=findSpawnPointNearBoss(150, 30);
+            
+            if(newLocation!=null)
+            {
+                int newX=newLocation[0];
+                int newY=newLocation[1];
+                
+                setLocation(newX,newY);
+                
+            }
     }
     /**
      * Summoner boss does not playAttackSoundEffect

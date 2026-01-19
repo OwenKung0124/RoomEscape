@@ -20,8 +20,8 @@ public class BulletWarrior extends Player
         
         animDelay = 6;
 
-        spriteW = 70;
-        spriteH = 80;
+        spriteW = 75;
+        spriteH = 85;
 
         //walking frames
         loadDirectionalFrames("player/bullet_warrior/walking", 4);

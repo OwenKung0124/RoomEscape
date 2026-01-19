@@ -9,7 +9,9 @@ public class AttackUpgrade extends Upgrade
     {
         //super(rd, r, c, tr, tc);
         super(w,h);
+        FRAME_COUNT=3;
         FRAME_PREFIX = "attack_upgrade/upgrade";
+        animDelay=20;
         frames = loadFrames();
         setImage(frames[0]);
     }

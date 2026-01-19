@@ -3,6 +3,7 @@ import greenfoot.*;
  * Graphic buttons for Music and Sound
  * 
  * @author:
+ * @version:
  */
 public class SoundToggleButton extends Actor
 {

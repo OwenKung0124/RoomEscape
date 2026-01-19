@@ -306,6 +306,7 @@ public abstract class Enemy extends CombatActor
         if (health <= 0 && getWorld() != null)
         {
             player.addScore(maxHealth);
+            SoundManager.playRewardSound();
             playEndOfLifeSoundEffect();  //play sound effect when enemy dies
             GameWorld.enemiesKilled++;  //increment the enemies killed count
             getWorld().removeObject(this);

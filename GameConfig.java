@@ -115,6 +115,9 @@ public class GameConfig
     //stone time
     public static final int STONE_TIME=120;//frames
     
+    //dodge constants
+    public static final int DODGE_ROOM_HAZARD_COUNT = 8;
+    
     //file for reloading data later
     public static final String SAVE_FILE = "save.txt";
     

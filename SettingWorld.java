@@ -3,6 +3,9 @@ import greenfoot.*;
 /**
  * SettingWorld lets the user pick a warrior then to start a new game or resume an old game
  * It also allows for turning music on/off
+ * 
+ * @author:
+ * @version:
  */
 public class SettingWorld extends World
 {
