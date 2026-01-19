@@ -6,8 +6,8 @@ import greenfoot.*;
  */
 public class Blocker extends SuperSmoothMover 
 {
-    //Set true to draw visible walls for debuggin)
-    protected static boolean VISIBLE= true;
+    //visible foe debugging
+    protected static boolean VISIBLE= false;
 
     /**
      * Creates a wall collider with width and height in pixels.

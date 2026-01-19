@@ -5,8 +5,6 @@ import greenfoot.*;
  * Hepls player and enemy actor to walk in the gameworld
  * with correct direction images
  * 
- * When attack, use correct images too.
- * It also avoid walking through wall.
  * 
  * @author:     Owen Kung
  * @version:    Jan 2026
@@ -348,8 +346,10 @@ public abstract class WalkingActor extends SuperSmoothMover
 
         if (dx != 0) {
             setLocation(getX() + dx, getY());
-             //make sure enemy does not wonder off open door
-            if (this instanceof Enemy && isTouching(Door.class)) 
+            //make sure enemy does not wonder off open door
+            //if (this instanceof Enemy && isTouching(Door.class)) 
+            //block doors for enemies/hazards/etc, but not the players
+            if (!(this instanceof Player) && isTouching(Door.class))
             {
                  setLocation(oldX,getY());
             }
@@ -363,7 +363,9 @@ public abstract class WalkingActor extends SuperSmoothMover
         {
             setLocation(getX(), getY() + dy);
             //make sure enemy does not wonder off open door
-            if (this instanceof Enemy && isTouching(Door.class)) 
+            //if (this instanceof Enemy && isTouching(Door.class)) 
+            //block doors for enemies/hazards/etc, but not the players
+            if (!(this instanceof Player) && isTouching(Door.class))
             {
                 setLocation(getX(),oldY);
             }

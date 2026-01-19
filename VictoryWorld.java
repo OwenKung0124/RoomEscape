@@ -2,6 +2,11 @@ import greenfoot.*;
 
 /**
  * VictoryWorld (Win Screen)
+ * It allows player to go back to setting or go play a new game directly
+ * It also shows same game states for feedback
+ * 
+ * @author:
+ * @version:
  * 
  */
 public class VictoryWorld extends World
@@ -37,7 +42,7 @@ public class VictoryWorld extends World
         //add text and states
         setBackground(bg);
     
-        //TextLabels
+        //textLabels
         addObject(new TextLabel("Successfully Escaped", 56, Color.WHITE, -1),
                   getWidth()/2, getHeight()/2 - 140);
     
@@ -57,7 +62,22 @@ public class VictoryWorld extends World
 
         addObject(new TextLabel("Total Enemies Killed: " + GameWorld.enemiesKilled, 22, Color.WHITE, -1),
                   getWidth()/2, y);
-                  
+        y+=step;
+        addObject(new TextLabel("Health Upgraded " + GameWorld.numOfHealthUpgrade, 22, Color.WHITE, -1),
+                getWidth()/2, y);
+                
+        y+=step;         
+        addObject(new TextLabel("Attack Power Upgraded " + GameWorld.numOfAttackUpgrade, 22, Color.WHITE, -1),
+                getWidth()/2, y);
+        
+        y+=step;         
+        addObject(new TextLabel("Stone Skilled Aquired " + GameWorld.numOfStoneUpgrade, 22, Color.WHITE, -1),
+                getWidth()/2, y);
+                
+        y+=step;         
+        addObject(new TextLabel("Stone Skill Used " + GameWorld.numOfStoneUsed, 22, Color.WHITE, -1),
+                getWidth()/2, y);
+                
         y+= step;
         addObject(new TextLabel("Total Time Taken to Escape: " + (GameWorld.playerTimeFrames/60) + " Seconds", 22, Color.WHITE, -1),
                   getWidth()/2, y);
@@ -68,9 +88,6 @@ public class VictoryWorld extends World
             addObject(new TextLabel("Final Score: " + data.score, 22, Color.WHITE, -1),
                       getWidth()/2, y);
                       
-            y+=step;
-            //addObject(new TextLabel("Coins Unused: " + data.coins, 22, Color.WHITE, -1),
-            //          getWidth()/2, y);
             //y += step;
 
             //addObject(new TextLabel("Unused Stone Skill: " + data.stones, 22, Color.WHITE, -1),
@@ -85,7 +102,7 @@ public class VictoryWorld extends World
     {
         SoundManager.playVictorySound();
         
-        // restart
+        //restart
         if (Greenfoot.isKeyDown("r"))
         {
             SaveManager.deleteSave();
@@ -99,7 +116,7 @@ public class VictoryWorld extends World
         {
             SoundManager.stopVictorySound();
             SoundManager.playGameMusic();
-            Greenfoot.setWorld(new SettingWorld(data));
+            Greenfoot.setWorld(new SettingWorld(null));
         }
         
         

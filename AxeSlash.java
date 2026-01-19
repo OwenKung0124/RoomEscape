@@ -3,10 +3,10 @@ import java.util.*;
 
 /**
  * AxeSlash is a short-lived invisible hitbox that removes enemies it touches.
+ * It attaches to the player when player tries to hit
  *
- *
- * Usage:
- *   getWorld().addObject(new AxeSlash(w, h, lifeFrames), x, y);
+ * @author:
+ * @version:
  */
 public class AxeSlash extends SuperSmoothMover
 {

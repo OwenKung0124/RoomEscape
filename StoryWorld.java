@@ -73,7 +73,6 @@ public class StoryWorld extends World
         storyText=new TypeWriterText(msg, 20, Color.WHITE, boxW - 40, boxH - 40, 2);
         addObject(storyText,boxCenterX, boxCenterY);
         
-        
         addObject(new TextLabel("Press Esc to Skip Intro.",30,Color.WHITE,-1),getWidth()/2, getHeight()-30);
         
     }

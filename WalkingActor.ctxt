@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=WalkingActor
-comment0.text=\n\ WalkingActor\ is\ a\ superclass\ for\ Player\ and\ Enemy.\n\ Hepls\ player\ and\ enemy\ actor\ to\ walk\ in\ the\ gameworld\n\ with\ correct\ direction\ images\n\ \n\ When\ attack,\ use\ correct\ images\ too.\n\ It\ also\ avoid\ walking\ through\ wall.\n\ \n\ @author\:\ \ \ \ \ Owen\ Kung\n\ @version\:\ \ \ \ Jan\ 2026\n\n
+comment0.text=\n\ WalkingActor\ is\ a\ superclass\ for\ Player\ and\ Enemy.\n\ Hepls\ player\ and\ enemy\ actor\ to\ walk\ in\ the\ gameworld\n\ with\ correct\ direction\ images\n\ \n\ \n\ @author\:\ \ \ \ \ Owen\ Kung\n\ @version\:\ \ \ \ Jan\ 2026\n\n
 comment1.params=
 comment1.target=void\ act()
 comment10.params=dx\ dy

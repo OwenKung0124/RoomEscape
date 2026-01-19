@@ -3,11 +3,14 @@ import greenfoot.*;
 /**
  * HealthBar draws a health bar for any HasHealth actor
  * can follow an actor or display at a fix place on screen
+ * 
+ * @author:
+ * @version:
  */
 public class HealthBar extends Actor
 {
-    private CombatActor unit;      // read HP from this
-    private Actor follow;        // optional: follow this actor's position
+    private CombatActor unit;      //read HP from this
+    private Actor follow;        //follow this actor's position
     private boolean followTarget;
 
     private int barW;
@@ -34,7 +37,9 @@ public class HealthBar extends Actor
         setImage(new GreenfootImage(barW, barH));
         updateImage();
     }
-
+    /**
+     * following actor and updage images
+     */    
     public void act()
     {
         if (getWorld() == null) return;

@@ -10,7 +10,7 @@ import greenfoot.*;
  *   Green: cleared
  *   Cyan outline: current room
  *   
- * @author:     Owen Kung
+ * @author:     Owen Kung, Clifton Lin
  * @version:    Jan 2026
  */
 public class MiniMap extends Actor 
@@ -103,11 +103,10 @@ public class MiniMap extends Actor
                 
                 char type = w.getRoomType(r, c);
                 //show markers for special rooms
-                if (type == 'T' || type == 'S'|| type == 'B')
+                if (type == 'T' || type == 'S'|| type == 'B' || type=='R'|| type=='D')
                 {
                     drawRoomTypeMarker(img, x, y, type);
                 }
-
 
                 //highlight the player's current room with a cyan outline
                 if (r == w.getRoomR() && c == w.getRoomC()) {

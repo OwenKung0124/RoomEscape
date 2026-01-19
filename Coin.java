@@ -3,6 +3,9 @@ import greenfoot.*;
 /**
  * A collectible potion called by player's collect
  * updates RoomData when collected.
+ * 
+ * @author:
+ * @version:
  */
 public class Coin extends Actor 
 {
@@ -44,6 +47,9 @@ public class Coin extends Actor
             collect();
         }
     }
+    /**
+     * Animate the actor
+     */
     private void animate()
     {
         if (frames == null || frames.length == 0)
