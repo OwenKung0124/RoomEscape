@@ -5,8 +5,8 @@ import greenfoot.*;
  * It allows player to go back to setting or go play a new game directly
  * It also shows same game states for feedback
  * 
- * @author:
- * @version:
+ * @author: Cartis Lee
+ * @version: 2025 Jan
  * 
  */
 public class VictoryWorld extends World

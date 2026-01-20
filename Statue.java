@@ -2,7 +2,9 @@ import greenfoot.*;
 
 /**
  * A Statue is a solid blocker that also shows a larger decorative image on top.
- *
+ * 
+ * @author:     Owen Kung
+ * @version:    Jan 2026
  */
 public class Statue extends Blocker
 {

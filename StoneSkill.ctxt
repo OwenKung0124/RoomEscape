@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=StoneSkill
-comment0.text=\n\ Animated\ Stone\ Skill\ that\ player\ can\ aquire\n
+comment0.text=\n\ Animated\ Stone\ Skill\ that\ player\ can\ aquire\n\ \n\ @author\:Cartis\ Lee\n\ @version\ Jan\ 2026\n
 comment1.params=w\ h
 comment1.target=StoneSkill(int,\ int)
 comment1.text=\n\ @param\ RoomDate\ rd\n\ @param\ roomR\ room\n\ @param\ roomC\ room\n\ @param\ tr\ tile\ row\n\ @param\ tc\ tile\ col\n

@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=TypeWriterText
-comment0.text=\n\ TypeWritter\ class\ to\ display\ text\ like\ a\ typwriter\ style\n\ Adds\ visual\ interest\ to\ the\ story\ page\n\ \n\ @author\:\ \n\ @version\n
+comment0.text=\n\ TypeWritter\ class\ to\ display\ text\ like\ a\ typwriter\ style\n\ Adds\ visual\ interest\ to\ the\ story\ page\n\ \n\ @author\:\ Owen\ Kung,\ Cartis\ Lee\n\ @version\ Jan\ 2026\n
 comment1.params=message\ fontSize\ textColor\ boxW\ boxH\ typingSpeed
 comment1.target=TypeWriterText(java.lang.String,\ int,\ greenfoot.Color,\ int,\ int,\ int)
 comment1.text=\n\ Constructor\ for\ TypeWritterText\n\ \n\ @param\ message\ \ \ \ \ \ \ the\ message\ to\ type\n\ @param\ fontsize\ \ \ \ \ \ size\ of\ the\ text\n\ @param\ textColor\ \ \ \ \ text\ color\n\ @param\ boxW\ \ \ \ \ \ \ \ \ \ box\ width\ where\ text\ will\ be\ dislayed\n\ @param\ boxH\ \ \ \ \ \ \ \ \ \ box\ height\ where\ text\ will\ be\ dislayed\n\ @param\ typingSpeed\ \ \ how\ fast\ to\ display\ the\ text\n

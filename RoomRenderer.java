@@ -10,6 +10,9 @@ import greenfoot.*;
  * it does not spawn enemies/coins.
  * 
  * it only builds the room structure.
+ * 
+ * @author: Owen Kung, Cartis Lee
+ * @verions: Jan 2026
  */
 public class RoomRenderer 
 {
@@ -77,19 +80,19 @@ public class RoomRenderer
         
         //don't put too close to entrances
         //AttackUpgrade attackUpgrade = new AttackUpgrade(240,190);
-        AttackUpgrade attackUpgrade = new AttackUpgrade(240,300);
-        world.addObject(attackUpgrade, 250,550);
+        AttackUpgrade attackUpgrade = new AttackUpgrade(240,190);
+        world.addObject(attackUpgrade, 250,150);
         
         HealthUpgrade healthUpgrade = new HealthUpgrade(240,190);
-        world.addObject(healthUpgrade, 700,250);
+        world.addObject(healthUpgrade, 700,150);
         
-        StoneSkill stoneSkill = new StoneSkill(240,190);
+        StoneSkill stoneSkill = new StoneSkill(260,210);
         world.addObject(stoneSkill, 700,550);
     }
     /**
      * Builds wall, blockers using the RoomData tile layout.
      */
-    public void buildObjectsFromTiles(int r, int c)
+    private void buildObjectsFromTiles(int r, int c)
     {
         RoomData rd = map.getRoomData(r, c);
         if (rd == null) return;

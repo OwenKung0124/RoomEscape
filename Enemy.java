@@ -5,11 +5,6 @@ import greenfoot.*;
  *
  * Subclasses need to implement computeMove().
  *
- * Required images in images/enemy/:
- * up1.png up2.png
- * down1.png down2.png
- * left1.png left2.png  //mirrored from right
- * right1.png right2.png
  * 
  * @author:     Owen Kung
  * @version:    Jan 2026

@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=HazardEnemy
-comment0.text=\n\ HazardEnemy\:\n\ \ moves\ around\ in\ a\ dodge\ room\n\ \ if\ player\ touches\ the\ Hazard,\ the\ timer\ resets\n\ \ it\ does\ not\ damage\ the\ player\n\ \ it\ does\ not\ have\ health,\ as\ it\ does\ not\ combat\n\ \ it\ does\ not\ take\ dmage\ from\ the\ player\n\ \ \n\ \ @author\n\ \ @version\:\n
+comment0.text=\n\ HazardEnemy\:\n\ \ moves\ around\ in\ a\ dodge\ room\n\ \ if\ player\ touches\ the\ Hazard,\ the\ timer\ resets\n\ \ it\ does\ not\ damage\ the\ player\n\ \ it\ does\ not\ have\ health,\ as\ it\ does\ not\ combat\n\ \ it\ does\ not\ take\ dmage\ from\ the\ player\n\ \ \n\ \ @author\:\ \ \ \ Owen\ Kung\n\ \ @version\:\ \ \ Jan\ 2026\n
 comment1.params=target
 comment1.target=HazardEnemy(Player)
 comment2.params=

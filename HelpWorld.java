@@ -4,8 +4,8 @@ import greenfoot.*;
  *  how to play the game
  *  how scaling, coins, scores work
  * 
- * @author:
- * @version:
+ * @author: Cartis Lee
+ * @version Jan 2026
  */
 public class HelpWorld extends World
 {

@@ -22,6 +22,9 @@ import java.util.Scanner;
  * tiles=0,0:2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2/2,1.....,0,.....2,2,2
  * axeAttackPower=10;
  * 
+ * @author: Owen Kung,Cartis Lee
+ * @version Jan 2026
+ * 
  */
 public class SaveManager
 {
@@ -235,11 +238,11 @@ public class SaveManager
     
                 if (line.startsWith("roomR="))
                 {
-                    data.roomR = parseIntSafe(line.substring("roomR=".length()), 0);
+                    data.roomR = parseIntSafe(line.substring("roomR=".length()), 1);
                 }
                 else if (line.startsWith("roomC="))
                 {
-                    data.roomC = parseIntSafe(line.substring("roomC=".length()), 0);
+                    data.roomC = parseIntSafe(line.substring("roomC=".length()), 1);
                 }
                 else if (line.startsWith("lastRoomR="))
                 {

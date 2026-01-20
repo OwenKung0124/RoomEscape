@@ -3,7 +3,9 @@ import greenfoot.*;
 /**
  * SpawnerSystem handles random spawning:
  * e.g enemies,boss
- *
+ * 
+ * @author:Owen Kung, Cartis Lee
+ * @version Jan 2026
  */
 public class SpawnerSystem 
 {

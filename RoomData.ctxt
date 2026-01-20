@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=RoomData
-comment0.text=\n\ RoomData\ stores\ the\ tile\ map\ for\ ONE\ room.\n\ Each\ room\ must\ have\ its\ own\ RoomData,\ so\ changes\ (coins\ collected,\ etc.)\n\ only\ affect\ that\ one\ room.\n
+comment0.text=\n\ RoomData\ stores\ the\ tile\ map\ for\ ONE\ room.\n\ Each\ room\ must\ have\ its\ own\ RoomData,\ so\ changes\ (coins\ collected,\ etc.)\n\ only\ affect\ that\ one\ room.\n\ \n\ @author\:Owen\ Kung,\ Cartis\ Lee\n\ @version\ Jan\ 2026\n
 comment1.params=template
 comment1.target=RoomData(int[][])
 comment1.text=\n\ creates\ a\ room\ using\ a\ template\ map\n\n\ @param\ template\:\ the\ template\ tiles\ for\ a\ room\ layout\n

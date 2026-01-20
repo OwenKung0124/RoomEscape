@@ -1,7 +1,10 @@
 import greenfoot.*;
 
 /**
- * ChaseEnemy moves toward the player.
+ * zombieEnemy moves toward the player.
+ * 
+ * @author:Owen Kung, Clifton Lin
+ * @version:2026 Jan
  */
 public class ZombieEnemy extends Enemy 
 {
@@ -39,10 +42,10 @@ public class ZombieEnemy extends Enemy
             return new int[]{0, 0};   
         }
 
-        int mx = (int)Math.round((dx / dist) * speed);
-        int my = (int)Math.round((dy / dist) * speed);
+        int movX = (int)Math.round((dx / dist) * speed);
+        int movY = (int)Math.round((dy / dist) * speed);
 
-        return new int[]{mx, my};
+        return new int[]{movX, movY};
     }
     protected void playAttackSoundEffect()
     {

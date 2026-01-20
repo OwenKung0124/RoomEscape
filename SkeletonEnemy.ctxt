@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=SkeletonEnemy
-comment0.text=\n\ SkeletonEnemy\:\n\ \ extends\ Enemy\ (movement/HP/contact\ damage)\n\ \ also\ attacks\ (uses\ CombatActor's\ attack\ animation\ system)\n\ \ wanders\ using\ WanderAround\n\ \ shoots\ an\ EnemyArrow\ on\ hitFrame\n\ \ \n\ It\ wanders\ around\ like\ Wander\ Enemy\ but\ fire\ arrow\ at\ a\ random\ time\ interval\ and\ when\ facing\ target.\n\ \ \n\ \ @author\:Owen\ Kung\n\ \ @version\:Jan\ 2026\n
+comment0.text=\n\ SkeletonEnemy\:\n\ \ extends\ Enemy\ (movement/HP/contact\ damage)\n\ \ also\ attacks\ (uses\ CombatActor's\ attack\ animation\ system)\n\ \ wanders\ using\ WanderAround\n\ \ shoots\ an\ EnemyArrow\ on\ hitFrame\n\ \ \n\ It\ wanders\ around\ like\ Wander\ Enemy\ but\ fire\ arrow\ at\ a\ random\ time\ interval\ and\ when\ facing\ target.\n\ \ \n\ \ @author\:\ \ \ \ Owen\ Kung,\ Cartis\ Lee\n\ \ @version\:\ \ \ Jan\ 2026\n
 comment1.params=target
 comment1.target=SkeletonEnemy(Player)
 comment10.params=
@@ -20,7 +20,7 @@ comment5.target=void\ startAttack()
 comment5.text=\n\ Start\ attack\:\ face\ player,\ then\ use\ CombatActor\ attack\ animation,\n\ then\ schedule\ next\ random\ attack.\n
 comment6.params=
 comment6.target=void\ onAttackHit()
-comment6.text=\n\ Called\ exactly\ once\ on\ hitFrame\ by\ CombatActor\n
+comment6.text=\n\ Called\ once\ on\ hitFrame\ by\ CombatActor\n
 comment7.params=
 comment7.target=void\ scheduleNextAttack()
 comment8.params=

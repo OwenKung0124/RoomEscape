@@ -1,6 +1,9 @@
 import greenfoot.*;
-/*
+/**
  * Decoration that uses animated images
+ * 
+ * @author:     Owen Kung
+ * @version:    Jan 2026
  */
 
 public class AnimatedDecoration extends Decoration

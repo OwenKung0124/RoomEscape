@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Enemy
-comment0.text=\n\ Enemy\ is\ the\ abastrct\ base\ class\ for\ all\ enemies.\n\n\ Subclasses\ need\ to\ implement\ computeMove().\n\n\ Required\ images\ in\ images/enemy/\:\n\ up1.png\ up2.png\n\ down1.png\ down2.png\n\ left1.png\ left2.png\ \ //mirrored\ from\ right\n\ right1.png\ right2.png\n\ \n\ @author\:\ \ \ \ \ Owen\ Kung\n\ @version\:\ \ \ \ Jan\ 2026\n
+comment0.text=\n\ Enemy\ is\ the\ abastrct\ base\ class\ for\ all\ enemies.\n\n\ Subclasses\ need\ to\ implement\ computeMove().\n\n\ \n\ @author\:\ \ \ \ \ Owen\ Kung\n\ @version\:\ \ \ \ Jan\ 2026\n
 comment1.params=target
 comment1.target=Enemy(Player)
 comment10.params=

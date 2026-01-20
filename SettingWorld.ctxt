@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=SettingWorld
-comment0.text=\n\ SettingWorld\ lets\ the\ user\ pick\ a\ warrior\ then\ to\ start\ a\ new\ game\ or\ resume\ an\ old\ game\n\ It\ also\ allows\ for\ turning\ music\ on/off\n\ \n\ @author\:\n\ @version\:\n
+comment0.text=\n\ SettingWorld\ lets\ the\ user\ pick\ a\ warrior\ then\ to\ start\ a\ new\ game\ or\ resume\ an\ old\ game\n\ It\ also\ allows\ for\ turning\ music\ on/off\n\ \n\ @author\:\ Clifton\ Lin\n\ @version\:Jan\ 2026\n
 comment1.params=
 comment1.target=SettingWorld()
 comment10.params=

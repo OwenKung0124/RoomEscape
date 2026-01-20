@@ -6,8 +6,8 @@ import java.util.StringTokenizer;
  * TypeWritter class to display text like a typwriter style
  * Adds visual interest to the story page
  * 
- * @author: 
- * @version
+ * @author: Owen Kung, Cartis Lee
+ * @version Jan 2026
  */
 public class TypeWriterText extends Actor
 {

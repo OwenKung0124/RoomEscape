@@ -2,6 +2,9 @@ import greenfoot.*;
 
 /**
  * WanderEnemy walks in random directions and changes direction randomly.
+ * 
+ * @author:Clifton Lin
+ * @version:2026 Jan
  */
 public class WanderEnemy extends Enemy
 {

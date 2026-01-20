@@ -1,6 +1,8 @@
 /**
  * SaveData stores information that will be saved.
  *
+ * @author:Owen Kung, Cartis Lee
+ * @version Jan 2026
  */
 public class GameData
 {

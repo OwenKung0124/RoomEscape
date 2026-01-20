@@ -3,8 +3,8 @@ import greenfoot.*;
 /**
  * DoorBlocker is a Wall collider that is always invisible.
  * 
- * @author:
- * @version:
+ * @author:     Owen Kung
+ * @version:    Jan 2026
  */
 public class DoorBlocker extends Blocker
 {

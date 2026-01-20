@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Player
-comment0.text=\n\ Player\n\ -\ walk\ using\ WalkingActor's\ movement/facing/walk\ animation\n\ -\ play\ a\ directional\ attack\ animation\n\ -\ trigger\ a\ hit\ once\ at\ a\ chosen\ frame\n\n\ Subclass\ constructor\ call\:\n\ \ \ \ \ \ loadDirectionalFrames()\n\ \ \ \ \ \ loadAttackFrames()\n\ \ Subclass\ implement\ wantsToAttack()\n\ \ Subclass\ implement\ onAttackHit()\n
+comment0.text=\n\ Player\n\ \ walk\ using\ WalkingActor's\ movement/facing/walk\ animation\n\ \ play\ a\ directional\ attack\ animation\n\ \ trigger\ a\ hit\ once\ at\ a\ chosen\ frame\n\ \ \n\ \ @author\:\ \ \ \ Owen\ Kung\n\ \ @version\:\ \ \ Jan\ 2026\n
 comment1.params=
 comment1.target=int[]\ computeMove()
 comment1.text=\n\ Subclass\ can\ override\n\ \n\ Parant\ class\ provides\ default\ movement\n\n\ @return\ int[]{dx,\ dy}\n
@@ -40,9 +40,6 @@ comment22.text=\n\ Logic\ to\ upgrade\ Player's\ health\ power\n\ if\ successful
 comment23.params=upgrade\ coinsTaken
 comment23.target=boolean\ aquireStoneSkill(int,\ int)
 comment23.text=\n\ Logic\ to\ aquire\ Player's\ stone\ skill\n\ if\ successfully\ upgraded\ return\ true\n\ \n\ @param\ upgrade\:\ \ \ \ \ \ \ \ \ \ \ \ \ \ amount\ of\ stone\ skill\ to\ aquire\n\ @param\ scoresTakes\:\ \ \ \ \ \ \ \ \ \ amount\ of\ coins\ needed\ to\ upgrade\n\ @return\ upgradeAttackPower\:\ \ returns\ true\ if\ upgrade\ is\ scccessful\n
-comment24.params=
-comment24.target=boolean\ touchingDoor()
-comment24.text=\n\ helper\ method\ for\ gameworld,\ used\ in\ trap\ room\n\ \n\ @return\ if\ player\ touches\ the\ door\n\ \n
 comment3.params=
 comment3.target=void\ onAttackHit()
 comment3.text=\n\ Called\ exactly\ once\ during\ the\ attack\ animation\ at\ hitFrame.\n\ Subclass\ defines\ the\ attack\ logic\ (melee\ hitbox,\ projectile,\ etc.)\n
@@ -62,4 +59,4 @@ comment8.text=\n\ Heals\ the\ player\ by\ a\ given\ amount\n\ without\ exceeding
 comment9.params=amount
 comment9.target=void\ setHealth(int)
 comment9.text=\n\ setHealth\ of\ the\ player\ when\ resume\ the\ game\n
-numComments=25
+numComments=24

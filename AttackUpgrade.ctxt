@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=AttackUpgrade
-comment0.text=\n\ Animated\ AttckUpgrade\ to\ upgrade\ player's\ attack\ power\n
+comment0.text=\n\ Animated\ AttckUpgrade\ to\ upgrade\ player's\ attack\ power\n\ \n\ @author\:Cartis\ Lee\n\ @version\ Jan\ 2026\n
 comment1.params=w\ h
 comment1.target=AttackUpgrade(int,\ int)
 comment2.params=p

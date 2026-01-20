@@ -3,6 +3,9 @@ import java.util.ArrayList;
 
 /**
  * Parent class for animated upgrade
+ * 
+ * @author:Owen Kung, Cartis Lee
+ * @version Jan 2026
  */
 public abstract class Upgrade extends Blocker
 {

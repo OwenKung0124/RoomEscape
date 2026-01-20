@@ -6,6 +6,9 @@ import greenfoot.*;
  *
  * It does not decide when to attack. 
  * Subclasses decide when to call startAttack().
+ * 
+ * @author:     Owen Kung
+ * @version:    Jan 2026
  */
 public abstract class CombatActor extends WalkingActor
 {

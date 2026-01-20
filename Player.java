@@ -3,15 +3,12 @@ import java.util.ArrayList;
 
 /**
  * Player
- * - walk using WalkingActor's movement/facing/walk animation
- * - play a directional attack animation
- * - trigger a hit once at a chosen frame
- *
- * Subclass constructor call:
- *      loadDirectionalFrames()
- *      loadAttackFrames()
- *  Subclass implement wantsToAttack()
- *  Subclass implement onAttackHit()
+ *  walk using WalkingActor's movement/facing/walk animation
+ *  play a directional attack animation
+ *  trigger a hit once at a chosen frame
+ *  
+ *  @author:    Owen Kung
+ *  @version:   Jan 2026
  */
 public abstract class Player extends CombatActor
 {
@@ -467,16 +464,6 @@ public abstract class Player extends CombatActor
         
         return true;
 
-    }
-    /**
-     * helper method for gameworld, used in trap room
-     * 
-     * @return if player touches the door
-     * 
-     */
-    public boolean touchingDoor()
-    {
-        return isTouching(Door.class);
     }
     
 }

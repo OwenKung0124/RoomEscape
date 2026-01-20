@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=SpawnerSystem
-comment0.text=\n\ SpawnerSystem\ handles\ random\ spawning\:\n\ e.g\ enemies,boss\n\n
+comment0.text=\n\ SpawnerSystem\ handles\ random\ spawning\:\n\ e.g\ enemies,boss\n\ \n\ @author\:Owen\ Kung,\ Cartis\ Lee\n\ @version\ Jan\ 2026\n
 comment1.params=world\ map
 comment1.target=SpawnerSystem(GameWorld,\ GameMap)
 comment2.params=r\ c\ player

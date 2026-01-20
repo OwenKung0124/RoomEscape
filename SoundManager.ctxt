@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=SoundManager
-comment0.text=\n\ Manage\ All\ the\ Sounds\ in\ the\ projects\n\ \n\ @authro\:\n
+comment0.text=\n\ Manage\ All\ the\ Sounds\ in\ the\ projects\n\ \n\ @author\:Clifton\ Lin,\ Owen\ Kung\n\ @version\:2026\ Jan\n
 comment1.params=
 comment1.target=SoundManager()
 comment10.params=
@@ -119,5 +119,5 @@ comment8.target=void\ playGameMusic()
 comment8.text=\n\ play\ game\ backgrond\ music\n
 comment9.params=
 comment9.target=void\ playSummonerBossSound()
-comment9.text=\n\ sound\ that\ s\ played\ when\ boss\ is\ about\ to\ spawn\ minions\n
+comment9.text=\n\ sound\ that\ s\ played\ when\ boss\ is\ abouindex\ \=\ 9;t\ to\ spawn\ minions\n
 numComments=41

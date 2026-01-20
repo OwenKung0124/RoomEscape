@@ -4,7 +4,7 @@ import java.util.*;
 /**
  * GameWorld is a room-to-room battle game.
  *
- * @author:     Owen Kung
+ * @author:     Owen Kung, Cartis Lee
  * @version:    Jan 2026
  */
 public class GameWorld extends World 
@@ -215,7 +215,8 @@ public class GameWorld extends World
             PauseOverlay.class,
             //Player.class,
             Decoration.class,   //the statue image actor
-            Enemy.class,
+            CombatActor.class,  //player and enemy
+            DoorVisual.class,   //fixes, so that player and enemy does not walk under the door
             SummonerBoss.class
         ); 
         
@@ -804,7 +805,7 @@ public class GameWorld extends World
      */
     public void started()
     {
-        //SoundManager.playGameMusic();
+        SoundManager.playGameMusic();
     }
     /**
      * Make sure game music stops when paused
@@ -1011,7 +1012,7 @@ public class GameWorld extends World
                 map.markCleared(roomR, roomC);
                 roomsClearedCount++;
     
-                player.addScore(GameConfig.DODGE_REWARD_SCORE); 
+                player.heal(GameConfig.DODGE_HEALTH_SCORE); 
                 SoundManager.playRewardSound(); //audio feedback
                 
                 //remove Hazard Visually
@@ -1022,7 +1023,7 @@ public class GameWorld extends World
                     removeObject(h);
                 }
                 
-                showMessage("Success! +" + GameConfig.DODGE_REWARD_SCORE + " score", 150);
+                showMessage("Success! +" + GameConfig.DODGE_HEALTH_SCORE + " health", 150);
             }
         }
     }

@@ -2,6 +2,9 @@ import greenfoot.*;
 /**
  * 
  * Helper TextLebel to help display texts
+ * 
+ * @author:Cartis Lee
+ * @version Jan 2026
  */
 public class TextLabel extends Actor
 {

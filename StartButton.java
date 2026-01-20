@@ -7,8 +7,8 @@ import greenfoot.*;
  *   MODE_NEW_GAME: deletes save and starts from beginning
  *   MODE_RESUME: loads save and continues
  *   
- * @author:
- * @version:
+ * @author: Clifton Lin
+ * @version:2026 Jan
  */
 public class StartButton extends Actor
 {

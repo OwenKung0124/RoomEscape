@@ -4,8 +4,8 @@ import greenfoot.*;
  * HealthBar draws a health bar for any HasHealth actor
  * can follow an actor or display at a fix place on screen
  * 
- * @author:
- * @version:
+ * @author:Clifton Lin
+ * @version:2026 Jan
  */
 public class HealthBar extends Actor
 {

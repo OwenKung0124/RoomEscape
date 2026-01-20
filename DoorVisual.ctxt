@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.target=DoorVisual
+comment0.text=\n\ DoorVisual\n\ is\ created,\ to\ fix\ enemy,player\ always\ appears\ below\ door\ \n\ \n\ @author\:\ Owen\ Kung\n\ @version\:\ Jan\ 2026\n
+comment1.params=filename\ w\ h
+comment1.target=DoorVisual(java.lang.String,\ int,\ int)
+numComments=2

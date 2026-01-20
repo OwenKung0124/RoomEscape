@@ -9,8 +9,8 @@ import greenfoot.*;
  *  
  * It wanders around like Wander Enemy but fire arrow at a random time interval and when facing target.
  *  
- *  @author:Owen Kung
- *  @version:Jan 2026
+ *  @author:    Owen Kung, Cartis Lee
+ *  @version:   Jan 2026
  */
 public class SkeletonEnemy extends Enemy
 {
@@ -85,7 +85,7 @@ public class SkeletonEnemy extends Enemy
             return;
         }
 
-        //normal movement + touch damage
+        //normal movement and touch damage
         regularMovement();
         handlePlayerContact();
 
@@ -111,6 +111,7 @@ public class SkeletonEnemy extends Enemy
     {
         int dx=player.getX() - getX();
         int dy=player.getY() - getY();
+        
         return (dx * dx + dy * dy) <= (attackRange * attackRange);
     }
 
@@ -126,7 +127,7 @@ public class SkeletonEnemy extends Enemy
     }
 
     /**
-     * Called exactly once on hitFrame by CombatActor
+     * Called once on hitFrame by CombatActor
      */
     protected void onAttackHit()
     {
@@ -141,11 +142,11 @@ public class SkeletonEnemy extends Enemy
         else dirX=1;
 
         int offset=25;
-        int sx=getX() + dirX * offset;
-        int sy=getY() + dirY * offset;
+        int shootx=getX() + dirX * offset;
+        int shooty=getY() + dirY * offset;
 
         SoundManager.playArrowSound();
-        getWorld().addObject(new EnemyArrow(dirX, dirY,getAttackPower()), sx, sy);
+        getWorld().addObject(new EnemyArrow(dirX, dirY,getAttackPower()), shootx, shooty);
     }
 
     private void scheduleNextAttack()

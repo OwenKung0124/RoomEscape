@@ -3,6 +3,9 @@ import greenfoot.*;
 /**
  *  Sword Warrior:
  *      attacks with sword
+ *      
+ * @author: Clifton Lin
+ * @version:2026 Jan
  */
 public class SwordWarrior extends Player
 {

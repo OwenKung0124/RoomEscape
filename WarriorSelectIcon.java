@@ -4,6 +4,9 @@ import greenfoot.*;
  *  shows animated warrior picture
  *  When clicked, it tells SettingWorld which warrior type was chosen
  *  Selected, it draws a highlight border
+ *  
+ & @author: Cartis Lee
+ * @version:2026 Jan
  */
 public class WarriorSelectIcon extends Actor
 {

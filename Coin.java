@@ -4,8 +4,8 @@ import greenfoot.*;
  * A collectible potion called by player's collect
  * updates RoomData when collected.
  * 
- * @author:
- * @version:
+ * @author:Clifton Lin
+ * @version:2026 Jan
  */
 public class Coin extends Actor 
 {

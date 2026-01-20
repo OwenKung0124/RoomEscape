@@ -2,7 +2,9 @@ import greenfoot.*;
 
 /**
  * A Statue is a solid blocker that also shows a larger decorative image on top.
- *
+ * 
+ * @author: Clifton Lin
+ * @version:2026 Jan
  */
 public class Fire extends Blocker
 {
@@ -36,9 +38,7 @@ public class Fire extends Blocker
      */
     protected void addedToWorld(World world)
     {
-        //create the visual decoration
-        //visual = new Decoration(GameConfig.STATUE_IMG, GameConfig.STATUE_W, GameConfig.STATUE_H); 
-        //public AnimatedDecoration(String baseFileName, int frameCount, int w, int h)
+    
         visual=new AnimatedDecoration(GameConfig.FIRE_IMG, 2,GameConfig.FIRE_W, GameConfig.FIRE_H);  
 
         //add the decoration at the same tile position as the hitbox.

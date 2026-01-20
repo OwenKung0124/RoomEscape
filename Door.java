@@ -9,10 +9,10 @@ import greenfoot.*;
  * - Left/Right doors use vertical images (mid)
  * - Top/Bottom doors use horizontal images (h)
  * 
- * @author:
- * @version
+ * @author:     OWwen Kung
+ * @version     Jan 2026
  */
-public class Door extends Actor
+public class Door extends SuperSmoothMover
 {
     //direction this door leads to (room movement):
     //dr=change in row
@@ -65,7 +65,7 @@ public class Door extends Actor
     private static final String VISUAL_H_OPEN   = "door/door_open_h.png";
 
     //the visual
-    private Decoration visual;
+    private DoorVisual visual;
 
     //store chosen visual size
     private int visualW;
@@ -280,7 +280,7 @@ public class Door extends Actor
         }
 
         //create new big visual
-        visual = new Decoration(getVisualPath(), visualW, visualH);
+        visual = new DoorVisual(getVisualPath(), visualW, visualH);
         visual.setSprite(getVisualPath(), shouldMirror());
         w.addObject(visual, getX(), getY());
     }

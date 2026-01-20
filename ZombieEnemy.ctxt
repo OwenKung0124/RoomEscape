@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=ZombieEnemy
-comment0.text=\n\ ChaseEnemy\ moves\ toward\ the\ player.\n
+comment0.text=\n\ zombieEnemy\ moves\ toward\ the\ player.\n\ \n\ @author\:Owen\ Kung,\ Clifton\ Lin\n\ @version\:2026\ Jan\n
 comment1.params=target
 comment1.target=ZombieEnemy(Player)
 comment1.text=\n\ Creates\ a\ chasing\ enemy.\n\n\ @param\ target\ the\ Player\ to\ chase\n

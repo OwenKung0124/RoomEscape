@@ -18,22 +18,20 @@ public class MiniMap extends Actor
 
     private GameWorld w;
 
-    //Mini cell size (pixels)
-    private static int CELL = GameConfig.MINIMAP_CELL;
+    //Mini cell size in pixels
+    private static int CELL=GameConfig.MINIMAP_CELL;
 
-    //Padding between cells (pixels)
-    private static int PAD =  GameConfig.MINIMAP_PAD;
+    //Padding between cells in pixels
+    private static int PAD= GameConfig.MINIMAP_PAD;
 
     /**
-     * Called automatically when MiniMap is added to the world.
-     * The minimap is created first and then added to the world
+     * Called  when MiniMap is added to the world.
      * 
-     *
      * @param world the world this actor was added to
      */
     public void addedToWorld(World world) 
     {
-        w = (GameWorld) world;
+        w=(GameWorld) world;
         updateImage();
     }
 
@@ -51,30 +49,30 @@ public class MiniMap extends Actor
         if (w == null) return;
 
         //grid size
-        int rows = w.getRows();
-        int cols = w.getCols();
+        int rows=w.getRows();
+        int cols=w.getCols();
         
         //image size:
         //cach cell is CELL pixels wide/high, 
         //with PAD pixels between cells and around the edges.
-        int width  = cols * (CELL + PAD) + PAD;
-        int height = rows * (CELL + PAD) + PAD;
+        int width =cols * (CELL + PAD) + PAD;
+        int height=rows * (CELL + PAD) + PAD;
         
 
         //create a fresh image every time 
-        GreenfootImage img = new GreenfootImage(width, height);
+        GreenfootImage img=new GreenfootImage(width, height);
         //draw the background panel 
-        //black with transparnecy = 120
+        //black with transparnecy=120
         img.setColor(new Color(0, 0, 0, 120));
         img.fill();
 
-        for (int r = 0; r < rows; r++) {
-            for (int c = 0; c < cols; c++) {
+        for (int r=0; r < rows; r++) {
+            for (int c=0; c < cols; c++) {
 
                 //convert grid position (r,c)
-                //into (x,y) on the minimap image
-                int x = PAD + c * (CELL + PAD);
-                int y = PAD + r * (CELL + PAD);
+                //into x,y)on the minimap image
+                int x=PAD + c * (CELL + PAD);
+                int y=PAD + r * (CELL + PAD);
 
                 if (!w.roomExists(r, c)) 
                 {
@@ -101,7 +99,7 @@ public class MiniMap extends Actor
                 }
                 img.fillRect(x, y, CELL, CELL);
                 
-                char type = w.getRoomType(r, c);
+                char type=w.getRoomType(r, c);
                 //show markers for special rooms
                 if (type == 'T' || type == 'S'|| type == 'D'|| type == 'R')
                 {
@@ -122,9 +120,9 @@ public class MiniMap extends Actor
     private void drawRoomTypeMarker(GreenfootImage img, int x, int y, char type)
     {
         //draw a small badge in the top-right of the cell
-        int badge = Math.max(10, CELL / 3);
-        int bx = x + CELL - badge - 2;
-        int by = y + 2;
+        int badge=Math.max(10, CELL / 3);
+        int bx=x + CELL - badge - 2;
+        int by=y + 2;
     
         //adge background
         img.setColor(new Color(0, 0, 0, 160));

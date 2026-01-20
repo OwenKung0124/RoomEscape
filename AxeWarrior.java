@@ -3,6 +3,9 @@ import greenfoot.*;
 
 /**
  *  Axe Warrior uses Axe to kill enemy
+ *  
+ *  @author:    Owen Kung
+ *  @version:   Jan 2026
  */
 public class AxeWarrior extends Player
 {

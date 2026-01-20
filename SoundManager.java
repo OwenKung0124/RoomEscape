@@ -2,21 +2,22 @@ import greenfoot.*;
 /**
  * Manage All the Sounds in the projects
  * 
- * @authro:
+ * @author:Clifton Lin, Owen Kung
+ * @version:2026 Jan
  */
 public class SoundManager
 {
     //user preferences
-    private static boolean musicOn = true;
-    private static boolean sfxOn   = true;
+    private static boolean musicOn = false;
+    private static boolean sfxOn   = false;
 
     //game music
-    private static GreenfootSound gameMusic = new GreenfootSound("dark_ambient_2.mp3");
+    private static GreenfootSound gameMusic = new GreenfootSound("dark_ambient_short.wav");
     //private static GreenfootSound gameMusic = new GreenfootSound("anna_theme.mp3");
     //private static GreenfootSound gameMusic = new GreenfootSound("game_music.mp3");
-    private static GreenfootSound defeat = new GreenfootSound("defeat.mp3");
-    private static GreenfootSound help = new GreenfootSound("fire.mp3");
-    private static GreenfootSound victory = new GreenfootSound("victory.mp3");
+    private static GreenfootSound defeat = new GreenfootSound("defeat.wav");
+    private static GreenfootSound help = new GreenfootSound("fire.wav");
+    private static GreenfootSound victory = new GreenfootSound("victory.wav");
     private static GreenfootSound failed=new GreenfootSound("failed.mp3");
     
     //summoner boss
@@ -146,12 +147,18 @@ public class SoundManager
      */
     public static void setMusicOn(boolean on)
     {
-        musicOn = on;
-        if (!musicOn) 
         {
-            stopGameMusic(); 
+            musicOn = on;
+        
+            if (musicOn)
+            {
+                playGameMusic();   // start now
+            }
+            else
+            {
+                stopGameMusic();   // stop now
+            }
         }
-
     }
     /**
      * setter method to set if sound effect i on/off
@@ -165,16 +172,20 @@ public class SoundManager
      */
     public static void toggleMusic()
     {
+        //musicOn = !musicOn;
+        //setMusicOn(!musicOn);
         musicOn = !musicOn;
-    
+
         if (musicOn)
         {
-            playGameMusic();   // start RIGHT NOW
+            playGameMusic();   //start right way
         }
         else
         {
-            stopGameMusic();   // stop RIGHT NOW
-        }
+            stopGameMusic();   // stop right away
+        } 
+ 
+       
     }
     /**
      * turn sound effect on/off
@@ -197,7 +208,7 @@ public class SoundManager
         }
     }
     /**
-     * sound that s played when boss is about to spawn minions
+     * sound that s played when boss is abouindex = 9;t to spawn minions
      */
     public static void playSummonerBossSound()
     {
@@ -505,7 +516,7 @@ public class SoundManager
     {
         if (!sfxOn) return;
         
-        messageIndex=arraySoundPlay(messageSounds,messageIndex,35);
+        messageIndex=arraySoundPlay(messageSounds,messageIndex,20);
     }
      /**
      * play health upgrade sound
@@ -551,7 +562,7 @@ public class SoundManager
         catch(ArrayIndexOutOfBoundsException ao)
         {
             //use the first one
-            index=9;
+            index=0;
             sounds[index].setVolume(volumn);
             sounds[index].play();
         }
@@ -580,7 +591,7 @@ public class SoundManager
      */
     public static void stopAll()
     {
-//stop(gameMusic);
+           stop(gameMusic);
            stop(summonerBoss);
            stop(bossFight);
            stop(bossDisappear);

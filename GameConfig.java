@@ -3,6 +3,8 @@
  * The static methods were originally from the GameWorld and moved here
  * work as helper methods for multiple classes the were originally in game world
  * 
+ * @author:Clifton Lin, Owen Kung
+ * @version:2026 Jan
  */
 public class GameConfig 
 {
@@ -80,13 +82,13 @@ public class GameConfig
     public static final int DOOR_GAP_W = 90;
     public static final int DOOR_GAP_H = 120;
 
-    public static final int ENEMIES_TO_SPAWN = 1;//this is for level 0
+    public static final int ENEMIES_TO_SPAWN = 2;//this is for level 0
     //public static final int WIN_ROOMS = 6;
     
     //SummonerBoss
     //public static final int SUMMONER_BOSS_DOOR_CLEARED=1;
-    public static final int SUMMOMER_BOSS_MINION_SPWAN=2; //2 for gampley, use smaller number for testingpublic static final int SUMMOMER_BOSS_MINION_SPWAN=1; 
-    public static final int SUMMONER_BOSS_MAX_HEALTH=150;  //180 for game, other numbers for testing
+    public static final int SUMMOMER_BOSS_MINION_SPAWN=2; //2 for gampley, use smaller number for testingpublic static final int SUMMOMER_BOSS_MINION_SPWAN=1; 
+    public static final int SUMMONER_BOSS_MAX_HEALTH=150;  //130 for game, other numbers for testing
     
     //Warrior Selection;
     public static final int WARRIOR_AXE=1;
@@ -94,9 +96,9 @@ public class GameConfig
     public static final int WARRIOR_SWORD=3;
     
     //Warrior default attack power
-    public static final int WARRIOR_AXE_DEFAULT_ATTACK=2;
+    public static final int WARRIOR_AXE_DEFAULT_ATTACK=3;
     public static final int WARRIOR_BULLET_DEFAULT_ATTACK=5;
-    public static final int WARRIOR_SWORD_DEFAULT_ATTACK=2;
+    public static final int WARRIOR_SWORD_DEFAULT_ATTACK=3;
     
     public static final int PLAYER_DOOR_OFFSET_X=50; //as player gets bigger, this should get bigger too
     public static final int PLAYER_DOOR_OFFSET_Y=40;
@@ -119,7 +121,7 @@ public class GameConfig
     public static final int DODGE_ROOM_HAZARD_COUNT =7;
     
     //combat related
-    public static final int COMBAT_BASE_TIME = 10 * 60;     //10 seconds minimum
+    public static final int COMBAT_BASE_TIME = 7 * 60;     //10 seconds minimum
     public static final int COMBAT_PER_ENEMY_TIME = 3 * 60; // +3 for each additionl enemy
     public static final int COMBAT_MAX_TIME = 60 * 60;      //maxium 60 seconds
     public static final int COMBAT_BOSS_TIME=COMBAT_MAX_TIME;
@@ -131,7 +133,7 @@ public class GameConfig
     
     //dodge room related constants
     public static final int DODGE_TIME_FRAMES = 10 * 60; // 10 seconds
-    public static final int DODGE_REWARD_SCORE = 30;    
+    public static final int DODGE_HEALTH_SCORE = 30;    
     
     
     //file for reloading data later

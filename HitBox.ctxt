@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=HitBox
-comment0.text=\n\ HitBox\ is\ a\ shortlived\ invisible\ hitbox.\n\ It\ removes\ enemies\ it\ touches.\n\n
+comment0.text=\n\ HitBox\ is\ a\ shortlived\ invisible\ hitbox.\n\ It\ removes\ enemies\ it\ touches.\n\ \n\ @author\:Clifton\ Lin\n\ @version\:2026\ Jan\n
 comment1.params=w\ h\ lifeFrames\ attackPower
 comment1.target=HitBox(int,\ int,\ int,\ int)
 comment1.text=\n\ Creates\ an\ invisible\ hitbox.\n\n\ @param\ w\ \ \ \ \ \ \ \ \ \ hitbox\ width\n\ @param\ h\ \ \ \ \ \ \ \ \ \ hitbox\ height\n\ @param\ lifeFrames\ how\ many\ act()\ frames\ it\ lasts\n\ @oaram\ attackPower\ passed\ by\ the\ player\n

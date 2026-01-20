@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Door
-comment0.text=\n\ Door\:\n\ -\ When\ the\ door\ is\ unlocked\ and\ the\ player\ touches\n\ \ \ it\ tells\ GameWorld\ to\ move\ to\ the\ next\ room.\n\ \ \ \n\ Door\ creates\ a\ Decoration\ for\ the\ look\n\ -\ Left/Right\ doors\ use\ vertical\ images\ (mid)\n\ -\ Top/Bottom\ doors\ use\ horizontal\ images\ (h)\n\ \n\ @author\:\n\ @version\n
+comment0.text=\n\ Door\:\n\ -\ When\ the\ door\ is\ unlocked\ and\ the\ player\ touches\n\ \ \ it\ tells\ GameWorld\ to\ move\ to\ the\ next\ room.\n\ \ \ \n\ Door\ creates\ a\ Decoration\ for\ the\ look\n\ -\ Left/Right\ doors\ use\ vertical\ images\ (mid)\n\ -\ Top/Bottom\ doors\ use\ horizontal\ images\ (h)\n\ \n\ @author\:\ \ \ \ \ OWwen\ Kung\n\ @version\ \ \ \ \ Jan\ 2026\n
 comment1.params=name\ dr\ dc
 comment1.target=Door(java.lang.String,\ int,\ int)
 comment1.text=\n\ Create\ a\ door.\n\n\ @param\ name\ label\ text\\\n\ @param\ dr\ which\ room\ row\ direction\ this\ door\ leads\ to\n\ @param\ dc\ which\ room\ column\ direction\ this\ door\ leads\ to\n

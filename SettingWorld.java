@@ -4,8 +4,8 @@ import greenfoot.*;
  * SettingWorld lets the user pick a warrior then to start a new game or resume an old game
  * It also allows for turning music on/off
  * 
- * @author:
- * @version:
+ * @author: Clifton Lin
+ * @version:Jan 2026
  */
 public class SettingWorld extends World
 {
@@ -46,7 +46,7 @@ public class SettingWorld extends World
 
         //Warrior Selection
         hintLabel = new TextLabel("Click a warrior image to select", 30, Color.WHITE, -1);
-        addObject(hintLabel, GameConfig.WORLD_W / 2, 100);
+        addObject(hintLabel, GameConfig.WORLD_W / 2, 675);
         
         //selections
         axeIcon = new WarriorSelectIcon("player/axe_warrior/walking/down", 4,GameConfig.WARRIOR_AXE,245,260);
@@ -60,11 +60,11 @@ public class SettingWorld extends World
         newGameBotton = new StartButton("setting/start.png", StartButton.MODE_NEW_GAME);
         resumeBotton  = new StartButton("setting/resume.png", StartButton.MODE_RESUME);
 
-        addObject(newGameBotton, GameConfig.WORLD_W / 2, 635);
-        addObject(resumeBotton,  GameConfig.WORLD_W / 2 + 260, 635);
+        addObject(newGameBotton, GameConfig.WORLD_W / 2+150, 90);
+        addObject(resumeBotton,  GameConfig.WORLD_W / 2 + 270, 90);
                 
         //help icon
-        addObject(new ImageIcon("help_icon.png","How to Play",50,50,255), GameConfig.WORLD_W/2 +275, 100);
+        addObject(new ImageIcon("setting/help.png","How to Play",50,50,255), GameConfig.WORLD_W/2, 90);
         
         //sound effects toggles
         addObject(new SoundToggleButton(SoundToggleButton.TYPE_MUSIC), GameConfig.WORLD_W/2 +400, 100);
@@ -170,7 +170,7 @@ public class SettingWorld extends World
         showText(
             "Selected: " + selectedStr,
             GameConfig.WORLD_W / 2,
-            135
+            650
         );
     }
     private  void showText(String msg, int size,Color color, int x, int y)

@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=WarriorSelectIcon
-comment0.text=\n\ WarriorSelectIcon\ is\ a\ clickable\ image\ used\ on\ the\ setup\ screen.\n\ \ shows\ animated\ warrior\ picture\n\ \ When\ clicked,\ it\ tells\ SettingWorld\ which\ warrior\ type\ was\ chosen\n\ \ Selected,\ it\ draws\ a\ highlight\ border\n
+comment0.text=\n\ WarriorSelectIcon\ is\ a\ clickable\ image\ used\ on\ the\ setup\ screen.\n\ \ shows\ animated\ warrior\ picture\n\ \ When\ clicked,\ it\ tells\ SettingWorld\ which\ warrior\ type\ was\ chosen\n\ \ Selected,\ it\ draws\ a\ highlight\ border\n\ \ \n\ &\ @author\:\ Cartis\ Lee\n\ @version\:2026\ Jan\n
 comment1.params=framePrefix\ frameCount\ type\ w\ h
 comment1.target=WarriorSelectIcon(java.lang.String,\ int,\ int,\ int,\ int)
 comment1.text=\n\ prefix\ example\:\ setting/axe_\ \ loads\ axe_1.png,\ axe_2.png\ ...\n

@@ -8,8 +8,8 @@ import greenfoot.*;
  *  it does not have health, as it does not combat
  *  it does not take dmage from the player
  *  
- *  @author
- *  @version:
+ *  @author:    Owen Kung
+ *  @version:   Jan 2026
  */
 public class HazardEnemy extends Enemy
 {

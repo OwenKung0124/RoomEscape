@@ -5,6 +5,9 @@ import greenfoot.*;
  * It is a solid blocker
  *
  * Use Decoration class to display the actual graphics
+ * 
+ * @author: Clifton Lin
+ * @version:2026 Jan
  */
 public class LionRight extends Blocker
 {

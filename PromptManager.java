@@ -5,8 +5,8 @@ import greenfoot.*;
  * Usually u to upgrade d to decline
  * 
  * 
- * @author:
- * @version:
+ * @author:Owen Kung, Clifton Lin
+ * @version:2026 Jan:
  * 
  */
 public class PromptManager extends Actor

@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=CombatActor
-comment0.text=\n\ CombatActor\ attacks\ and\ has\ attack\ animation\ logic\n\n\n\ It\ does\ not\ decide\ when\ to\ attack.\ \n\ Subclasses\ decide\ when\ to\ call\ startAttack().\n
+comment0.text=\n\ CombatActor\ attacks\ and\ has\ attack\ animation\ logic\n\n\n\ It\ does\ not\ decide\ when\ to\ attack.\ \n\ Subclasses\ decide\ when\ to\ call\ startAttack().\n\ \n\ @author\:\ \ \ \ \ Owen\ Kung\n\ @version\:\ \ \ \ Jan\ 2026\n
 comment1.params=
 comment1.target=int\ getHealth()
 comment1.text=\ \n\ @return\ current\ HP\ \n

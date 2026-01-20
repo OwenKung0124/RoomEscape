@@ -33,7 +33,22 @@ public class Decoration extends SuperSmoothMover
      */
     public void setSprite(String filename)
     {
-        GreenfootImage img = new GreenfootImage(filename);
+        GreenfootImage img=null;
+        try
+        {
+            img=new GreenfootImage(filename);
+        }
+        catch (IllegalArgumentException e)
+        {
+            //file not found
+            //create placeholderimage
+            img = new GreenfootImage(30, 30);
+            img.setColor(Color.YELLOW);
+            img.fillOval(2, 2, 26, 26);
+            img.setColor(Color.ORANGE);
+            img.drawOval(2, 2, 26, 26);
+
+        }
         img.scale(w, h);
         setImage(img);
     }

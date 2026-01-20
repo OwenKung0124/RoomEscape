@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=DoorSystem
-comment0.text=\n\ DoorSystem\ controls\ door\ rules\ and\ the\ physical\ blockers.\n\n\ Door\ rules\:\n\ -\ If\ the\ current\ room\ is\ cleared\ (enemies\ \=\ 0)\:\ all\ doors\ are\ usable.\n\ -\ If\ not\ cleared\:\ ONLY\ the\ "back\ door"\ (the\ room\ you\ came\ from)\ is\ usable.\n\ -\ Locked\ door\ gaps\ are\ physically\ blocked\ using\ invisible\ Wall\ objects.\n
+comment0.text=\n\ DoorSystem\ controls\ door\ rules\ and\ the\ physical\ blockers.\n\n\ Door\ rules\:\n\ -\ If\ the\ current\ room\ is\ cleared\ (enemies\ \=\ 0)\:\ all\ doors\ are\ usable.\n\ -\ If\ not\ cleared\:\ ONLY\ the\ "back\ door"\ (the\ room\ you\ came\ from)\ is\ usable.\n\ -\ Locked\ door\ gaps\ are\ physically\ blocked\ using\ invisible\ Wall\ objects.\n\ \n\ @author\:Owen\ Kung,\ Cartis\ Lee\n\ @version\ Jan\ 2026\n
 comment1.params=world\ map
 comment1.target=DoorSystem(GameWorld,\ GameMap)
 comment2.params=

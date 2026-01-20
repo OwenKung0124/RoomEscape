@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=HealthBar
-comment0.text=\n\ HealthBar\ draws\ a\ health\ bar\ for\ any\ HasHealth\ actor\n\ can\ follow\ an\ actor\ or\ display\ at\ a\ fix\ place\ on\ screen\n\ \n\ @author\:\n\ @version\:\n
+comment0.text=\n\ HealthBar\ draws\ a\ health\ bar\ for\ any\ HasHealth\ actor\n\ can\ follow\ an\ actor\ or\ display\ at\ a\ fix\ place\ on\ screen\n\ \n\ @author\:Clifton\ Lin\n\ @version\:2026\ Jan\n
 comment1.params=unit\ follow\ width\ height\ followTarget\ yOffset
 comment1.target=HealthBar(CombatActor,\ greenfoot.Actor,\ int,\ int,\ boolean,\ int)
 comment1.text=\n\ @param\ unit\ \ \ \ \ \ \ \ \ actor\ that\ has\ health\n\ @param\ follow\ \ \ \ \ \ \ actor\ to\ follow\n\ @param\ width\ \ \ \ \ \ \ \ bar\ width\n\ @param\ height\ \ \ \ \ \ \ bar\ height\n\ @param\ followTarget\ true\ to\ follow\ follow\ actor\ closely\n\ @param\ yOffset\ \ \ \ \ \ y\ offset\ from\ the\ actor\ to\ display\n

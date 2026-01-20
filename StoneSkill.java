@@ -2,6 +2,9 @@ import greenfoot.*;
 
 /**
  * Animated Stone Skill that player can aquire
+ * 
+ * @author:Cartis Lee
+ * @version Jan 2026
  */
 public class StoneSkill extends Upgrade
 {
@@ -17,6 +20,7 @@ public class StoneSkill extends Upgrade
     {
         //super(rd, r, c, tr, tc);
         super(w,h);
+        FRAME_COUNT=1;
         FRAME_PREFIX = "stone_skill/upgrade";
         frames = loadFrames();
         setImage(frames[0]);

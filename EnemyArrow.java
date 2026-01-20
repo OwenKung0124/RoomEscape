@@ -20,7 +20,7 @@ public class EnemyArrow extends Bullet
         
         speed = 2;
 
-        // arrow sprite points LEFT by default
+        //arrow sprite points LEFT by default
         if (dirX == 1){
             //RIGHT
             setImage(new GreenfootImage("enemy/skeleton/arrow.png"));

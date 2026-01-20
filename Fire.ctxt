@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Fire
-comment0.text=\n\ A\ Statue\ is\ a\ solid\ blocker\ that\ also\ shows\ a\ larger\ decorative\ image\ on\ top.\n\n
+comment0.text=\n\ A\ Statue\ is\ a\ solid\ blocker\ that\ also\ shows\ a\ larger\ decorative\ image\ on\ top.\n\ \n\ @author\:\ Clifton\ Lin\n\ @version\:2026\ Jan\n
 comment1.params=w\ h
 comment1.target=Fire(int,\ int)
 comment1.text=\n\ Creates\ a\ statue\ with\ a\ collision\ hitbox\ of\ size\ (w,\ h).\n\n\ @param\ w\:\ \ \ \ hitbox\ width\n\ @param\ h\:\ \ \ \ hitbox\ height\n

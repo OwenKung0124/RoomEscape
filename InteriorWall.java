@@ -3,8 +3,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class InteriorWall here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author: Clifton Lin
+ * @version:2026 Jan
  */
 public class InteriorWall extends Blocker
 {

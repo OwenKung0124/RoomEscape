@@ -5,8 +5,8 @@ import greenfoot.*;
  * 
  * It also display game related information for feedback.
  * 
- * @author:
- * @version
+ * @author Clifton Lin
+ * @version Jan, 2026
  */
 public class DefeatWorld extends World
 {

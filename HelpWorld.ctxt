@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=HelpWorld
-comment0.text=\n\ This\ world\ simply\ display\ information\ on\ \n\ \ how\ to\ play\ the\ game\n\ \ how\ scaling,\ coins,\ scores\ work\n\ \n\ @author\:\n\ @version\:\n
+comment0.text=\n\ This\ world\ simply\ display\ information\ on\ \n\ \ how\ to\ play\ the\ game\n\ \ how\ scaling,\ coins,\ scores\ work\n\ \n\ @author\:\ Cartis\ Lee\n\ @version\ Jan\ 2026\n
 comment1.params=returnWorld
 comment1.target=HelpWorld(greenfoot.World)
 comment1.text=\n\ Creates\ the\ HelpWorld\ and\ displays\ the\ first\ help\ page.\n\n\ @param\ returnWorld\ the\ world\ to\ go\ back\ to\ when\ Esc\ is\ pressed\n

@@ -8,6 +8,9 @@ import java.util.*;
  * - If the current room is cleared (enemies = 0): all doors are usable.
  * - If not cleared: ONLY the "back door" (the room you came from) is usable.
  * - Locked door gaps are physically blocked using invisible Wall objects.
+ * 
+ * @author:Owen Kung, Cartis Lee
+ * @version Jan 2026
  */
 public class DoorSystem 
 {

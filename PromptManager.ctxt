@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=PromptManager
-comment0.text=\n\ PromptManager\ responsible\ for\ prompting\ a\ message\ in\ the\ sidepanel\n\ Asking\ if\ player\ would\ like\ to\ upgrade\ certain\ feature\n\ Usually\ u\ to\ upgrade\ d\ to\ decline\n\ \n\ \n\ @author\:\n\ @version\:\n\ \n
+comment0.text=\n\ PromptManager\ responsible\ for\ prompting\ a\ message\ in\ the\ sidepanel\n\ Asking\ if\ player\ would\ like\ to\ upgrade\ certain\ feature\n\ Usually\ u\ to\ upgrade\ d\ to\ decline\n\ \n\ \n\ @author\:Owen\ Kung,\ Clifton\ Lin\n\ @version\:2026\ Jan\:\n\ \n
 comment1.params=
 comment1.target=PromptManager()
 comment10.params=

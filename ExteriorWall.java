@@ -5,6 +5,9 @@ import greenfoot.*;
  * but works the same as Wall for collisions.
  *
  * Checks Wall.class collisions
+ * 
+ * @author:     Owen Kung
+ * @version:    Jan 2026 
  */
 public class ExteriorWall extends Blocker
 {

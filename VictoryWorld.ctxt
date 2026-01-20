@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=VictoryWorld
-comment0.text=\n\ VictoryWorld\ (Win\ Screen)\n\ It\ allows\ player\ to\ go\ back\ to\ setting\ or\ go\ play\ a\ new\ game\ directly\n\ It\ also\ shows\ same\ game\ states\ for\ feedback\n\ \n\ @author\:\n\ @version\:\n\ \n
+comment0.text=\n\ VictoryWorld\ (Win\ Screen)\n\ It\ allows\ player\ to\ go\ back\ to\ setting\ or\ go\ play\ a\ new\ game\ directly\n\ It\ also\ shows\ same\ game\ states\ for\ feedback\n\ \n\ @author\:\ Cartis\ Lee\n\ @version\:\ 2025\ Jan\n\ \n
 comment1.params=
 comment1.target=VictoryWorld()
 comment2.params=data

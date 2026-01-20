@@ -2,6 +2,9 @@ import greenfoot.*;
 
 /**
  * Animated HealthUpgrade to upgrade player's attack power
+ * 
+ * @author:Cartis Lee
+ * @version Jan 2026
  */
 public class HealthUpgrade extends Upgrade
 {

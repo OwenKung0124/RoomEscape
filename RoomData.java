@@ -4,6 +4,9 @@ import java.util.StringTokenizer;
  * RoomData stores the tile map for ONE room.
  * Each room must have its own RoomData, so changes (coins collected, etc.)
  * only affect that one room.
+ * 
+ * @author:Owen Kung, Cartis Lee
+ * @version Jan 2026
  */
 public class RoomData 
 {

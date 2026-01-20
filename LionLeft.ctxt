@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=LionLeft
-comment0.text=\n\ LionLeft\ is\ a\ statue\ in\ the\ room\ added\ using\ room\ tile\ configuration\n\ It\ is\ a\ solid\ blocker\n\n\ Use\ Decoration\ class\ to\ display\ the\ actual\ graphics\n
+comment0.text=\n\ LionLeft\ is\ a\ statue\ in\ the\ room\ added\ using\ room\ tile\ configuration\n\ It\ is\ a\ solid\ blocker\n\n\ Use\ Decoration\ class\ to\ display\ the\ actual\ graphics\n\ \n\ @author\:\ Clifton\ Lin\n\ @version\:2026\ Jan\n
 comment1.params=w\ h
 comment1.target=LionLeft(int,\ int)
 comment1.text=\n\ Creates\ a\ statue\ with\ a\ collision\ hitbox\ of\ size\ (w,\ h).\n\ The\ hitbox\ is\ tranparent,\ just\ to\ block\ the\ movement\n\n\ @param\ w\:\ \ \ \ hitbox\ width\n\ @param\ h\:\ \ \ \ hitbox\ height\n

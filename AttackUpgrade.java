@@ -1,6 +1,9 @@
 import greenfoot.*;
 /**
  * Animated AttckUpgrade to upgrade player's attack power
+ * 
+ * @author:Cartis Lee
+ * @version Jan 2026
  */
 public class AttackUpgrade extends Upgrade
 {
@@ -9,7 +12,7 @@ public class AttackUpgrade extends Upgrade
     {
         //super(rd, r, c, tr, tc);
         super(w,h);
-        FRAME_COUNT=3;
+        FRAME_COUNT=2;
         FRAME_PREFIX = "attack_upgrade/upgrade";
         animDelay=20;
         frames = loadFrames();

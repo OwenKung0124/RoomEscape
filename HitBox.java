@@ -4,7 +4,9 @@ import java.util.*;
 /**
  * HitBox is a shortlived invisible hitbox.
  * It removes enemies it touches.
- *
+ * 
+ * @author:Clifton Lin
+ * @version:2026 Jan
  */
 public class HitBox extends SuperSmoothMover
 {

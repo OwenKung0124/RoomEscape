@@ -1,139 +1,126 @@
 import greenfoot.*;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
- * A stationary boss that periodically performs a "summon" animation.
+ * A stationary boss that performs a summon animation.
+ *  Uses a Queue (LinkedList) to schedule summon waves
+ *  Each wave is an int[3]:
+ *      [0] delayFrames  
+ *      [1] count        
+ *      [2] type         
  *
  * Behaviour:
- *  The boss does not move
- *  After a random interval, it starts a summon animation.
- *  When the summon animation finishes, it spawns a small wave of enemies
- *    in the current room using SpawnerSystem.randomFloomSpawnInRoom(RoomData).
- *  It then returns to an idle state and waits for the next interval.
+ * - Boss does not move (except landing + relocate)
+ * - It waits based on the next wave's delay
+ * - It plays summon animation
+ * - When animation ends, it spawns the wave's minions
+ * - Then it loads the next wave from the queue
  *
+ * @author:     Owen Kung, Cartis Lee
+ * @version:    Jan 2026
  */
 public class SummonerBoss extends Enemy
 {
-   
-    //summon timer setting
-    private int summonTimer;
-    //inimum frames to wait before summoning again
-    private int minInterval=180; 
-    //maximum frames to wait before summoning again.
-    private int maxInterval=300; 
-
-    //animations
+    //summon animation related
     private GreenfootImage[] summonFrames;
-    private int summonAnimDelay=35;  //adjust this to match the sound effect timing
+    private int summonAnimDelay = 35; // adjust to match sound timing
+    private boolean summoning = false;
 
-    //summoning state
-    private boolean summoning=false;
+    //landing related
+    private boolean landed = false;
 
-    //How many minions to spawn 
-    //after each summon animation finishes
-    private int minionsPerSummon=GameConfig.SUMMOMER_BOSS_MINION_SPWAN;
+    //for managing wave for spawns
+    private Queue<int[]> waveQueue = new LinkedList<int[]>();
+
+    //wave related data
+    //loaded from queue
+    private int summonTimer = 0;          //counts down until next summon starts
+    private int currentWaveCount = 0;     //how many minions to spawn at end of animation
+    private int currentWaveType = 3;      //minion type
 
     /**
-     * Creates a SummonerBoss that targets the given Player (required by Enemy).
-     *
-     * @param target the player this boss (and its minions) will target/track
+     * Creates a SummonerBoss that targets the given Player.
      */
     public SummonerBoss(Player target)
     {
         super(target);
 
-        spriteW=160;
-        spriteH=125;
+        spriteW = 160;
+        spriteH = 125;
 
-        //boos health
+        //boss health
         baseMaxHealth=GameConfig.SUMMONER_BOSS_MAX_HEALTH;
         maxHealth=baseMaxHealth;
         health=maxHealth;
-        
 
-        //no damage
-        //otherwise sword and axe warrior can't kill boss
-        contactDamage=1;
+        //contact damage
+        //contact boss does not damage to player
+        //othewise axe and sword warrior can't kill boss
+        contactDamage = 1;
 
         //health bar
-        HP_BAR_W=spriteW-20;
-        HP_BAR_H=10;
-        HP_BAR_Y_OFFSET=90;
+        HP_BAR_W = spriteW - 20;
+        HP_BAR_H = 10;
+        HP_BAR_Y_OFFSET = 90;
 
-        //loadFramesRequired("pathPrefix", count) loads:
-        summonFrames=loadFramesRequired("enemy/boss/summon/summon", 8);
+        //load summon frames
+        summonFrames = loadFramesRequired("enemy/boss/summon/summon", 8);
+        setImage(summonFrames[0]); // idle image
 
-        //iIdle image: first summon frame.
-        setImage(summonFrames[0]);
-
-        //start the boss in the waiting state.
-        scheduleNextSummon();
+        //build the schedule 
+        buildWaveSchedule();
+        loadNextWaveFromQueue();
     }
 
     /**
-     * movement for boss is always 0, 0
-     *
-     * @return {0,0} so the boss never moves
+     * Boss never moves by AI.
      */
     protected int[] computeMove()
     {
         return new int[]{0, 0};
     }
 
-    /**
-     * Main update loop:
-     * - Handles pause
-     * - Either counts down to summon OR plays the summon animation
-     * - Spawns minions only at the end of the animation
-     */
     public void act()
     {
-
         if (GameWorld.isPaused()) return;
+        if (getWorld() == null) return;
 
-        if (getWorld()==null) return;
-
-        //countdown freeze
-        //stop movement  contact damage while frozen
+        //frozen by stone skill
         if (freezeTimer > 0)
         {
-            showText("Stoned",Color.YELLOW,getX(),getY()+100,false);
+            showText("Stoned", Color.YELLOW, getX(), getY() + 100, false);
             freezeTimer--;
-            return; 
+            return;
         }
-       
-        //summoner enemy does not hit
-        //if (hitCooldown > 0) hitCooldown--;
 
-        //landing
-        if(getY()<=GameConfig.roomCenterY())
+        //Landing
+        if (!landed)
         {
-            SoundManager.playDescendingSound();
-            //avoid landing into Blocker in the ro
-            if (!getWorld().getObjectsAt(getX(),   
-                                        GameConfig.roomCenterY(), 
-                                        Blocker.class).isEmpty())
+            if (getY() <= GameConfig.roomCenterY())
             {
-               setLocation(GameConfig.roomCenterX()/2,getY()+5);
-            }
-            else
-            {
-                setLocation(getX(),getY()+5);
-                
-                //already in the room centre, play once
-                if(getY()>=GameConfig.roomCenterY())
-                {
-                    SoundManager.stopDescendingSound();
-                    SoundManager.playSummonerBossFightSound();
+                SoundManager.playDescendingSound();
 
+                if (!getWorld().getObjectsAt(getX(), GameConfig.roomCenterY(), Blocker.class).isEmpty())
+                {
+                    setLocation(GameConfig.roomCenterX() / 2, getY() + 5);
+                }
+                else
+                {
+                    setLocation(getX(), getY() + 5);
+
+                    if (getY() >= GameConfig.roomCenterY())
+                    {
+                        SoundManager.stopDescendingSound();
+                        SoundManager.playSummonerBossFightSound();
+                        landed = true;
+                    }
                 }
             }
+            return;
         }
-   
-        //summoner is big
-        //when player touches
-        //it does not takeDamage of player
-        //handlePlayerContact();
 
+        //Summon
         if (summoning)
         {
             playSummonAnimation();
@@ -147,123 +134,135 @@ public class SummonerBoss extends Enemy
             }
         }
     }
+
     /**
-     * Boss does not handle player contact
-     * otherwise sword and axe warrior has no way to kill the boss
+     * Boss does not damage player by contact handling.
      */
-    protected void handlePlayerContact() 
+    protected void handlePlayerContact()
     {
-        //do nothing
-        //otherwise, axe or sword player has now way to kill the boos
-    
         return;
     }
+
     /**
-     * Schedules the next summon by setting summonTimer to a random value
-     * between minInterval and maxInterval (inclusive).
+     * Build a wave schedule  into the queue.
      */
-    private void scheduleNextSummon()
+    private void buildWaveSchedule()
     {
-        summonTimer=minInterval + Greenfoot.getRandomNumber(maxInterval - minInterval + 1);
+        waveQueue.clear();
+
+        //int[]{delayFrames, count, type}
+        waveQueue.add(new int[]{120, GameConfig.SUMMOMER_BOSS_MINION_SPAWN, 0}); // after 2 sec, 1 zombie
+        waveQueue.add(new int[]{180, GameConfig.SUMMOMER_BOSS_MINION_SPAWN+1, 3}); // another 3 sec, 2 random
+        waveQueue.add(new int[]{240, GameConfig.SUMMOMER_BOSS_MINION_SPAWN+2, 1}); // another 4 sec, 3 wander
+        waveQueue.add(new int[]{300, GameConfig.SUMMOMER_BOSS_MINION_SPAWN+3, 3}); // another 4 sec, 4 random
+        waveQueue.add(new int[]{360, GameConfig.SUMMOMER_BOSS_MINION_SPAWN+4, 2}); // another 6 sec, 5 skeleton
     }
 
     /**
-     * Enters the summoning state and resets animation counters.
-     * The actual spawn happens only when the animation finishes.
+     * Take next wave from queue. 
+     * If queue empty, rebuild it
      */
+    private void loadNextWaveFromQueue()
+    {
+        if (waveQueue.isEmpty())
+        {
+            buildWaveSchedule();
+        }
+
+        int[] wave = waveQueue.poll(); //pop next wave
+
+        if (wave == null)
+        {
+            //default
+            summonTimer = 180;
+            currentWaveCount = 2;
+            currentWaveType = 3;
+            return;
+        }
+
+        summonTimer = wave[0];
+        currentWaveCount = wave[1];
+        currentWaveType = wave[2];
+    }
     private void startSummon()
     {
-        summoning=true;
+        summoning = true;
 
-        //start with the first frame
-        frameIndex=0;
-        animTimer=0;
+        frameIndex = 0;
+        animTimer = 0;
 
         setImage(summonFrames[0]);
-    }
 
-    /**
-     * Advances the summon animation.
-     *
-     * When the last frame finishes, this method:
-     * - switches back to idle
-     * - spawns minions in the current room
-     * - schedules the next summon timer
-     */
+        // play once at the start
+        SoundManager.playSummonerBossSound();
+    }
     private void playSummonAnimation()
     {
         animTimer++;
 
-        //only change frame when reach delay value
         if (animTimer < summonAnimDelay)
         {
-            return; 
-        }
-
-        animTimer=0;
-        frameIndex++;
-
-        //if reached the end of the animation
-        //do the spawn and reset to idle.
-        if (frameIndex >= summonFrames.length)
-        {
-            summoning=false;
-            setImage(summonFrames[0]); //idle image
-
-            //spawn happens
-            //at the end of the animation.
-            spawnMinions();
-            
-            //relocate minions
-            //so the player won't stay in the same spot hitting the boss
-            relocate();
-            //sart waiting for the next summon.
-            scheduleNextSummon();
             return;
         }
 
-        //play only once during the animation
-        SoundManager.playSummonerBossSound();//
-    
-        //show the next frame.
+        animTimer = 0;
+        frameIndex++;
+
+        if (frameIndex >= summonFrames.length)
+        {
+            summoning = false;
+            setImage(summonFrames[0]); // back to idle
+
+            //spawn the wave that was scheduled
+            spawnMinions(currentWaveCount, currentWaveType);
+
+            //to avoid player staying on the spot
+            //targeting the boss
+            relocate();
+
+            //load next scheduled wave
+            loadNextWaveFromQueue();
+            return;
+        }
+
         setImage(summonFrames[frameIndex]);
     }
+
     /**
-     * Spawns minions around the boss
-     *
-     * Strategy:
-     *  try random points in a square around the boss (radius).
-     *  prevent points that are out of bounds or inside blockers.
-     *  when fail to find a valid spot after many tries
-     *  use SpawnerSystem.randomFloomSpawnInRoom(currentRoomData).
+     * Spawn minions for this wave.
+     * 
+     * @param count: how many to spawn
+     * @param type: what type to spawn
      */
-    private void spawnMinions()
+    private void spawnMinions(int count, int type)
     {
-        GameWorld gw=(GameWorld) getWorld();
-        RoomData rd=gw.getCurrentRoomData();
-    
-        int radius=120; //where to spawn the minions
-    
-        //how many random tries per minion
-        int triesPerMinion=30;
-    
-        for (int i=0; i < minionsPerSummon; i++)
+        GameWorld gw = (GameWorld) getWorld();
+        RoomData rd = gw.getCurrentRoomData();
+
+        int radius = 100;
+        int triesPerMinion = 30;
+
+        for (int i = 0; i < count; i++)
         {
-            int[] point=findSpawnPointNearBoss(radius, triesPerMinion);
-    
-            //if no good point found near the boss, use room-floor helper
-            if (point==null)
+            int[] point = findSpawnPointNearBoss(radius, triesPerMinion);
+            if (point == null)
             {
-                point=SpawnerSystem.randomFloomSpawnInRoom(rd);
+                point = SpawnerSystem.randomFloomSpawnInRoom(rd);
             }
-    
-            //spawn a random minion type
-            int choice=Greenfoot.getRandomNumber(3);
-            if (choice==0)
+
+            int choice = type;
+
+            //type 3 means random mix
+            if (type == 3)
+            {
+                choice = Greenfoot.getRandomNumber(3); // 0/1/2
+            }
+
+            if (choice == 0)
             {
                 getWorld().addObject(new ZombieEnemy(player), point[0], point[1]);
             }
-            else if (choice==1)
+            else if (choice == 1)
             {
                 getWorld().addObject(new WanderEnemy(player), point[0], point[1]);
             }
@@ -273,75 +272,52 @@ public class SummonerBoss extends Enemy
             }
         }
     }
-    
     /**
-     * find a valid spawn location near the boss.
-     *  inside world bounds
-     *  not at a Blocker
-     *
-     * @param radius:   maximum distance from the boss
-     * @param maxTries: how many random tries before giving up
-     * @return:         {x,y} locatiom or null
+     * find a safe spot near boss, avoid wall or blocker objects
      */
     private int[] findSpawnPointNearBoss(int radius, int maxTries)
     {
-        World w=getWorld();
-        if (w==null) return null;
-    
-        for (int t=0; t < maxTries; t++)
+        World w = getWorld();
+        if (w == null) return null;
+
+        for (int t = 0; t < maxTries; t++)
         {
-            int x=getX() + Greenfoot.getRandomNumber(radius * 2 + 1) - radius;
-            int y=getY() + Greenfoot.getRandomNumber(radius * 2 + 1) - radius;
-    
-            //Keep inside world bounds 
-            if (x < 20 || y < 20 || 
-                x > w.getWidth() - 20 || 
-                y > w.getHeight() - 20)
+            int x = getX() + Greenfoot.getRandomNumber(radius * 2 + 1) - radius;
+            int y = getY() + Greenfoot.getRandomNumber(radius * 2 + 1) - radius;
+
+            if (x < 20 || y < 20 || x > w.getWidth() - 20 || y > w.getHeight() - 20)
             {
                 continue;
             }
-    
-            //skip if location is at a blocker.
+
             if (!w.getObjectsAt(x, y, Blocker.class).isEmpty())
             {
                 continue;
             }
-    
+
             return new int[]{x, y};
         }
-    
+
         return null;
     }
+    
     /**
-     *  Relocate boss after it spawns minions
-     *  to avoid player staying in the same position hitting boss
+     * relocate boss from time to time to avoid player staying stationary targeting boss
      */
     private void relocate()
     {
-            int[] newLocation=findSpawnPointNearBoss(150, 30);
-            
-            if(newLocation!=null)
-            {
-                int newX=newLocation[0];
-                int newY=newLocation[1];
-                
-                setLocation(newX,newY);
-                
-            }
+        int[] newLocation = findSpawnPointNearBoss(100, 30);
+        if (newLocation != null)
+        {
+            setLocation(newLocation[0], newLocation[1]);
+        }
     }
-    /**
-     * Summoner boss does not playAttackSoundEffect
-     */
     protected void playAttackSoundEffect()
     {
-        //SoundManager.playZombieSound();
+        // boss doesn't attack
     }
-    /**
-     * Summoner boss does play end of life sound effect
-     */
     protected void playEndOfLifeSoundEffect()
     {
-        //to prevent hearing summoning sound after boss dead
         SoundManager.stopSummonerBossSound();
         SoundManager.playSummonBossDisappear();
     }

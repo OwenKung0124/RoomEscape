@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=WanderEnemy
-comment0.text=\n\ WanderEnemy\ walks\ in\ random\ directions\ and\ changes\ direction\ randomly.\n
+comment0.text=\n\ WanderEnemy\ walks\ in\ random\ directions\ and\ changes\ direction\ randomly.\n\ \n\ @author\:Clifton\ Lin\n\ @version\:2026\ Jan\n
 comment1.params=target
 comment1.target=WanderEnemy(Player)
 comment2.params=
