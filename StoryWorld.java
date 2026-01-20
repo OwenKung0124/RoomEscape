@@ -83,6 +83,7 @@ public class StoryWorld extends World
         if (Greenfoot.isKeyDown("escape"))
         {
             SoundManager.stopTypingSound();
+            SoundManager.playGameMusic();
             Greenfoot.setWorld(new SettingWorld());
             return;
         }
@@ -95,6 +96,7 @@ public class StoryWorld extends World
             if (switchTimer >= SWITCH_DELAY)
             {
                 //go to setting world
+                SoundManager.playGameMusic();
                 Greenfoot.setWorld(new SettingWorld()); 
             }
         }
@@ -105,14 +107,12 @@ public class StoryWorld extends World
     public void started()
     {
         SoundManager.playTypingSound();
-        //SoundManager.playGameMusic();
     }
     /**
      * Make sure game music stops when paused
      */
     public void stopped()
     {
-        SoundManager.stopGameMusic();
-        //SoundManager.stopTypingSound();
+        SoundManager.stopTypingSound();
     }
 }

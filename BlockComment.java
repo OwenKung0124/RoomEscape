@@ -17,7 +17,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * ArrayList of Actors is used to manage room transition cleanup on room load. Only UI objects remain.
  * DoorSystem uses ArrayList to store and manage all DoorBlocker objects in the current room, to manage Door lock and unlock.
  * ArrayList of Enemies to manage gameplay state in combat rooms.
- * DoorSystem uses ArrayList to store and manage all DoorBlocker objects in the current room.
  * 
  * Queue:
  * SummonerBoss spawns enemies in waves.

@@ -85,10 +85,6 @@ public class DoorSystem
      * - If the room is unlocked (enemies = 0): do not block any door gaps.
      * - If the room is locked (enemies > 0): block every door gap except the back door gap.
      *
-     * IMPORTANT UPDATE:
-     * - Only block a direction if a Door actor actually exists in that direction.
-     * - Uses DoorBlocker so blockers are never visible.
-     *
      * @param roomR current room row
      * @param roomC current room col
      * @param lastRoomR previous room row
@@ -116,7 +112,7 @@ public class DoorSystem
         }
         doorBlockers.clear();
     
-        // If unlocked
+        //If unlocked
         //need no more blockers
         if (unlocked)
         {
@@ -128,10 +124,10 @@ public class DoorSystem
         int backDc = lastRoomC - roomC;
 
         //Block every door EXCEPT the back door.
-        blockDoor(-1, 0, backDr, backDc); // UP
-        blockDoor( 1, 0, backDr, backDc); // DOWN
-        blockDoor( 0,-1, backDr, backDc); // LEFT
-        blockDoor( 0, 1, backDr, backDc); // RIGHT
+        blockDoor(-1, 0, backDr, backDc); //UP
+        blockDoor( 1, 0, backDr, backDc); //DOWN
+        blockDoor( 0,-1, backDr, backDc); //LEFT
+        blockDoor( 0, 1, backDr, backDc); //RIGHT
     }
 
     /**
@@ -139,13 +135,13 @@ public class DoorSystem
      */
     private void blockDoor(int dr, int dc, int backDr, int backDc)
     {
-        // don't block the back door
+        //don't block the back door
         if (dr == backDr && dc == backDc) return;
 
         Door door = findDoor(dr, dc);
         if (door == null) 
         {
-             // no actual door here -> don't block
+             //no actual door here -> don't block
              return;
         }
 

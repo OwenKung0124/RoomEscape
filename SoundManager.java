@@ -8,14 +8,16 @@ import greenfoot.*;
 public class SoundManager
 {
     //user preferences
-    private static boolean musicOn = false;
-    private static boolean sfxOn   = false;
+    private static boolean musicOn = true;
+    private static boolean sfxOn   = true;
 
     //game music
     private static GreenfootSound gameMusic = new GreenfootSound("dark_ambient_short.wav");
     //private static GreenfootSound gameMusic = new GreenfootSound("anna_theme.mp3");
     //private static GreenfootSound gameMusic = new GreenfootSound("game_music.mp3");
-    private static GreenfootSound defeat = new GreenfootSound("defeat.wav");
+    //private static GreenfootSound defeat = new GreenfootSound("defeat.wav");
+    private static GreenfootSound defeat = new GreenfootSound("anna_theme.mp3");
+    
     private static GreenfootSound help = new GreenfootSound("fire.wav");
     private static GreenfootSound victory = new GreenfootSound("victory.wav");
     private static GreenfootSound failed=new GreenfootSound("failed.mp3");
@@ -409,6 +411,8 @@ public class SoundManager
      */
     public static void playTypingSound()
     {
+        if (!musicOn) return;
+        
         typing.setVolume(30);
         if (!typing.isPlaying()) 
         {
