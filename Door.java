@@ -51,7 +51,7 @@ public class Door extends SuperSmoothMover
     private static final int LEFT_EXTRA_X  = -40;
 
    //right door
-    private static final int RIGHT_EXTRA_X = -30;
+    private static final int RIGHT_EXTRA_X = -32;
 
     //side door extra y to match bg
     private static final int SIDE_EXTRA_Y = 6;

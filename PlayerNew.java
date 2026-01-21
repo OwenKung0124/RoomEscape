@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *  @author:    Owen Kung
  *  @version:   Jan 2026
  */
-public abstract class Player extends CombatActor
+public abstract class PlayerNew extends CombatActor
 {
     //health and damges
     //Maximum health the player can have. */
@@ -250,7 +250,7 @@ public abstract class Player extends CombatActor
         if (amount <= 0) return;
          //allow players to help unlimited health
         health += amount;
-        //setHealth(health + amount);
+        setHealth(health + amount);
 
     }
     /**
@@ -271,8 +271,7 @@ public abstract class Player extends CombatActor
         
         if (health > maxHealth) 
         {
-            //health = maxHealth;   
-            maxHealth=health;
+            health = maxHealth;   
         }
 
     }
@@ -283,7 +282,6 @@ public abstract class Player extends CombatActor
             maxHealth = 1;
         }
         
-        //allow player to have unlimited health
         if(health > maxHealth){
             health = maxHealth;
         }
@@ -388,9 +386,7 @@ public abstract class Player extends CombatActor
     }
     public void setAttackPower(int attackPower)
     {
-        //never below 1
-        if (attackPower < 1) attackPower = 1;
-        this.attackPower = attackPower;
+        this.attackPower=attackPower;
     }
     public int getStoneSkillCount()
     {

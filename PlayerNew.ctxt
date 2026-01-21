@@ -1,5 +1,5 @@
 #BlueJ class context
-comment0.target=Player
+comment0.target=PlayerNew
 comment0.text=\n\ Player\n\ \ walk\ using\ WalkingActor's\ movement/facing/walk\ animation\n\ \ play\ a\ directional\ attack\ animation\n\ \ trigger\ a\ hit\ once\ at\ a\ chosen\ frame\n\ \ \n\ \ @author\:\ \ \ \ Owen\ Kung\n\ \ @version\:\ \ \ Jan\ 2026\n
 comment1.params=
 comment1.target=int[]\ computeMove()

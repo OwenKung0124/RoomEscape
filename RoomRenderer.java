@@ -84,10 +84,10 @@ public class RoomRenderer
         world.addObject(attackUpgrade, 250,150);
         
         HealthUpgrade healthUpgrade = new HealthUpgrade(240,190);
-        world.addObject(healthUpgrade, 700,150);
+        world.addObject(healthUpgrade, 750,150);
         
         StoneSkill stoneSkill = new StoneSkill(260,210);
-        world.addObject(stoneSkill, 700,550);
+        world.addObject(stoneSkill, 750,550);
     }
     /**
      * Builds wall, blockers using the RoomData tile layout.

@@ -71,6 +71,31 @@ public class GameWorld extends World
     
     private GameData data;   //this data is passed around between world and is used to save to file when needed
     
+    
+    //Shop/artifact data
+    private String[] artifactName;
+    private int[] artifactCost;
+    private int[] artifactDmg;
+    private int[] artifactHp;
+    
+    //current shop items
+    private ShopItem shop1;
+    private ShopItem shop2;
+    private ShopItem shopHeal;
+    
+    //shop memeory so that items dont change it was really annoying
+    private boolean shopGenerated = false;
+    
+    private int shopArtifact1Name = -1;
+    private int shopArtifact2Name = -1;
+    
+    private boolean shopArtifact1Sold = false;
+    private boolean shopArtifact2Sold = false;
+    private boolean shopHealSold = false;
+    
+    private boolean lastR = false; //this is for reroll detection
+    private boolean lastE = false;
+    
     public GameWorld()
     {
         this(GameConfig.WARRIOR_AXE, false, null);   //default warrior selection, new game, no save data passed
@@ -84,6 +109,8 @@ public class GameWorld extends World
     public GameWorld(int warriorType,boolean resume, GameData data)
     {
         super(GameConfig.WORLD_W, GameConfig.WORLD_H, 1);
+        
+        theArtifacts();
         
         //if there's already an existing savedata
         if(data!=null)
@@ -395,6 +422,40 @@ public class GameWorld extends World
         showText("" + player.getHealth(), hudX+115, 655);
         
         
+        //for shop items
+        if(map.getRoomType(roomR, roomC) == 'S'){
+            showText("Press R to reroll (2 coins) \n Press E to Aquire Artifacts", GameConfig.sidePanelCentreX() , GameConfig.sidePanelCentreY()-125);
+        }else{
+            showText("", GameConfig.sidePanelCentreX(),  GameConfig.sidePanelCentreY() -125);
+        }
+        if(map.getRoomType(roomR , roomC) == 'S'){
+            if(Greenfoot.isKeyDown("e") && !lastE){
+                buyClosestShopItem();
+            }
+            lastE = Greenfoot.isKeyDown("e");
+        }else{
+            lastE = false;
+        }
+        if(map.getRoomType(roomR, roomC) == 'S'){ //this is to find the shop room
+            boolean rKey = Greenfoot.isKeyDown("r");
+            if(rKey&& !lastR){
+                if(player.getCoinCount()<2)
+                {
+                    showMessage("Not enough coins to reroll.",80);
+                    SoundManager.playFailSound();
+                }
+                else
+                {
+                    rerollShop();
+                }
+                
+            }
+            lastR = rKey;
+        }else{
+            lastR = false;
+        }
+        
+        
         //track for gameMessage
         if (messageTimer>=0)
         {
@@ -431,6 +492,8 @@ public class GameWorld extends World
 
         //block door gaps while locked, but not the back door gap
         doorSystem.syncDoorBlockers(roomR, roomC, lastRoomR, lastRoomC, unlockedNow);
+        
+        
     }  
     /**
      * all seession varibles to be cleared for new game
@@ -493,6 +556,10 @@ public class GameWorld extends World
              {
                 removeObject(a);   
              }
+        }
+        
+        if(map.getRoomType(r, c) == 'S'){//adds shop items - cartis
+            spawnShopItems();
         }
 
 
@@ -1057,5 +1124,116 @@ public class GameWorld extends World
         gameMessage.setText(msg);     
         gameMessage.setVisible(true);
         messageTimer = frames;
+    }
+    private void spawnShopItems(){
+        if(!shopGenerated){
+            shopArtifact1Name = Greenfoot.getRandomNumber(artifactName.length);
+            shopArtifact2Name = Greenfoot.getRandomNumber(artifactName.length);
+        
+            while(shopArtifact1Name == shopArtifact2Name){
+                shopArtifact2Name = Greenfoot.getRandomNumber(10);
+            }
+            
+            shopArtifact1Sold = false;
+            shopArtifact2Sold = false;
+            shopHealSold = false;
+            
+            shopGenerated = true;
+        }
+        int y = 400;
+        
+        //2 artifacts
+        if(!shopArtifact1Sold){
+            shop1 = new ShopItem(shopArtifact1Name, artifactName[shopArtifact1Name], artifactCost[shopArtifact1Name], artifactDmg[shopArtifact1Name], artifactHp[shopArtifact1Name]);
+             addObject(shop1, 150, y);
+        }
+        
+        if(!shopArtifact2Sold){
+            shop2 = new ShopItem(shopArtifact2Name, artifactName[shopArtifact2Name], artifactCost[shopArtifact2Name], artifactDmg[shopArtifact2Name], artifactHp[shopArtifact2Name]);
+            addObject(shop2, 375, y);
+        }
+        
+        // 1 heal itme
+        
+        if(!shopHealSold){
+            shopHeal = new ShopItem("Heal", 3, 25);
+            addObject(shopHeal, 600, y);
+        }
+    }
+        public void markShopSold(int type, int artifactName){
+        if(type == ShopItem.HEAL){
+            shopHealSold = true;
+            return;
+        }
+        
+        if(artifactName == shopArtifact1Name){
+            shopArtifact1Sold = true;
+        }
+        if(artifactName == shopArtifact2Name){
+            shopArtifact2Sold = true;
+        }
+    }
+    private void theArtifacts(){
+        artifactName = new String[10];
+        artifactCost = new int[10];
+        artifactDmg = new int [10];
+        artifactHp = new int[10];
+        
+        artifactName[0] = "Glass Cannon"; artifactCost[0] = 10; artifactDmg[0] = 100; artifactHp[0] = -99;
+        artifactName[1] = "Clifton's phone"; artifactCost[1] = 4; artifactDmg[1] = 10; artifactHp[1] = -2;
+        artifactName[2] = "MrCohen's toes"; artifactCost[2] = 0; artifactDmg[2] = 0; artifactHp[2] = -20;
+        artifactName[3] = "MrCohen's fingers"; artifactCost[3] = 0; artifactDmg[3] = -20; artifactHp[3] = 0;
+        artifactName[4] = "Magic Blade"; artifactCost[4] = 5; artifactDmg[4] = 2; artifactHp[4] = 5;
+        artifactName[5] = "Clifton's Left Testicle"; artifactCost[5] = 10; artifactDmg[5] = 3; artifactHp[5] = -10;
+        artifactName[6] = "Ying Yang"; artifactCost[6] = 10; artifactDmg[6] = 5; artifactHp[6] = -5;
+        artifactName[7] = "Owen's Armour"; artifactCost[7] = 10; artifactDmg[7] = -3; artifactHp[7] = 10;
+        artifactName[8] = "Adam"; artifactCost[8] = 10; artifactDmg[8] = 5; artifactHp[8] = -20;
+        artifactName[9] = "Advanced Staff"; artifactCost[9] = 4; artifactDmg[9] = 3; artifactHp[9] = -10;
+    }
+    private void rerollShop(){
+        
+        shopGenerated = false;
+        shopArtifact1Sold = false;
+        shopArtifact2Sold = false;
+        shopHealSold = false;
+        
+        
+        
+        if(player.getCoinCount() < 2){
+            return;
+        }
+        
+        player.setCoinCount(player.getCoinCount() - 2);
+        
+        if(shop1 !=null && shop1.getWorld() != null) removeObject(shop1);
+        if(shop2 !=null && shop2.getWorld() != null) removeObject(shop2);
+        if(shopHeal !=null && shopHeal.getWorld() != null) removeObject(shopHeal);
+        
+        spawnShopItems();
+    }
+    private void buyClosestShopItem(){
+        List<ShopItem> items = getObjects(ShopItem.class);
+        if(items.isEmpty()){
+            return;
+        }
+        
+        int bestDist = Integer.MAX_VALUE;
+        ShopItem best = null;
+        
+        for(ShopItem s: items){
+
+            int distx = s.getX() - player.getX();
+            int disty = s.getY() - player.getY();
+            int dist2 = distx*distx + disty*disty;
+            
+            if(best == null || dist2 < bestDist){
+                bestDist = dist2;
+                best = s;
+            }
+        }
+        
+        if(best != null){
+            best.buyFromWorld(player);// calls a public method on shop items
+        }
     }
 }

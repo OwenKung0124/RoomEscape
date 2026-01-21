@@ -124,7 +124,7 @@ public class GameConfig
     public static final int COMBAT_BASE_TIME = 7 * 60;     //10 seconds minimum
     public static final int COMBAT_PER_ENEMY_TIME = 3 * 60; // +3 for each additionl enemy
     public static final int COMBAT_MAX_TIME = 60 * 60;      //maxium 60 seconds
-    public static final int COMBAT_BOSS_TIME=COMBAT_MAX_TIME;
+    public static final int COMBAT_BOSS_TIME=90*60;
     
     //trap room related constants
     public static final int TRAP_TIME_FRAMES = 10 * 60;

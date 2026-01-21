@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=CursedTile
+comment1.params=delayFrames\ phase
+comment1.target=CursedTile(int,\ int)
+comment2.params=
+comment2.target=void\ act()
+numComments=3

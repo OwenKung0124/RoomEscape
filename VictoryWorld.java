@@ -21,7 +21,7 @@ public class VictoryWorld extends World
     public VictoryWorld(GameData data)
     {
         super(GameConfig.WORLD_W, GameConfig.WORLD_H, 1);
-        SoundManager.stopGameMusic();
+        
     
         this.data = data;
     
@@ -95,6 +95,7 @@ public class VictoryWorld extends World
             //y += step;
         }
         
+        SoundManager.stopGameMusic();
         SoundManager.playVictorySound();
     }
 

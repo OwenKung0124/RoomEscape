@@ -428,6 +428,8 @@ public class GameMap
      */
     public boolean isBossRoom(int r, int c)
     {
+//for testingif(r==2 && c==1) return true;
+
 
         //must be a battle room itself
         if (!isCombatRoom(r,c))

@@ -64,7 +64,7 @@ public class SettingWorld extends World
         addObject(resumeBotton,  GameConfig.WORLD_W / 2 + 270, 90);
                 
         //help icon
-        addObject(new ImageIcon("setting/help.png","How to Play",50,50,255), GameConfig.WORLD_W/2, 90);
+        addObject(new ImageIcon("setting/help.png","How to Play",50,50,255), GameConfig.WORLD_W/2+550, 675);
         
         //sound effects toggles
         addObject(new SoundToggleButton(SoundToggleButton.TYPE_MUSIC), GameConfig.WORLD_W/2 +400, 100);

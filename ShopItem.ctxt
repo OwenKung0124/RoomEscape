@@ -1,0 +1,26 @@
+#BlueJ class context
+comment0.target=ShopItem
+comment0.text=\n\ This\ is\ the\ shop\ that\ cotains\ all\ the\ artifacts\n\ \n\ @Cartis\ Lee\n\ @version\ jan\ 2026\n
+comment1.params=artifactName\ name\ cost\ dmgChange\ hpChange
+comment1.target=ShopItem(int,\ java.lang.String,\ int,\ int,\ int)
+comment10.params=num
+comment10.target=greenfoot.GreenfootImage\ artifactImage(int)
+comment11.params=msg\ frames
+comment11.target=void\ feedback(java.lang.String,\ int)
+comment2.params=name\ cost\ healAmount
+comment2.target=ShopItem(java.lang.String,\ int,\ int)
+comment3.params=
+comment3.target=void\ act()
+comment4.params=p
+comment4.target=void\ buyItem(Player)
+comment5.params=showE
+comment5.target=void\ updateImage(boolean)
+comment6.params=n
+comment6.target=java.lang.String\ signed(int)
+comment7.params=s
+comment7.target=java.lang.String\ shortName(java.lang.String)
+comment8.params=p
+comment8.target=boolean\ isClosestToPlayer(Player)
+comment9.params=p
+comment9.target=void\ buyFromWorld(Player)
+numComments=12
